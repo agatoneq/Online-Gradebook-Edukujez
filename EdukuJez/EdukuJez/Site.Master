@@ -15,10 +15,27 @@
 
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-
+    <link href="Content/Master.site.css" rel="stylesheet" type="text/css" media="screen" />
 </head>
 <body>
-    <form runat="server">
+    <form  runat="server">
+        
+        <div class="container-main">
+            <div class="header navbar ">
+                <div class="navbar-grid-container">
+                    <div class="navbar-logo">                    
+                        <img class="logo" src="Imgs/Logo_PH.png" />
+                    </div>
+                    <div class="navbar-list">
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolderNav" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+                    <div class="navbar-profile">
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolderNavProfile" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </div>
+            </div>
         <asp:ScriptManager runat="server">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
@@ -38,33 +55,21 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
+        <%--tego nie ruszać--%>
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" runat="server" href="~/">Nazwa aplikacji</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/">Strona główna</a></li>
-                        <li><a runat="server" href="~/About">Informacje</a></li>
-                        <li><a runat="server" href="~/Contact">Kontakt</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
-            <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Moja aplikacja platformy ASP.NET</p>
-            </footer>
+        </div>
+        <footer>
+            <p>
+                &copy; <%: DateTime.Now.Year %>- Aplikacja autorstwa: Karolina Barszcz, Eustachy Lisiński, Kamila Młynarczyk, Agata Sobczyk, Artur Ulman, Miłosz Wojtanek
+                <br />
+                W ramach projektu akademickiego z inżynierii oprogramowania
+
+            </p>
+        </footer>
         </div>
 
     </form>

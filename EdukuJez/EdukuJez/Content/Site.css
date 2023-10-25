@@ -1,7 +1,9 @@
 ﻿/* Move down content because we have a fixed navbar that is 50px tall */
 body {
-    padding-top: 50px;
     padding-bottom: 20px;
+    width: 100%;
+    margin: 0px;
+    margin-top: 8px;
 }
 
 /* Wrapping element */
@@ -17,7 +19,42 @@ select,
 textarea {
     max-width: 280px;
 }
-
+div {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: rgb(254,250,224);
+}
+.navbar {
+    padding-right: 15px;
+    padding-left: 15px;
+    background-color: rgb(96,108,56);
+    color: rgb(188,108,37);
+}
+a {
+    color: rgb(188,108,37);  
+}
+a:hover {
+    color: rgb(40,54,24);
+}
+footer {
+    background-color: rgb(96,108,56);
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+.text-standard {
+    color:black;
+}
+.text-special {
+    color: black;
+}
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
