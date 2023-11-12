@@ -11,17 +11,20 @@ namespace EdukuJez
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+        }
+        protected void LoginButton_Click(object sender, EventArgs e)
+        {
+
 
         }
 
         protected void Login1_Authenticate(object sender, AuthenticateEventArgs e)
         {
-
-        }
-
-        protected void LoginButton_Click(object sender, EventArgs e)
-        {
-
+            string login = Login1.UserName;
+            string password = Login1.Password;
+            var response = ServerClient.SendRequestToSqlServer("Select * from Uzytkownicy;");
+            response.Wait();
+            Login1.FailureText = response.Result.Count.ToString();
         }
     }
 }

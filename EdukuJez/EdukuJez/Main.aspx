@@ -2,7 +2,10 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <asp:Login ID="Login1" runat="server" Height="346px" Width="730px" OnAuthenticate="Login1_Authenticate" style="margin-left: 314px">
-    </asp:Login>
+
+
+    <p> Tu będzie strona główna</p>
+
+
 
 </asp:Content>
