@@ -10,7 +10,7 @@ namespace EdukuJez
     static public class ServerClient
     {
 
-        static public async Task<List<Dictionary<string, object>>> SendRequestToSqlServer(string quary)
+        static public async Task<List<Dictionary<string, object>>> SendRequestToSqlServer(string query)
         {
             List<Dictionary<string, object>> data = new List<Dictionary<string, object>>();
             string connectionString = @"Data Source=DESKTOP-602DCUI;Initial Catalog=Edukujez;Integrated Security=True";
@@ -21,7 +21,7 @@ namespace EdukuJez
                 {
                     await connection.OpenAsync().ConfigureAwait(false);
 
-                    using (SqlCommand command = new SqlCommand(quary, connection))
+                    using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {

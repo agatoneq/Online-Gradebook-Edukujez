@@ -9,6 +9,8 @@ namespace EdukuJez
 {
     public partial class _Default : Page
     {
+        const string FAILURE_MSG = "Błędne dane logowania,\n spróbuj jeszcze raz";
+        const string MAIN_SITE = "Main.aspx";
         protected void Page_Load(object sender, EventArgs e)
         {
         }
@@ -22,9 +24,16 @@ namespace EdukuJez
         {
             string login = Login1.UserName;
             string password = Login1.Password;
-            var response = ServerClient.SendRequestToSqlServer("Select * from Uzytkownicy;");
+            var response = ServerClient.SendRequestToSqlServer($"Select * from Uzytkownicy where Loginy ='{login}' AND  Haslo='{password}';");
             response.Wait();
-            Login1.FailureText = response.Result.Count.ToString();
+            if (response.Result.Count == 1)
+            {
+                Response.Redirect(MAIN_SITE);
+            }
+            else
+            {
+                Login1.FailureText = FAILURE_MSG;
+            }
         }
     }
 }

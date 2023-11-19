@@ -194,7 +194,10 @@
     <Compile Include="Main.aspx.designer.cs">
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Model\ServerClient.cs" />
+    <Compile Include="Model\ServerAccess\QuaryBuilder.cs" />
+    <Compile Include="Model\ServerAccess\Query.cs" />
+    <Compile Include="Model\ServerAccess\ServerClient.cs" />
+    <Compile Include="Model\ServerAccess\UserSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
