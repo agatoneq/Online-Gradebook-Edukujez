@@ -32,7 +32,7 @@ namespace EdukuJez
             {
                 try
                 {
-                    Response.Redirect("Main.aspx");
+                    Response.Redirect(MAIN_SITE);
                 }
                 catch (ThreadAbortException ex)
                 {
