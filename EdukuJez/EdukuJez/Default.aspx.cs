@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -11,6 +12,7 @@ namespace EdukuJez
     {
         const string FAILURE_MSG = "Błędne dane logowania,\n spróbuj jeszcze raz";
         const string MAIN_SITE = "Main.aspx";
+        const bool debug = false;
         protected void Page_Load(object sender, EventArgs e)
         {
         }
@@ -24,11 +26,17 @@ namespace EdukuJez
         {
             string login = Login1.UserName;
             string password = Login1.Password;
-            var response = ServerClient.SendRequestToSqlServer($"Select * from Uzytkownicy where Loginy ='{login}' AND  Haslo='{password}';");
+            var response = ServerClient.StartConnection().SendRequestToSqlServer($"Select * from Uzytkownicy where Loginy ='{login}' AND  Haslo='{password}';");
             response.Wait();
-            if (response.Result.Count == 1)
+            if (response.Result.Count == 1 || debug)
             {
-                Response.Redirect(MAIN_SITE);
+                try
+                {
+                    Response.Redirect("Main.aspx");
+                }
+                catch (ThreadAbortException ex)
+                {
+                }
             }
             else
             {
