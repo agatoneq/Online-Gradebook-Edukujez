@@ -12,10 +12,10 @@ namespace EdukuJez
     {
         const String LOGIN_SITE = "Default.aspx";
         static UserSession _instance;
-        public readonly String login;
+        public readonly String Login;
         UserSession(String login)
         {
-            this.login = login;
+            this.Login = login;
         }
 
         public static void ChangeSitePermissionCheck(Page sender)
@@ -31,6 +31,10 @@ namespace EdukuJez
            _instance = new UserSession(login);
 
             return true;
+        }
+        public static void EndSession()
+        {
+            _instance = null;
         }
     }
 }

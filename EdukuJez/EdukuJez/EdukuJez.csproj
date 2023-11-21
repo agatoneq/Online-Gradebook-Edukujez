@@ -194,8 +194,13 @@
     <Compile Include="Main.aspx.designer.cs">
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Model\Main\IHtmlInject.cs" />
+    <Compile Include="Model\ServerAccess\DBEntity\EntityBase.cs" />
+    <Compile Include="Model\ServerAccess\DBEntity\User.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\IRepository.cs" />
     <Compile Include="Model\ServerAccess\QuaryBuilder.cs" />
     <Compile Include="Model\ServerAccess\Query.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\UsersRepository.cs" />
     <Compile Include="Model\ServerAccess\ServerClient.cs" />
     <Compile Include="Model\ServerAccess\UserSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

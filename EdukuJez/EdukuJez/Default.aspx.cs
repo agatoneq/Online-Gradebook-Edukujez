@@ -5,6 +5,7 @@ using System.Threading;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using EdukuJez.Repositories;
 
 namespace EdukuJez
 {
@@ -26,9 +27,28 @@ namespace EdukuJez
         {
             string login = Login1.UserName;
             string password = Login1.Password;
+            /* Stare rozwiązanie
             var response = ServerClient.StartConnection().SendRequestToSqlServer($"Select * from Uzytkownicy where Loginy ='{login}' AND  Haslo='{password}';");
             response.Wait();
             if (response.Result.Count == 1 || debug)
+            {
+                try
+                {
+                    Response.Redirect(MAIN_SITE);
+                }
+                catch (ThreadAbortException ex)
+                {
+                }
+            }
+            else
+            {
+                Login1.FailureText = FAILURE_MSG;
+            }
+            */
+            //Repozytorium
+
+            var repo = new UsersRepository();
+            if (repo.CheckLogin(login, password))
             {
                 try
                 {

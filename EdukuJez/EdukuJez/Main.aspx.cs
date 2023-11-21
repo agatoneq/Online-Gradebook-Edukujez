@@ -11,7 +11,7 @@ namespace EdukuJez
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            UserSession.ChangeSitePermissionCheck(this);
+            //UserSession.ChangeSitePermissionCheck(this);
         }
     }
 }

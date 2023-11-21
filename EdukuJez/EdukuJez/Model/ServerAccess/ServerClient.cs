@@ -62,5 +62,23 @@ namespace EdukuJez
 
             return data;
         }
+
+        public async Task<SqlDataReader> ReturnDataReader(string query)
+        {
+            try
+            {
+                await connection.OpenAsync().ConfigureAwait(false);
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    return reader;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
     }
 }
