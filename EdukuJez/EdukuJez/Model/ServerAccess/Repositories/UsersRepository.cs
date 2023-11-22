@@ -49,7 +49,7 @@ namespace EdukuJez.Repositories
                 user.Id = reader.GetInt32(0);
                 user.UserName = reader.GetString(1);
                 user.UserSurname = reader.GetString(2);
-                //user.UserFroup= reader.GetString(3);
+                //user.UserGroup= reader.GetString(3);
                 user.UserLogin = reader.GetString(4);
                 user.UserPassword = reader.GetString(5);
 
