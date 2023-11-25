@@ -23,18 +23,17 @@ namespace EdukuJez
         {
             this.user = user;
         }
-
+        public static UserSession GetSession()
+        {
+            return _instance;
+        }
+        public static bool  CheckPermission(String PermissionSubject, String PermissionType)
+        {
+            return true;
+        }
         public void ChangeSitePermissionCheck(Page sender)
         {
               //tu dać sprawdzanie dostępu do strony
-        }
-        public static UserSession GetSession()
-        {
-                return _instance;
-        }
-        public bool CheckPermission(String PermissionSubject, String PermissionType)
-        {           
-            return true;
         }
         public static bool EnterNewSession(User user)
         {
