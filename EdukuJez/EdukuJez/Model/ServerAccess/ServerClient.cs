@@ -11,7 +11,7 @@ namespace EdukuJez
     {
         static ServerClient _instance;
         readonly SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-602DCUI;Initial Catalog=Edukujez;Integrated Security=True");
-        public static new ServerClient StartConnection()
+        public static ServerClient StartConnection()
         {
             if (_instance == null)
             {

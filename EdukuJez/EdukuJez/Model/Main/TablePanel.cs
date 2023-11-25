@@ -5,7 +5,7 @@ using System.Web;
 
 namespace EdukuJez.Model.Main
 {
-    public class IHtmlInject
+    public class TablePanel
     {
     }
 }

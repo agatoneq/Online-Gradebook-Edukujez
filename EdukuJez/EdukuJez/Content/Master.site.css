@@ -39,4 +39,11 @@
 }
 .container-main {
     margin: 0 auto;
+
+}
+.Center-Form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }

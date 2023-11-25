@@ -1,8 +1,6 @@
 ﻿/* Move down content because we have a fixed navbar that is 50px tall */
 body {
     padding-bottom: 20px;
-    width: 100%;
-    margin: 0px;
     margin-top: 8px;
 }
 
@@ -48,6 +46,7 @@ footer {
     padding-left: 15px;
     padding-top: 1px;
     padding-bottom: 1px;
+	margin-top: auto;
 }
 .text-standard {
     color:black;
@@ -64,5 +63,7 @@ footer {
 
     .body-content {
         padding: 0;
+		min-height:920px;
+		min-width:1920px
     }
 }

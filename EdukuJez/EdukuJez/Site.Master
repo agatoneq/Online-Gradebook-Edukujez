@@ -16,9 +16,12 @@
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="Content/Master.site.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="Content/Site.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="Content/Main.css" rel="stylesheet" type="text/css" media="screen" />
 </head>
 <body>
-    <form  runat="server">
+    <div class="Center-Form">
+    <form runat="server">
         
         <div class="container-main">
             <div class="header navbar ">
@@ -60,8 +63,8 @@
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
-            <hr />
         </div>
+        <hr />
         <footer>
             <p>
                 &copy; <%: DateTime.Now.Year %>- Aplikacja autorstwa: Karolina Barszcz, Eustachy Lisiński, Kamila Młynarczyk, Agata Sobczyk, Artur Ulman, Miłosz Wojtanek
@@ -73,5 +76,6 @@
         </div>
 
     </form>
+    </div>
 </body>
 </html>
