@@ -12,23 +12,22 @@ namespace EdukuJez
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                TableRow row1 = new TableRow();
-                row1.Controls.Add(PanelFactory.MakePanel("Przedmioty", "#808000", "Main.aspx", this).ConvertToCell());
-                row1.Controls.Add(PanelFactory.MakePanel("Ogłoszenia", "#D2691E", "Main.aspx", this).ConvertToCell());
-                TableRow row2 = new TableRow();
-                row2.Controls.Add(PanelFactory.MakePanel("Plan Zajęć", "#996515", "Main.aspx", this).ConvertToCell());
-                row2.Controls.Add(PanelFactory.MakePanel("Zarządzanie Kontami", "#DAA520", "Main.aspx", this).ConvertToCell());
+                AddTableRow(PanelFactory.MakePanel("Przedmioty", "#808000", "Default.aspx", this),
+                    PanelFactory.MakePanel("Ogłoszenia", "#D2691E", "Main.aspx", this));
 
+                AddTableRow(PanelFactory.MakePanel("Plan Zajęć", "#996515", "Main.aspx", this),
+                    PanelFactory.MakePanel("Zarządzanie Kontami", "#DAA520", "Main.aspx", this));
 
-                // Dodajemy wiersz do tabeli
-                MainTable.Rows.Add(row1);
-                MainTable.Rows.Add(row2);
-            }
+                AddTableRow(PanelFactory.MakePanel("Grupy i uprawnienia", "#F88158", "Main.aspx", this));
         }
-        public void MainRedirect()
-        { 
+        private void AddTableRow(params TablePanel[] cells)
+        {
+            TableRow row = new TableRow();
+            foreach (var t in cells)
+            {
+                row.Controls.Add(t.ConvertToCell());
+            }
+            MainTable.Rows.Add(row);
         }
     }
 }

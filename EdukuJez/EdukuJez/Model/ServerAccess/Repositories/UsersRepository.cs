@@ -61,5 +61,9 @@ namespace EdukuJez.Repositories
         {
             return UserList.Any(x => x.UserLogin == login || x.UserPassword == password);
         }
+        public User GetByLogin(string login)
+        {
+            return UserList.First(x => x.UserLogin == login);
+        }
     }
 }

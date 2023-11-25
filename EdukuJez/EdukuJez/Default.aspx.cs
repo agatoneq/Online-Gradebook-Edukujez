@@ -27,36 +27,14 @@ namespace EdukuJez
         {
             string login = Login1.UserName;
             string password = Login1.Password;
-            /* Stare rozwiązanie
-            var response = ServerClient.StartConnection().SendRequestToSqlServer($"Select * from Uzytkownicy where Loginy ='{login}' AND  Haslo='{password}';");
-            response.Wait();
-            if (response.Result.Count == 1 || debug)
-            {
-                try
-                {
-                    Response.Redirect(MAIN_SITE);
-                }
-                catch (ThreadAbortException ex)
-                {
-                }
-            }
-            else
-            {
-                Login1.FailureText = FAILURE_MSG;
-            }
-            */
+            
             //Repozytorium
 
             var repo = new UsersRepository();
             if (repo.CheckLogin(login, password))
             {
-                try
-                {
-                    Response.Redirect(MAIN_SITE);
-                }
-                catch (ThreadAbortException ex)
-                {
-                }
+                UserSession.EnterNewSession(repo.GetByLogin(login));
+                Response.Redirect(MAIN_SITE);
             }
             else
             {

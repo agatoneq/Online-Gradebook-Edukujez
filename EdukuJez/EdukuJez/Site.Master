@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - Moja aplikacja platformy ASP.NET</title>
+    <title><%: Page.Title %>- Moja aplikacja platformy ASP.NET</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -34,8 +34,11 @@
                         </asp:ContentPlaceHolder>
                     </div>
                     <div class="navbar-profile">
-                        <asp:ContentPlaceHolder ID="ContentPlaceHolderNavProfile" runat="server">
-                        </asp:ContentPlaceHolder>
+                        <asp:Panel ID="ProfilePanel" runat="server" Visible="False">
+                            <asp:Label ID="ProfileNameLabel" CssClass="profile-label" runat="server"></asp:Label>
+                            <asp:Label ID="ProfileSurnameLabel" CssClass="profile-label" runat="server"></asp:Label>
+                            <asp:LinkButton CssClass="profile-label" ID="LogoutButton" runat="server" OnClick="LogoutButton_Click">Wyloguj</asp:LinkButton>
+                        </asp:Panel>
                     </div>
                 </div>
             </div>
@@ -58,7 +61,7 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
-        <%--tego nie ruszać--%>
+            <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
 
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
@@ -67,7 +70,7 @@
         <hr />
         <footer>
             <p>
-                &copy; <%: DateTime.Now.Year %>- Aplikacja autorstwa: Karolina Barszcz, Eustachy Lisiński, Kamila Młynarczyk, Agata Sobczyk, Artur Ulman, Miłosz Wojtanek
+                &copy; <%--Framework Scripts--%>- Aplikacja autorstwa: Karolina Barszcz, Eustachy Lisiński, Kamila Młynarczyk, Agata Sobczyk, Artur Ulman, Miłosz Wojtanek
                 <br />
                 W ramach projektu akademickiego z inżynierii oprogramowania
 

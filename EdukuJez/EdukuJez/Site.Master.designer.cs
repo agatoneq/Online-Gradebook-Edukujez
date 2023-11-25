@@ -24,13 +24,40 @@ namespace EdukuJez
         protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderNav;
 
         /// <summary>
-        /// Kontrolka ContentPlaceHolderNavProfile.
+        /// Kontrolka ProfilePanel.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderNavProfile;
+        protected global::System.Web.UI.WebControls.Panel ProfilePanel;
+
+        /// <summary>
+        /// Kontrolka ProfileNameLabel.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ProfileNameLabel;
+
+        /// <summary>
+        /// Kontrolka ProfileSurnameLabel.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ProfileSurnameLabel;
+
+        /// <summary>
+        /// Kontrolka LogoutButton.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LogoutButton;
 
         /// <summary>
         /// Kontrolka MainContent.

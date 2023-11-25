@@ -9,9 +9,27 @@ namespace EdukuJez
 {
     public partial class SiteMaster : MasterPage
     {
+        const String LOGIN_SITE = "Default.aspx";
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            if (UserSession.IsInSession())
+            {
+                var Session = UserSession.GetSession();
+                ProfilePanel.Visible = true;
+                ProfileNameLabel.Text = Session.UserName;
+                ProfileSurnameLabel.Text = Session.UserSurname;
+            }
+            else
+            {
+                ProfilePanel.Visible = false;
+            }
+        }
+
+        protected void LogoutButton_Click(object sender, EventArgs e)
+        {
+            UserSession.EndSession(new Page());
+            Response.Redirect(LOGIN_SITE);
         }
     }
 }

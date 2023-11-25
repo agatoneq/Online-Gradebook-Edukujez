@@ -10,13 +10,16 @@
     margin-left: 0px;
     width: 400px;
     height: 100px;
+    float:left;
 }
 .navbar-list {
     grid-column-start: 2;
     margin-top: 0px;
     margin-left: 0px;
-    width: stretch;
+    width: 966px;
     height: stretch;
+    float: left;
+    height: 100px;
 }
 .navbar-profile {
     grid-column-start: 3;
@@ -25,6 +28,16 @@
     height: stretch;
     margin-right: 0px;
     margin-left: auto;
+    float: right;
+    height: 100px;
+}
+.profile-label {
+    width:100px;
+    font:18pt;
+    text-align:center;
+    color:black;
+    padding:15px;
+    margin-top:20px;
 }
 .logo {
     height: 100px;
