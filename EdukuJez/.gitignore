@@ -398,4 +398,4 @@ FodyWeavers.xsd
 *.sln.iml
 
 # plik z ConnectionStringiem
-.\EdukuJez\EdukuJez\Model\ServerAccess\ServerClient.cs
+.\EdukuJez\Model\ServerAccess\ServerClient.cs
