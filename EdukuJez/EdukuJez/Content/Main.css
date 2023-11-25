@@ -1,9 +1,10 @@
 ﻿.Main-Label-Panel {
     display: inline-block;
     text-align: center;
-    margin-top: 30px;;
+    margin-top: auto;
     float: left;
-    font-size:40pt;
+    font-size: 40pt;
+    width: 300px;
 }
 .Main-Panel {
     display: inline-block;
@@ -15,4 +16,7 @@
     width: 70px;
     height: 120px;
     float:right;
+}
+.Main-Table {
+    padding:10px;
 }

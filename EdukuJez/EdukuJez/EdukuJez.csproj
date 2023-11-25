@@ -141,6 +141,7 @@
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Imgs\Arrow_left.png" />
     <Content Include="Imgs\Logo_PH.png" />
+    <Content Include="Imgs\Main_Page_Title.png" />
     <Content Include="Main.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -196,8 +197,8 @@
     <Compile Include="Main.aspx.designer.cs">
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Model\Main\PanelFactory.cs" />
     <Compile Include="Model\Main\TablePanel.cs" />
-    <Compile Include="Model\Main\MainTable.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\EntityBase.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\User.cs" />
     <Compile Include="Model\ServerAccess\Repositories\IRepository.cs" />

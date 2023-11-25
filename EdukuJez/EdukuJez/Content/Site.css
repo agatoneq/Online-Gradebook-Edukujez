@@ -55,6 +55,10 @@ footer {
     color: black;
 }
 
+.Container-Title {
+	padding-right: 15px;
+    padding-left: 15px;
+}
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     .jumbotron {
@@ -63,6 +67,7 @@ footer {
 
     .body-content {
         padding: 0;
+        padding-top: 10px;
 		min-height:920px;
 		min-width:1920px
     }
