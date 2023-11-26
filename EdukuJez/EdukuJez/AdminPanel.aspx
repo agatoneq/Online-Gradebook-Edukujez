@@ -6,6 +6,7 @@
         <img src="Imgs/Admin_Page_Title.png" class="logo1" style="height: 82px; width: 661px" />
         <hr />
     </div>
+    <asp:Label ID="MainLabel" runat="server" Text="Czym chcesz zarządzać?" Font-Size="48px"></asp:Label>
     <asp:Table ID="MainAdminTable" runat="server" CellSpacing="20" CssClass="Center-Form Main-Table">
     </asp:Table>
 </asp:Content>

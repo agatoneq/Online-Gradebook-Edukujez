@@ -15,6 +15,15 @@ namespace EdukuJez
     {
 
         /// <summary>
+        /// Kontrolka MainLabel.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MainLabel;
+
+        /// <summary>
         /// Kontrolka MainAdminTable.
         /// </summary>
         /// <remarks>
