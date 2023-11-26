@@ -132,6 +132,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Content\Master.site.css" />
     <Content Include="Default.aspx" />
+    <Content Include="EditClasses.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -196,6 +197,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EditClasses.aspx.cs">
+      <DependentUpon>EditClasses.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditClasses.aspx.designer.cs">
+      <DependentUpon>EditClasses.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -210,6 +218,8 @@
     <Compile Include="Model\Main\TablePanel.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\EntityBase.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\User.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\ClassesDataBaseAdd.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\ClassesDataBaseDelete.cs" />
     <Compile Include="Model\ServerAccess\Repositories\IRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\UsersRepository.cs" />
     <Compile Include="Model\ServerAccess\ServerClient.cs" />
