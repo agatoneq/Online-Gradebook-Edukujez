@@ -139,6 +139,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="AccountsManagement.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Imgs\Arrow_left.png" />
     <Content Include="Imgs\Logo_PH.png" />
@@ -234,6 +235,13 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="AccountsManagement.aspx.cs">
+      <DependentUpon>AccountsManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AccountsManagement.aspx.designer.cs">
+      <DependentUpon>AccountsManagement.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -12,24 +12,23 @@ namespace EdukuJez
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+                AddTableRow(PanelFactory.MakePanel("Kontami", "#808000", "AccountsManagement.aspx", this),
+                    PanelFactory.MakePanel("Kontami dla Rodziców", "#D2691E", "AdminPanel.aspx", this));
+
+                AddTableRow(PanelFactory.MakePanel("Planem Zajęć", "#811B1B", "Main.aspx", this),
+                    PanelFactory.MakePanel("Kalendarzem", "#9E9A74", "AdminPanel.aspx", this));
+
+                AddTableRow(PanelFactory.MakePanel("Przedmiotami", "#996515", "AdminPanel.aspx", this),
+                    PanelFactory.MakePanel("Grupami Zajęciowymi", "#DAA520", "AdminPanel.aspx", this));
+        }
+        private void AddTableRow(params TablePanel[] cells)
+        {
+            TableRow row = new TableRow();
+            foreach (var t in cells)
             {
-                TableRow row1 = new TableRow();
-                row1.Controls.Add(PanelFactory.MakePanel("Kontami", "#808000", "Main.aspx", this).ConvertToCell());
-                row1.Controls.Add(PanelFactory.MakePanel("Kontami dla Rodziców", "#D2691E", "Main.aspx", this).ConvertToCell());
-                TableRow row2 = new TableRow();
-                row2.Controls.Add(PanelFactory.MakePanel("Planem Zajęć", "#811B1B", "Main.aspx", this).ConvertToCell());
-                row2.Controls.Add(PanelFactory.MakePanel("Kalendarzem", "#9E9A74", "Main.aspx", this).ConvertToCell());
-                TableRow row3 = new TableRow();
-                row3.Controls.Add(PanelFactory.MakePanel("Przedmiotami", "#996515", "Main.aspx", this).ConvertToCell());
-                row3.Controls.Add(PanelFactory.MakePanel("Grupami Zajęciowymi", "#DAA520", "Main.aspx", this).ConvertToCell());
-
-
-                // Dodajemy wiersz do tabeli
-                MainAdminTable.Rows.Add(row1);
-                MainAdminTable.Rows.Add(row2);
-                MainAdminTable.Rows.Add(row3);
+                row.Controls.Add(t.ConvertToCell());
             }
+            MainAdminTable.Rows.Add(row);
         }
     }
 }
