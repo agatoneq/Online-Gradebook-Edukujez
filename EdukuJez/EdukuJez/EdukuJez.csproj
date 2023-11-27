@@ -142,16 +142,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="AccountsManagement.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Imgs\Accounts_Management_Page_Title.png" />
-    <Content Include="Imgs\Admin_Page_Title.png" />
     <Content Include="Imgs\Arrow_left.png" />
-    <Content Include="Imgs\Calendar_Management_Page_Title.png" />
-    <Content Include="Imgs\Groups_Management_Page_Title.png" />
     <Content Include="Imgs\Logo_PH.png" />
     <Content Include="Imgs\Main_Page_Title.png" />
-    <Content Include="Imgs\Parents_Accounts_Page_Title.png" />
-    <Content Include="Imgs\Subjects_Management_Page_Title.png" />
-    <Content Include="Imgs\Timetable_Management_Page_Title.png" />
+    <Content Include="LessonPlan.aspx" />
     <Content Include="Main.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -214,6 +208,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="LessonPlan.aspx.cs">
+      <DependentUpon>LessonPlan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LessonPlan.aspx.designer.cs">
+      <DependentUpon>LessonPlan.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Main.aspx.cs">
       <DependentUpon>Main.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -224,6 +225,7 @@
     <Compile Include="Model\Main\PanelFactory.cs" />
     <Compile Include="Model\Main\TablePanel.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\EntityBase.cs" />
+    <Compile Include="Model\ServerAccess\DBEntity\ClassC.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\User.cs" />
     <Compile Include="Model\ServerAccess\Repositories\ClassesDataBaseAdd.cs" />
     <Compile Include="Model\ServerAccess\Repositories\ClassesDataBaseDelete.cs" />
@@ -263,6 +265,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Model\LessonPlan\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
