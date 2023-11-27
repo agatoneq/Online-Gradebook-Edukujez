@@ -127,11 +127,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\LessonPlan.css" />
+    <Content Include="AdminPanel.aspx" />
     <Content Include="Content\Main.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\Master.site.css" />
     <Content Include="Default.aspx" />
+    <Content Include="EditClasses.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -139,6 +140,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="AccountsManagement.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Imgs\Arrow_left.png" />
     <Content Include="Imgs\Logo_PH.png" />
@@ -180,6 +182,13 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminPanel.aspx.cs">
+      <DependentUpon>AdminPanel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel.aspx.designer.cs">
+      <DependentUpon>AdminPanel.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Default.aspx.cs">
@@ -188,6 +197,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditClasses.aspx.cs">
+      <DependentUpon>EditClasses.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditClasses.aspx.designer.cs">
+      <DependentUpon>EditClasses.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -211,7 +227,8 @@
     <Compile Include="Model\ServerAccess\DBEntity\EntityBase.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\ClassC.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\User.cs" />
-    <Compile Include="Model\ServerAccess\Repositories\ScheduleRepository.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\ClassesDataBaseAdd.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\ClassesDataBaseDelete.cs" />
     <Compile Include="Model\ServerAccess\Repositories\IRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\UsersRepository.cs" />
     <Compile Include="Model\ServerAccess\ServerClient.cs" />
@@ -237,6 +254,13 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="AccountsManagement.aspx.cs">
+      <DependentUpon>AccountsManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AccountsManagement.aspx.designer.cs">
+      <DependentUpon>AccountsManagement.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

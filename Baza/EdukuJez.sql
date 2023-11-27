@@ -1,6 +1,6 @@
 USE [EdukuJez]
 GO
-/****** Object:  Table [dbo].[Classes]    Script Date: 26.11.2023 18:54:32 ******/
+/****** Object:  Table [dbo].[Classes]    Script Date: 21.11.2023 00:29:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -18,7 +18,7 @@ CREATE TABLE [dbo].[Classes](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Grades]    Script Date: 26.11.2023 18:54:32 ******/
+/****** Object:  Table [dbo].[Grades]    Script Date: 21.11.2023 00:29:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -34,7 +34,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Groups]    Script Date: 26.11.2023 18:54:32 ******/
+/****** Object:  Table [dbo].[Groups]    Script Date: 21.11.2023 00:29:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -49,7 +49,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Permission_List]    Script Date: 26.11.2023 18:54:32 ******/
+/****** Object:  Table [dbo].[Permission_List]    Script Date: 21.11.2023 00:29:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -64,7 +64,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Permissions]    Script Date: 26.11.2023 18:54:32 ******/
+/****** Object:  Table [dbo].[Permissions]    Script Date: 21.11.2023 00:29:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -78,7 +78,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Subjects]    Script Date: 26.11.2023 18:54:32 ******/
+/****** Object:  Table [dbo].[Subjects]    Script Date: 21.11.2023 00:29:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -92,7 +92,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[User_Group]    Script Date: 26.11.2023 18:54:32 ******/
+/****** Object:  Table [dbo].[User_Group]    Script Date: 21.11.2023 00:29:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -107,7 +107,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Users]    Script Date: 26.11.2023 18:54:32 ******/
+/****** Object:  Table [dbo].[Users]    Script Date: 21.11.2023 00:29:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -124,21 +124,6 @@ PRIMARY KEY CLUSTERED
 	[ID_User] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
-GO
-ALTER TABLE [dbo].[Classes]  WITH CHECK ADD  CONSTRAINT [FK_Classes_Groups] FOREIGN KEY([ID_Group])
-REFERENCES [dbo].[Groups] ([ID_Group])
-GO
-ALTER TABLE [dbo].[Classes] CHECK CONSTRAINT [FK_Classes_Groups]
-GO
-ALTER TABLE [dbo].[Classes]  WITH CHECK ADD  CONSTRAINT [FK_Classes_Subjects] FOREIGN KEY([ID_Subject])
-REFERENCES [dbo].[Subjects] ([ID_Subject])
-GO
-ALTER TABLE [dbo].[Classes] CHECK CONSTRAINT [FK_Classes_Subjects]
-GO
-ALTER TABLE [dbo].[Classes]  WITH CHECK ADD  CONSTRAINT [FK_Classes_Users] FOREIGN KEY([ID_Teacher])
-REFERENCES [dbo].[Users] ([ID_User])
-GO
-ALTER TABLE [dbo].[Classes] CHECK CONSTRAINT [FK_Classes_Users]
 GO
 ALTER TABLE [dbo].[Grades]  WITH CHECK ADD  CONSTRAINT [FK_Grades_Subjects] FOREIGN KEY([ID_Subject])
 REFERENCES [dbo].[Subjects] ([ID_Subject])
@@ -175,25 +160,13 @@ REFERENCES [dbo].[Users] ([ID_User])
 GO
 ALTER TABLE [dbo].[User_Group] CHECK CONSTRAINT [FK_User_Group_Users]
 GO
+ALTER TABLE [dbo].[Classes]  WITH CHECK ADD  CONSTRAINT [CK__Classes__Day__00200768] CHECK  (([Day]='piątek' OR [Day]='czwartek' OR [Day]='środa' OR [Day]='wtorek' OR [Day]='poniedziałek'))
+GO
+ALTER TABLE [dbo].[Classes] CHECK CONSTRAINT [CheckDay]
+GO
 ALTER TABLE [dbo].[Classes]  WITH CHECK ADD  CONSTRAINT [CheckPrzedzialCzasu] CHECK  (([Hour]='14:25 – 15:10' OR [Hour]='13:35 – 14:20' OR [Hour]='12:45 – 13:30' OR [Hour]='11:40 – 12:25' OR [Hour]='10:35 – 11:20' OR [Hour]='9:45 – 10:30' OR [Hour]='8:50 – 9:35' OR [Hour]='8:00 – 8:45'))
 GO
 ALTER TABLE [dbo].[Classes] CHECK CONSTRAINT [CheckPrzedzialCzasu]
-GO
-ALTER TABLE [dbo].[Classes]  WITH CHECK ADD  CONSTRAINT [CK__Classes__Day__00200768] CHECK  (([Day]='piątek' OR [Day]='czwartek' OR [Day]='środa' OR [Day]='wtorek' OR [Day]='poniedziałek'))
-GO
-ALTER TABLE [dbo].[Classes] CHECK CONSTRAINT [CK__Classes__Day__00200768]
-GO
-ALTER TABLE [dbo].[Classes]  WITH CHECK ADD  CONSTRAINT [CK__Classes__Day__7A672E12] CHECK  (([Day]='piątek' OR [Day]='czwartek' OR [Day]='środa' OR [Day]='wtorek' OR [Day]='poniedziałek'))
-GO
-ALTER TABLE [dbo].[Classes] CHECK CONSTRAINT [CK__Classes__Day__7A672E12]
-GO
-ALTER TABLE [dbo].[Classes]  WITH CHECK ADD  CONSTRAINT [CK__Classes__Day__7C4F7684] CHECK  (([Day]='piątek' OR [Day]='czwartek' OR [Day]='środa' OR [Day]='wtorek' OR [Day]='poniedziałek'))
-GO
-ALTER TABLE [dbo].[Classes] CHECK CONSTRAINT [CK__Classes__Day__7C4F7684]
-GO
-ALTER TABLE [dbo].[Classes]  WITH CHECK ADD  CONSTRAINT [CK__Classes__Day__7E37BEF6] CHECK  (([Day]='piątek' OR [Day]='czwartek' OR [Day]='środa' OR [Day]='wtorek' OR [Day]='poniedziałek'))
-GO
-ALTER TABLE [dbo].[Classes] CHECK CONSTRAINT [CK__Classes__Day__7E37BEF6]
 GO
 ALTER TABLE [dbo].[Classes]  WITH CHECK ADD  CONSTRAINT [Day] CHECK  (([day]='Piatek' OR [day]='Czwartek' OR [day]='Sroda' OR [day]='Wtorek' OR [day]='Poniedzialek'))
 GO
