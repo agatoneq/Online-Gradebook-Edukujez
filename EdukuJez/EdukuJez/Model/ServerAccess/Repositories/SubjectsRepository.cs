@@ -10,7 +10,7 @@ namespace EdukuJez.Repositories
     public class SubjectsRepository : IRepository<Subject>
     {
         List<Subject> SubjectList;
-        static string CREATE_QUARY = "Select * from Subjects";
+        string CREATE_QUARY = "Select * from Subjects";
         public SubjectsRepository()
         {
             SubjectList = new List<Subject>();
@@ -21,8 +21,9 @@ namespace EdukuJez.Repositories
 
         public SubjectsRepository(String sqlText)
         {
+            CREATE_QUARY = "select * from User where " + sqlText;
             SubjectList = new List<Subject>();
-            var response = ServerClient.StartConnection().ReturnDataReader("select * from User where " + sqlText);
+            var response = ServerClient.StartConnection().ReturnDataReader(CREATE_QUARY);
             response.Wait();
             MapEntities(response.Result);
         }
@@ -37,8 +38,9 @@ namespace EdukuJez.Repositories
         }
         public void Create(Subject entity)
         {
-            CREATE_QUARY = "insert into Subjects values ('"+entity.SubjectName+"')";
-            var response = ServerClient.StartConnection().ReturnDataReader(CREATE_QUARY);
+            //później dodać opis przedmiotu
+            var QUARY = "insert into Subjects values ('"+entity.SubjectName+"')";
+            var response = ServerClient.StartConnection().ReturnDataReader(QUARY);
         }
         public void Update(Subject entity)
         {
@@ -51,7 +53,6 @@ namespace EdukuJez.Repositories
         //Mapowanie
         private void MapEntities(SqlDataReader reader)
         {
-            if(reader != null)
             while (reader.Read())
             {
                 Subject subject = new Subject();
