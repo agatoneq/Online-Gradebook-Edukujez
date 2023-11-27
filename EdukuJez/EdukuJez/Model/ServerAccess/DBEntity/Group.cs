@@ -7,7 +7,8 @@ namespace EdukuJez.Repositories
 {
     public class Group : EntityBase
     {
-        public string GroupName { get; set; }
-        public int ParentGroup { get; set; }
+        public string Name { get; set; }
+        public string ParentGroup { get; set; }
+        public int ParentGroupID { get; set; }
     }
 }

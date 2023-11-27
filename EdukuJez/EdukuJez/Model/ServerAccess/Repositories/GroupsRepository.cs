@@ -25,8 +25,8 @@ namespace EdukuJez.Repositories
                 Group group = new Group();
 
                 group.Id = reader.GetInt32(0);
-                group.GroupName = reader.GetString(1);
-                if(!reader.IsDBNull(2)) group.ParentGroup = reader.GetInt32(2);
+                group.Name = reader.GetString(1);
+                if(!reader.IsDBNull(2)) group.ParentGroupID = reader.GetInt32(2);
                 GroupList.Add(group);
             }
         }

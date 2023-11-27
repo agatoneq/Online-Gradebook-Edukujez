@@ -20,7 +20,7 @@ namespace EdukuJez
                 var repoU = new UsersRepository();
                 for (int i = 0; i < repoG.GetAll().Count(); ++i)
                 {
-                    DropDownList.Items.Add(repoG.GetAll()[i].GroupName);
+                    DropDownList.Items.Add(repoG.GetAll()[i].Name);
 
                 }
                 for (int i = 0; i < repoU.GetAll().Count(); ++i)
