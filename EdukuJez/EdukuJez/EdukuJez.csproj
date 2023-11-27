@@ -128,6 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdminPanel.aspx" />
+    <Content Include="Content\LessonPlan.css" />
     <Content Include="Content\Main.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\Master.site.css" />
@@ -142,9 +143,19 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="AccountsManagement.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Grades.aspx" />
+    <Content Include="GroupManger.aspx" />
+    <Content Include="Imgs\Accounts_Management_Page_Title.png" />
+    <Content Include="Imgs\Admin_Page_Title.png" />
     <Content Include="Imgs\Arrow_left.png" />
+    <Content Include="Imgs\Calendar_Management_Page_Title.png" />
+    <Content Include="Imgs\Groups_Management_Page_Title.png" />
+    <Content Include="Imgs\Groups_Page_Title.png" />
     <Content Include="Imgs\Logo_PH.png" />
     <Content Include="Imgs\Main_Page_Title.png" />
+    <Content Include="Imgs\Parents_Accounts_Page_Title.png" />
+    <Content Include="Imgs\Subjects_Management_Page_Title.png" />
+    <Content Include="Imgs\Timetable_Management_Page_Title.png" />
     <Content Include="LessonPlan.aspx" />
     <Content Include="Main.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -176,6 +187,7 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
+    <Content Include="SubjectAdminPanel.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -208,6 +220,20 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Grades.aspx.cs">
+      <DependentUpon>Grades.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Grades.aspx.designer.cs">
+      <DependentUpon>Grades.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GroupManger.aspx.cs">
+      <DependentUpon>GroupManger.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GroupManger.aspx.designer.cs">
+      <DependentUpon>GroupManger.aspx</DependentUpon>
+    </Compile>
     <Compile Include="LessonPlan.aspx.cs">
       <DependentUpon>LessonPlan.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -226,10 +252,20 @@
     <Compile Include="Model\Main\TablePanel.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\EntityBase.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\ClassC.cs" />
+    <Compile Include="Model\ServerAccess\DBEntity\Grade.cs" />
+    <Compile Include="Model\ServerAccess\DBEntity\Group.cs" />
+    <Compile Include="Model\ServerAccess\DBEntity\Subject.cs" />
+    <Compile Include="Model\ServerAccess\DBEntity\SubjView.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\User.cs" />
+    <Compile Include="Model\ServerAccess\IRestricted.cs" />
     <Compile Include="Model\ServerAccess\Repositories\ClassesDataBaseAdd.cs" />
     <Compile Include="Model\ServerAccess\Repositories\ClassesDataBaseDelete.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\GradesRepository.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\GroupsRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\IRepository.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\ScheduleRepository.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\SubjectsRepository.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\SubjViewRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\UsersRepository.cs" />
     <Compile Include="Model\ServerAccess\ServerClient.cs" />
     <Compile Include="Model\ServerAccess\UserSession.cs" />
@@ -247,6 +283,13 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="SubjectAdminPanel.aspx.cs">
+      <DependentUpon>SubjectAdminPanel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SubjectAdminPanel.aspx.designer.cs">
+      <DependentUpon>SubjectAdminPanel.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
