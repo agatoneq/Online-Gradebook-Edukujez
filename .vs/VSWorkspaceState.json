@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\EdukuJez",
+    "\\EdukuJez\\EdukuJez"
   ],
-  "SelectedNode": "\\EdukuJez.sln",
+  "SelectedNode": "\\EdukuJez\\EdukuJez\\Site.Master.cs",
   "PreviewInSolutionExplorer": false
 }

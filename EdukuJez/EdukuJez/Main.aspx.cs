@@ -15,7 +15,7 @@ namespace EdukuJez
                 AddTableRow(PanelFactory.MakePanel("Przedmioty", "#808000", "Default.aspx", this),
                     PanelFactory.MakePanel("Ogłoszenia", "#D2691E", "Main.aspx", this));
 
-                AddTableRow(PanelFactory.MakePanel("Plan Zajęć", "#996515", "Main.aspx", this),
+                AddTableRow(PanelFactory.MakePanel("Plan Zajęć", "#996515", "LessonPlan.aspx", this),
                     PanelFactory.MakePanel("Zarządzanie Kontami", "#DAA520", "Main.aspx", this));
 
                 AddTableRow(PanelFactory.MakePanel("Grupy i uprawnienia", "#F88158", "Main.aspx", this));

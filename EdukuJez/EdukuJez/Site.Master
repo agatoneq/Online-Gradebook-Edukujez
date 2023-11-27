@@ -18,6 +18,7 @@
     <link href="Content/Master.site.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="Content/Site.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="Content/Main.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="Content/LessonPlan.css" rel="stylesheet" type="text/css" media="screen" />
 </head>
 <body>
     <div class="Center-Form">

@@ -1,0 +1,11 @@
+﻿.lesson-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 20px;
+}
+
+	.lesson-table th, .lesson-table td {
+		border: 1px solid black;
+		padding: 10px;
+		text-align: center;
+	}
