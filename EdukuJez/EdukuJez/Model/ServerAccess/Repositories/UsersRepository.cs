@@ -10,6 +10,7 @@ namespace EdukuJez.Repositories
     {
         List<User> UserList;
         const string CREATE_QUARY = "Select * from Users";
+
         public UsersRepository()
         {
             UserList = new List<User>();
@@ -29,7 +30,11 @@ namespace EdukuJez.Repositories
         }
         public void Create(User entity)
         {
-            throw new NotImplementedException();
+            string insertQuery = $"INSERT INTO Users (Name, Surname, [Group], Login, Password) " +
+                                       $"VALUES ('{entity.UserName}', '{entity.UserSurname}', '{entity.UserGroup}', '{entity.UserLogin}', '{entity.UserPassword}')";
+
+            var response = ServerClient.StartConnection().SendRequestToSqlServer(insertQuery);
+            response.Wait();
         }
         public void Update(User entity)
         {
@@ -37,7 +42,10 @@ namespace EdukuJez.Repositories
         }
         public void Delete(User entity)
         {
-            throw new NotImplementedException();
+            string deleteQuery = $"DELETE FROM Users WHERE Login = '{entity.UserLogin}'";
+
+            var response = ServerClient.StartConnection().SendRequestToSqlServer(deleteQuery);
+            response.Wait();
         }
         //Mapowanie
         private void MapEntities(SqlDataReader reader)
@@ -64,6 +72,19 @@ namespace EdukuJez.Repositories
         public User GetByLogin(string login)
         {
             return UserList.First(x => x.UserLogin == login);
+        }
+
+        public bool IsLoginInDatabase(string login)
+        {
+            string checkQuery = $"SELECT COUNT(*) FROM Users WHERE Login = '{login}'";
+
+            var response = ServerClient.StartConnection().SendRequestToSqlServer(checkQuery);
+            response.Wait();
+
+            int count = response.Result?.FirstOrDefault()?.Values.FirstOrDefault() as int? ?? 0;
+
+            return count > 0;
+            
         }
     }
 }

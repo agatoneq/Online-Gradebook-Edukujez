@@ -9,12 +9,12 @@
          <asp:Label ID="MainInfoLabel" runat="server" Text="Wpisz login użytkownika, którego chcesz dodać lub usunąć:" Font-Size="24px" ></asp:Label>
         <div style="margin-top: 20px; width: 2000px;">
             <asp:Label ID="LoginLabel" runat="server" Text="Login:  " Font-Size="20px"></asp:Label>
-            <asp:TextBox ID="LoginBox" runat="server" style="width: 250px; height: 20px; font-size: 16px;"></asp:TextBox>
+            <asp:TextBox ID="LoginBox" runat="server" style="width: 250px; height: 20px; font-size: 16px;" AutoPostBack="True" OnTextChanged="LoginBoxChanged"></asp:TextBox>
         </div>
     <div style="margin-top: 20px; width: 2020px;">
         <asp:Button ID="ConfirmDeleteButton" runat="server" Text="Potwierdź" style="width: 150px; height: 40px; font-size: 20px;" OnClick="ConfirmDeleteClick" Visible="false"/>
-        <asp:Button ID="AddUserButton" runat="server" Text="Dodaj" OnClick="AddClick" style="width: 150px; height: 40px; font-size: 20px;" />
-        <asp:Button ID="DeleteUserButton" runat="server" Text="Usuń" OnClick="DeleteClick" style="width: 150px; height: 40px; font-size: 20px;" />
+        <asp:Button ID="AddUserButton" runat="server" Text="Dodaj" OnClick="AddClick" style="width: 150px; height: 40px; font-size: 20px;" Enabled="False" />
+        <asp:Button ID="DeleteUserButton" runat="server" Text="Usuń" OnClick="DeleteClick" style="width: 150px; height: 40px; font-size: 20px;" Enabled="False" />
         <asp:Label ID="NameLabel" runat="server" Text="Imię:  " Font-Size="20px" Visible="False"></asp:Label>
         <asp:TextBox ID="NameBox" runat="server" style="width: 250px; height: 20px; font-size: 16px;" Visible="false"></asp:TextBox>
     </div>

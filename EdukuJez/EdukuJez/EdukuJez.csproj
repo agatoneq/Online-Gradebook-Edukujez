@@ -142,9 +142,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="AccountsManagement.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Imgs\Accounts_Management_Page_Title.png" />
+    <Content Include="Imgs\Admin_Page_Title.png" />
     <Content Include="Imgs\Arrow_left.png" />
+    <Content Include="Imgs\Calendar_Management_Page_Title.png" />
+    <Content Include="Imgs\Groups_Management_Page_Title.png" />
     <Content Include="Imgs\Logo_PH.png" />
     <Content Include="Imgs\Main_Page_Title.png" />
+    <Content Include="Imgs\Parents_Accounts_Page_Title.png" />
+    <Content Include="Imgs\Subjects_Management_Page_Title.png" />
+    <Content Include="Imgs\Timetable_Management_Page_Title.png" />
     <Content Include="Main.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
