@@ -50,7 +50,7 @@ namespace EdukuJez.Repositories
                 ClassC.Name = reader.GetString(1);
                 ClassC.Surname = reader.GetString(2);
                 ClassC.Class= reader.GetInt32(3);
-                ClassC.Hour = reader.GetString(4);
+                ClassC.Hour = reader.GetTimeSpan(4).ToString();
                 ClassC.Day = reader.GetString(5);
 
                 ClassCList.Add(ClassC);

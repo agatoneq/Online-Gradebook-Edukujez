@@ -7,6 +7,6 @@ namespace EdukuJez
 {
     public class IRestricted
     {
-        public string ReqPermission { get;}
+        public string ReqPermission { get; protected set; }
     }
 }
