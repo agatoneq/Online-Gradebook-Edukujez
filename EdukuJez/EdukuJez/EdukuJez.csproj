@@ -367,6 +367,18 @@
     <Compile Include="Migrations\20231217131001_Initial2.designer.cs">
       <DependentUpon>20231217131001_Initial2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20231217183733_SubjectDesc.cs" />
+    <Compile Include="Migrations\20231217183733_SubjectDesc.designer.cs">
+      <DependentUpon>20231217183733_SubjectDesc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20231217190212_Activity_test.cs" />
+    <Compile Include="Migrations\20231217190212_Activity_test.designer.cs">
+      <DependentUpon>20231217190212_Activity_test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20231217190236_Activity.cs" />
+    <Compile Include="Migrations\20231217190236_Activity.designer.cs">
+      <DependentUpon>20231217190236_Activity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\BaseContextModelSnapshot.cs" />
     <Compile Include="Model\Main\PanelFactory.cs" />
     <Compile Include="Model\Main\TablePanel.cs" />
@@ -381,9 +393,8 @@
     <Compile Include="Model\ServerAccess\DBEntity\SubjView.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\User.cs" />
     <Compile Include="Model\ServerAccess\IRestricted.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\ActivitiesRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\BaseContext.cs" />
-    <Compile Include="Model\ServerAccess\Repositories\ClassesDataBaseAdd.cs" />
-    <Compile Include="Model\ServerAccess\Repositories\ClassesDataBaseDelete.cs" />
     <Compile Include="Model\ServerAccess\Repositories\GradesRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\GroupsRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\ARepository.cs" />
