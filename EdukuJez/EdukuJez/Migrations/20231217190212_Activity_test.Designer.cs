@@ -4,14 +4,16 @@ using EdukuJez.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EdukuJez.Migrations
 {
     [DbContext(typeof(BaseContext))]
-    partial class BaseContextModelSnapshot : ModelSnapshot
+    [Migration("20231217190212_Activity_test")]
+    partial class Activity_test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,9 +102,6 @@ namespace EdukuJez.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ActivityId")
-                        .HasColumnType("int");
-
                     b.Property<int>("GradeValue")
                         .HasColumnType("int");
 
@@ -116,8 +115,6 @@ namespace EdukuJez.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ActivityId");
 
                     b.HasIndex("SubjectId");
 
@@ -234,10 +231,6 @@ namespace EdukuJez.Migrations
 
             modelBuilder.Entity("EdukuJez.Repositories.Grade", b =>
                 {
-                    b.HasOne("EdukuJez.Repositories.Activity", "Activity")
-                        .WithMany("Grades")
-                        .HasForeignKey("ActivityId");
-
                     b.HasOne("EdukuJez.Repositories.Subject", "Subject")
                         .WithMany("Grades")
                         .HasForeignKey("SubjectId");

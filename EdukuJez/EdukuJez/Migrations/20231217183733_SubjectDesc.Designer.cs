@@ -4,35 +4,22 @@ using EdukuJez.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EdukuJez.Migrations
 {
     [DbContext(typeof(BaseContext))]
-    partial class BaseContextModelSnapshot : ModelSnapshot
+    [Migration("20231217183733_SubjectDesc")]
+    partial class SubjectDesc
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.32")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("EdukuJez.Repositories.Activity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Activities");
-                });
 
             modelBuilder.Entity("EdukuJez.Repositories.ClassC", b =>
                 {
@@ -100,9 +87,6 @@ namespace EdukuJez.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ActivityId")
-                        .HasColumnType("int");
-
                     b.Property<int>("GradeValue")
                         .HasColumnType("int");
 
@@ -116,8 +100,6 @@ namespace EdukuJez.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ActivityId");
 
                     b.HasIndex("SubjectId");
 
@@ -234,10 +216,6 @@ namespace EdukuJez.Migrations
 
             modelBuilder.Entity("EdukuJez.Repositories.Grade", b =>
                 {
-                    b.HasOne("EdukuJez.Repositories.Activity", "Activity")
-                        .WithMany("Grades")
-                        .HasForeignKey("ActivityId");
-
                     b.HasOne("EdukuJez.Repositories.Subject", "Subject")
                         .WithMany("Grades")
                         .HasForeignKey("SubjectId");

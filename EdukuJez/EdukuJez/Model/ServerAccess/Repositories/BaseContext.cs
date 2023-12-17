@@ -15,6 +15,7 @@ namespace EdukuJez.Repositories
         public DbSet<GroupUser> GroupUsers { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Activity> Activities { get; set; }
         public static BaseContext GetContext()
         {
             if (_instance == null)

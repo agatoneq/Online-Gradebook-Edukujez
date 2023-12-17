@@ -1,11 +1,11 @@
-﻿using EdukuJez.Model.ServerAccess.Repositories;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using EdukuJez.Repositories;
 
 namespace EdukuJez
 {
@@ -18,11 +18,19 @@ namespace EdukuJez
         private DropDownList DropDownListTeacher;
         private DropDownList DropDownListGroup;
         private DropDownList DropDownListSubject;
-
+        private ScheduleRepository scheduleRepo;
+        private GroupsRepository groupRepo;
+        private SubjectsRepository subjRepo;
+        public EditClasses()
+        {
+            scheduleRepo = new ScheduleRepository();
+            groupRepo = new GroupsRepository();
+            subjRepo = new SubjectsRepository();
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
  
-                CreateDynamicControls();
+            CreateDynamicControls();
             
         }
 
@@ -30,13 +38,16 @@ namespace EdukuJez
         {
             string dzien = DropDownListDay.SelectedValue;
             string godzina = DropDownListHour.SelectedValue;
-            int nauczycielId = Convert.ToInt32(DropDownListTeacher.SelectedValue);
+            int nauczycielId = Convert.ToInt32(DropDownListTeacher.SelectedValue); //Ciężko mi to zmienić
             int grupaId = Convert.ToInt32(DropDownListGroup.SelectedValue);
             int przedmiotId = Convert.ToInt32(DropDownListSubject.SelectedValue);
 
-
-            ClassesDataBaseAdd dataBaseAdd = new ClassesDataBaseAdd();
-            dataBaseAdd.AddData(dzien,godzina,nauczycielId,grupaId,przedmiotId);
+            ClassC c = new ClassC();
+            c.Day = dzien;
+            c.Hour = godzina;
+            c.Group = groupRepo.Table.FirstOrDefault(x => x.Id == grupaId);
+            c.Subject = subjRepo.Table.FirstOrDefault(x => x.Id == przedmiotId) ;
+            scheduleRepo.Insert(c);
         }
 
         protected void DeleteButton_Click(object sender, EventArgs e)
@@ -47,9 +58,8 @@ namespace EdukuJez
             int grupaId = Convert.ToInt32(DropDownListGroup.SelectedValue);
             int przedmiotId = Convert.ToInt32(DropDownListSubject.SelectedValue);
 
-
-            ClassesDataBaseDelete dataBaseDelete = new ClassesDataBaseDelete();
-            dataBaseDelete.DeleteData(dzien, godzina, nauczycielId, grupaId, przedmiotId);
+            ClassC c = scheduleRepo.Table.First(x => x.Day == dzien && x.Hour == godzina && x.Group.Id == grupaId && x.Subject.Id == przedmiotId);
+            scheduleRepo.Delete(c);
         }
 
 
