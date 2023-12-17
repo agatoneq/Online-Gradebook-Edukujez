@@ -44,9 +44,9 @@ namespace EdukuJez
 
         protected void ConfirmDeleteClick(object sender, EventArgs e)
         {
-            newUser.UserLogin = LoginBox.Text;
-            UsersRepository usersRepository = new UsersRepository(); //wot?
-            usersRepository.Delete(newUser);
+            //newUser.UserLogin = LoginBox.Text;
+            UsersRepository usersRepository = new UsersRepository();
+            usersRepository.Delete(usersRepository.Table.First(x => x.UserLogin== LoginBox.Text));
         }
 
         protected void ConfirmAddClick(object sender, EventArgs e)
