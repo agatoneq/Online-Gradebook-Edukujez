@@ -370,6 +370,7 @@
     <Compile Include="Migrations\BaseContextModelSnapshot.cs" />
     <Compile Include="Model\Main\PanelFactory.cs" />
     <Compile Include="Model\Main\TablePanel.cs" />
+    <Compile Include="Model\ServerAccess\DBEntity\Activity.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\ClassUsers.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\EntityBase.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\ClassC.cs" />

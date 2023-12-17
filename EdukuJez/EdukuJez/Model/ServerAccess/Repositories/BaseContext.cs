@@ -25,7 +25,7 @@ namespace EdukuJez.Repositories
         }
 
 
-        private BaseContext()
+        public BaseContext()
         {
             
 
