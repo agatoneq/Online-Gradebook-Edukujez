@@ -359,27 +359,34 @@
     <Compile Include="Main.aspx.designer.cs">
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20231211194430_InitialCreate.cs" />
-    <Compile Include="Migrations\20231211194430_InitialCreate.designer.cs">
-      <DependentUpon>20231211194430_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\20231217125123_Initial.cs" />
+    <Compile Include="Migrations\20231217125123_Initial.designer.cs">
+      <DependentUpon>20231217125123_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20231217131001_Initial2.cs" />
+    <Compile Include="Migrations\20231217131001_Initial2.designer.cs">
+      <DependentUpon>20231217131001_Initial2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\BaseContextModelSnapshot.cs" />
-    <Compile Include="Model\Data\BaseContext.cs" />
     <Compile Include="Model\Main\PanelFactory.cs" />
     <Compile Include="Model\Main\TablePanel.cs" />
+    <Compile Include="Model\ServerAccess\DBEntity\ClassUsers.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\EntityBase.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\ClassC.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\Grade.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\Group.cs" />
+    <Compile Include="Model\ServerAccess\DBEntity\GroupUser.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\Subject.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\SubjView.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\User.cs" />
     <Compile Include="Model\ServerAccess\IRestricted.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\BaseContext.cs" />
     <Compile Include="Model\ServerAccess\Repositories\ClassesDataBaseAdd.cs" />
     <Compile Include="Model\ServerAccess\Repositories\ClassesDataBaseDelete.cs" />
     <Compile Include="Model\ServerAccess\Repositories\GradesRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\GroupsRepository.cs" />
-    <Compile Include="Model\ServerAccess\Repositories\IRepository.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\ARepository.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\GroupUsersRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\ScheduleRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\SubjectsRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\SubjViewRepository.cs" />
@@ -425,6 +432,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Model\Data\" />
     <Folder Include="Model\LessonPlan\" />
   </ItemGroup>
   <ItemGroup>

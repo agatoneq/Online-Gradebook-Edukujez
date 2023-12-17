@@ -3,23 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Microsoft.EntityFrameworkCore;
-using EdukuJez.Repositories;
-using EdukuJez;
 
-namespace EdukuJez
+namespace EdukuJez.Repositories
 {
-    public class BaseContext : DbContext
+    public class BaseContext : DbContext 
     {
+        public DbSet<ClassC> Classes { get; set; }
+        public DbSet<Grade> Grades { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<GroupUser> GroupUsers { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<ClassC> ClassC { get; set; }
-        public DbSet<Grade> Grade { get; set; }
-        public DbSet<Group> Group { get; set; }
-        public DbSet<Subject> Subject { get; set; }
-        public DbSet<SubjView> SubjView { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // Konfiguracja połączenia z bazą danych
             optionsBuilder.UseSqlServer(ServerClient.CONSTRING);
         }
+
     }
 }

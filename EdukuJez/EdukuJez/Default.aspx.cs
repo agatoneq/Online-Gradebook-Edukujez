@@ -27,8 +27,9 @@ namespace EdukuJez
         {
             string login = Login1.UserName;
             string password = Login1.Password;
-            
+
             //Repozytorium
+
 
             var repo = new UsersRepository();
             if (repo.CheckLogin(login, password))

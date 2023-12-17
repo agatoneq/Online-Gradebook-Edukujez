@@ -15,7 +15,7 @@ namespace EdukuJez.Model.ServerAccess.Repositories
     public class ClassesDataBaseDelete
     {
 
-        public void DeleteData(string dzien, string godzina, int nauczyciel, int przedmiot, int grupa)
+        public void DeleteData(string dzien, string godzina, int nauczyciel, int przedmiot, int grupa) // 🤮
         {
 
             string connectionString = @"Data Source=DESKTOP-0SPQE52 ;Initial Catalog=Edukujez;Integrated Security=True;"; // Ustaw własny connection string

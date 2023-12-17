@@ -6,69 +6,41 @@ using System.Data.SqlClient;
 
 
 namespace EdukuJez.Repositories { 
-    public class GradesRepository : IRepository<Grade>
+    public class GradesRepository : ARepository<Grade>
     {
-        List<Grade> GradesList;
-        
+
         string CREATE_QUARY = "Select * from Grades";
 
         public GradesRepository()
         {
-            GradesList = new List<Grade>();
-            var response = ServerClient.StartConnection().ReturnDataReader(CREATE_QUARY);
-            response.Wait();
-            MapEntities(response.Result);
+            Table = Context.Grades;
         }
-        public GradesRepository(String text)
+        public GradesRepository(String text) //??
         {
+
             CREATE_QUARY = "select * from Grades where " + text;
-            GradesList = new List<Grade>();
             var response = ServerClient.StartConnection().ReturnDataReader(CREATE_QUARY);
             response.Wait();
-            MapEntities(response.Result);
-        }
-        public Grade GetById(int id) { 
-            throw new NotImplementedException(); 
-        }
-        public List<Grade> GetAll() {
-            return GradesList;
-        }
-        public void Create(Grade entity) {
-            throw new NotImplementedException(); 
-        }
-        public void Update(Grade entity) {
-            throw new NotImplementedException(); 
-        }
-        public void Delete(Grade entity) {
-            throw new NotImplementedException();
+            //nie rozumiem po co to jest rozdzielone,
+            //użycie wyłącznie jednego z tych konstruktorów byłoby dużo lepsze
+
         }
 
-        //Mapowanie
-        private void MapEntities(SqlDataReader reader)
-        {
-            if (reader != null)
-                while (reader.Read())
-            {
-                Grade grade = new Grade();
-
-                grade.Id = reader.GetInt32(0);
-                grade.GradeValue = reader.GetInt32(1);
-                grade.GradeWeight = reader.GetInt32(2);
-                grade.GradeIDSubject = reader.GetInt32(3);
-       
-                GradesList.Add(grade);
-            }
-        }
 
         //Wyszukiwanie
-        public List<int> getGrades(int id)
+        public List<int> getGrades(int id) //??
         {
+            var GradesList = new List<Grade>();
             List<int> gradesList = new List<int>();
+
             for (int i = 0; i < GradesList.Count(); ++i) {
                 if (GradesList[i].Id == id) {
                     gradesList.Add(GradesList[i].GradeValue);
                 }
             }
+            // jeżeli dobrze rozumiem, zwracane są oceny o podanym Id,
+            // jako że Id jest unikalne zawsze zostanie zwrócona tylko jedna ocena
+            // czemu jest zwracana lista?
             return gradesList;
         }
        

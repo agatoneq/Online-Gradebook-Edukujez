@@ -30,7 +30,7 @@ namespace EdukuJez
                         var subjView_repo = new SubjViewRepository("Login = " + UserSession.GetSession().UserLogin);
                         for (int i = 0; i < subjView_repo.GetAll().Count; ++i)
                         {
-                            SubjectsDropDownList.Items.Add(subjView_repo.GetAll()[i].Subject);
+                            SubjectsDropDownList.Items.Add(subjView_repo.GetAll()[i].SubjectName);
                         }
                     }
                     //kolumny tabeli:
@@ -42,12 +42,12 @@ namespace EdukuJez
                     {
                         var grades_repo = new GradesRepository("ID_Student = " + UserSession.GetSession().UserLogin + "and ID_Subject = " + subject_repo.GetAll().First().Id);
                         //wiersze tabeli:
-                        for (int i = 0; i < grades_repo.GetAll().Count; ++i)
+                        foreach (var grade in grades_repo.Table) 
                         {
                             DataRow newRow = dataTable.NewRow();
-                            newRow["Ocena"] = grades_repo.GetAll()[i].GradeValue;
-                            newRow["Waga"] = grades_repo.GetAll()[i].GradeWeight;
-                            newRow["Aktywność"] = "Sprawdzian " + i; //jeszcze nie ma w bazie aktywnosci
+                            newRow["Ocena"] = grade.GradeValue;
+                            newRow["Waga"] = grade.GradeWeight;
+                           // newRow["Aktywność"] = "Sprawdzian " + i; //jeszcze nie ma w bazie aktywnosci
                             dataTable.Rows.Add(newRow);
                         }
                     }
@@ -171,3 +171,4 @@ namespace EdukuJez
         }
     }
 }
+//for (int i = 0; i < tablica.Count; ++i)

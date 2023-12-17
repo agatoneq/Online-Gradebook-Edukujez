@@ -10,7 +10,7 @@ namespace EdukuJez
 {
     public partial class AccountsManagement : System.Web.UI.Page
     {
-        private User newUser = new User();
+        private User newUser = new User(); //???
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -45,19 +45,19 @@ namespace EdukuJez
         protected void ConfirmDeleteClick(object sender, EventArgs e)
         {
             newUser.UserLogin = LoginBox.Text;
-            UsersRepository usersRepository = new UsersRepository();
+            UsersRepository usersRepository = new UsersRepository(); //wot?
             usersRepository.Delete(newUser);
         }
 
         protected void ConfirmAddClick(object sender, EventArgs e)
         {
+            UsersRepository usersRepository = new UsersRepository();
             newUser.UserLogin = LoginBox.Text;
             newUser.UserName = NameBox.Text;
             newUser.UserSurname = SurnameBox.Text;
             newUser.UserPassword = PasswordBox.Text;
-            newUser.UserGroup = GroupBox.Text;
-            UsersRepository usersRepository = new UsersRepository();
-            usersRepository.Create(newUser);
+            //newUser.Groups = GroupBox.Text;
+            usersRepository.Insert(newUser);
         }
 
         protected void LoginBoxChanged(object sender, EventArgs e)

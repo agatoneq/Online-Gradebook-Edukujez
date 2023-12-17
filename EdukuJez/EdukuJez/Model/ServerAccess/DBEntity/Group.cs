@@ -8,7 +8,9 @@ namespace EdukuJez.Repositories
     public class Group : EntityBase
     {
         public string Name { get; set; }
-        public string ParentGroup { get; set; }
-        public int ParentGroupID { get; set; }
+        public Group ParentGroup { get; set; }
+        public ICollection<Group>  ChildGroups { get; set; }
+        public ICollection<GroupUser> Users { get; set; }
+        public ICollection<ClassC> Classes { get; set; }
     }
 }

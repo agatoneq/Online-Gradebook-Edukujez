@@ -18,14 +18,14 @@ namespace EdukuJez
             {
                 var repoG = new GroupsRepository();
                 var repoU = new UsersRepository();
-                for (int i = 0; i < repoG.GetAll().Count(); ++i)
+                foreach (var g in repoG.Table)
                 {
-                    DropDownList.Items.Add(repoG.GetAll()[i].Name);
+                    DropDownList.Items.Add(g.Name);
 
                 }
-                for (int i = 0; i < repoU.GetAll().Count(); ++i)
+                foreach (var u in repoU.Table)
                 {
-                    DropDownList.Items.Add(repoU.GetAll()[i].UserName + " " + repoU.GetAll()[i].UserSurname + ":" + repoU.GetAll()[i].UserGroup);
+                    DropDownList.Items.Add(u.UserName + " " + u.UserSurname);
                 }
             }
         }
@@ -47,7 +47,7 @@ namespace EdukuJez
                 Subject subject = new Subject();
                 subject.SubjectName = TextBoxSubjectName.Text;
                 //subject.SubjectNameDescription = TextBoxSubjectDescription;
-                repoS.Create(subject);
+                repoS.Insert(subject);
                 //dodanie grupom uprawnień do przedmiotu
             }
         }

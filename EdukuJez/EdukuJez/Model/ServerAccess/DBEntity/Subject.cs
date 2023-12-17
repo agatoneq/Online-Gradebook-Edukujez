@@ -7,6 +7,8 @@ namespace EdukuJez.Repositories
 {
     public class Subject : EntityBase
     {
-        public String SubjectName { get; set; }
+        public string SubjectName { get; set; }
+        public ICollection<ClassC> Classes { get; set; }
+        public ICollection<Grade> Grades { get; set; }
     }
 }

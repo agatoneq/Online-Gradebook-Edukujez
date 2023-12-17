@@ -21,14 +21,16 @@ namespace EdukuJez
         {
             var ng = new Group();
             ng.Name = NewGroupTextBox.Text;
-            ng.ParentGroup = PGroupDropdown.SelectedValue;
+            var parentName = PGroupDropdown.SelectedValue;
+            ng.ParentGroup = repo.Table.First(x => x.Name==parentName );
+            repo.Insert(ng);
         }
 
         void RefreshTables()
         {
-            myRepeater.DataSource = repo.GetAll();
+            myRepeater.DataSource = repo.Table;
             myRepeater.DataBind();
-            PGroupDropdown.DataSource = repo.GetAll().Select(x => x.Name);
+            PGroupDropdown.DataSource = repo.Table.Select(x => x.Name);
             PGroupDropdown.DataBind();
         }
     }

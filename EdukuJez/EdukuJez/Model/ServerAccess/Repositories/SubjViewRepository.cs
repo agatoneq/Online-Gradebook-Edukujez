@@ -6,63 +6,24 @@ using System.Data.SqlClient;
 
 namespace EdukuJez.Repositories
 {
-    public class SubjViewRepository : IRepository<SubjView>
+    public class SubjViewRepository //nie wolno używać do modyfikacji
     {
-        List<SubjView> SubjViewList;
-        const string CREATE_QUARY = "Select * from SubjView";
-        public SubjViewRepository()
-        {
-            SubjViewList = new List<SubjView>();
-            var response = ServerClient.StartConnection().ReturnDataReader(CREATE_QUARY);
-            response.Wait();
-            MapEntities(response.Result);
-        }
+        public List<Subject> SubjViewList = new List<Subject>();
         public SubjViewRepository(String text)
         {
-            SubjViewList = new List<SubjView>();
-            var response = ServerClient.StartConnection().ReturnDataReader("select * from SubjView where "+ text);
-            response.Wait();
-            MapEntities(response.Result);
+            var Subjects = new SubjectsRepository();
+
+            var SubjViewList = Subjects.Table
+        .Where(subject => subject.Grades.Any(grade => grade.Users.UserName == text))
+        .ToList();
+
         }
 
-        //implementacja interfejsu
-        public SubjView GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-        public List<SubjView> GetAll()
+        public List<Subject> GetAll()
         {
             return SubjViewList;
         }
-        public void Create(SubjView entity)
-        {
-            throw new NotImplementedException();
-        }
-        public void Update(SubjView entity)
-        {
-            throw new NotImplementedException();
-        }
-        public void Delete(SubjView entity)
-        {
-            throw new NotImplementedException();
-        }
-        //Mapowanie
-        private void MapEntities(SqlDataReader reader)
-        {
-            if(reader != null)
-            while (reader.Read())
-            {
-                SubjView subjView = new SubjView();
 
-                subjView.ID_User = reader.GetInt32(0);
-                subjView.Login = reader.GetString(1);
-                subjView.ID_Subject = reader.GetInt32(2);
-                subjView.Subject = reader.GetString(3);
-
-                SubjViewList.Add(subjView);
-            }
-        }
-        //Wyszukiwanie linq na kolekcji repozytorium
        
     }
 }

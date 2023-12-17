@@ -8,47 +8,20 @@ using System.Web;
 
 namespace EdukuJez.Repositories
 {
-    public class GroupsRepository : IRepository<Group>
+    public class GroupsRepository : ARepository<Group>
     {
-        List<Group> GroupList;
-        const string CREATE_QUARY = "Select * from Groups";
-        public GroupsRepository() {
-            GroupList = new List<Group>();
-            var response = ServerClient.StartConnection().ReturnDataReader(CREATE_QUARY);
-            response.Wait();
-            MapEntities(response.Result);
-        }
-        private void MapEntities(SqlDataReader reader)
+        public GroupsRepository()
         {
-            while (reader.Read())
-            {
-                Group group = new Group();
-
-                group.Id = reader.GetInt32(0);
-                group.Name = reader.GetString(1);
-                if(!reader.IsDBNull(2)) group.ParentGroupID = reader.GetInt32(2);
-                GroupList.Add(group);
-            }
+            Table = Context.Groups;
         }
+
         public Group GetById(int id)
         {
-            for (int i=0; i<GroupList.Count();++i)
+            foreach (var row in Table)      
             {
-                if (GroupList[i].Id==id) return GroupList[i];
+                if (row.Id==id) return row;
             }
             return null;
-        }
-        public List<Group> GetAll() {
-            return GroupList;
-        }
-        public void Create(Group entity) {
-            throw new NotImplementedException();
-        }
-        public void Update(Group entity) {
-            throw new NotImplementedException();
-        }
-        public void Delete(Group entity) {
-            throw new NotImplementedException();
         }
     }
 }

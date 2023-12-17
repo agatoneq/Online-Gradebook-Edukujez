@@ -14,9 +14,10 @@ namespace EdukuJez
         const String LOGIN_SITE = "Default.aspx";
         static UserSession _instance;
         User user;
+        public int UserId { get { return user.Id; } }
         public string UserName { get { return user.UserName; }}
         public string UserSurname { get { return user.UserSurname; } }
-        public string UserGroup { get { return user.UserGroup; } }
+        public IEnumerable<Group> UserGroups { get { return user.Groups.Select(x => x.Group); } }
         public string UserLogin { get { return user.UserLogin; } }
         public string UserPassword { get { return user.UserPassword; } }
         UserSession(User user)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.UI.WebControls;
 using EdukuJez.Repositories;
 
@@ -12,13 +13,13 @@ namespace EdukuJez
             {
                 // Pobierz plan lekcji z bazy danych i wyświetl na stronie
                 ScheduleRepository Lessons = new ScheduleRepository();
-                List<ClassC> lessonPlan = Lessons.GetAll();
+                var lessonPlan = Lessons.Table.ToList();
                 PopulateLessonTable(lessonPlan);
             }
         }
 
 
-        private void PopulateLessonTable(List<ClassC> lessonPlan)
+        private void PopulateLessonTable(ICollection<ClassC> lessonPlan)
         {
             foreach (ClassC lesson in lessonPlan)
             {
