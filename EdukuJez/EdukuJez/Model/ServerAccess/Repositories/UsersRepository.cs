@@ -23,7 +23,7 @@ namespace EdukuJez.Repositories
             return Table.First(x => x.UserLogin == login);
         }
 
-        public bool IsLoginInDatabase(string login) //?? wot? why?
+        public bool IsLoginInDatabase(string login) 
         {
             return Table.Any(x => x.UserLogin == login);
             

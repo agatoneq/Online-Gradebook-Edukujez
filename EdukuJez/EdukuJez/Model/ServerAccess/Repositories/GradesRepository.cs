@@ -15,7 +15,7 @@ namespace EdukuJez.Repositories {
         {
             Table = Context.Grades;
         }
-        public GradesRepository(String text) //??
+        public GradesRepository(String text)
         {
 
             CREATE_QUARY = "select * from Grades where " + text;
@@ -28,7 +28,7 @@ namespace EdukuJez.Repositories {
 
 
         //Wyszukiwanie
-        public List<int> getGrades(int id) //??
+        public List<int> getGrades(int id)
         {
             var GradesList = new List<Grade>();
             List<int> gradesList = new List<int>();

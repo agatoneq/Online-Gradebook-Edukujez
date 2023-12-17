@@ -11,6 +11,10 @@ namespace EdukuJez.Repositories
     {
         public  IQueryable<T> Table { get; protected set; }
         protected BaseContext Context { get; }
+        public ARepository()
+        {
+            Context = BaseContext.GetContext();
+        }
         public void Insert(T entity)
         {
             Context.Add(entity);
