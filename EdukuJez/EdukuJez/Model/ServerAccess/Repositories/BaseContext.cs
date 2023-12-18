@@ -16,6 +16,7 @@ namespace EdukuJez.Repositories
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Activity> Activities { get; set; }
+        public DbSet<Calendar> Calendar { get; set; }
         public static BaseContext GetContext()
         {
             if (_instance == null)
