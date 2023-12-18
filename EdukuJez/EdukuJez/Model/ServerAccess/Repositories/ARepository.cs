@@ -15,19 +15,16 @@ namespace EdukuJez.Repositories
         {
             Context = BaseContext.GetContext();
         }
-        public virtual void Insert(T entity)
+        public void Insert(T entity)
         {
             Context.Add(entity);
             Context.SaveChanges();
         }
-        public virtual void Delete(T entity)
+        public void Delete(T entity)
         {
             Context.Remove(entity);
             Context.SaveChanges();
         }
-        public virtual void Update()
-        {
-            Context.SaveChanges();
-        }
+
     }
 }
