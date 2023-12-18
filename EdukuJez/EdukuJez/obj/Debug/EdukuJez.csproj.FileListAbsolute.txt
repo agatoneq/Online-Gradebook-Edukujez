@@ -970,3 +970,7 @@ D:\c#\Projekt__IO\ProjektIO\EdukuJez\EdukuJez\obj\Debug\EdukuJez.csproj.CoreComp
 D:\c#\Projekt__IO\ProjektIO\EdukuJez\EdukuJez\obj\Debug\EdukuJez.csproj.CopyComplete
 D:\c#\Projekt__IO\ProjektIO\EdukuJez\EdukuJez\obj\Debug\EdukuJez.dll
 D:\c#\Projekt__IO\ProjektIO\EdukuJez\EdukuJez\obj\Debug\EdukuJez.pdb
+F:\GitHub\ProjektIO222\EdukuJez\EdukuJez\obj\Debug\EdukuJez.csproj.AssemblyReference.cache
+F:\GitHub\ProjektIO222\EdukuJez\EdukuJez\obj\Debug\EdukuJez.csproj.CoreCompileInputs.cache
+F:\GitHub\ProjektIO222\EdukuJez\EdukuJez\obj\Debug\EdukuJez.dll
+F:\GitHub\ProjektIO222\EdukuJez\EdukuJez\obj\Debug\EdukuJez.pdb

@@ -32,14 +32,12 @@ namespace EdukuJez
         List<string> Teacher = new List<string> { };
 
 
-        private ScheduleRepository scheduleRepo;
-        private GroupsRepository groupRepo;
-        private SubjectsRepository subjRepo;
+        private ScheduleRepository scheduleRepo = new ScheduleRepository();
+        private GroupsRepository groupRepo = new GroupsRepository();
+        private SubjectsRepository subjRepo = new SubjectsRepository();
         protected void Page_Load(object sender, EventArgs e)
         {
-            var a =  groupRepo = new GroupsRepository();
-            var Lessons = new ScheduleRepository();
-            var list = groupRepo.Table.ToList();
+            var Lessons = scheduleRepo;
             var lessonPlan = Lessons.Table.Include(u => u.Group).Include(u => u.Subject).ToList();
 
             LoadToList(lessonPlan);
@@ -49,9 +47,6 @@ namespace EdukuJez
 
         public EditClasses()
         {
-            scheduleRepo = new ScheduleRepository();
-            groupRepo = new GroupsRepository();
-            subjRepo = new SubjectsRepository();
         }
 
 
@@ -66,9 +61,8 @@ namespace EdukuJez
 
             var query = new ClassC() { Hour = godzina, Day = dzien, Class = Class };
 
-            var dbc = new ClassesAdminReposytory();
 
-            dbc.Insert(query);
+            scheduleRepo.Insert(query);
 
 
         }

@@ -25,6 +25,9 @@ namespace EdukuJez.Repositories
             Context.Remove(entity);
             Context.SaveChanges();
         }
-
+        public void Update()
+        {
+            Context.SaveChanges();
+        }
     }
 }
