@@ -24,12 +24,12 @@ namespace EdukuJez
         protected global::System.Web.UI.WebControls.Table LessonTable;
 
         /// <summary>
-        /// Kontrolka MainTable.
+        /// Kontrolka myRepeater.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table MainTable;
+        protected global::System.Web.UI.WebControls.Repeater myRepeater;
     }
 }

@@ -4,10 +4,35 @@
         <div>
             <asp:Table ID="LessonTable" runat="server" CssClass="LessonPlan"></asp:Table>
         </div>
-    <asp:Table ID="MainTable" runat="server" CellSpacing="20" CssClass="Center-Form  Main-Table">
-         
+    <div class="Center-Form">
+            <asp:Repeater ID="myRepeater" runat="server">
+                <HeaderTemplate>
+                    <table border="1">
+                        <tr>
+                            <th>Dzień Tygodnia</th>
+                            <th>Przedmiot</th>
+                            <th>Prowadzący</th>
+                            <th>Prowadzący</th>
+                            <th>Sala</th>
+                            <th>Godzina</th>
 
-    </asp:Table>
+                        </tr>
+                </HeaderTemplate>
+                <ItemTemplate>
+                    <tr>
+                        <td><%# Eval("Day") %></td>
+                        <td><%# Eval("SubjectName") %></td>
+                        <td><%# Eval("Name") %></td>
+                        <td><%# Eval("Surname") %></td>
+                        <td><%# Eval("Class") %></td>
+                        <td><%# Eval("Hour") %></td>
+                    </tr>
+                </ItemTemplate>
+                <FooterTemplate>
+                    </table>
+                </FooterTemplate>
+            </asp:Repeater>
+        </div>
     
 
 </asp:Content>
