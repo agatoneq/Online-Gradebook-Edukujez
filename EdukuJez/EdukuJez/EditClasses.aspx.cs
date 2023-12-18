@@ -1,14 +1,20 @@
-﻿using EdukuJez.Migrations;
-using EdukuJez.Model.ServerAccess.Repositories;
+﻿
+using EdukuJez.Migrations;
+
 using EdukuJez.Repositories;
 using Microsoft.Ajax.Utilities;
 using System;
+
+﻿using System;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using EdukuJez.Repositories;
+
 
 namespace EdukuJez
 {
@@ -22,35 +28,52 @@ namespace EdukuJez
         private DropDownList DropDownListGroup;
         private DropDownList DropDownListSubject;
 
+
         List<string> Class = new List<string> { };
         List<string> Subject = new List<string> { };
         List<string> Group = new List<string> { };
         List<string> Name = new List<string> { };
         List<string> Surname = new List<string> { };
         List<string> Teacher = new List<string> { };
+
+
+        private ScheduleRepository scheduleRepo;
+        private GroupsRepository groupRepo;
+        private SubjectsRepository subjRepo;
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            var Lessons = new ClassesAdminRepository();
+            var Lessons = new ScheduleRepository();
             var lessonPlan = Lessons.Table.ToList();
 
             LoadToList(lessonPlan);
             CreateDynamicControls(lessonPlan);
+
         }
+
+        public EditClasses()
+        {
+            scheduleRepo = new ScheduleRepository();
+            groupRepo = new GroupsRepository();
+            subjRepo = new SubjectsRepository();
+        }
+
 
         protected void AddButton_Click(object sender, EventArgs e)
         {
             string dzien = DropDownListDay.SelectedValue;
             string godzina = DropDownListHour.SelectedValue;
+
             int Class = Convert.ToInt32(DropDownListTeacher.SelectedValue);
             int grupaId = Convert.ToInt32(DropDownListGroup.SelectedValue);
             int przedmiotId = Convert.ToInt32(DropDownListSubject.SelectedValue);
 
             var query = new ClassC() { Hour = godzina, Day = dzien, Class = Class };
 
-            var dbc = new ClassesAdminRepository();
+            var dbc = new ScheduleRepository();
 
             dbc.Insert(query);
+
 
         }
 
@@ -64,11 +87,14 @@ namespace EdukuJez
 
 
 
+
             var query = new ClassC() { Id = 1, Hour = godzina, Day = dzien, Class = Class };
 
-            var dbc = new ClassesAdminRepository();
+            var dbc = new ScheduleRepository();
 
             dbc.Delete(query);
+
+
         }
 
 
@@ -84,7 +110,7 @@ namespace EdukuJez
             List<string> subjects = Subject;
             List<string> classes = Class;
 
-            List<List<string>> values = new List<List<string>> { days, hours, teachers, groups, subjects,classes };
+            List<List<string>> values = new List<List<string>> { days, hours, teachers, groups, subjects, classes };
 
             for (int i = 0; i < dropdownNames.Length; i++)
             {
@@ -178,18 +204,18 @@ namespace EdukuJez
 
         void LoadToList(ICollection<ClassC> lessonPlan)
         {
-            string a; 
+            string a;
             foreach (ClassC lesson in lessonPlan)
             {
                 Class.Add(lesson.Class.ToString());
-                Subject.Add(lesson.Subject.ToString());
-                Group.Add(lesson.Group.ToString());
+               // Subject.Add(lesson.Subject.Id.ToString());
+               // Group.Add(lesson.Group.Id.ToString());
                 Name.Add(lesson.Name.ToString());
                 Surname.Add(lesson.Surname.ToString());
                 a = lesson.Name.ToString() + " " + (lesson.Surname.ToString());
                 Teacher.Add(a);
             }
-        
+
         }
 
     }

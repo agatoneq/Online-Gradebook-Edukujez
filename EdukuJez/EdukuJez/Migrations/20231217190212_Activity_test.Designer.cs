@@ -4,14 +4,16 @@ using EdukuJez.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EdukuJez.Migrations
 {
     [DbContext(typeof(BaseContext))]
-    partial class BaseContextModelSnapshot : ModelSnapshot
+    [Migration("20231217190212_Activity_test")]
+    partial class Activity_test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,24 +34,6 @@ namespace EdukuJez.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Activities");
-                });
-
-            modelBuilder.Entity("EdukuJez.Repositories.Calendar", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Desc")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Calendar");
                 });
 
             modelBuilder.Entity("EdukuJez.Repositories.ClassC", b =>
@@ -118,9 +102,6 @@ namespace EdukuJez.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ActivityId")
-                        .HasColumnType("int");
-
                     b.Property<int>("GradeValue")
                         .HasColumnType("int");
 
@@ -134,8 +115,6 @@ namespace EdukuJez.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ActivityId");
 
                     b.HasIndex("SubjectId");
 
@@ -186,99 +165,6 @@ namespace EdukuJez.Migrations
                     b.ToTable("GroupUsers");
                 });
 
-            modelBuilder.Entity("EdukuJez.Repositories.Message", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsGroupMsg")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("SenderId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Topic")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SenderId");
-
-                    b.ToTable("Messages");
-                });
-
-            modelBuilder.Entity("EdukuJez.Repositories.MessageGroups", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("GroupId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("MessageId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GroupId");
-
-                    b.HasIndex("MessageId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("MessageGroups");
-                });
-
-            modelBuilder.Entity("EdukuJez.Repositories.MessageUsers", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("MessageId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MessageId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("MessageUsers");
-                });
-
-            modelBuilder.Entity("EdukuJez.Repositories.Post", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsUserSender")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("MessageId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MessageId");
-
-                    b.ToTable("Post");
-                });
-
             modelBuilder.Entity("EdukuJez.Repositories.Subject", b =>
                 {
                     b.Property<int>("Id")
@@ -287,17 +173,12 @@ namespace EdukuJez.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("SubjectDesc")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SubjectName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("SubjectName")
-                        .IsUnique();
 
                     b.ToTable("Subjects");
                 });
@@ -310,25 +191,18 @@ namespace EdukuJez.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("UserLogin")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserPassword")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserSurname")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserLogin")
-                        .IsUnique();
 
                     b.ToTable("Users");
                 });
@@ -357,10 +231,6 @@ namespace EdukuJez.Migrations
 
             modelBuilder.Entity("EdukuJez.Repositories.Grade", b =>
                 {
-                    b.HasOne("EdukuJez.Repositories.Activity", "Activity")
-                        .WithMany("Grades")
-                        .HasForeignKey("ActivityId");
-
                     b.HasOne("EdukuJez.Repositories.Subject", "Subject")
                         .WithMany("Grades")
                         .HasForeignKey("SubjectId");
@@ -386,52 +256,6 @@ namespace EdukuJez.Migrations
                     b.HasOne("EdukuJez.Repositories.User", "User")
                         .WithMany("Groups")
                         .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("EdukuJez.Repositories.Message", b =>
-                {
-                    b.HasOne("EdukuJez.Repositories.User", "Sender")
-                        .WithMany()
-                        .HasForeignKey("SenderId");
-                });
-
-            modelBuilder.Entity("EdukuJez.Repositories.MessageGroups", b =>
-                {
-                    b.HasOne("EdukuJez.Repositories.Group", null)
-                        .WithMany("Messages")
-                        .HasForeignKey("GroupId");
-
-                    b.HasOne("EdukuJez.Repositories.Message", "Message")
-                        .WithMany("GroupRecipients")
-                        .HasForeignKey("MessageId");
-
-                    b.HasOne("EdukuJez.Repositories.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("EdukuJez.Repositories.MessageUsers", b =>
-                {
-                    b.HasOne("EdukuJez.Repositories.Message", "Message")
-                        .WithMany("Recipients")
-                        .HasForeignKey("MessageId");
-
-                    b.HasOne("EdukuJez.Repositories.User", "User")
-                        .WithMany("Messages")
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("EdukuJez.Repositories.Post", b =>
-                {
-                    b.HasOne("EdukuJez.Repositories.User", "User")
-                        .WithOne("Post")
-                        .HasForeignKey("EdukuJez.Repositories.Post", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EdukuJez.Repositories.Message", "Message")
-                        .WithMany()
-                        .HasForeignKey("MessageId");
                 });
 #pragma warning restore 612, 618
         }
