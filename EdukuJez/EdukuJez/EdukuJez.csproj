@@ -391,14 +391,6 @@
     <Compile Include="Migrations\20231218124358_Uniques_and_nulls.designer.cs">
       <DependentUpon>20231218124358_Uniques_and_nulls.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20231218145304_test.cs" />
-    <Compile Include="Migrations\20231218145304_test.designer.cs">
-      <DependentUpon>20231218145304_test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20231218151349_back.cs" />
-    <Compile Include="Migrations\20231218151349_back.designer.cs">
-      <DependentUpon>20231218151349_back.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\BaseContextModelSnapshot.cs" />
     <Compile Include="Model\Main\PanelFactory.cs" />
     <Compile Include="Model\Main\TablePanel.cs" />
@@ -420,7 +412,6 @@
     <Compile Include="Model\ServerAccess\IRestricted.cs" />
     <Compile Include="Model\ServerAccess\Repositories\ActivitiesRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\BaseContext.cs" />
-    <Compile Include="Model\ServerAccess\Repositories\ClassesAdminReposytory.cs" />
     <Compile Include="Model\ServerAccess\Repositories\GradesRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\GroupsRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\ARepository.cs" />
