@@ -19,7 +19,7 @@ namespace EdukuJez
             var ddList = groupsRepository.Table.Select(x => x.Name).ToList();
             foreach (var gr in ddList)
                 GroupBox.Items.Add(gr);
-            
+
         }
 
         protected void AddClick(object sender, EventArgs e)

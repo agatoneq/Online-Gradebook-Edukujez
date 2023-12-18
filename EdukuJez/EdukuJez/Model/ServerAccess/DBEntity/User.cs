@@ -22,10 +22,10 @@ namespace EdukuJez.Repositories
         public string UserPassword { get; set; }
         public virtual Post Post { get; set; }
 
-        public ICollection<GroupUser> Groups { get; set; }
-        public ICollection<Grade> Grades { get; set; }
-        public ICollection<ClassUsers> Clasess { get; set; }
-        public ICollection<MessageUsers> Messages { get; set; }
+        public ICollection<GroupUser> Groups { get; set; } = new List<GroupUser>();
+        public ICollection<Grade> Grades { get; set; } = new List<Grade>();
+        public ICollection<ClassUsers> Clasess { get; set; } = new List<ClassUsers>();
+        public ICollection<MessageUsers> Messages { get; set; } = new List<MessageUsers>();
 
         public bool IsNameValid(string name)
         {

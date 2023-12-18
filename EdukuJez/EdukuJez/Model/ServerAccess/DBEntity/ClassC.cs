@@ -8,7 +8,7 @@ namespace EdukuJez.Repositories
     public class ClassC : EntityBase
     {
         public Subject Subject { get; set; }
-        public ICollection<ClassUsers> Users { get; set; }
+        public ICollection<ClassUsers> Users { get; set; } = new List<ClassUsers>();
         public Group Group { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }

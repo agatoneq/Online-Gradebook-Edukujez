@@ -1,20 +1,15 @@
 ﻿
 using EdukuJez.Migrations;
-
 using EdukuJez.Repositories;
 using Microsoft.Ajax.Utilities;
 using System;
-
-﻿using System;
-
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using EdukuJez.Repositories;
-using EdukuJez.Model.ServerAccess.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace EdukuJez
 {
@@ -42,9 +37,10 @@ namespace EdukuJez
         private SubjectsRepository subjRepo;
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            var Lessons = new ClassesAdminReposytory();
-            var lessonPlan = Lessons.Table.ToList();
+            var a =  groupRepo = new GroupsRepository();
+            var Lessons = new ScheduleRepository();
+            var list = groupRepo.Table.ToList();
+            var lessonPlan = Lessons.Table.Include(u => u.Group).Include(u => u.Subject).ToList();
 
             LoadToList(lessonPlan);
             CreateDynamicControls(lessonPlan);
@@ -203,12 +199,12 @@ namespace EdukuJez
 
 
         void LoadToList(ICollection<ClassC> lessonPlan)
-        {
+        { 
             string a;
             foreach (ClassC lesson in lessonPlan)
             {
                 Class.Add(lesson.Class.ToString());
-                Subject.Add(lesson.Subject.Id.ToString());
+                //Subject.Add(lesson.Subject.Id.ToString());
                 Group.Add(lesson.Group.Id.ToString());
                 Name.Add(lesson.Name.ToString());
                 Surname.Add(lesson.Surname.ToString());

@@ -12,7 +12,7 @@ namespace EdukuJez.Repositories
         public string SubjectName { get; set; }
         [Required]
         public string SubjectDesc { get; set; }
-        public ICollection<ClassC> Classes { get; set; }
-        public ICollection<Grade> Grades { get; set; }
+        public ICollection<ClassC> Classes { get; set; } = new List<ClassC>();
+        public ICollection<Grade> Grades { get; set; } = new List<Grade>();
     }
 }

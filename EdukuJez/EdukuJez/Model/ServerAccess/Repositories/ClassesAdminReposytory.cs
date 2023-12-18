@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
 
-namespace EdukuJez.Model.ServerAccess.Repositories
+namespace EdukuJez
 {
     public class ClassesAdminReposytory : ARepository<ClassC>
     {
