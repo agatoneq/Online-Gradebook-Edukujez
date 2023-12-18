@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using EdukuJez.Repositories;
 
@@ -10,11 +7,10 @@ namespace EdukuJez
 {
     public partial class AccountsManagement : System.Web.UI.Page
     {
-        private User newUser = new User(); //???
-        protected void Page_Load(object sender, EventArgs e)
-        {
+        private User newUser = new User();
+        private UsersRepository usersRepository = new UsersRepository();
 
-        }
+        protected void Page_Load(object sender, EventArgs e) { }
 
         protected void AddClick(object sender, EventArgs e)
         {
@@ -44,41 +40,78 @@ namespace EdukuJez
 
         protected void ConfirmDeleteClick(object sender, EventArgs e)
         {
-            //newUser.UserLogin = LoginBox.Text;
-            UsersRepository usersRepository = new UsersRepository();
-            usersRepository.Delete(usersRepository.Table.First(x => x.UserLogin== LoginBox.Text));
+            usersRepository.Delete(usersRepository.Table.First(x => x.UserLogin == LoginBox.Text));
+            MainInfoLabel.Text = "Usunąłeś z bazy danych użytkownika o loginie " + LoginBox.Text + ". <br> Kliknij poniższy przycisk, aby dodać lub usunąć kolejnego użytkownika.";
+            ConfirmDeleteButton.Visible = false;
+            LoginBox.Visible = false;
+            LoginLabel.Visible = false;
+            RestartButton.Visible = true;
         }
 
         protected void ConfirmAddClick(object sender, EventArgs e)
         {
-            UsersRepository usersRepository = new UsersRepository();
-            newUser.UserLogin = LoginBox.Text;
-            newUser.UserName = NameBox.Text;
-            newUser.UserSurname = SurnameBox.Text;
-            newUser.UserPassword = PasswordBox.Text;
-            //newUser.Groups = GroupBox.Text;
-            usersRepository.Insert(newUser);
+            if (!newUser.IsNameValid(NameBox.Text))
+            {
+                InfoLabel.Text = "Niepoprawne imię.";
+            }
+            else if (!newUser.IsSurnameValid(SurnameBox.Text))
+            {
+                InfoLabel.Text = "Niepoprawne nazwisko.";
+            }
+            else if (!newUser.IsPasswordValid(PasswordBox.Text))
+            {
+                InfoLabel.Text = "Hasło musi się składać od 8 do 50 znaków, <br> co najmniej: jednej cyfry, jednej małej i jednej wielkiej litery <br> oraz co najmniej jednego ze znaków: . ! @ # $ % & ? <br> nie może także zawierać znaków polskich.";
+            }
+            else
+            {
+                InfoLabel.Visible = false;
+                newUser.UserLogin = LoginBox.Text;
+                newUser.UserName = NameBox.Text;
+                newUser.UserSurname = SurnameBox.Text;
+                newUser.UserPassword = PasswordBox.Text;
+                //newUser.Groups = GroupBox.Text;
+                usersRepository.Insert(newUser);
+                MainInfoLabel.Text = "Dodałeś do bazy danych użytkownika o loginie " + newUser.UserLogin +
+                                     ". <br> Kliknij poniższy przycisk, aby dodać lub usunąć kolejnego użytkownika.";
+
+                PasswordBox.Visible = false;
+                GroupBox.Visible = false;
+                ConfirmAddButton.Visible = false;
+                NameLabel.Visible = false;
+                NameBox.Visible = false;
+                SurnameLabel.Visible = false;
+                SurnameBox.Visible = false;
+                PasswordLabel.Visible = false;
+                GroupLabel.Visible = false;
+                LoginBox.Visible = false;
+                LoginLabel.Visible = false;
+                RestartButton.Visible = true;
+            }
         }
 
         protected void LoginBoxChanged(object sender, EventArgs e)
         {
-            UsersRepository usersRepository = new UsersRepository();
-            int loginLength = LoginBox.Text.Length;
-            if (loginLength >= 3 && loginLength <= 10 && !usersRepository.IsLoginInDatabase(LoginBox.Text))
-            {
-                AddUserButton.Enabled = true;
-                DeleteUserButton.Enabled = false;
-            }
-            else if (loginLength >= 3 && loginLength <= 10 && usersRepository.IsLoginInDatabase(LoginBox.Text))
+            if (usersRepository.IsLoginInDatabase(LoginBox.Text))
             {
                 DeleteUserButton.Enabled = true;
                 AddUserButton.Enabled = false;
+            }
+            else if (newUser.IsLoginValid(LoginBox.Text, LoginBox.Text.Length) && !usersRepository.IsLoginInDatabase(LoginBox.Text))
+            {
+                AddUserButton.Enabled = true;
+                DeleteUserButton.Enabled = false;
             }
             else
             { 
                 AddUserButton.Enabled = false;
                 DeleteUserButton.Enabled = false;
+                InfoLabel.Text = "Login może się składać z 3-30 liter (nie polskich) oraz cyfr. Nie zaczynaj loginu od cyfry.";
             }
+        }
+
+        protected void ConfirmRestartClick(object sender, EventArgs e)
+        {
+            Response.Redirect("AccountsManagement.aspx");
 
         }
     }
