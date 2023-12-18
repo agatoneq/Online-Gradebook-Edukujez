@@ -14,10 +14,12 @@ namespace EdukuJez
         private GroupsRepository groupsRepository = new GroupsRepository();
 
         protected void Page_Load(object sender, EventArgs e) {
+            GroupsRepository groupsRepository = new GroupsRepository();
             GroupBox.Items.Clear();
             var ddList = groupsRepository.Table.Select(x => x.Name).ToList();
             foreach (var gr in ddList)
                 GroupBox.Items.Add(gr);
+            
         }
 
         protected void AddClick(object sender, EventArgs e)
@@ -78,10 +80,16 @@ namespace EdukuJez
                 newUser.UserSurname = SurnameBox.Text;
                 newUser.UserPassword = PasswordBox.Text;
 
-                Group g = groupsRepository.Table.FirstOrDefault(x=> x.Name==GroupBox.Text);
-                groupsUsersRepository.Insert(new GroupUser() { User = newUser, Group = g });
 
+                Group g = groupsRepository.Table.First();
+                var gu = new GroupUser();
+                g.Users = new List<GroupUser>() { gu };
+                newUser.Groups = new List<GroupUser>() { gu };
                 usersRepository.Insert(newUser);
+                groupsRepository.Update();
+
+
+
                 MainInfoLabel.Text = "Dodałeś do bazy danych użytkownika o loginie " + newUser.UserLogin +
                                      ". <br> Kliknij poniższy przycisk, aby dodać lub usunąć kolejnego użytkownika.";
 
