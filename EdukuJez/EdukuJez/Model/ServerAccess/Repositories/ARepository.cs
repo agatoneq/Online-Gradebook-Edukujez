@@ -9,7 +9,7 @@ namespace EdukuJez.Repositories
 {
     public abstract class ARepository<T> where T : EntityBase
     {
-        public  IQueryable<T> Table { get; protected set; }
+        public  DbSet<T> Table { get; protected set; }
         protected BaseContext Context { get; }
         public ARepository()
         {

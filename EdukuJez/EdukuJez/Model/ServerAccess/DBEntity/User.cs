@@ -5,19 +5,27 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI.WebControls;
 using System.Xml.Linq;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EdukuJez.Repositories
 {
     public class User : EntityBase
     {
+        [Required]
         public string UserName { get; set; }
+        [Required]
         public string UserSurname { get; set; }
+        [Required]
         public string UserLogin { get; set; }
+        [Required]
         public string UserPassword { get; set; }
+        public virtual Post Post { get; set; }
 
         public ICollection<GroupUser> Groups { get; set; }
         public ICollection<Grade> Grades { get; set; }
         public ICollection<ClassUsers> Clasess { get; set; }
+        public ICollection<MessageUsers> Messages { get; set; }
 
         public bool IsNameValid(string name)
         {

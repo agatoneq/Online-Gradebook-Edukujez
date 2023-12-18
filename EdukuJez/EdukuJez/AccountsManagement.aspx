@@ -22,10 +22,6 @@
                 <asp:TextBox ID="SurnameBox" runat="server" Style="display: block; margin-bottom: 10px; width: 250px; height: 25px; font-size: 16px;" Visible="false"></asp:TextBox>
                 <asp:TextBox ID="PasswordBox" runat="server" Style="display: block; margin-bottom: 10px; width: 250px; height: 25px; font-size: 16px;" Visible="false"></asp:TextBox>
                 <asp:DropDownList ID="GroupBox" runat="server" Style="display: block; margin-bottom: 10px; width: 255px; height: 30px; font-size: 16px;" Visible="false">
-                    <asp:ListItem>Uczeń</asp:ListItem>
-                    <asp:ListItem>Nauczyciel</asp:ListItem>
-                    <asp:ListItem>Rodzic</asp:ListItem>
-                    <asp:ListItem>Administrator</asp:ListItem>
                 </asp:DropDownList>
             </asp:Panel>
 

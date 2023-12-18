@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.UI.WebControls;
 using EdukuJez.Repositories;
+using System.Collections.Generic;
 
 namespace EdukuJez
 {
@@ -9,8 +10,15 @@ namespace EdukuJez
     {
         private User newUser = new User();
         private UsersRepository usersRepository = new UsersRepository();
+        private GroupUsersRepository groupsUsersRepository = new GroupUsersRepository();
+        private GroupsRepository groupsRepository = new GroupsRepository();
 
-        protected void Page_Load(object sender, EventArgs e) { }
+        protected void Page_Load(object sender, EventArgs e) {
+            GroupBox.Items.Clear();
+            var ddList = groupsRepository.Table.Select(x => x.Name).ToList();
+            foreach (var gr in ddList)
+                GroupBox.Items.Add(gr);
+        }
 
         protected void AddClick(object sender, EventArgs e)
         {
@@ -69,7 +77,10 @@ namespace EdukuJez
                 newUser.UserName = NameBox.Text;
                 newUser.UserSurname = SurnameBox.Text;
                 newUser.UserPassword = PasswordBox.Text;
-                //newUser.Groups = GroupBox.Text;
+
+                Group g = groupsRepository.Table.FirstOrDefault(x=> x.Name==GroupBox.Text);
+                groupsUsersRepository.Insert(new GroupUser() { User = newUser, Group = g });
+
                 usersRepository.Insert(newUser);
                 MainInfoLabel.Text = "Dodałeś do bazy danych użytkownika o loginie " + newUser.UserLogin +
                                      ". <br> Kliknij poniższy przycisk, aby dodać lub usunąć kolejnego użytkownika.";

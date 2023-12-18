@@ -379,6 +379,18 @@
     <Compile Include="Migrations\20231217190236_Activity.designer.cs">
       <DependentUpon>20231217190236_Activity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20231218112423_calendar.cs" />
+    <Compile Include="Migrations\20231218112423_calendar.designer.cs">
+      <DependentUpon>20231218112423_calendar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20231218121014_Messages.cs" />
+    <Compile Include="Migrations\20231218121014_Messages.designer.cs">
+      <DependentUpon>20231218121014_Messages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20231218124358_Uniques_and_nulls.cs" />
+    <Compile Include="Migrations\20231218124358_Uniques_and_nulls.designer.cs">
+      <DependentUpon>20231218124358_Uniques_and_nulls.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\BaseContextModelSnapshot.cs" />
     <Compile Include="Model\Main\PanelFactory.cs" />
     <Compile Include="Model\Main\TablePanel.cs" />
@@ -390,6 +402,10 @@
     <Compile Include="Model\ServerAccess\DBEntity\Grade.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\Group.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\GroupUser.cs" />
+    <Compile Include="Model\ServerAccess\DBEntity\Message.cs" />
+    <Compile Include="Model\ServerAccess\DBEntity\MessageGroups.cs" />
+    <Compile Include="Model\ServerAccess\DBEntity\MessageUsers.cs" />
+    <Compile Include="Model\ServerAccess\DBEntity\Post.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\Subject.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\SubjView.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\User.cs" />

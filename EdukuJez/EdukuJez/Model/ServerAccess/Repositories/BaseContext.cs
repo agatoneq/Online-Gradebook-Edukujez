@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace EdukuJez.Repositories
 {
     public class BaseContext : DbContext 
@@ -17,6 +18,9 @@ namespace EdukuJez.Repositories
         public DbSet<User> Users { get; set; }
         public DbSet<Activity> Activities { get; set; }
         public DbSet<Calendar> Calendar { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<MessageGroups> MessageGroups { get; set; }
+        public DbSet<MessageUsers> MessageUsers { get; set; }
         public static BaseContext GetContext()
         {
             if (_instance == null)
@@ -37,6 +41,22 @@ namespace EdukuJez.Repositories
             // Konfiguracja połączenia z bazą danych
             optionsBuilder.UseSqlServer(ServerClient.CONSTRING);
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Post)
+                .WithOne(p => p.User)
+                .HasForeignKey<Post>(p => p.Id);
+
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.UserLogin)
+                .IsUnique();
+
+            modelBuilder.Entity<Subject>()
+                .HasIndex(u => u.SubjectName)
+                .IsUnique();
+        }
     }
 }
