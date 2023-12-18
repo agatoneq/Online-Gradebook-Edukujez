@@ -1,4 +1,12 @@
+﻿
+using EdukuJez.Migrations;
+
+using EdukuJez.Repositories;
+using Microsoft.Ajax.Utilities;
+using System;
+
 ﻿using System;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,75 +14,103 @@ using System.Web.Helpers;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using EdukuJez.Repositories;
+using EdukuJez.Model.ServerAccess.Repositories;
 
 namespace EdukuJez
 {
     public partial class EditClasses : System.Web.UI.Page
     {
 
-    // Deklaracja zmiennych do przechowywania DropDownList jako zmiennych klasy
-    private DropDownList DropDownListDay;
+        // Deklaracja zmiennych do przechowywania DropDownList jako zmiennych klasy
+        private DropDownList DropDownListDay;
         private DropDownList DropDownListHour;
         private DropDownList DropDownListTeacher;
         private DropDownList DropDownListGroup;
         private DropDownList DropDownListSubject;
+
+
+        List<string> Class = new List<string> { };
+        List<string> Subject = new List<string> { };
+        List<string> Group = new List<string> { };
+        List<string> Name = new List<string> { };
+        List<string> Surname = new List<string> { };
+        List<string> Teacher = new List<string> { };
+
+
         private ScheduleRepository scheduleRepo;
         private GroupsRepository groupRepo;
         private SubjectsRepository subjRepo;
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+            var Lessons = new ClassesAdminReposytory();
+            var lessonPlan = Lessons.Table.ToList();
+
+            LoadToList(lessonPlan);
+            CreateDynamicControls(lessonPlan);
+
+        }
+
         public EditClasses()
         {
             scheduleRepo = new ScheduleRepository();
             groupRepo = new GroupsRepository();
             subjRepo = new SubjectsRepository();
         }
-        protected void Page_Load(object sender, EventArgs e)
-        {
- 
-            CreateDynamicControls();
-            
-        }
+
 
         protected void AddButton_Click(object sender, EventArgs e)
         {
             string dzien = DropDownListDay.SelectedValue;
             string godzina = DropDownListHour.SelectedValue;
-            int nauczycielId = Convert.ToInt32(DropDownListTeacher.SelectedValue); //Ciężko mi to zmienić
+
+            int Class = Convert.ToInt32(DropDownListTeacher.SelectedValue);
             int grupaId = Convert.ToInt32(DropDownListGroup.SelectedValue);
             int przedmiotId = Convert.ToInt32(DropDownListSubject.SelectedValue);
 
-            ClassC c = new ClassC();
-            c.Day = dzien;
-            c.Hour = godzina;
-            c.Group = groupRepo.Table.FirstOrDefault(x => x.Id == grupaId);
-            c.Subject = subjRepo.Table.FirstOrDefault(x => x.Id == przedmiotId) ;
-            scheduleRepo.Insert(c);
+            var query = new ClassC() { Hour = godzina, Day = dzien, Class = Class };
+
+            var dbc = new ClassesAdminReposytory();
+
+            dbc.Insert(query);
+
+
         }
 
         protected void DeleteButton_Click(object sender, EventArgs e)
         {
             string dzien = DropDownListDay.SelectedValue;
             string godzina = DropDownListHour.SelectedValue;
-            int nauczycielId = Convert.ToInt32(DropDownListTeacher.SelectedValue);
+            int Class = Convert.ToInt32(DropDownListTeacher.SelectedValue);
             int grupaId = Convert.ToInt32(DropDownListGroup.SelectedValue);
             int przedmiotId = Convert.ToInt32(DropDownListSubject.SelectedValue);
 
-            ClassC c = scheduleRepo.Table.First(x => x.Day == dzien && x.Hour == godzina && x.Group.Id == grupaId && x.Subject.Id == przedmiotId);
-            scheduleRepo.Delete(c);
+
+
+
+            var query = new ClassC() { Id = 1, Hour = godzina, Day = dzien, Class = Class };
+
+            var dbc = new ScheduleRepository();
+
+            dbc.Delete(query);
+
+
         }
 
 
-        private void CreateDynamicControls()
+        private void CreateDynamicControls(ICollection<ClassC> lessonPlan)
         {
             string[] dropdownNames = { "Dzien", "Godzina", "Nauczyciel", "Grupa", "Przedmiot" };
 
             // Zakładając, że masz listy wartości dla każdego DropDownList
             List<string> days = new List<string> { "Poniedzialek", "Wtorek", "Sroda", "Czwartek", "Piatek" };
             List<string> hours = new List<string> { "8:00 – 8:45", "8:50 – 9:35", "9:45 – 10:30", "10:35 – 11:20", "11:40 – 12:25", "12:45 – 13:30", "13:35 – 14:20", "14:25 – 15:10" };
-            List<string> teachers = new List<string> { "1", "2", "3" };
-            List<string> groups = new List<string> { "1", "2", "3" };
-            List<string> subjects = new List<string> { "1", "2", "3" };
+            List<string> teachers = Teacher;
+            List<string> groups = Group;
+            List<string> subjects = Subject;
+            List<string> classes = Class;
 
-            List<List<string>> values = new List<List<string>> { days, hours, teachers, groups, subjects };
+            List<List<string>> values = new List<List<string>> { days, hours, teachers, groups, subjects, classes };
 
             for (int i = 0; i < dropdownNames.Length; i++)
             {
@@ -145,6 +181,43 @@ namespace EdukuJez
             submitRow.Cells.Add(submitCell);
 
             MainTable.Rows.Add(submitRow);
+
+            foreach (ClassC lesson in lessonPlan)
+            {
+                TableRow row = new TableRow();
+
+                // Tworzenie nowych komórek TableCell
+                TableCell cellClass = new TableCell { Text = lesson.Class.ToString() };
+                TableCell cellHour = new TableCell { Text = lesson.Hour.ToString() };
+                TableCell cellDay = new TableCell { Text = lesson.Day.ToString() };
+
+                // Dodawanie komórek do wiersza
+                row.Cells.Add(cellDay);
+                row.Cells.Add(cellClass);
+                row.Cells.Add(cellHour);
+
+                // Dodawanie wiersza do tabeli MainTable
+                MainTable.Rows.Add(row);
+            }
         }
+
+
+        void LoadToList(ICollection<ClassC> lessonPlan)
+        {
+            string a;
+            foreach (ClassC lesson in lessonPlan)
+            {
+                Class.Add(lesson.Class.ToString());
+                Subject.Add(lesson.Subject.Id.ToString());
+                Group.Add(lesson.Group.Id.ToString());
+                Name.Add(lesson.Name.ToString());
+                Surname.Add(lesson.Surname.ToString());
+                a = lesson.Name.ToString() + " " + (lesson.Surname.ToString());
+                Teacher.Add(a);
+            }
+
+        }
+
     }
 }
+

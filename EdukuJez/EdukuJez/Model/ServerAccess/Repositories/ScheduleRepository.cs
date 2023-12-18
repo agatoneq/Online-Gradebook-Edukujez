@@ -11,6 +11,7 @@ namespace EdukuJez.Repositories
         public ScheduleRepository()
         {
             Table = Context.Classes;
-        }        
+        }
+
     }
 }
