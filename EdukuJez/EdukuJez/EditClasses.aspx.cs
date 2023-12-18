@@ -39,12 +39,7 @@ namespace EdukuJez
         private UsersRepository userRepo = new UsersRepository();
         protected void Page_Load(object sender, EventArgs e)
         {
-            var Lessons = scheduleRepo;
-            var lessonPlan = Lessons.Table.Include(u => u.Group).Include(u => u.Subject).ToList();
-
-            LoadToList(lessonPlan);
-            CreateDynamicControls(lessonPlan);
-
+            ReloadData();
         }
 
         public EditClasses()
@@ -75,6 +70,7 @@ namespace EdukuJez
             userRepo.Update();
             groupRepo.Update();
             subjRepo.Update();
+            ReloadData();
         }
 
         protected void DeleteButton_Click(object sender, EventArgs e)
@@ -93,11 +89,13 @@ namespace EdukuJez
             ClassC query = scheduleRepo.Table
                 .FirstOrDefault(x => x.Hour == godzina && x.Day == dzien && x.Warden.UserName == parts[0] && x.Warden.UserSurname == parts[1] && x.Class == classRoom);
             scheduleRepo.Delete(query);
+            ReloadData();
         }
 
 
         private void CreateDynamicControls(ICollection<ClassC> lessonPlan)
         {
+            MainTable.Controls.Clear();
             string[] dropdownNames = { "Dzien", "Godzina", "Nauczyciel", "Grupa", "Przedmiot", "Sala" };
 
             // Zakładając, że masz listy wartości dla każdego DropDownList
@@ -227,7 +225,40 @@ namespace EdukuJez
             }
 
         }
+        private void ReloadData()
+        {
 
+            var subList = subjRepo.Table.ToList();
+            var groupList = groupRepo.Table.ToList();
+            var userList = userRepo.Table.ToList();
+            var lessonPlan = scheduleRepo.Table.Include(u => u.Group).Include(u => u.Warden).Include(u => u.Subject).ToList();
+
+            LoadToChose(groupList, subList, userList, lessonPlan);
+
+
+            CreateDynamicControls(lessonPlan);
+
+        }
+        void LoadToChose(ICollection<Group> groupT, ICollection<Subject> SubjectT, ICollection<User> UserT, ICollection<ClassC> lessonPlan)
+        {
+            foreach (Group group in groupT)
+            {
+                Group.Add(group.Name.ToString());
+            }
+            foreach (Subject subject in SubjectT)
+            {
+                Subject.Add(subject.SubjectName.ToString());
+            }
+            foreach (User user in UserT)
+            {
+                var a = user.UserName.ToString() + " " + user.UserSurname.ToString();
+                Teacher.Add(a);
+            }
+            foreach (ClassC lesson in lessonPlan)
+            {
+                Class.Add(lesson.Class.ToString());
+            }
+        }
     }
 }
 
