@@ -9,7 +9,7 @@ namespace EdukuJez.Repositories
 {
     public abstract class ARepository<T> where T : EntityBase
     {
-        public  DbSet<T> Table { get; protected set; }
+        public DbSet<T> Table { get; protected set; }
         protected BaseContext Context { get; }
         public ARepository()
         {
@@ -17,11 +17,15 @@ namespace EdukuJez.Repositories
         }
         public void Insert(T entity)
         {
+            if (entity == null)
+                return;
             Context.Add(entity);
             Context.SaveChanges();
         }
         public void Delete(T entity)
         {
+            if (entity == null)
+                return;
             Context.Remove(entity);
             Context.SaveChanges();
         }

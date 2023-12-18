@@ -22,6 +22,7 @@ namespace EdukuJez
         private DropDownList DropDownListTeacher;
         private DropDownList DropDownListGroup;
         private DropDownList DropDownListSubject;
+        private DropDownList DropDownListClass;
 
 
         List<string> Class = new List<string> { };
@@ -55,42 +56,46 @@ namespace EdukuJez
             string dzien = DropDownListDay.SelectedValue;
             string godzina = DropDownListHour.SelectedValue;
 
-            int Class = Convert.ToInt32(DropDownListTeacher.SelectedValue);
-            int grupaId = Convert.ToInt32(DropDownListGroup.SelectedValue);
-            int przedmiotId = Convert.ToInt32(DropDownListSubject.SelectedValue);
-
-            var query = new ClassC() { Hour = godzina, Day = dzien, Class = Class };
+            // rozdzielenie imienia i nazwiska na dwa osobne stringi do wysłania do DB
+            string Teacher = DropDownListTeacher.SelectedValue;
+            string[] parts = Teacher.Split(' ');
 
 
-            scheduleRepo.Insert(query);
 
+            var group = Convert.ToString(DropDownListGroup.SelectedValue);
+            var subject = Convert.ToString(DropDownListSubject.SelectedValue);
+            int classRoom = Convert.ToInt32(DropDownListClass.SelectedValue);
 
+            var c = new ClassC() { Hour = godzina, Day = dzien, Name = parts[0], Surname = parts[1], Class = classRoom };
+
+            groupRepo.Table.First(x => x.Name == group).Classes.Add(c);
+            subjRepo.Table.First(x => x.SubjectName == subject).Classes.Add(c);
+            groupRepo.Update();
+            subjRepo.Update();
         }
 
         protected void DeleteButton_Click(object sender, EventArgs e)
         {
             string dzien = DropDownListDay.SelectedValue;
             string godzina = DropDownListHour.SelectedValue;
-            int Class = Convert.ToInt32(DropDownListTeacher.SelectedValue);
-            int grupaId = Convert.ToInt32(DropDownListGroup.SelectedValue);
-            int przedmiotId = Convert.ToInt32(DropDownListSubject.SelectedValue);
 
+            // rozdzielenie imienia i nazwiska na dwa osobne stringi do wysłania do DB
+            string Teacher = DropDownListTeacher.SelectedValue;
+            string[] parts = Teacher.Split(' ');
 
+            var group = Convert.ToString(DropDownListGroup.SelectedValue);
+            var subject = Convert.ToString(DropDownListSubject.SelectedValue);
+            int classRoom = Convert.ToInt32(DropDownListClass.SelectedValue);
 
-
-            var query = new ClassC() { Id = 1, Hour = godzina, Day = dzien, Class = Class };
-
-            var dbc = new ScheduleRepository();
-
-            dbc.Delete(query);
-
-
+            var query = scheduleRepo.Table
+                .FirstOrDefault(x => x.Hour == godzina && x.Day == dzien && x.Name == parts[0] && x.Surname == parts[1] && x.Class == classRoom);
+            scheduleRepo.Delete(query);
         }
 
 
         private void CreateDynamicControls(ICollection<ClassC> lessonPlan)
         {
-            string[] dropdownNames = { "Dzien", "Godzina", "Nauczyciel", "Grupa", "Przedmiot" };
+            string[] dropdownNames = { "Dzien", "Godzina", "Nauczyciel", "Grupa", "Przedmiot", "Sala" };
 
             // Zakładając, że masz listy wartości dla każdego DropDownList
             List<string> days = new List<string> { "Poniedzialek", "Wtorek", "Sroda", "Czwartek", "Piatek" };
@@ -98,9 +103,9 @@ namespace EdukuJez
             List<string> teachers = Teacher;
             List<string> groups = Group;
             List<string> subjects = Subject;
-            List<string> classes = Class;
+            List<string> classRoom = new List<string> { "1", "2", "3", "4", "5", "6" };
 
-            List<List<string>> values = new List<List<string>> { days, hours, teachers, groups, subjects, classes };
+            List<List<string>> values = new List<List<string>> { days, hours, teachers, groups, subjects, classRoom };
 
             for (int i = 0; i < dropdownNames.Length; i++)
             {
@@ -130,6 +135,9 @@ namespace EdukuJez
                         break;
                     case 4:
                         DropDownListSubject = dropdown;
+                        break;
+                    case 5:
+                        DropDownListClass = dropdown;
                         break;
                 }
 
@@ -180,28 +188,37 @@ namespace EdukuJez
                 TableCell cellClass = new TableCell { Text = lesson.Class.ToString() };
                 TableCell cellHour = new TableCell { Text = lesson.Hour.ToString() };
                 TableCell cellDay = new TableCell { Text = lesson.Day.ToString() };
+                TableCell cellTeacherName = new TableCell { Text = lesson.Name.ToString() };
+                TableCell cellTeacherSurname = new TableCell { Text = lesson.Surname.ToString() };
+                TableCell cellSubject = new TableCell { Text = lesson.Subject.SubjectName.ToString() };
 
                 // Dodawanie komórek do wiersza
                 row.Cells.Add(cellDay);
-                row.Cells.Add(cellClass);
                 row.Cells.Add(cellHour);
+                row.Cells.Add(cellClass);
+                row.Cells.Add(cellSubject);
+                row.Cells.Add(cellTeacherName);
+                row.Cells.Add(cellTeacherSurname);
 
                 // Dodawanie wiersza do tabeli MainTable
                 MainTable.Rows.Add(row);
             }
         }
 
-
+        //ładowanie listy do wyświetlania 
         void LoadToList(ICollection<ClassC> lessonPlan)
-        { 
+        {
             string a;
             foreach (ClassC lesson in lessonPlan)
             {
                 Class.Add(lesson.Class.ToString());
-                //Subject.Add(lesson.Subject.Id.ToString());
-                Group.Add(lesson.Group.Id.ToString());
+                Subject.Add(lesson.Subject.SubjectName.ToString());
+
                 Name.Add(lesson.Name.ToString());
                 Surname.Add(lesson.Surname.ToString());
+
+                Group.Add(lesson.Group.Name.ToString());
+
                 a = lesson.Name.ToString() + " " + (lesson.Surname.ToString());
                 Teacher.Add(a);
             }
