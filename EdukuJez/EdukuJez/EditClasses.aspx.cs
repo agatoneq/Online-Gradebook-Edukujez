@@ -36,6 +36,7 @@ namespace EdukuJez
         private ScheduleRepository scheduleRepo = new ScheduleRepository();
         private GroupsRepository groupRepo = new GroupsRepository();
         private SubjectsRepository subjRepo = new SubjectsRepository();
+        private UsersRepository userRepo = new UsersRepository();
         protected void Page_Load(object sender, EventArgs e)
         {
             var Lessons = scheduleRepo;
@@ -65,11 +66,13 @@ namespace EdukuJez
             var group = Convert.ToString(DropDownListGroup.SelectedValue);
             var subject = Convert.ToString(DropDownListSubject.SelectedValue);
             int classRoom = Convert.ToInt32(DropDownListClass.SelectedValue);
+            
+            var c = new ClassC() { Hour = godzina, Day = dzien, Class = classRoom };
 
-            var c = new ClassC() { Hour = godzina, Day = dzien, Name = parts[0], Surname = parts[1], Class = classRoom };
-
+            userRepo.Table.First(x => x.UserName == parts[0] && x.UserSurname == parts[1]).Teaches.Add(c);
             groupRepo.Table.First(x => x.Name == group).Classes.Add(c);
             subjRepo.Table.First(x => x.SubjectName == subject).Classes.Add(c);
+            userRepo.Update();
             groupRepo.Update();
             subjRepo.Update();
         }
@@ -87,8 +90,8 @@ namespace EdukuJez
             var subject = Convert.ToString(DropDownListSubject.SelectedValue);
             int classRoom = Convert.ToInt32(DropDownListClass.SelectedValue);
 
-            var query = scheduleRepo.Table
-                .FirstOrDefault(x => x.Hour == godzina && x.Day == dzien && x.Name == parts[0] && x.Surname == parts[1] && x.Class == classRoom);
+            ClassC query = scheduleRepo.Table
+                .FirstOrDefault(x => x.Hour == godzina && x.Day == dzien && x.Warden.UserName == parts[0] && x.Warden.UserSurname == parts[1] && x.Class == classRoom);
             scheduleRepo.Delete(query);
         }
 
@@ -188,8 +191,8 @@ namespace EdukuJez
                 TableCell cellClass = new TableCell { Text = lesson.Class.ToString() };
                 TableCell cellHour = new TableCell { Text = lesson.Hour.ToString() };
                 TableCell cellDay = new TableCell { Text = lesson.Day.ToString() };
-                TableCell cellTeacherName = new TableCell { Text = lesson.Name.ToString() };
-                TableCell cellTeacherSurname = new TableCell { Text = lesson.Surname.ToString() };
+                TableCell cellTeacherName = new TableCell { Text = lesson.Warden.UserName.ToString() };
+                TableCell cellTeacherSurname = new TableCell { Text = lesson.Warden.UserSurname.ToString() };
                 TableCell cellSubject = new TableCell { Text = lesson.Subject.SubjectName.ToString() };
 
                 // Dodawanie komórek do wiersza
@@ -214,12 +217,12 @@ namespace EdukuJez
                 Class.Add(lesson.Class.ToString());
                 Subject.Add(lesson.Subject.SubjectName.ToString());
 
-                Name.Add(lesson.Name.ToString());
-                Surname.Add(lesson.Surname.ToString());
+                Name.Add(lesson.Warden.UserName.ToString());
+                Surname.Add(lesson.Warden.UserSurname.ToString());
 
                 Group.Add(lesson.Group.Name.ToString());
 
-                a = lesson.Name.ToString() + " " + (lesson.Surname.ToString());
+                a = lesson.Warden.UserName.ToString() + " " + (lesson.Warden.UserSurname.ToString());
                 Teacher.Add(a);
             }
 

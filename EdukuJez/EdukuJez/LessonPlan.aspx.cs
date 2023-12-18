@@ -24,8 +24,8 @@ namespace EdukuJez
             {
                 Day = a.Day,
                 SubjectName = a.Subject.SubjectName,
-                Name = a.Name,
-                Surname = a.Surname,
+                Name = a.Warden.UserName,
+                Surname = a.Warden.UserSurname,
                 Class = a.Class,
                 Hour = a.Hour
             });

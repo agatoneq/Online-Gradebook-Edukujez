@@ -14,6 +14,7 @@ namespace EdukuJez.Repositories
         public DbSet<Grade> Grades { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<GroupUser> GroupUsers { get; set; }
+        public DbSet<ClassUsers> ClassUsers { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Activity> Activities { get; set; }
