@@ -12,5 +12,6 @@ namespace EdukuJez.Repositories
         public ICollection<Group>  ChildGroups { get; set; }
         public ICollection<GroupUser> Users { get; set; }
         public ICollection<ClassC> Classes { get; set; }
+        public ICollection<MessageGroups> Messages { get; set; }
     }
 }

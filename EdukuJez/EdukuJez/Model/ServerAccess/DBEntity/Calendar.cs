@@ -5,9 +5,9 @@ using System.Web;
 
 namespace EdukuJez.Repositories
 {
-    public class Activity : EntityBase
+    public class Calendar : EntityBase
     {
-        public string Name { get; set; }
-        public ICollection<Grade> Grades { get; set; }
+        public DateTime Date { get; set; }
+        public string Desc { get; set; }
     }
 }
