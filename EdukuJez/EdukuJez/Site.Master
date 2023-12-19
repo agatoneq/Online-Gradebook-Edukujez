@@ -35,10 +35,11 @@
                         </asp:ContentPlaceHolder>
                     </div>
                     <div class="navbar-profile">
-                        <asp:Panel ID="ProfilePanel" runat="server" Visible="False">
+                        <asp:Panel ID="ProfilePanel" runat="server" Style="width: 125px;" Visible="False">
                             <asp:Label ID="ProfileNameLabel" CssClass="profile-label" runat="server"></asp:Label>
                             <asp:Label ID="ProfileSurnameLabel" CssClass="profile-label" runat="server"></asp:Label>
                             <asp:LinkButton CssClass="profile-label" ID="LogoutButton" runat="server" OnClick="LogoutButton_Click">Wyloguj</asp:LinkButton>
+                            <asp:LinkButton CssClass="profile-label" ID="ChangePasswordButton" runat="server" OnClick="ChangePasswordButton_Click">Zmień hasło</asp:LinkButton>
                         </asp:Panel>
                     </div>
                 </div>

@@ -32,5 +32,10 @@ namespace EdukuJez
             UserSession.EndSession(new Page());
             Response.Redirect(LOGIN_SITE);
         }
+
+        protected void ChangePasswordButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ChangingPassword.aspx");
+        }
     }
 }

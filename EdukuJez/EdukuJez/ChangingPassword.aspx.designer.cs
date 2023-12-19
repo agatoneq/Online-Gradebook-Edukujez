@@ -11,53 +11,53 @@ namespace EdukuJez
 {
 
 
-    public partial class SiteMaster
+    public partial class ChangingPassword
     {
 
         /// <summary>
-        /// Kontrolka ContentPlaceHolderNav.
+        /// Kontrolka MainInfoLabel.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderNav;
+        protected global::System.Web.UI.WebControls.Label MainInfoLabel;
 
         /// <summary>
-        /// Kontrolka ProfilePanel.
+        /// Kontrolka InfoPassword.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel ProfilePanel;
+        protected global::System.Web.UI.WebControls.Label InfoPassword;
 
         /// <summary>
-        /// Kontrolka ProfileNameLabel.
+        /// Kontrolka OldPasswordBox.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ProfileNameLabel;
+        protected global::System.Web.UI.WebControls.TextBox OldPasswordBox;
 
         /// <summary>
-        /// Kontrolka ProfileSurnameLabel.
+        /// Kontrolka NewPasswordBox.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ProfileSurnameLabel;
+        protected global::System.Web.UI.WebControls.TextBox NewPasswordBox;
 
         /// <summary>
-        /// Kontrolka LogoutButton.
+        /// Kontrolka ConfirmPasswordButton.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LogoutButton;
+        protected global::System.Web.UI.WebControls.Button ConfirmPasswordButton;
 
         /// <summary>
         /// Kontrolka ChangePasswordButton.
@@ -66,15 +66,24 @@ namespace EdukuJez
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton ChangePasswordButton;
+        protected global::System.Web.UI.WebControls.Button ChangePasswordButton;
 
         /// <summary>
-        /// Kontrolka MainContent.
+        /// Kontrolka InfoLabel.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.Label InfoLabel;
+
+        /// <summary>
+        /// Kontrolka ReturnButton.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ReturnButton;
     }
 }

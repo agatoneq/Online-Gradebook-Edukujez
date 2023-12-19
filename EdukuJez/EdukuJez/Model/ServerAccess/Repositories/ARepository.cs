@@ -33,5 +33,10 @@ namespace EdukuJez.Repositories
         {
             Context.SaveChanges();
         }
+        public void UpdateRow(T entity)
+        {
+            Context.Update(entity);
+            Context.SaveChanges();
+        }
     }
 }
