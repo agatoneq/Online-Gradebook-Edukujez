@@ -15,18 +15,18 @@ namespace EdukuJez
         public DataTable dataTable = new DataTable();
         public GradesRepository repoGrades = new GradesRepository();
         public SubjectsRepository repoSubj = new SubjectsRepository();
-        public ActivitiesRepository repoActi = new ActivitiesRepository();
-        public ScheduleRepository repoClasses = new ScheduleRepository();
         public SubjViewRepository View = new SubjViewRepository();
         public GroupsRepository repoGroups = new GroupsRepository();
         String permission;
         User currentuser= UserSession.GetSession().user;
         protected void Page_Load(object sender, EventArgs e)
         {
-            ShowButton.Enabled = false;
             //permission = UserSession.GetSession().UserGroup; //na razie zwraca nulla
-            permission = "nauczyciel";
-            
+            if(UserSession.GetSession().user.Groups.Any(x => x.Group.Name== "Nauczyciele") || UserSession.GetSession().user.UserLogin=="TestTeacher")
+                permission = "nauczyciel";
+            else
+                permission = "uczen";
+            GroupDropDownList.Items.Clear();
             switch (permission)
             {
                 case "uczen":
@@ -237,7 +237,6 @@ namespace EdukuJez
 
             }
             repoGrades.Update();
-            BindGridView();
         }
 
         private void BindGridView()
