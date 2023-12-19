@@ -121,43 +121,8 @@ namespace EdukuJez
                     GradesGridView.Visible = true;
                     break;
                 case "nauczyciel":
-
-                    //kolumny:
-                    dataTable.Columns.Add("Imię", typeof(String));
-                    dataTable.Columns.Add("Nazwisko", typeof(String));
-
-                    var grades = repoGrades.Table.Include(x => x.Users).Include(x => x.Activity).Include(x => x.Subject)
-                        .Where(x => x.Subject.SubjectName == SubjectsDropDownList.SelectedValue).ToList();
-                    var activities = grades.Select(x => x.Activity).Distinct();
-                    //kolumny tabeli:
-                    if (activities.Count() != 0)
-                    {
-                        foreach (var i in activities)
-                        {
-                            dataTable.Columns.Add(i.Name, typeof(int));
-                        }
-                    }
-
-                    grades = grades.OrderBy(x => x.Users.UserSurname).OrderBy(x => x.Users.UserName).ToList();
-                    //wiersze:
-                    foreach (var grade in grades.Select(x=> x.Users).Distinct()) 
-                    {
-                        var userGrades = grades.Where(x => x.Users == grade);
-                        DataRow newRow = dataTable.NewRow();
-                        newRow["Imię"] = grade.UserName;
-                        newRow["Nazwisko"] = grade.UserSurname;
-                        foreach (var act in activities)
-                        {
-                            newRow[act.Name] = userGrades.FirstOrDefault(x => x.Activity==act).GradeValue;
-                        }
-
-                        dataTable.Rows.Add(newRow);
-                    }
-                    EditButton.Visible = true;
-
+                    BindGridView();
                     GradesGridView.Visible = true;
-                    GradesGridView.DataSource = dataTable;
-                    GradesGridView.DataBind();
                     break;
                 default:
                     //to do
@@ -212,10 +177,115 @@ namespace EdukuJez
             GradesGridView.DataBind(); //powrot wartosci tabeli
         }
 
-        protected void GradesGridView_RowUpdated(object sender, GridViewUpdatedEventArgs e)
+
+        protected void GradesGridView_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            //to do 
-            var change = e.Keys;
+            GridViewRow row = GradesGridView.Rows[e.NewEditIndex];
+            GradesGridView.EditIndex = e.NewEditIndex;
+            BindGridView();
+            for (int i = 0; i < row.Cells.Count; i++)
+            {
+                if(i == 1) // Zmień 1 na odpowiednią pozycję kolumny (numeracja od zera)       
+                {   
+                    var textBox = row.Cells[i].Controls;
+                    var c = 1 + 1;
+                }
+            }
+        }
+        private void AddEditButtonToGridView()
+        {
+            CommandField editField = new CommandField();
+            editField.ButtonType = ButtonType.Button; // Możesz dostosować typ przycisku
+            editField.ShowEditButton = true;
+
+            GradesGridView.Columns.Add(editField);
+        }
+
+        protected void GradesGridView_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            GridView gv = (GridView)sender;
+            GridViewRow row = gv.Rows[e.RowIndex];
+            var changeList = new List<int>();
+            for (int i = 3; i < row.Cells.Count; i++)
+            {
+                var textBox = (TextBox)row.Cells[i].Controls[0];
+                changeList.Add(Convert.ToInt32(textBox.Text));
+            }
+            var name = ((TextBox)row.Cells[1].Controls[0]).Text;
+            var surname = ((TextBox)row.Cells[2].Controls[0]).Text;
+
+
+            var grades = repoGrades.Table.Include(x => x.Users).Include(x => x.Activity).Include(x => x.Subject)
+                .Where(x => x.Subject.SubjectName == SubjectsDropDownList.SelectedValue).ToList();
+            var activities = grades.Select(x => x.Activity).Distinct();
+            //kolumny tabeli:
+            if (activities.Count() != 0)
+            {
+                foreach (var i in activities)
+                {
+                    dataTable.Columns.Add(i.Name, typeof(int));
+                    dataTable.Columns[i.Name].ReadOnly = false;
+                }
+            }
+            int j = 0;
+            foreach (var a in activities)
+            {
+                var grade = repoGrades.Table
+                    .First(u => u.Users.UserName == name && u.Users.UserSurname == surname && u.Activity.Id == a.Id);
+                grade.GradeValue = changeList[j];
+                j++;
+
+            }
+            repoGrades.Update();
+            BindGridView();
+        }
+
+        private void BindGridView()
+        {
+            GradesGridView.Columns.Clear();
+            AddEditButtonToGridView();
+            //kolumny:
+            dataTable.Columns.Add("Imię", typeof(String));
+            dataTable.Columns["Imię"].ReadOnly = true;
+            dataTable.Columns.Add("Nazwisko", typeof(String));
+            dataTable.Columns["Nazwisko"].ReadOnly = true;
+
+            var grades = repoGrades.Table.Include(x => x.Users).Include(x => x.Activity).Include(x => x.Subject)
+                .Where(x => x.Subject.SubjectName == SubjectsDropDownList.SelectedValue).ToList();
+            var activities = grades.Select(x => x.Activity).Distinct();
+            //kolumny tabeli:
+            if (activities.Count() != 0)
+            {
+                foreach (var i in activities)
+                {
+                    dataTable.Columns.Add(i.Name, typeof(int));
+                    dataTable.Columns[i.Name].ReadOnly = false;
+                }
+            }
+
+            grades = grades.OrderBy(x => x.Users.UserSurname).OrderBy(x => x.Users.UserName).ToList();
+            //wiersze:
+            foreach (var grade in grades.Select(x => x.Users).Distinct())
+            {
+                var userGrades = grades.Where(x => x.Users == grade);
+                DataRow newRow = dataTable.NewRow();
+                newRow["Imię"] = grade.UserName;
+                newRow["Nazwisko"] = grade.UserSurname;
+                foreach (var act in activities)
+                {
+                    newRow[act.Name] = userGrades.FirstOrDefault(x => x.Activity == act).GradeValue;
+                }
+
+                dataTable.Rows.Add(newRow);
+            }
+            GradesGridView.DataSource = dataTable;
+            GradesGridView.DataBind();
+        }
+
+        protected void GradesGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            GradesGridView.EditIndex = -1; // Anuluj tryb edycji
+            BindGridView();
         }
     }
 }

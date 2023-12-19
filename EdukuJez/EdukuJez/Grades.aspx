@@ -12,7 +12,7 @@
     <asp:Button ID="ShowButton" runat="server" Text="Pokaż" OnClick="ShowButton_Click" /> 
     <asp:Button ID="EditButton" runat="server" Text="Edytuj oceny" OnClick="EditButton_Click" Visible ="false"/>
    
-    <asp:GridView ID="GradesGridView" CssClass="Center-Form" runat="server"  Visible ="false"></asp:GridView>
+    <asp:GridView ID="GradesGridView"  CssClass="Center-Form" runat="server"  Visible ="false" OnRowCancelingEdit="GradesGridView_RowCancelingEdit" OnRowEditing="GradesGridView_RowEditing" OnRowUpdating="GradesGridView_RowUpdating"></asp:GridView>
     <asp:Button ID="AddButton" runat="server" Text="Anuluj zmiany"  Visible="false" /> 
     <asp:Button ID="SaveButton" runat="server" Text="Zapisz zmiany"  Visible="false" />
 </asp:Content>
