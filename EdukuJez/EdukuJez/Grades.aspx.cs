@@ -6,19 +6,27 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using EdukuJez.Repositories;
 using System.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace EdukuJez
 {
     public partial class Grades : System.Web.UI.Page
     {
-        public DataTable dataTable = new DataTable(); //do gradegridview
+        public DataTable dataTable = new DataTable();
+        public GradesRepository repoGrades = new GradesRepository();
+        public SubjectsRepository repoSubj = new SubjectsRepository();
+        public SubjViewRepository View = new SubjViewRepository();
+        public GroupsRepository repoGroups = new GroupsRepository();
         String permission;
-
+        User currentuser= UserSession.GetSession().user;
         protected void Page_Load(object sender, EventArgs e)
         {
-            //permission = UserSession.GetSession().UserGroup; //jest nullem
-            permission = "nauczyciel";
-
+            //permission = UserSession.GetSession().UserGroup; //na razie zwraca nulla
+            if(UserSession.GetSession().user.Groups.Any(x => x.Group.Name== "Nauczyciele") || UserSession.GetSession().user.UserLogin=="TestTeacher")
+                permission = "nauczyciel";
+            else
+                permission = "uczen";
+            GroupDropDownList.Items.Clear();
             switch (permission)
             {
                 case "uczen":
@@ -26,149 +34,257 @@ namespace EdukuJez
                     EditButton.Visible = false;
                     if (!IsPostBack)
                     {
-                        //wybor przedmiotu:
-                        var subjView_repo = new SubjViewRepository("Login = " + UserSession.GetSession().UserLogin);
-                        for (int i = 0; i < subjView_repo.GetAll().Count; ++i)
+
+                        var c = View.GetSubjects(currentuser.Id);
+                        if (c.Count() != 0)
                         {
-                            SubjectsDropDownList.Items.Add(subjView_repo.GetAll()[i].SubjectName);
+                            foreach (var i in c)
+                            {
+                                SubjectsDropDownList.Items.Add(i.SubjectName);
+                            }
                         }
-                    }
-                    //kolumny tabeli:
-                    dataTable.Columns.Add("Ocena", typeof(int));
-                    dataTable.Columns.Add("Waga", typeof(int));
-                    dataTable.Columns.Add("Aktywność", typeof(String));
-                    var subject_repo = new SubjectsRepository("Subject = " + SubjectsDropDownList.SelectedValue);
-                    try
-                    {
-                        var grades_repo = new GradesRepository("ID_Student = " + UserSession.GetSession().UserLogin + "and ID_Subject = " + subject_repo.GetAll().First().Id);
-                        //wiersze tabeli:
-                        foreach (var grade in grades_repo.Table) 
+                        else
                         {
-                            DataRow newRow = dataTable.NewRow();
-                            newRow["Ocena"] = grade.GradeValue;
-                            newRow["Waga"] = grade.GradeWeight;
-                           // newRow["Aktywność"] = "Sprawdzian " + i; //jeszcze nie ma w bazie aktywnosci
-                            dataTable.Rows.Add(newRow);
+                            SubjectsDropDownList.Items.Add("Brak przedmiotów do wyświetlenia");
                         }
-                    }
-                    catch (InvalidOperationException exc) //jesli subject_repo.GetAll() jest puste
-                    {
-                        DataRow newRow = dataTable.NewRow();
-                        newRow["Aktywność"] = "Brak przypisanych przedmiotow";
-                        dataTable.Rows.Add(newRow);
                     }
                     break;
                 case "nauczyciel":
+                    var lista = repoGroups.Table.Include(x => x.Classes)
+                        .Where(x => x.Classes.Any(c => c.Warden.Id == currentuser.Id))
+                        .Select(x => x.Name)
+                        .ToList();
 
-                    //wybor klasy/grupy ktora porowadzi dany nauczyciel:
-                    //to do - tymczasowo statycznie
-                    GroupDropDownList.Items.Add("1a");
-                    GroupDropDownList.Items.Add("1b");
-                    GroupDropDownList.Items.Add("2");
-                    GroupDropDownList.Items.Add("3a");
-                    GroupDropDownList.Items.Add("3b");
-                    if (!IsPostBack)
+                    SubjectsDropDownList.Items.Add("Najpierw wybierz grupę");
+
+                    if (lista.Count() != 0)
                     {
-                        //wybor przedmiotu danej klasy jesli zalogowany nauczyciel uczy ich wielec niz 1 przedmiotu
-                        //to do - tymczasowo statycznie:
-                        SubjectsDropDownList.Items.Add("Przedmiot1");
-                        SubjectsDropDownList.Items.Add("Przedmiot2");
-                        SubjectsDropDownList.Items.Add("Przedmiot3");
+                        foreach (var i in lista)
+                        {
+                            GroupDropDownList.Items.Add(i);
+                        }
+                        GroupDropDownList_SelectedIndexChanged(GroupDropDownList, new EventArgs());
                     }
-                    //kolumny:
-                    dataTable.Columns.Add("Imię", typeof(String));
-                    dataTable.Columns.Add("Nazwisko", typeof(String));
-                    //kolumny:
-                    for (int i = 1; i < 3; i++)
-                    { //nazwy aktywnosci - tymczasowo statycznie
-                        dataTable.Columns.Add("Aktywność" + i, typeof(int));  //jeszcze nie ma w bazie aktywnosci
-                    }
-
-                    //wiersze:
-                    for (int i = 1; i < 6; i++) //tymczasowo statycznie
+                    else
                     {
-                        DataRow newRow = dataTable.NewRow();
-                        newRow["Imię"] = "Imię" + i;
-                        newRow["Nazwisko"] = "Nazwisko" + i;
-                        newRow["Aktywność1"] = 5;
-                        newRow["Aktywność2"] = 4;
-
-                        dataTable.Rows.Add(newRow);
+                        GroupDropDownList.Items.Add("Brak przypisanych grup");
                     }
                     break;
                 default:
                     //to do
                     break;
             }
-
-            UserSession.CheckPermission("a", "b");
-
-            //wrzucenie danych do tabeli:
-            GradesGridView.DataSource = dataTable;
-            GradesGridView.DataBind();
-
-            /*
-                //SubjectsDropDownList.SelectedValue;
-                for (int i = 0; i < grades_repo.GetAll().Count; ++i) //wyswietlenie ocen //jeszcze nie - z wybranego przedmiotu
-                {
-                    DataRow newRow = dataTable.NewRow();
-                    newRow["Grade"] = grades_repo.GetAll()[i].GradeValue;
-                    newRow["Grade weight"] = grades_repo.GetAll()[i].GradeWeight;
-                    dataTable.Rows.Add(newRow);
-                }
-            */
-            /*
-            //GradesGridView
-            dataTable.Columns.Add("Grade", typeof(int));
-            dataTable.Columns.Add("Grade weight", typeof(int));
-            dataTable.Columns.Add("Name", typeof(String));
-            dataTable.Columns.Add("Surname", typeof(String));
-            for (int i = 1; i < 6; i++) 
-            {
-                DataRow newRow = dataTable.NewRow();
-                newRow["Grade"] = i;
-                newRow["Grade weight"] = 3;
-                newRow["Name"] = "Jezy";
-                newRow["Surname"] = "Jezowicz";
-                dataTable.Rows.Add(newRow);
-            }
-            GradesGridView.DataSource = dataTable;
-            GradesGridView.DataBind(); 
-            */
-
         }
 
         protected void ShowButton_Click(object sender, EventArgs e)
         {
-
-            GradesGridView.Visible = true;
-            if (permission == "nauczyciel")
+            dataTable.Rows.Clear();
+            dataTable.Columns.Clear();
+            switch (permission)
             {
-                EditButton.Visible = true;
+                case "uczen":
+                    //kolumny tabeli:
+                    dataTable.Columns.Add("Ocena", typeof(int));
+                    dataTable.Columns.Add("Waga", typeof(int));
+                    dataTable.Columns.Add("Aktywność", typeof(String));
+
+                    var subject_repo = new SubjectsRepository("Subjects.Subject = '" + SubjectsDropDownList.SelectedValue + "'");
+                    if (UserSession.GetSession() != null)
+                    {
+                        var list = repoGrades.Table.Include(x => x.Users).Include(x => x.Activity)
+                            .Where(x => x.Users.Id == currentuser.Id);
+                        //wiersze tabeli:
+                        if (list.Count() != 0)
+                        {
+                            foreach (var i in list)
+                            {
+                                DataRow newRow = dataTable.NewRow();
+                                newRow["Ocena"] = i.GradeValue;
+                                newRow["Waga"] = i.GradeWeight;
+                                newRow["Aktywność"] = i.Activity?.Name; //jeszcze nie ma w bazie aktywnosci
+                                dataTable.Rows.Add(newRow);
+                            }
+                        }
+                        else
+                        {
+                            DataRow newRow = dataTable.NewRow();
+                            newRow["Aktywność"] = "Brak przypisanych przedmiotow";
+                            dataTable.Rows.Add(newRow);
+                        }
+                    }
+                    else
+                    {
+                        Response.Redirect("Default.aspx");
+                    }
+                    GradesGridView.DataSource = dataTable;
+                    GradesGridView.DataBind();
+                    GradesGridView.Visible = true;
+                    break;
+                case "nauczyciel":
+                    BindGridView();
+                    GradesGridView.Visible = true;
+                    break;
+                default:
+                    //to do
+                    break;
             }
-        }
-
-        protected void AddButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void SaveButton_Click(object sender, EventArgs e)
-        {
-
         }
 
         protected void EditButton_Click(object sender, EventArgs e)
         {
             //tryb edycji:
-            //to do
-            /* for()
-             TextBox textBox1 = new TextBox();
-             textBox1.ID = "TextBox1"; // Unikalny identyfikator dla kontrolki
-             textBox1.Text = "Wartość początkowa"; // Domyślna wartość
-             AddButton.Visible = true;
-             SaveButton.Visible = true;*/
+
+            for (int i = 2; i < dataTable.Columns.Count; ++i)
+            { //edycja mozliwa dla kolumn zawiarajacych oceny
+                dataTable.Columns[i].ReadOnly = false;
+            }
+            GradesGridView.DataSource = dataTable;
+            GradesGridView.DataBind();
+            EditButton.Visible = false;
+        }
+
+        //nauczyciel wybral grupe:
+        protected void GroupDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SubjectsDropDownList.Items.Clear();
+            var lista = repoSubj.Table.Include(x => x.Classes)                       
+                        .ThenInclude(x => x.Group)
+                        .Where(x => x.Classes.Any(c => c.Group.Name == GroupDropDownList.SelectedValue))
+                        .ToList();
+
+            if (lista.Count() != 0)
+            {
+                foreach (var i in lista)
+                {
+                    SubjectsDropDownList.Items.Add(i.SubjectName);
+                }
+            }
+            else
+            {
+                SubjectsDropDownList.Items.Add("Brak przedmiotów dla tej grupy");
+            }
+            SubjectsDropDownList_SelectedIndexChanged(SubjectsDropDownList, new EventArgs());
+        }
+        //nauczyciel/uczen wybral przedmiot:
+        protected void SubjectsDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ShowButton.Enabled = true; //moze wyswietlic
+        }
+
+        protected void CancelButton_Click(object sender, EventArgs e)
+        {
+            EditButton.Visible = true;
+            GradesGridView.DataBind(); //powrot wartosci tabeli
+        }
+
+
+        protected void GradesGridView_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            GridViewRow row = GradesGridView.Rows[e.NewEditIndex];
+            GradesGridView.EditIndex = e.NewEditIndex;
+            BindGridView();
+            for (int i = 0; i < row.Cells.Count; i++)
+            {
+                if(i == 1) // Zmień 1 na odpowiednią pozycję kolumny (numeracja od zera)       
+                {   
+                    var textBox = row.Cells[i].Controls;
+                    var c = 1 + 1;
+                }
+            }
+        }
+        private void AddEditButtonToGridView()
+        {
+            CommandField editField = new CommandField();
+            editField.ButtonType = ButtonType.Button; // Możesz dostosować typ przycisku
+            editField.ShowEditButton = true;
+
+            GradesGridView.Columns.Add(editField);
+        }
+
+        protected void GradesGridView_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            GridView gv = (GridView)sender;
+            GridViewRow row = gv.Rows[e.RowIndex];
+            var changeList = new List<int>();
+            for (int i = 3; i < row.Cells.Count; i++)
+            {
+                var textBox = (TextBox)row.Cells[i].Controls[0];
+                changeList.Add(Convert.ToInt32(textBox.Text));
+            }
+            var name = ((TextBox)row.Cells[1].Controls[0]).Text;
+            var surname = ((TextBox)row.Cells[2].Controls[0]).Text;
+
+
+            var grades = repoGrades.Table.Include(x => x.Users).Include(x => x.Activity).Include(x => x.Subject)
+                .Where(x => x.Subject.SubjectName == SubjectsDropDownList.SelectedValue).ToList();
+            var activities = grades.Select(x => x.Activity).Distinct();
+            //kolumny tabeli:
+            if (activities.Count() != 0)
+            {
+                foreach (var i in activities)
+                {
+                    dataTable.Columns.Add(i.Name, typeof(int));
+                    dataTable.Columns[i.Name].ReadOnly = false;
+                }
+            }
+            int j = 0;
+            foreach (var a in activities)
+            {
+                var grade = repoGrades.Table
+                    .First(u => u.Users.UserName == name && u.Users.UserSurname == surname && u.Activity.Id == a.Id);
+                grade.GradeValue = changeList[j];
+                j++;
+
+            }
+            repoGrades.Update();
+        }
+
+        private void BindGridView()
+        {
+            GradesGridView.Columns.Clear();
+            AddEditButtonToGridView();
+            //kolumny:
+            dataTable.Columns.Add("Imię", typeof(String));
+            dataTable.Columns["Imię"].ReadOnly = true;
+            dataTable.Columns.Add("Nazwisko", typeof(String));
+            dataTable.Columns["Nazwisko"].ReadOnly = true;
+
+            var grades = repoGrades.Table.Include(x => x.Users).Include(x => x.Activity).Include(x => x.Subject)
+                .Where(x => x.Subject.SubjectName == SubjectsDropDownList.SelectedValue).ToList();
+            var activities = grades.Select(x => x.Activity).Distinct();
+            //kolumny tabeli:
+            if (activities.Count() != 0)
+            {
+                foreach (var i in activities)
+                {
+                    dataTable.Columns.Add(i.Name, typeof(int));
+                    dataTable.Columns[i.Name].ReadOnly = false;
+                }
+            }
+
+            grades = grades.OrderBy(x => x.Users.UserSurname).OrderBy(x => x.Users.UserName).ToList();
+            //wiersze:
+            foreach (var grade in grades.Select(x => x.Users).Distinct())
+            {
+                var userGrades = grades.Where(x => x.Users == grade);
+                DataRow newRow = dataTable.NewRow();
+                newRow["Imię"] = grade.UserName;
+                newRow["Nazwisko"] = grade.UserSurname;
+                foreach (var act in activities)
+                {
+                    newRow[act.Name] = userGrades.FirstOrDefault(x => x.Activity == act).GradeValue;
+                }
+
+                dataTable.Rows.Add(newRow);
+            }
+            GradesGridView.DataSource = dataTable;
+            GradesGridView.DataBind();
+        }
+
+        protected void GradesGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            GradesGridView.EditIndex = -1; // Anuluj tryb edycji
+            BindGridView();
         }
     }
 }
-//for (int i = 0; i < tablica.Count; ++i)

@@ -71,20 +71,19 @@ namespace EdukuJez.Migrations
                     b.Property<string>("Hour")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int?>("SubjectId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Surname")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("WardenId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("GroupId");
 
                     b.HasIndex("SubjectId");
+
+                    b.HasIndex("WardenId");
 
                     b.ToTable("Classes");
                 });
@@ -342,6 +341,10 @@ namespace EdukuJez.Migrations
                     b.HasOne("EdukuJez.Repositories.Subject", "Subject")
                         .WithMany("Classes")
                         .HasForeignKey("SubjectId");
+
+                    b.HasOne("EdukuJez.Repositories.User", "Warden")
+                        .WithMany("Teaches")
+                        .HasForeignKey("WardenId");
                 });
 
             modelBuilder.Entity("EdukuJez.Repositories.ClassUsers", b =>

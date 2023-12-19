@@ -391,6 +391,10 @@
     <Compile Include="Migrations\20231218124358_Uniques_and_nulls.designer.cs">
       <DependentUpon>20231218124358_Uniques_and_nulls.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20231218213459_Teachers.cs" />
+    <Compile Include="Migrations\20231218213459_Teachers.designer.cs">
+      <DependentUpon>20231218213459_Teachers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\BaseContextModelSnapshot.cs" />
     <Compile Include="Model\Main\PanelFactory.cs" />
     <Compile Include="Model\Main\TablePanel.cs" />

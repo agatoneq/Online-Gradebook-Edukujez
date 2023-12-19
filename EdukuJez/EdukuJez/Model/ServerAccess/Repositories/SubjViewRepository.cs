@@ -9,19 +9,22 @@ namespace EdukuJez.Repositories
     public class SubjViewRepository //nie wolno używać do modyfikacji
     {
         public List<Subject> SubjViewList = new List<Subject>();
-        public SubjViewRepository(String text)
+        BaseContext Context = BaseContext.GetContext();
+        public SubjViewRepository()      
         {
-            var Subjects = new SubjectsRepository();
-
-            var SubjViewList = Subjects.Table
-        .Where(subject => subject.Grades.Any(grade => grade.Users.UserName == text))
-        .ToList();
+            
 
         }
 
-        public List<Subject> GetAll()
+        public List<Subject> GetSubjects(int id)
         {
-            return SubjViewList;
+            var SubjViewList = from Subject in Context.Subjects
+                               join ClassC in Context.Classes on Subject.Id equals ClassC.Subject.Id
+                               join ClassUsers in Context.ClassUsers on ClassC.Id equals ClassUsers.Class.Id
+                               join User in Context.Users on ClassUsers.User.Id equals User.Id
+                               where User.Id == id
+                               select  Subject;
+            return SubjViewList.Distinct().ToList();
         }
 
        

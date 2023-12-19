@@ -13,7 +13,7 @@ namespace EdukuJez
     {
         const String LOGIN_SITE = "Default.aspx";
         static UserSession _instance;
-        User user;
+        public User user { get; private set; }
         public int UserId { get { return user.Id; } }
         public string UserName { get { return user.UserName; }}
         public string UserSurname { get { return user.UserSurname; } }
