@@ -27,6 +27,7 @@ namespace EdukuJez.Repositories
         public ICollection<ClassC> Teaches { get; set; } = new List<ClassC>();
         public ICollection<ClassUsers> Clasess { get; set; } = new List<ClassUsers>();
         public ICollection<MessageUsers> Messages { get; set; } = new List<MessageUsers>();
+        public ICollection<Group> Educates { get; set; } = new List<Group>();
 
         public bool IsNameValid(string name)
         {

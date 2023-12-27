@@ -403,6 +403,10 @@
     <Compile Include="Migrations\20231218213459_Teachers.designer.cs">
       <DependentUpon>20231218213459_Teachers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20231227213722_group_Educator.cs" />
+    <Compile Include="Migrations\20231227213722_group_Educator.designer.cs">
+      <DependentUpon>20231227213722_group_Educator.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\BaseContextModelSnapshot.cs" />
     <Compile Include="Model\Main\PanelFactory.cs" />
     <Compile Include="Model\Main\TablePanel.cs" />
