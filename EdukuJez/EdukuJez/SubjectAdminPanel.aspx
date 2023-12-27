@@ -1,6 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SubjectAdminPanel.aspx.cs" Inherits="EdukuJez.SubjectAdminPanel" %>
 <asp:Content ID="MainContentID" ContentPlaceHolderID="MainContent" runat="server">
-    <br /> 
+    <div style="margin-bottom: 30px;" class="header Container-Title ">
+        <img src="Imgs/Subjects_Management_Page_Title.png" class="logo1" style="height: 82px; width: 650px" />
+        <hr />
+    </div>
        <p align="center">
        <asp:Label ID="LabelSubjectName" runat="server" Text="Nazwa przedmiotu: "></asp:Label>
        <asp:TextBox ID="TextBoxSubjectName" runat="server" MaxLength="100"></asp:TextBox>

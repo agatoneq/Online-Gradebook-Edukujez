@@ -16,7 +16,7 @@ namespace EdukuJez.Repositories
         //Wyszukiwanie linq na kolekcji repozytorium
         public bool CheckLogin(string login, string password)
         {
-            return Table.Any(x => x.UserLogin == login || x.UserPassword == password);
+            return Table.Any(x => x.UserLogin == login && x.UserPassword == password);
         }
         public User GetByLogin(string login)
         {

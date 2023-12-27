@@ -8,7 +8,7 @@ using EdukuJez.Repositories;
 
 namespace EdukuJez
 {
-    public partial class GroupManger : System.Web.UI.Page
+    public partial class GroupsManagement : System.Web.UI.Page
     {
         readonly GroupsRepository repo = new GroupsRepository();
         protected void Page_Load(object sender, EventArgs e)
@@ -21,17 +21,18 @@ namespace EdukuJez
         {
             var ng = new Group();
             ng.Name = NewGroupTextBox.Text;
-            var parentName = PGroupDropdown.SelectedValue;
+            var parentName = MainGroupList.SelectedValue;
             ng.ParentGroup = repo.Table.First(x => x.Name==parentName );
             repo.Insert(ng);
         }
 
         void RefreshTables()
         {
-            myRepeater.DataSource = repo.Table;
+            List<Group> groups = repo.Table.ToList();
+            myRepeater.DataSource = groups;
             myRepeater.DataBind();
-            PGroupDropdown.DataSource = repo.Table.Select(x => x.Name);
-            PGroupDropdown.DataBind();
+            MainGroupList.DataSource = groups.Select(x => x.Name);
+            MainGroupList.DataBind();
         }
     }
 }

@@ -256,7 +256,7 @@
     <Content Include="AccountsManagement.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Grades.aspx" />
-    <Content Include="GroupManger.aspx" />
+    <Content Include="GroupsManagement.aspx" />
     <Content Include="Imgs\Accounts_Management_Page_Title.png" />
     <Content Include="Imgs\Admin_Page_Title.png" />
     <Content Include="Imgs\Arrow_left.png" />
@@ -346,12 +346,12 @@
     <Compile Include="Grades.aspx.designer.cs">
       <DependentUpon>Grades.aspx</DependentUpon>
     </Compile>
-    <Compile Include="GroupManger.aspx.cs">
-      <DependentUpon>GroupManger.aspx</DependentUpon>
+    <Compile Include="GroupsManagement.aspx.cs">
+      <DependentUpon>GroupsManagement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="GroupManger.aspx.designer.cs">
-      <DependentUpon>GroupManger.aspx</DependentUpon>
+    <Compile Include="GroupsManagement.aspx.designer.cs">
+      <DependentUpon>GroupsManagement.aspx</DependentUpon>
     </Compile>
     <Compile Include="LessonPlan.aspx.cs">
       <DependentUpon>LessonPlan.aspx</DependentUpon>
