@@ -10,28 +10,36 @@ namespace EdukuJez
 {
     public partial class GroupsManagement : System.Web.UI.Page
     {
-        readonly GroupsRepository repo = new GroupsRepository();
+        readonly GroupsRepository groupRepo = new GroupsRepository();
+        readonly GroupsRepository userGroupRepo = new GroupsRepository();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             RefreshTables();
             
         }
 
-        protected void NewGroupButton_Click(object sender, EventArgs e)
+        protected void AddNewGroupButton_Click(object sender, EventArgs e)
         {
             var ng = new Group();
             ng.Name = NewGroupTextBox.Text;
             var parentName = MainGroupList.SelectedValue;
-            ng.ParentGroup = repo.Table.First(x => x.Name==parentName );
-            repo.Insert(ng);
+            ng.ParentGroup = groupRepo.Table.First(x => x.Name==parentName );
+            groupRepo.Insert(ng);
+        }
+
+        protected void DeleteGroupButton_Click(object sender, EventArgs e)
+        {
         }
 
         void RefreshTables()
         {
-            List<Group> groups = repo.Table.ToList();
+            List<Group> groups = groupRepo.Table.ToList();
             myRepeater.DataSource = groups;
             myRepeater.DataBind();
-            MainGroupList.DataSource = groups.Select(x => x.Name);
+
+
+            MainGroupList.DataSource = groups.Where(x => x.ParentGroup == null).Select(x => x.Name);
             MainGroupList.DataBind();
         }
     }

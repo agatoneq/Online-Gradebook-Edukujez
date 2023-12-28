@@ -11,15 +11,15 @@ namespace EdukuJez
         private User newUser = new User();
         private UsersRepository usersRepository = new UsersRepository();
         private GroupUsersRepository groupsUsersRepository = new GroupUsersRepository();
-        private GroupsRepository groupsRepository = new GroupsRepository();
+        private GroupsRepository groupsRepo = new GroupsRepository();
 
         protected void Page_Load(object sender, EventArgs e) {
-            GroupsRepository groupsRepository = new GroupsRepository();
-            GroupBox.Items.Clear();
-            var ddList = groupsRepository.Table.Select(x => x.Name).ToList();
-            foreach (var gr in ddList)
-                GroupBox.Items.Add(gr);
-
+            if (!IsPostBack)
+            {
+                List<Group> groups = groupsRepo.Table.ToList();
+                GroupBox.DataSource = groups.Where(x => x.ParentGroup == null).Select(x => x.Name);
+                GroupBox.DataBind();
+            }
         }
 
         protected void AddClick(object sender, EventArgs e)
@@ -81,12 +81,12 @@ namespace EdukuJez
                 newUser.UserPassword = PasswordBox.Text;
 
 
-                Group g = groupsRepository.Table.First();
+                Group g = groupsRepo.Table.FirstOrDefault(x => x.Name == GroupBox.SelectedValue.ToString());
                 var gu = new GroupUser();
                 g.Users = new List<GroupUser>() { gu };
                 newUser.Groups = new List<GroupUser>() { gu };
                 usersRepository.Insert(newUser);
-                groupsRepository.Update();
+                groupsRepo.Update();
 
 
 

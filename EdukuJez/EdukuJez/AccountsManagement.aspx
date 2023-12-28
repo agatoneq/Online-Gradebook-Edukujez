@@ -21,8 +21,8 @@
                 <asp:TextBox ID="NameBox" runat="server" Style="display: block; margin-bottom: 10px; width: 250px; height: 25px; font-size: 16px;" Visible="false"></asp:TextBox>
                 <asp:TextBox ID="SurnameBox" runat="server" Style="display: block; margin-bottom: 10px; width: 250px; height: 25px; font-size: 16px;" Visible="false"></asp:TextBox>
                 <asp:TextBox ID="PasswordBox" runat="server" Style="display: block; margin-bottom: 10px; width: 250px; height: 25px; font-size: 16px;" Visible="false"></asp:TextBox>
-                <asp:DropDownList ID="GroupBox" runat="server" Style="display: block; margin-bottom: 10px; width: 255px; height: 30px; font-size: 16px;" Visible="false">
-                </asp:DropDownList>
+                <asp:DropDownList ID="GroupBox" runat="server" Style="display: block; margin-bottom: 10px; width: 255px; height: 30px; font-size: 16px;" Visible="false"></asp:DropDownList>
+
             </asp:Panel>
 
             <asp:Button ID="RestartButton" runat="server" Text="Zatwierdź" Style="width: 150px; height: 40px; font-size: 20px;" OnClick="ConfirmRestartClick" Visible="false" />

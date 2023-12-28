@@ -6,17 +6,25 @@
         <hr />
     </div>
         <asp:Label ID="MainInfoLabel" runat="server" Text="Dodaj lub usuń nową grupę podrzędną:" Font-Size="28px"></asp:Label>
-        <div style="margin-top: 20px; width: 2000px; text-align: center;">
-            <asp:Label ID="NameLabel" runat="server" Text="Nazwa:" Font-Size="24px"></asp:Label>
-            <asp:TextBox ID="NewGroupTextBox" runat="server" Style="width: 250px; height: 25px; font-size: 16px;"></asp:TextBox>
-        </div>
-        <div style="margin-top: 20px; width: 2000px; text-align: center;">
-            <asp:Label ID="MainGroupLabel" runat="server" Text="Grupa nadrzędna:" Font-Size="24px"></asp:Label>
-            <asp:DropDownList ID="MainGroupList" runat="server" Style="width: 250px; height: 25px; font-size: 16px;"></asp:DropDownList>
-        </div>
-        <div style="margin-top: 20px; width: 2000px; text-align: center;">
-            <asp:Button  ID="NewGroupButton" runat="server" Text="Dodaj nową" Style="width: 300px; height: 40px; font-size: 20px;" OnClick="NewGroupButton_Click" />
-        </div>
+    
+
+        <div style="margin-top: 20px; width: 2000px;">
+            <asp:Panel ID="LabelsPanel" runat="server" Style="display: inline-block;">
+                <asp:Label ID="NameLabel" runat="server" Text="Nazwa:" Font-Size="24px" Style="display: block; margin-bottom: 10px;"></asp:Label>
+               <asp:Label ID="MainGroupLabel" runat="server" Text="Grupa nadrzędna:" Font-Size="24px" Style="display: block; margin-bottom: 10px;"></asp:Label>
+                <asp:Label ID="EducatorLabel" runat="server" Text="Wychowawca:" Font-Size="24px" Style="display: block; margin-bottom: 10px;"></asp:Label>
+                </asp:Panel>
+
+            <asp:Panel ID="TextBoxesPanel" runat="server" Style="display: inline-block;">
+                <asp:TextBox ID="NewGroupTextBox" runat="server" Style="display: block; margin-bottom: 10px; width: 250px; height: 25px; font-size: 16px;"></asp:TextBox>
+                <asp:DropDownList ID="MainGroupList" runat="server" Style="display: block; margin-bottom: 10px; width: 255px; height: 30px; font-size: 16px;"></asp:DropDownList>
+                <asp:DropDownList ID="TeachersList" runat="server" Style="display: block; margin-bottom: 10px; width: 255px; height: 30px; font-size: 16px;"></asp:DropDownList>
+                </asp:Panel>
+            <br/>
+            <asp:Button  ID="AddNewGroupButton" runat="server" Text="Dodaj nową" Style="width: 150px; height: 40px; font-size: 20px;" Enabled="False" OnClick="DeleteGroupButton_Click" />
+            <asp:Button  ID="DeleteGroupButton" runat="server" Text="Usuń" Style="width: 150px; height: 40px; font-size: 20px;" Enabled="False"  OnClick="AddNewGroupButton_Click"/>
+
+            </div>
     <div class="Center-Form" style="margin-top: 20px; width: 2000px; text-align: center;">
             <asp:Repeater ID="myRepeater" runat="server">
                 <HeaderTemplate>

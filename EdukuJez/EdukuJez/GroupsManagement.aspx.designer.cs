@@ -24,6 +24,15 @@ namespace EdukuJez
         protected global::System.Web.UI.WebControls.Label MainInfoLabel;
 
         /// <summary>
+        /// Kontrolka LabelsPanel.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel LabelsPanel;
+
+        /// <summary>
         /// Kontrolka NameLabel.
         /// </summary>
         /// <remarks>
@@ -31,15 +40,6 @@ namespace EdukuJez
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label NameLabel;
-
-        /// <summary>
-        /// Kontrolka NewGroupTextBox.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox NewGroupTextBox;
 
         /// <summary>
         /// Kontrolka MainGroupLabel.
@@ -51,6 +51,33 @@ namespace EdukuJez
         protected global::System.Web.UI.WebControls.Label MainGroupLabel;
 
         /// <summary>
+        /// Kontrolka EducatorLabel.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label EducatorLabel;
+
+        /// <summary>
+        /// Kontrolka TextBoxesPanel.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel TextBoxesPanel;
+
+        /// <summary>
+        /// Kontrolka NewGroupTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox NewGroupTextBox;
+
+        /// <summary>
         /// Kontrolka MainGroupList.
         /// </summary>
         /// <remarks>
@@ -60,13 +87,31 @@ namespace EdukuJez
         protected global::System.Web.UI.WebControls.DropDownList MainGroupList;
 
         /// <summary>
-        /// Kontrolka NewGroupButton.
+        /// Kontrolka TeachersList.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button NewGroupButton;
+        protected global::System.Web.UI.WebControls.DropDownList TeachersList;
+
+        /// <summary>
+        /// Kontrolka AddNewGroupButton.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button AddNewGroupButton;
+
+        /// <summary>
+        /// Kontrolka DeleteGroupButton.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button DeleteGroupButton;
 
         /// <summary>
         /// Kontrolka myRepeater.
