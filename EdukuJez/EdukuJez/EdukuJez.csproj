@@ -367,45 +367,9 @@
     <Compile Include="Main.aspx.designer.cs">
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20231217125123_Initial.cs" />
-    <Compile Include="Migrations\20231217125123_Initial.designer.cs">
-      <DependentUpon>20231217125123_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20231217131001_Initial2.cs" />
-    <Compile Include="Migrations\20231217131001_Initial2.designer.cs">
-      <DependentUpon>20231217131001_Initial2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20231217183733_SubjectDesc.cs" />
-    <Compile Include="Migrations\20231217183733_SubjectDesc.designer.cs">
-      <DependentUpon>20231217183733_SubjectDesc.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20231217190212_Activity_test.cs" />
-    <Compile Include="Migrations\20231217190212_Activity_test.designer.cs">
-      <DependentUpon>20231217190212_Activity_test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20231217190236_Activity.cs" />
-    <Compile Include="Migrations\20231217190236_Activity.designer.cs">
-      <DependentUpon>20231217190236_Activity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20231218112423_calendar.cs" />
-    <Compile Include="Migrations\20231218112423_calendar.designer.cs">
-      <DependentUpon>20231218112423_calendar.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20231218121014_Messages.cs" />
-    <Compile Include="Migrations\20231218121014_Messages.designer.cs">
-      <DependentUpon>20231218121014_Messages.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20231218124358_Uniques_and_nulls.cs" />
-    <Compile Include="Migrations\20231218124358_Uniques_and_nulls.designer.cs">
-      <DependentUpon>20231218124358_Uniques_and_nulls.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20231218213459_Teachers.cs" />
-    <Compile Include="Migrations\20231218213459_Teachers.designer.cs">
-      <DependentUpon>20231218213459_Teachers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20231227213722_group_Educator.cs" />
-    <Compile Include="Migrations\20231227213722_group_Educator.designer.cs">
-      <DependentUpon>20231227213722_group_Educator.cs</DependentUpon>
+    <Compile Include="Migrations\20240104205342_NewInitial.cs" />
+    <Compile Include="Migrations\20240104205342_NewInitial.designer.cs">
+      <DependentUpon>20240104205342_NewInitial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\BaseContextModelSnapshot.cs" />
     <Compile Include="Model\Main\PanelFactory.cs" />
