@@ -15,11 +15,12 @@ namespace EdukuJez
         static UserSession _instance;
         public User user { get; private set; }
         public int UserId { get { return user.Id; } }
-        public string UserName { get { return user.UserName; }}
+        public string UserName { get { return user.UserName; } }
         public string UserSurname { get { return user.UserSurname; } }
         public IEnumerable<Group> UserGroups { get { return user.Groups.Select(x => x.Group); } }
         public string UserLogin { get { return user.UserLogin; } }
         public string UserPassword { get { return user.UserPassword; } }
+        public User checkedChild { get; set; }
         UserSession(User user)
         {
             this.user = user;
@@ -28,17 +29,17 @@ namespace EdukuJez
         {
             return _instance;
         }
-        public static bool  CheckPermission(String PermissionSubject, String PermissionType)
+        public static bool CheckPermission(String PermissionSubject, String PermissionType)
         {
             return true;
         }
         public void ChangeSitePermissionCheck(Page sender)
         {
-              //tu dać sprawdzanie dostępu do strony
+            //tu dać sprawdzanie dostępu do strony
         }
         public static bool EnterNewSession(User user)
         {
-           _instance = new UserSession(user);
+            _instance = new UserSession(user);
             return true;
         }
         public static bool IsInSession()
@@ -52,5 +53,6 @@ namespace EdukuJez
         {
             _instance = null;
         }
+
     }
 }

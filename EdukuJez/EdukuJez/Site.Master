@@ -40,6 +40,8 @@
                             <asp:Label ID="ProfileSurnameLabel" CssClass="profile-label" runat="server"></asp:Label>
                             <asp:LinkButton CssClass="profile-label" ID="LogoutButton" runat="server" OnClick="LogoutButton_Click">Wyloguj</asp:LinkButton>
                             <asp:LinkButton CssClass="profile-label" ID="ChangePasswordButton" runat="server" OnClick="ChangePasswordButton_Click">Zmień hasło</asp:LinkButton>
+                            <asp:DropDownList ID="ChildrenDropDownList" runat="server" Visible="False"></asp:DropDownList>
+                            <asp:Button ID="ChildButton" runat="server" Text="Wybierz" OnClick="ChildButton_Click" Visible="False" />
                         </asp:Panel>
                     </div>
                 </div>
