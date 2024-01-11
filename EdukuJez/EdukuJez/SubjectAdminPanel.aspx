@@ -4,28 +4,16 @@
         <img src="Imgs/Subjects_Management_Page_Title.png" class="logo1" style="height: 82px; width: 650px" />
         <hr />
     </div>
-       <p align="center">
-       <asp:Label ID="LabelSubjectName" runat="server" Text="Nazwa przedmiotu: "></asp:Label>
-       <asp:TextBox ID="TextBoxSubjectName" runat="server" MaxLength="100"></asp:TextBox>
-   </p>   
-    <br />
-    <p align="center">
-        <asp:Label ID="LabelDescription" runat="server" Text="Opis przedmiotu: "></asp:Label>
-        &nbsp;<asp:TextBox ID="TextBoxSubjectDescription" runat="server" TextMode="MultiLine"></asp:TextBox>
-    </p>
-    <br />
-    <p align="center">
-        <asp:Label ID="LabelGroupsAndUsers" runat="server" Text="Grupy i użytkownicy: "></asp:Label>
-        <asp:DropDownList ID="DropDownList" runat="server"></asp:DropDownList>
-        <asp:Button ID="ButtonAdd" runat="server" Text="Dodaj" OnClick="ButtonAdd_Click" />
+      <div style="text-align:center;">
+      <asp:ListBox ID="ListBoxAllSubjects" runat="server" style="width: 350px; height: 400px; font-size: 20px;"></asp:ListBox>
+        </div>
+     <asp:Button ID="ButtonAdd" runat="server" Text="Dodaj nowy przedmiot" Visible="False" OnClick="ButtonAdd_Click" Style="width: 220px; height: 40px; font-size: 20px;"/>
         <br />
+    <asp:Button ID="ButtonEdit" runat="server" Text="Edytuj przedmiot" Visible="False" OnClick="ButtonEdit_Click" Style="width: 220px; height: 40px; font-size: 20px;"/>
         <br />
-            <asp:ListBox ID="ListBox1" runat="server" BackColor="White"></asp:ListBox>
-        <asp:Button ID="ButtonDelete" runat="server" Text="Usuń" OnClick="ButtonDelete_Click" />
-    </p>
-    <br />
-    <p align="center">
-        <asp:Button ID="ButtonSubjectAccept"  runat="server" Text="Dodaj przedmiot" OnClick="ButtonSubjectAccept_Click" />
-    </p>
+    <asp:Button ID="ButtonDelete" runat="server" Text="Usuń przedmiot" Visible="False" OnClick="ButtonDelete_Click" Style="width: 220px; height: 40px; font-size: 20px;" />
+        <div style="margin-top: 20px; width: 2000px; text-align: center;">
+            <asp:Label ID="LabelInfo" runat="server" Text="Label" Visible="False" Font-Size="24px" ForeColor="#CC0000"></asp:Label>
+    </div>
 </asp:Content>
 

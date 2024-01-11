@@ -15,58 +15,13 @@ namespace EdukuJez
     {
 
         /// <summary>
-        /// Kontrolka LabelSubjectName.
+        /// Kontrolka ListBoxAllSubjects.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelSubjectName;
-
-        /// <summary>
-        /// Kontrolka TextBoxSubjectName.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxSubjectName;
-
-        /// <summary>
-        /// Kontrolka LabelDescription.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelDescription;
-
-        /// <summary>
-        /// Kontrolka TextBoxSubjectDescription.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxSubjectDescription;
-
-        /// <summary>
-        /// Kontrolka LabelGroupsAndUsers.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelGroupsAndUsers;
-
-        /// <summary>
-        /// Kontrolka DropDownList.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList;
+        protected global::System.Web.UI.WebControls.ListBox ListBoxAllSubjects;
 
         /// <summary>
         /// Kontrolka ButtonAdd.
@@ -78,13 +33,13 @@ namespace EdukuJez
         protected global::System.Web.UI.WebControls.Button ButtonAdd;
 
         /// <summary>
-        /// Kontrolka ListBox1.
+        /// Kontrolka ButtonEdit.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox ListBox1;
+        protected global::System.Web.UI.WebControls.Button ButtonEdit;
 
         /// <summary>
         /// Kontrolka ButtonDelete.
@@ -96,12 +51,12 @@ namespace EdukuJez
         protected global::System.Web.UI.WebControls.Button ButtonDelete;
 
         /// <summary>
-        /// Kontrolka ButtonSubjectAccept.
+        /// Kontrolka LabelInfo.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonSubjectAccept;
+        protected global::System.Web.UI.WebControls.Label LabelInfo;
     }
 }
