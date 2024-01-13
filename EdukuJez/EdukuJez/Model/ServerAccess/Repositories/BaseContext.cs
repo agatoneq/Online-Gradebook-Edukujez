@@ -58,6 +58,18 @@ namespace EdukuJez.Repositories
             modelBuilder.Entity<Subject>()
                 .HasIndex(u => u.SubjectName)
                 .IsUnique();
+
+            modelBuilder.Entity<Subject>()
+                .HasOne(s => s.TeacherGroup)
+                .WithMany(g => g.SubjectsTeachers)
+                .HasForeignKey(s => s.TeacherGroupId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Subject>()
+                .HasOne(s => s.StudentGroup)
+                .WithMany(g => g.SubjectsStudents)
+                .HasForeignKey(s => s.StudentGroupId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

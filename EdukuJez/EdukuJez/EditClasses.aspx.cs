@@ -1,5 +1,4 @@
 ﻿
-using EdukuJez.Migrations;
 using EdukuJez.Repositories;
 using Microsoft.Ajax.Utilities;
 using System;
