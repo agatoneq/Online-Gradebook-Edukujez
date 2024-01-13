@@ -23,5 +23,11 @@ namespace EdukuJez.Repositories
             }
             return null;
         }
+
+        public bool IsGroupInDatabase(string name)
+        {
+            return Table.Any(x => x.Name == name);
+
+        }
     }
 }
