@@ -17,6 +17,7 @@ namespace EdukuJez.Repositories
         public DbSet<ClassUsers> ClassUsers { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Post> Posts { get; set; }
         public DbSet<Activity> Activities { get; set; }
         public DbSet<Calendar> Calendar { get; set; }
         public DbSet<Message> Messages { get; set; }
@@ -58,6 +59,18 @@ namespace EdukuJez.Repositories
             modelBuilder.Entity<Subject>()
                 .HasIndex(u => u.SubjectName)
                 .IsUnique();
+
+            modelBuilder.Entity<Subject>()
+                .HasOne(s => s.TeacherGroup)
+                .WithMany(g => g.SubjectsTeachers)
+                .HasForeignKey(s => s.TeacherGroupId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Subject>()
+                .HasOne(s => s.StudentGroup)
+                .WithMany(g => g.SubjectsStudents)
+                .HasForeignKey(s => s.StudentGroupId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

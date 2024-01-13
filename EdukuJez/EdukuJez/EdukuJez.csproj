@@ -254,6 +254,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="AccountsManagement.aspx" />
+    <Content Include="PostOffice.aspx" />
+    <Content Include="ReadMessage.aspx" />
+    <Content Include="WriteMessage.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Grades.aspx" />
     <Content Include="GroupsManagement.aspx" />
@@ -367,45 +370,9 @@
     <Compile Include="Main.aspx.designer.cs">
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20231217125123_Initial.cs" />
-    <Compile Include="Migrations\20231217125123_Initial.designer.cs">
-      <DependentUpon>20231217125123_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20231217131001_Initial2.cs" />
-    <Compile Include="Migrations\20231217131001_Initial2.designer.cs">
-      <DependentUpon>20231217131001_Initial2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20231217183733_SubjectDesc.cs" />
-    <Compile Include="Migrations\20231217183733_SubjectDesc.designer.cs">
-      <DependentUpon>20231217183733_SubjectDesc.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20231217190212_Activity_test.cs" />
-    <Compile Include="Migrations\20231217190212_Activity_test.designer.cs">
-      <DependentUpon>20231217190212_Activity_test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20231217190236_Activity.cs" />
-    <Compile Include="Migrations\20231217190236_Activity.designer.cs">
-      <DependentUpon>20231217190236_Activity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20231218112423_calendar.cs" />
-    <Compile Include="Migrations\20231218112423_calendar.designer.cs">
-      <DependentUpon>20231218112423_calendar.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20231218121014_Messages.cs" />
-    <Compile Include="Migrations\20231218121014_Messages.designer.cs">
-      <DependentUpon>20231218121014_Messages.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20231218124358_Uniques_and_nulls.cs" />
-    <Compile Include="Migrations\20231218124358_Uniques_and_nulls.designer.cs">
-      <DependentUpon>20231218124358_Uniques_and_nulls.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20231218213459_Teachers.cs" />
-    <Compile Include="Migrations\20231218213459_Teachers.designer.cs">
-      <DependentUpon>20231218213459_Teachers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20231227213722_group_Educator.cs" />
-    <Compile Include="Migrations\20231227213722_group_Educator.designer.cs">
-      <DependentUpon>20231227213722_group_Educator.cs</DependentUpon>
+    <Compile Include="Migrations\20240104205342_NewInitial.cs" />
+    <Compile Include="Migrations\20240104205342_NewInitial.designer.cs">
+      <DependentUpon>20240104205342_NewInitial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\BaseContextModelSnapshot.cs" />
     <Compile Include="Model\Main\PanelFactory.cs" />
@@ -428,10 +395,14 @@
     <Compile Include="Model\ServerAccess\IRestricted.cs" />
     <Compile Include="Model\ServerAccess\Repositories\ActivitiesRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\BaseContext.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\MessageGroupsRepository.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\MessageRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\GradesRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\GroupsRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\ARepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\GroupUsersRepository.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\MessageUsersRepository.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\PostRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\ScheduleRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\SubjectsRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\SubjViewRepository.cs" />
@@ -473,6 +444,27 @@
     </Compile>
     <Compile Include="AccountsManagement.aspx.designer.cs">
       <DependentUpon>AccountsManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PostOffice.aspx.cs">
+      <DependentUpon>PostOffice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PostOffice.aspx.designer.cs">
+      <DependentUpon>PostOffice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReadMessage.aspx.cs">
+      <DependentUpon>ReadMessage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReadMessage.aspx.designer.cs">
+      <DependentUpon>ReadMessage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WriteMessage.aspx.cs">
+      <DependentUpon>WriteMessage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WriteMessage.aspx.designer.cs">
+      <DependentUpon>WriteMessage.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

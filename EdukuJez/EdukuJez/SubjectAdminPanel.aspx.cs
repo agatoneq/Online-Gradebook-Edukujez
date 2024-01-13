@@ -12,43 +12,64 @@ namespace EdukuJez
 {
     public partial class SubjectAdminPanel : Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected void Page_load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            //sprawdzanie czy uzytkownik ma uprawnienia admina - jeszcze nie działa
+            //if (UserSession.GetSession().user.Groups.Any(x => x.Group.Name == "Administratorzy"))
             {
-                var repoG = new GroupsRepository();
-                var repoU = new UsersRepository();
-                foreach (var g in repoG.Table)
+                if (!IsPostBack)
                 {
-                    DropDownList.Items.Add(g.Name);
+                    var repoS = new SubjectsRepository();
+                    foreach (var s in repoS.Table)
+                    {
+                        ListBoxAllSubjects.Items.Add(s.SubjectName);
 
-                }
-                foreach (var u in repoU.Table)
-                {
-                    DropDownList.Items.Add(u.UserName + " " + u.UserSurname);
+                    }
+                    ButtonAdd.Visible = true;
+                    ButtonEdit.Visible = true;
+                    ButtonDelete.Visible = true;
                 }
             }
+            //else
+           {
+                LabelInfo.Text = "Brak dostępu do zawartości strony";
+                LabelInfo.Visible = true;
+           }
         }
 
         protected void ButtonAdd_Click(object sender, EventArgs e)
         {
-            ListBox1.Items.Add(DropDownList.SelectedItem.ToString());
+            this.Response.Redirect("SubjectAddAdminPanel.aspx");
+        }
+
+        protected void ButtonEdit_Click(object sender, EventArgs e)
+        {
+            if (ListBoxAllSubjects.SelectedItem == null)
+            {
+                LabelInfo.Text = "Należy wybrać przedmiot";
+                LabelInfo.Visible = true;
+            }
+            else
+            {
+                var subject = new SubjectsRepository();
+                Session["Subject"] = subject.Table.FirstOrDefault(s => s.SubjectName == ListBoxAllSubjects.SelectedItem.Text);
+                Response.Redirect("SubjectAddAdminPanel.aspx");
+            }
         }
 
         protected void ButtonDelete_Click(object sender, EventArgs e)
         {
-            ListBox1.Items.Remove(ListBox1.SelectedItem);
-        }
-
-        protected void ButtonSubjectAccept_Click(object sender, EventArgs e)
-        {
-            if (TextBoxSubjectName.Text!="") {
+            if (ListBoxAllSubjects.SelectedItem == null)
+            {
+                LabelInfo.Text = "Należy wybrać przedmiot";
+                LabelInfo.Visible = true;
+            }
+            else
+            {
                 var repoS = new SubjectsRepository();
-                Subject subject = new Subject();
-                subject.SubjectName = TextBoxSubjectName.Text;
-                //subject.SubjectNameDescription = TextBoxSubjectDescription;
-                repoS.Insert(subject);
-                //dodanie grupom uprawnień do przedmiotu
+                //nazwa przedmiotu musi być unikatowa
+                repoS.Delete(repoS.Table.FirstOrDefault(x => x.SubjectName == ListBoxAllSubjects.SelectedItem.Text));
+                ListBoxAllSubjects.Items.Remove(ListBoxAllSubjects.SelectedItem);
             }
         }
     }

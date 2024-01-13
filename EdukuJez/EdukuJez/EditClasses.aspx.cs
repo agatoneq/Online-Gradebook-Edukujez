@@ -1,5 +1,4 @@
 ﻿
-using EdukuJez.Migrations;
 using EdukuJez.Repositories;
 using Microsoft.Ajax.Utilities;
 using System;
@@ -32,7 +31,7 @@ namespace EdukuJez
         List<string> Surname = new List<string> { };
         List<string> Teacher = new List<string> { };
 
-
+        readonly GroupUsersRepository groupUserRepo = new GroupUsersRepository();
         private ScheduleRepository scheduleRepo = new ScheduleRepository();
         private GroupsRepository groupRepo = new GroupsRepository();
         private SubjectsRepository subjRepo = new SubjectsRepository();
@@ -230,7 +229,8 @@ namespace EdukuJez
 
             var subList = subjRepo.Table.ToList();
             var groupList = groupRepo.Table.ToList();
-            var userList = userRepo.Table.ToList();
+            List<GroupUser> groupUserList = groupUserRepo.Table.Include(u => u.User).Include(g => g.Group).ToList();
+            var userList = groupUserList.Where(x => x.Group != null && x.Group.Id == 2 && x.User != null).Select(x => x.User).ToList(); ;
             var lessonPlan = scheduleRepo.Table.Include(u => u.Group).Include(u => u.Warden).Include(u => u.Subject).ToList();
 
             LoadToChose(groupList, subList, userList, lessonPlan);
@@ -243,7 +243,9 @@ namespace EdukuJez
         {
             foreach (Group group in groupT)
             {
-                Group.Add(group.Name.ToString());
+
+                    Group.Add(group.Name);
+                
             }
             foreach (Subject subject in SubjectT)
             {
@@ -251,8 +253,10 @@ namespace EdukuJez
             }
             foreach (User user in UserT)
             {
-                var a = user.UserName.ToString() + " " + user.UserSurname.ToString();
-                Teacher.Add(a);
+
+                    var a = user.UserName.ToString() + " " + user.UserSurname.ToString();
+                    Teacher.Add(a);
+                
             }
             foreach (ClassC lesson in lessonPlan)
             {
