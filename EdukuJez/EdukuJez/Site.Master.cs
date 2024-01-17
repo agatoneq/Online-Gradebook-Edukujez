@@ -57,7 +57,7 @@ namespace EdukuJez
             }
             else
             {
-                //Response.Redirect(LOGIN_SITE);
+                Response.Redirect(LOGIN_SITE);
                 ProfilePanel.Visible = false;
             }
         }

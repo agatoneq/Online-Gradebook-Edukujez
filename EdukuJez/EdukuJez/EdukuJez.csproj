@@ -371,6 +371,14 @@
     <Compile Include="Migrations\20240104205342_NewInitial.designer.cs">
       <DependentUpon>20240104205342_NewInitial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20240117171257_gradetoTeacher.cs" />
+    <Compile Include="Migrations\20240117171257_gradetoTeacher.designer.cs">
+      <DependentUpon>20240117171257_gradetoTeacher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20240117180121_Remarks.cs" />
+    <Compile Include="Migrations\20240117180121_Remarks.designer.cs">
+      <DependentUpon>20240117180121_Remarks.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\BaseContextModelSnapshot.cs" />
     <Compile Include="Model\Main\PanelFactory.cs" />
     <Compile Include="Model\Main\TablePanel.cs" />
@@ -386,6 +394,7 @@
     <Compile Include="Model\ServerAccess\DBEntity\MessageGroups.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\MessageUsers.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\Post.cs" />
+    <Compile Include="Model\ServerAccess\DBEntity\Remark.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\Subject.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\SubjView.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\User.cs" />

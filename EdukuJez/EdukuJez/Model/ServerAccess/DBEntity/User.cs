@@ -24,6 +24,9 @@ namespace EdukuJez.Repositories
 
         public ICollection<GroupUser> Groups { get; set; } = new List<GroupUser>();
         public ICollection<Grade> Grades { get; set; } = new List<Grade>();
+        public ICollection<Grade> SubmittedGrades { get; set; } = new List<Grade>();
+        public ICollection<Remark> Remarks { get; set; } = new List<Remark>();
+        public ICollection<Remark> SubmittedRemarks { get; set; } = new List<Remark>();
         public ICollection<ClassC> Teaches { get; set; } = new List<ClassC>();
         public ICollection<ClassUsers> Clasess { get; set; } = new List<ClassUsers>();
         public ICollection<MessageUsers> Messages { get; set; } = new List<MessageUsers>();

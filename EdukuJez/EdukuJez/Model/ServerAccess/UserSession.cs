@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using EdukuJez.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace EdukuJez
 {
@@ -17,21 +18,40 @@ namespace EdukuJez
         public int UserId { get { return user.Id; } }
         public string UserName { get { return user.UserName; } }
         public string UserSurname { get { return user.UserSurname; } }
-        public IEnumerable<Group> UserGroups { get { return user.Groups.Select(x => x.Group); } }
+        public List<Group> UserGroups { get; private set;  }
         public string UserLogin { get { return user.UserLogin; } }
         public string UserPassword { get { return user.UserPassword; } }
         public User checkedChild { get; set; }
         UserSession(User user)
         {
             this.user = user;
+            //Wszystkie grupy urzytkownika
+            var UserId = UserSession.GetSession().UserId;
+            GroupUsersRepository groupUserRepo = new GroupUsersRepository();
+            List<GroupUser> groupUserList = groupUserRepo.Table.Include(u => u.User).Include(g => g.Group).ToList();
+            List<Group> result = groupUserList.Where(x => x.User.Id == UserId).Select(x => x.Group).ToList();
+            UserGroups = new List<Group>();
+
+            // Jeśli grupa ma rodzica, rekurencyjnie dodaj wszystkich rodziców
+            foreach (var g in result)
+            {
+                UserGroups.AddRange(GetAllParentGroups(g.ParentGroup));
+            }
+            UserGroups=UserGroups.Distinct().ToList();
         }
         public static UserSession GetSession()
         {
             return _instance;
         }
-        public static bool CheckPermission(String PermissionSubject, String PermissionType)
+        public static bool CheckPermission(String requiredGroupName)
         {
-            return true;
+            bool isInGroup = UserSession.GetSession().UserGroups.Any(x => x.Name == requiredGroupName);
+            return isInGroup;
+        }
+        public static bool CheckPermission(Group requiredGroup)
+        {
+            bool isInGroup = UserSession.GetSession().UserGroups.Any(x => x.Id == requiredGroup.Id);
+            return isInGroup;
         }
         public void ChangeSitePermissionCheck(Page sender)
         {
@@ -53,6 +73,20 @@ namespace EdukuJez
         {
             _instance = null;
         }
+        public List<Group> GetAllParentGroups(Group group)
+        {
+            List<Group> result = new List<Group>();
 
+            // Dodaj bieżącą grupę do listy wynikowej
+            result.Add(group);
+
+            // Jeśli grupa ma rodzica, rekurencyjnie dodaj wszystkich rodziców
+            if (group.ParentGroup != null)
+            {
+                result.AddRange(GetAllParentGroups(group.ParentGroup));
+            }
+
+            return result;
+        }
     }
 }
