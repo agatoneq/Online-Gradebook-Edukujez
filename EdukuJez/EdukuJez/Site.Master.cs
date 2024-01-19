@@ -20,7 +20,7 @@ namespace EdukuJez
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            if (UserSession.IsInSession())
+            if (UserSession.IsInSession() )
             {
                 var session = UserSession.GetSession();
                 ProfilePanel.Visible = true;
@@ -57,7 +57,8 @@ namespace EdukuJez
             }
             else
             {
-                Response.Redirect(LOGIN_SITE);
+
+                //Response.Redirect(LOGIN_SITE);
                 ProfilePanel.Visible = false;
             }
         }
