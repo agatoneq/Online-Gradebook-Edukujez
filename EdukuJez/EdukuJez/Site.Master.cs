@@ -57,7 +57,6 @@ namespace EdukuJez
             }
             else
             {
-
                 //Response.Redirect(LOGIN_SITE);
                 ProfilePanel.Visible = false;
             }
@@ -73,7 +72,7 @@ namespace EdukuJez
         {
             Response.Redirect("ChangingPassword.aspx");
         }
-
+        
         protected void ChildButton_Click(object sender, EventArgs e)
         {
             if (ChildrenDropDownList.SelectedValue == "Wybierz dziecko")

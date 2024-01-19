@@ -26,7 +26,7 @@ namespace EdukuJez
         {
             this.user = user;
             //Wszystkie grupy urzytkownika
-            var UserId = UserSession.GetSession().UserId;
+            var UserId = this.UserId;
             GroupUsersRepository groupUserRepo = new GroupUsersRepository();
             List<GroupUser> groupUserList = groupUserRepo.Table.Include(u => u.User).Include(g => g.Group).ToList();
             List<Group> result = groupUserList.Where(x => x.User.Id == UserId).Select(x => x.Group).ToList();
