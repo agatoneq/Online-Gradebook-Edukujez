@@ -36,6 +36,7 @@ namespace EdukuJez
         private GroupsRepository groupRepo = new GroupsRepository();
         private SubjectsRepository subjRepo = new SubjectsRepository();
         private UsersRepository userRepo = new UsersRepository();
+        private ClassUsers classUsers = new ClassUsers();
         protected void Page_Load(object sender, EventArgs e)
         {
             ReloadData();
@@ -66,9 +67,24 @@ namespace EdukuJez
             userRepo.Table.First(x => x.UserName == parts[0] && x.UserSurname == parts[1]).Teaches.Add(c);
             groupRepo.Table.First(x => x.Name == group).Classes.Add(c);
             subjRepo.Table.First(x => x.SubjectName == subject).Classes.Add(c);
+
+
+
+            User u = userRepo.Table.First(x => x.UserName == parts[0] && x.UserSurname == parts[1]);
+            var CU = new ClassUsers();
+            c.Users = new List<ClassUsers>() { CU };    
+            u.Clasess = new List<ClassUsers>() { CU };  
+
+
+
             userRepo.Update();
             groupRepo.Update();
             subjRepo.Update();
+
+
+
+
+
             ReloadData();
         }
 

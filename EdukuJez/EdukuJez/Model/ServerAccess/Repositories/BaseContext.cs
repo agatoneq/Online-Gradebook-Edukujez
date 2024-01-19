@@ -71,6 +71,30 @@ namespace EdukuJez.Repositories
                 .WithMany(g => g.SubjectsStudents)
                 .HasForeignKey(s => s.StudentGroupId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Grade>()
+                .HasOne(s => s.Users)
+                .WithMany(g => g.Grades)
+                .HasForeignKey(s => s.StudentId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Grade>()
+                .HasOne(s => s.Teacher)
+                .WithMany(g => g.SubmittedGrades)
+                .HasForeignKey(s => s.TeacherId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Remark>()
+                .HasOne(s => s.Student)
+                .WithMany(g => g.Remarks)
+                .HasForeignKey(s => s.StudentId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Remark>()
+                .HasOne(s => s.Submitter)
+                .WithMany(g => g.SubmittedRemarks)
+                .HasForeignKey(s => s.SubmitterId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

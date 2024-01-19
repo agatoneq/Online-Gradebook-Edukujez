@@ -22,6 +22,10 @@
         </asp:Panel>
         <br />
                 <asp:Button ID="SubmitButton" runat="server" Text="Wyślij" Style="margin-top: 10px;" OnClick="SendMessage" />
+
+        <br />
+        <br />
+        <asp:Label ID="InfoLabel" runat="server" Text="" Visible="true"></asp:Label>
     </div>
                  </ContentTemplate>
 </asp:UpdatePanel>

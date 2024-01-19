@@ -19,6 +19,7 @@ namespace EdukuJez
         private UsersRepository userRepo = new UsersRepository();
         private GroupsRepository groupRepo = new GroupsRepository();
         private GroupUsersRepository groupUsersRepo = new GroupUsersRepository();
+        private 
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,7 +32,7 @@ namespace EdukuJez
                 foreach (User users in userList)
                 {
                     if(users.UserName!= UserSession.GetSession().UserName)
-                    DropDownList.Items.Add(users.UserName + users.UserSurname);
+                    DropDownList.Items.Add(users.UserName +" "+ users.UserSurname);
 
                 }
                 foreach (Group group in groupList)
@@ -54,29 +55,70 @@ namespace EdukuJez
 
             if (userRepo.Table.Any(x => x.UserName == parts[0])&& userRepo.Table.Any(x => x.UserSurname == parts[1]))
             {
-                var query = new Message() { Topic = Topic, Content = Message };
+                try
+                {
+                    var query = new Message() { Topic = Topic, Content = Message };
 
-                userRepo.Table.First(x => x.UserName == User_name).Sends.Add(query);
-                userRepo.Update();
+                    userRepo.Table.First(x => x.UserName == User_name).Sends.Add(query);
+
+
+                    User u = userRepo.Table.First(x => x.UserName == parts[0] && x.UserSurname == parts[1]);
+                    var MU = new MessageUsers();
+                    query.Recipients = new List<MessageUsers>() { MU };
+                    u.MessagesUsers = new List<MessageUsers>() { MU };
+
+
+                    userRepo.Update();
+
+
+                    InfoLabel.Text = "Wiadomość wysłana";
+                }
+                catch
+                {
+                    InfoLabel.Text = "Wiadomość nie wysłana";
+                }
+
+
+
+
             }
             else if(groupRepo.Table.Any(x => x.Name == Name))
             {
-                var userList = groupUsersRepo.Table.Include(x => x.User).Include(g => g.Group).Where(g => g.Group.Name == Name).Select(x =>x.User).ToList();
+                // znajdowanie użytkowników po grupie 
+                // var userList = groupUsersRepo.Table.Include(x => x.User).Include(g => g.Group).Where(g => g.Group.Name == Name).Select(x =>x.User).ToList();
 
+                try
+                {
+                    //  foreach (User users in userList)
+                    //  {
 
                 var query = new Message() { Topic = Topic, Content = Message };
+                userRepo.Table.First(x => x.UserName == User_name).Sends.Add(query);
+                query.IsGroupMsg = true;   
 
-                foreach (User users in userList)
+
+                Group g = groupRepo.Table.First(x => x.Name == Name);
+                var MG = new MessageGroups();
+                query.GroupRecipients = new List<MessageGroups>() { MG };
+                g.Messages = new List<MessageGroups>() { MG };
+
+
+                messageRepo.Insert(query);
+                groupRepo.Update();
+                userRepo.Update();
+
+                    InfoLabel.Text = "Wiadomość wysłana";
+              }
+                catch
                 {
+                InfoLabel.Text = "Wiadomość nie wysłana";
+              }
 
-                        userRepo.Table.First(x => x.UserName == User_name).Sends.Add(query);
-                        userRepo.Update();
-                    
 
-                }
+            //   }
 
-            }
         }
+    }
 
         protected void SelectedIndexChanged(object sender, EventArgs e)
         {

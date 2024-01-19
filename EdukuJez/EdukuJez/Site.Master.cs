@@ -20,7 +20,7 @@ namespace EdukuJez
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            if (UserSession.IsInSession())
+            if (UserSession.IsInSession() )
             {
                 var session = UserSession.GetSession();
                 ProfilePanel.Visible = true;
@@ -57,8 +57,19 @@ namespace EdukuJez
             }
             else
             {
-                //Response.Redirect(LOGIN_SITE);
-                ProfilePanel.Visible = false;
+                string currentPage = Request.Url.Segments.LastOrDefault();
+
+                // Możesz teraz użyć zmiennej "currentPage" do podjęcia odpowiednich działań
+                // w zależności od tego, która strona jest ładowana.
+
+                if (currentPage != null)
+                {
+                    if (!currentPage.Equals("Default.aspx", StringComparison.OrdinalIgnoreCase))
+                    {
+                        //Response.Redirect(LOGIN_SITE);
+                    }
+                    ProfilePanel.Visible = false;
+                }
             }
         }
 
@@ -72,7 +83,7 @@ namespace EdukuJez
         {
             Response.Redirect("ChangingPassword.aspx");
         }
-
+        
         protected void ChildButton_Click(object sender, EventArgs e)
         {
             if (ChildrenDropDownList.SelectedValue == "Wybierz dziecko")

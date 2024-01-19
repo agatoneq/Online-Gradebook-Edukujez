@@ -4,14 +4,16 @@ using EdukuJez.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EdukuJez.Migrations
 {
     [DbContext(typeof(BaseContext))]
-    partial class BaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240117171257_gradetoTeacher")]
+    partial class gradetoTeacher
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -289,31 +291,6 @@ namespace EdukuJez.Migrations
                     b.ToTable("Post");
                 });
 
-            modelBuilder.Entity("EdukuJez.Repositories.Remark", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Contents")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SubmitterId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StudentId");
-
-                    b.HasIndex("SubmitterId");
-
-                    b.ToTable("Remark");
-                });
-
             modelBuilder.Entity("EdukuJez.Repositories.Subject", b =>
                 {
                     b.Property<int>("Id")
@@ -493,21 +470,6 @@ namespace EdukuJez.Migrations
                     b.HasOne("EdukuJez.Repositories.Message", "Message")
                         .WithMany()
                         .HasForeignKey("MessageId");
-                });
-
-            modelBuilder.Entity("EdukuJez.Repositories.Remark", b =>
-                {
-                    b.HasOne("EdukuJez.Repositories.User", "Student")
-                        .WithMany("Remarks")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("EdukuJez.Repositories.User", "Submitter")
-                        .WithMany("SubmittedRemarks")
-                        .HasForeignKey("SubmitterId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("EdukuJez.Repositories.Subject", b =>

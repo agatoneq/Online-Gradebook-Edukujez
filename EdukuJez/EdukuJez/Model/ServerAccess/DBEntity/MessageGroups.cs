@@ -8,6 +8,6 @@ namespace EdukuJez.Repositories
     public class MessageGroups : EntityBase
     {
         public Message Message { get; set; }
-        public User User { get; set; }
+        public Group Group { get; set; }
     }
 }

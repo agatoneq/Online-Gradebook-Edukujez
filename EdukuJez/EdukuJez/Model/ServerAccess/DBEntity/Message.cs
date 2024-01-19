@@ -13,5 +13,6 @@ namespace EdukuJez.Repositories
         public bool IsGroupMsg { get; set; }
         public ICollection<MessageUsers> Recipients { get; set; } = new List<MessageUsers>();
         public ICollection<MessageGroups> GroupRecipients { get; set; } = new List<MessageGroups>();
+
     }
 }
