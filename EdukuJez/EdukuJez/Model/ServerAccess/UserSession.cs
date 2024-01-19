@@ -76,6 +76,8 @@ namespace EdukuJez
         public List<Group> GetAllParentGroups(Group group)
         {
             List<Group> result = new List<Group>();
+            if (group == null)
+                return result;
 
             // Dodaj bieżącą grupę do listy wynikowej
             result.Add(group);

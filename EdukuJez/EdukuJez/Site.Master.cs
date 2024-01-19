@@ -57,8 +57,19 @@ namespace EdukuJez
             }
             else
             {
-                //Response.Redirect(LOGIN_SITE);
-                ProfilePanel.Visible = false;
+                string currentPage = Request.Url.Segments.LastOrDefault();
+
+                // Możesz teraz użyć zmiennej "currentPage" do podjęcia odpowiednich działań
+                // w zależności od tego, która strona jest ładowana.
+
+                if (currentPage != null)
+                {
+                    if (!currentPage.Equals("Default.aspx", StringComparison.OrdinalIgnoreCase))
+                    {
+                        //Response.Redirect(LOGIN_SITE);
+                    }
+                    ProfilePanel.Visible = false;
+                }
             }
         }
 
