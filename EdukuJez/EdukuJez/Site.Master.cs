@@ -17,6 +17,23 @@ namespace EdukuJez
         public GroupUsersRepository grUsRepo = new GroupUsersRepository();
         public GroupsRepository groupRepo = new GroupsRepository();
         private List<User> children = new List<User>();
+        protected override void OnInit(EventArgs e)
+        {
+            // Wywołaj oryginalną implementację OnInit z klasy bazowej
+            base.OnInit(e);
+
+            // Dodatkowe operacje inicjalizacyjne
+            // ...
+            string currentPage = Request.Url.Segments.LastOrDefault();
+
+            if (currentPage != null && !UserSession.IsInSession())
+            {
+                if (!currentPage.Equals("Default", StringComparison.OrdinalIgnoreCase))
+                {
+                    Response.Redirect(LOGIN_SITE);
+                }
+            }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -57,19 +74,8 @@ namespace EdukuJez
             }
             else
             {
-                string currentPage = Request.Url.Segments.LastOrDefault();
-
-                // Możesz teraz użyć zmiennej "currentPage" do podjęcia odpowiednich działań
-                // w zależności od tego, która strona jest ładowana.
-
-                if (currentPage != null)
-                {
-                    if (!currentPage.Equals("Default.aspx", StringComparison.OrdinalIgnoreCase))
-                    {
-                        //Response.Redirect(LOGIN_SITE);
-                    }
                     ProfilePanel.Visible = false;
-                }
+                
             }
         }
 

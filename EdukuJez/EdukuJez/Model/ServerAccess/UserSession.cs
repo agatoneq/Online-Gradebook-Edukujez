@@ -28,16 +28,17 @@ namespace EdukuJez
             //Wszystkie grupy urzytkownika
             var UserId = this.UserId;
             GroupUsersRepository groupUserRepo = new GroupUsersRepository();
-            List<GroupUser> groupUserList = groupUserRepo.Table.Include(u => u.User).Include(g => g.Group).ToList();
+            List<GroupUser> groupUserList = groupUserRepo.Table.Include(u => u.User).Include(g => g.Group).ThenInclude(g => g.ParentGroup).ToList();
             List<Group> result = groupUserList.Where(x => x.User.Id == UserId).Select(x => x.Group).ToList();
             UserGroups = new List<Group>();
 
             // Jeśli grupa ma rodzica, rekurencyjnie dodaj wszystkich rodziców
             foreach (var g in result)
             {
-                UserGroups.AddRange(GetAllParentGroups(g.ParentGroup));
+                UserGroups.AddRange(GetAllParentGroups(g));
             }
             UserGroups=UserGroups.Distinct().ToList();
+            string a = "";
         }
         public static UserSession GetSession()
         {
@@ -75,6 +76,8 @@ namespace EdukuJez
         }
         public List<Group> GetAllParentGroups(Group group)
         {
+            GroupsRepository groupRepo = new GroupsRepository();
+            group = groupRepo.Table.Include(x => x.ParentGroup).First(x=>x.Id == group.Id);
             List<Group> result = new List<Group>();
             if (group == null)
                 return result;

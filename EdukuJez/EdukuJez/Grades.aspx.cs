@@ -18,7 +18,7 @@ namespace EdukuJez
         public SubjViewRepository View = new SubjViewRepository();
         public GroupsRepository repoGroups = new GroupsRepository();
         String permission;
-        User currentuser= UserSession.GetSession().user;
+        User currentuser= UserSession.GetSession()?.user;
         protected void Page_Load(object sender, EventArgs e)
         {
             //permission = UserSession.GetSession().UserGroup; //na razie zwraca nulla
