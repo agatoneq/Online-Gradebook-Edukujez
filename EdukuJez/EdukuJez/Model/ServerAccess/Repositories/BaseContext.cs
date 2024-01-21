@@ -23,6 +23,8 @@ namespace EdukuJez.Repositories
         public DbSet<Message> Messages { get; set; }
         public DbSet<MessageGroups> MessageGroups { get; set; }
         public DbSet<MessageUsers> MessageUsers { get; set; }
+        public DbSet<Remark> Remarks { get; set; }
+        public DbSet<GradeFormula> GradeFormulas { get; set; }
         public static BaseContext GetContext()
         {
             if (_instance == null)
@@ -95,6 +97,11 @@ namespace EdukuJez.Repositories
                 .WithMany(g => g.SubmittedRemarks)
                 .HasForeignKey(s => s.SubmitterId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<GradeFormula>()
+                .HasOne(u => u.Activity)
+                .WithOne(p => p.formula)
+                .HasForeignKey<Activity>(p => p.Id);
         }
     }
 }
