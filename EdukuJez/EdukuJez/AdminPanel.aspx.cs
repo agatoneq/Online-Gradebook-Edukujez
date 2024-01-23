@@ -20,6 +20,9 @@ namespace EdukuJez
 
                 AddTableRow(PanelFactory.MakePanel("Przedmiotami", "#996515", "SubjectAdminPanel.aspx", this),
                     PanelFactory.MakePanel("Grupami Użytkowników", "#DAA520", "GroupsManagement.aspx", this));
+
+                AddTableRow(PanelFactory.MakePanel("Kalendarzem", "#996515", "CalendarAdminPanel.aspx", this),
+                    PanelFactory.MakePanel("PlaceHolder", "#DAA520", "Main.aspx", this));
         }
         private void AddTableRow(params TablePanel[] cells)
         {

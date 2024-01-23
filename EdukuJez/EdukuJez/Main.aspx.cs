@@ -20,6 +20,9 @@ namespace EdukuJez
 
             AddTableRow(PanelFactory.MakePanel("Grupy i uprawnienia", "#F88158", "Main.aspx", this),
             PanelFactory.MakePanel("Poczta", "#DAF380", "PostOffice.aspx", this));
+
+            AddTableRow(PanelFactory.MakePanel("Kalendarz", "#F58231", "Calendar.aspx", this),
+           PanelFactory.MakePanel("PlaceHolder", "#DAF380", "Main.aspx", this));
         }
         private void AddTableRow(params TablePanel[] cells)
         {
