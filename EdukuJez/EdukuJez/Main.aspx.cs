@@ -12,7 +12,7 @@ namespace EdukuJez
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            AddTableRow(PanelFactory.MakePanel("Przedmioty", "#808000", "Default.aspx", this),
+            AddTableRow(PanelFactory.MakePanel("Przedmioty", "#808000", "SubjectPage.aspx", this),
                 PanelFactory.MakePanel("Oceny", "#D2691E", "Grades.aspx", this));
 
             AddTableRow(PanelFactory.MakePanel("Plan Zajęć", "#996515", "LessonPlan.aspx", this),

@@ -258,6 +258,8 @@
     <Content Include="Calendar.aspx" />
     <Content Include="PostOffice.aspx" />
     <Content Include="ReadMessage.aspx" />
+    <Content Include="SubjectAddAdminPanel.aspx" />
+    <Content Include="SubjectPage.aspx" />
     <Content Include="WriteMessage.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Grades.aspx" />
@@ -443,12 +445,26 @@
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
+    <Compile Include="SubjectAddAdminPanel.aspx.cs">
+      <DependentUpon>SubjectAddAdminPanel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SubjectAddAdminPanel.aspx.designer.cs">
+      <DependentUpon>SubjectAddAdminPanel.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SubjectAdminPanel.aspx.cs">
       <DependentUpon>SubjectAdminPanel.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="SubjectAdminPanel.aspx.designer.cs">
       <DependentUpon>SubjectAdminPanel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SubjectPage.aspx.cs">
+      <DependentUpon>SubjectPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SubjectPage.aspx.designer.cs">
+      <DependentUpon>SubjectPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
