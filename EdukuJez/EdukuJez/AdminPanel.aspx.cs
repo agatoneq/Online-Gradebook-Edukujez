@@ -12,14 +12,20 @@ namespace EdukuJez
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-                AddTableRow(PanelFactory.MakePanel("Kontami", "#808000", "AccountsManagement.aspx", this),
-                    PanelFactory.MakePanel("Kontami dla Rodziców", "#D2691E", "AdminPanel.aspx", this));
+            if (UserSession.CheckPermission(UserSession.ADMIN_GROUP) == false)
+                UserSession.ChangeSiteNoPermission(this, "Main.aspx");
 
-                AddTableRow(PanelFactory.MakePanel("Planem Zajęć", "#811B1B", "EditClasses.aspx", this),
-                    PanelFactory.MakePanel("Kalendarzem", "#9E9A74", "AdminPanel.aspx", this));
+            AddTableRow(PanelFactory.MakePanel("Kontami", "#808000", "AccountsManagement.aspx", this),
+                PanelFactory.MakePanel("Kontami dla Rodziców", "#D2691E", "AdminPanel.aspx", this));
+
+            AddTableRow(PanelFactory.MakePanel("Planem Zajęć", "#811B1B", "EditClasses.aspx", this),
+                PanelFactory.MakePanel("Kalendarzem", "#9E9A74", "AdminPanel.aspx", this));
 
                 AddTableRow(PanelFactory.MakePanel("Przedmiotami", "#996515", "SubjectAdminPanel.aspx", this),
                     PanelFactory.MakePanel("Grupami Użytkowników", "#DAA520", "GroupsManagement.aspx", this));
+
+                AddTableRow(PanelFactory.MakePanel("Kalendarzem", "#996515", "CalendarAdminPanel.aspx", this),
+                    PanelFactory.MakePanel("PlaceHolder", "#DAA520", "Main.aspx", this));
         }
         private void AddTableRow(params TablePanel[] cells)
         {

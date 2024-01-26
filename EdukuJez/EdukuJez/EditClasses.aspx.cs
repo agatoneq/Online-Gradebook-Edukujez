@@ -9,6 +9,7 @@ using System.Web.Helpers;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.EntityFrameworkCore;
+using EdukuJez.Model.ServerAccess.Repositories;
 
 namespace EdukuJez
 {
@@ -36,9 +37,12 @@ namespace EdukuJez
         private GroupsRepository groupRepo = new GroupsRepository();
         private SubjectsRepository subjRepo = new SubjectsRepository();
         private UsersRepository userRepo = new UsersRepository();
-        private ClassUsers classUsers = new ClassUsers();
+        private ClassUsersRepository CURepo = new ClassUsersRepository();
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            if (UserSession.CheckPermission(UserSession.ADMIN_GROUP) == false || UserSession.CheckPermission(UserSession.TEACHER_GROUP) == false)
+                UserSession.ChangeSiteNoPermission(this, "Main.aspx");
             ReloadData();
         }
 
@@ -101,8 +105,18 @@ namespace EdukuJez
             var subject = Convert.ToString(DropDownListSubject.SelectedValue);
             int classRoom = Convert.ToInt32(DropDownListClass.SelectedValue);
 
-            ClassC query = scheduleRepo.Table
+          
+
+            ClassC query = scheduleRepo.Table.Include(x=>x.Users)
                 .FirstOrDefault(x => x.Hour == godzina && x.Day == dzien && x.Warden.UserName == parts[0] && x.Warden.UserSurname == parts[1] && x.Class == classRoom);
+
+            var CU = query.Users.ToList();
+            foreach(var users in CU)
+            {
+                CURepo.Delete(users);   
+            }
+            scheduleRepo.Update();
+
             scheduleRepo.Delete(query);
             ReloadData();
         }
@@ -123,6 +137,7 @@ namespace EdukuJez
 
             List<List<string>> values = new List<List<string>> { days, hours, teachers, groups, subjects, classRoom };
 
+            //Tworzenie dropdownlist
             for (int i = 0; i < dropdownNames.Length; i++)
             {
                 DropDownList dropdown = new DropDownList();
@@ -196,6 +211,29 @@ namespace EdukuJez
 
             MainTable.Rows.Add(submitRow);
 
+            TableRow rowStart = new TableRow();
+
+            // Tworzenie nowych komórek TableCell
+            TableCell StartcellClass = new TableCell { Text = "Sala" };
+            TableCell StartcellHour = new TableCell { Text = "Godzina"};
+            TableCell StartcellDay = new TableCell { Text = "Dzień"};
+            TableCell StartcellTeacherName = new TableCell { Text = "Imie" };
+            TableCell StartcellTeacherSurname = new TableCell { Text = "Nazwisko" };
+            TableCell StartcellGroup = new TableCell { Text = "Grupa"};
+            TableCell StartcellSubject = new TableCell { Text = "Przedmiot"};
+
+            // Dodawanie komórek do wiersza
+            rowStart.Cells.Add(StartcellDay);
+            rowStart.Cells.Add(StartcellHour);
+            rowStart.Cells.Add(StartcellClass);
+            rowStart.Cells.Add(StartcellGroup);
+            rowStart.Cells.Add(StartcellSubject);
+            rowStart.Cells.Add(StartcellTeacherName);
+            rowStart.Cells.Add(StartcellTeacherSurname);
+
+            // Dodawanie wiersza do tabeli MainTable
+            MainTable.Rows.Add(rowStart);
+            //dodawanie wartości do tabeli
             foreach (ClassC lesson in lessonPlan)
             {
                 TableRow row = new TableRow();
@@ -206,12 +244,14 @@ namespace EdukuJez
                 TableCell cellDay = new TableCell { Text = lesson.Day.ToString() };
                 TableCell cellTeacherName = new TableCell { Text = lesson.Warden.UserName.ToString() };
                 TableCell cellTeacherSurname = new TableCell { Text = lesson.Warden.UserSurname.ToString() };
+                TableCell cellGroup = new TableCell { Text = lesson.Group.Name.ToString() };
                 TableCell cellSubject = new TableCell { Text = lesson.Subject.SubjectName.ToString() };
 
                 // Dodawanie komórek do wiersza
                 row.Cells.Add(cellDay);
                 row.Cells.Add(cellHour);
                 row.Cells.Add(cellClass);
+                row.Cells.Add(cellGroup);
                 row.Cells.Add(cellSubject);
                 row.Cells.Add(cellTeacherName);
                 row.Cells.Add(cellTeacherSurname);
@@ -242,6 +282,11 @@ namespace EdukuJez
         }
         private void ReloadData()
         {
+
+        DropDownListTeacher.Items.Clear();
+            DropDownListGroup.Items.Clear();    
+        DropDownListSubject.Items.Clear();
+
 
             var subList = subjRepo.Table.ToList();
             var groupList = groupRepo.Table.ToList();

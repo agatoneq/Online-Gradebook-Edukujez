@@ -9,5 +9,6 @@ namespace EdukuJez.Repositories
     {
         public string Name { get; set; }
         public ICollection<Grade> Grades { get; set; } = new List<Grade>();
+        public GradeFormula formula { get; set; }
     }
 }
