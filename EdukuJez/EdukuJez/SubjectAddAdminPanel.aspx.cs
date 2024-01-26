@@ -18,13 +18,9 @@ namespace EdukuJez
         private SubjectsRepository repoS = new SubjectsRepository();
         protected void Page_Load(object sender, EventArgs e)
         {
-                //sprawdzanie czy uzytkownik ma uprawnienia admina - jeszcze nie działa
-                //if (UserSession.GetSession().user.Groups.Any(x => x.Group.Name == "Administratorzy"))
-                {
-                    if(Session["Subject"] != null) subject = (Subject)Session["Subject"];
+                if(Session["Subject"] != null) subject = (Subject)Session["Subject"];
                 if (!IsPostBack)
                     {
-
                         foreach (var s in repoG.Table)
                         {
                             //znalezienie tylko grup uczniów na razie nie działa
@@ -48,14 +44,6 @@ namespace EdukuJez
                         ButtonSubjectAccept.Text = "Edytuj przedmiot";
                     }
                 }
-
-                }
-                //else
-                {
-                    LabelInfo.Text = "Brak dostępu do zawartości strony";
-                    LabelInfo.Visible = true;
-                }
-
         }
         protected void ButtonSubjectAccept_Click(object sender, EventArgs e)
         {
@@ -115,6 +103,16 @@ namespace EdukuJez
                     LabelInfo.Visible = true;
                 }
             }
+        }
+
+        protected void ButtonSubjectCancel_Click(object sender, EventArgs e)
+        {
+            if (Session["Subject"] != null)
+            {
+                Session.Contents.Remove("Subject");
+                Session.Abandon();
+            }
+            Response.Redirect("SubjectAdminPanel.aspx");
         }
     }
 }

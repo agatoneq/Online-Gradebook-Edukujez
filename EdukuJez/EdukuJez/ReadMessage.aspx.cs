@@ -81,7 +81,7 @@ namespace EdukuJez
 
         private void LoadSendData()
         {
-            DropDownList.Items.Clear();
+
             DropDownList.Items.Clear();
             var messListSend = messRepo.Table.Where(x => x.Sender.Id == CurrentUser.UserId);
 
