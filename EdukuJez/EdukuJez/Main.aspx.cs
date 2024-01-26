@@ -18,11 +18,14 @@ namespace EdukuJez
             AddTableRow(PanelFactory.MakePanel("Plan Zajęć", "#996515", "LessonPlan.aspx", this), 
                 PanelFactory.MakePanel("Poczta", "#DAF380", "PostOffice.aspx", this));
 
-            AddTableRow(PanelFactory.MakePanel("Grupy i uprawnienia", "#F88158", "Main.aspx", this),
-            PanelFactory.MakePanel("Poczta", "#DAF380", "PostOffice.aspx", this));
-
             AddTableRow(PanelFactory.MakePanel("Kalendarz", "#F58231", "Calendar.aspx", this),
            PanelFactory.MakePanel("PlaceHolder", "#DAF380", "Main.aspx", this));
+
+            if (UserSession.CheckPermission(UserSession.ADMIN_GROUP) == true)      //tylko dla administatorów
+            {
+                AddTableRow(PanelFactory.MakePanel("Grupy i uprawnienia", "#F88158", "Main.aspx", this),
+                PanelFactory.MakePanel("Panel Administratora", "#DAA520", "AdminPanel.aspx", this));
+            }
         }
         private void AddTableRow(params TablePanel[] cells)
         {
