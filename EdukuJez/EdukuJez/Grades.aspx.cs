@@ -22,8 +22,8 @@ namespace EdukuJez
         protected void Page_Load(object sender, EventArgs e)
         {
             //permission = UserSession.GetSession().UserGroup; //na razie zwraca nulla
-            if(UserSession.GetSession().user.Groups.Any(x => x.Group.Name== "Nauczyciele") || UserSession.GetSession().user.UserLogin=="TestTeacher")
-                permission = "nauczyciel";
+            if (UserSession.CheckPermission(UserSession.ADMIN_GROUP) == true || UserSession.CheckPermission(UserSession.TEACHER_GROUP) == true)
+             permission = "nauczyciel";
             else
                 permission = "uczen";
             GroupDropDownList.Items.Clear();
