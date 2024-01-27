@@ -20,7 +20,6 @@ namespace EdukuJez.Repositories
         public string UserLogin { get; set; }
         [Required]
         public string UserPassword { get; set; }
-        public virtual Post Post { get; set; }
 
 
         public ICollection<GroupUser> Groups { get; set; } = new List<GroupUser>();
@@ -33,6 +32,7 @@ namespace EdukuJez.Repositories
         public ICollection<MessageUsers> MessagesUsers { get; set; } = new List<MessageUsers>();
         public ICollection<Group> Educates { get; set; } = new List<Group>();
         public ICollection<Message> Sends { get; set; } = new List<Message>();
+        public ICollection<Attendance> Attendance { get; set; } = new List<Attendance>();
 
 
         public bool IsNameValid(string name)

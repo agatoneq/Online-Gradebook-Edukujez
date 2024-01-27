@@ -21,6 +21,7 @@ namespace EdukuJez.Repositories
         [Required]
         public Group StudentGroup { get; set; }
         public ICollection<ClassC> Classes { get; set; } = new List<ClassC>();
-        public ICollection<Grade> Grades { get; set; } = new List<Grade>();
+        public ICollection<Activity> Activites { get; set; } = new List<Activity>();
+        public ICollection<Attachment> Attachments { get; set; } = new List<Attachment>();
     }
 }
