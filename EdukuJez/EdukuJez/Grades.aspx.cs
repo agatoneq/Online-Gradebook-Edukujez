@@ -22,7 +22,7 @@ namespace EdukuJez
         protected void Page_Load(object sender, EventArgs e)
         {
             //permission = UserSession.GetSession().UserGroup; //na razie zwraca nulla
-            if(UserSession.GetSession().user.Groups.Any(x => x.Group.Name== "Nauczyciele") || UserSession.GetSession().user.UserLogin=="TestTeacher")
+            if(UserSession.GetSession().user.Groups.Any(x => x.Group.Name== "Nauczyciel") || UserSession.GetSession().user.UserLogin=="TestTeacher")
                 permission = "nauczyciel";
             else
                 permission = "uczen";

@@ -22,7 +22,7 @@ namespace EdukuJez.Repositories
         
         public bool IsNameValid(string name)
         {
-            Regex reg = new Regex(@"^[a-zA-Z]\w{2,29}$");
+            Regex reg = new Regex(@"^[a-zA-Z][\w\s]{2,29}$");
             return reg.IsMatch(name);
         }
     }

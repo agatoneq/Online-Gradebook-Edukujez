@@ -48,9 +48,22 @@ namespace EdukuJez
         {
             var ng = new Group();
             ng.Name = NewGroupTextBox.Text;
+
             var parentName = MainGroupList.SelectedValue;
-            ng.ParentGroup = groupRepo.Table.First(x => x.Name==parentName );
+            ng.ParentGroup = groupRepo.Table.First(x => x.Name == parentName);
+
             groupRepo.Insert(ng);
+
+            if (parentName == "Uczeń")
+            {
+                var educatorFullName = TeachersList.SelectedValue;
+                string[] parts = educatorFullName.Split(' ');
+                ng.Educator = userRepo.Table.First(x => (x.UserName + " " + x.UserSurname) == educatorFullName);
+                userRepo.Table.First(x => x.UserName == parts[0] && x.UserSurname == parts[1]).Educates.Add(ng);
+                userRepo.Update();
+                groupRepo.Update();
+            }
+
             MainInfoLabel.Text = "Dodałeś do bazy danych grupę o nazwie " + ng.Name +
                                      ". <br> Kliknij poniższy przycisk, aby dodać lub usunąć kolejną grupę.";
 
@@ -63,6 +76,7 @@ namespace EdukuJez
             DeleteGroupButton.Visible = false;
             AddNewGroupButton.Visible = false;
             RestartButton.Visible = true;
+            EditGroupButton.Visible = false;
             myRepeater.DataBind();
         }
 
@@ -76,18 +90,55 @@ namespace EdukuJez
             MainGroupLabel.Visible = false;
             DeleteGroupButton.Visible = false;
             AddNewGroupButton.Visible = false;
+            EditGroupButton.Visible = false;
             ConfirmDeleteButton.Visible = true;
-
         }
 
         protected void ConfirmDeleteClick(object sender, EventArgs e)
         {
             groupRepo.Delete(groupRepo.Table.First(x => x.Name == NewGroupTextBox.Text));
-            MainInfoLabel.Text = "Usunąłeś z bazy danych grupę o nazwie " + NewGroupTextBox.Text + ". <br> Kliknij poniższy przycisk, aby dodać lub usunąć kolejną grupę.";
+            MainInfoLabel.Text = "Usunąłeś z bazy danych grupę o nazwie " + NewGroupTextBox.Text + ". <br> Kliknij poniższy przycisk, aby dodać, edytować lub usunąć kolejną grupę.";
             MainGroupLabel.Visible = false;
             NewGroupTextBox.Visible = false;
             ConfirmDeleteButton.Visible = false;
             NameLabel.Visible = false;
+            RestartButton.Visible = true;
+            EditGroupButton.Visible = false;
+            myRepeater.DataBind();
+        }
+
+        protected void EditGroupButton_Click(object sender, EventArgs e)
+        {
+            List<Group> groupList = groupRepo.Table.ToList();
+            var parentName = groupList.Where(x => x.Name == NewGroupTextBox.Text).Select(g => g.ParentGroup.Name);
+            string pn = parentName.FirstOrDefault();
+
+            Group groupToUpdate = groupRepo.Table.FirstOrDefault(x => x.Name == NewGroupTextBox.Text);
+            string educatorName = groupToUpdate.Educator?.UserName;
+            string educatorSurname = groupToUpdate.Educator?.UserSurname;
+
+            MainInfoLabel.Text = "Edytowałeś w bazie danych grupę o nazwie " + groupToUpdate.Name +
+                                     ". <br> Kliknij poniższy przycisk, aby dodać, edytować lub usunąć kolejną grupę.";
+            NameLabel.Visible = false;
+            NewGroupTextBox.Visible = false;
+            TeachersList.Visible = false;
+            EducatorLabel.Visible = false;
+            MainGroupList.Visible = false;
+            MainGroupLabel.Visible = false;
+            DeleteGroupButton.Visible = false;
+            AddNewGroupButton.Visible = false;
+            EditGroupButton.Visible = false;
+            
+            if (pn == "Uczeń")
+            {
+                string educatorFullName = TeachersList.SelectedValue;
+                string[] parts = educatorFullName.Split(' ');
+                groupToUpdate.Educator = userRepo.Table.First(x => (x.UserName + " " + x.UserSurname) == educatorFullName);
+                userRepo.Table.First(x => x.UserName == parts[0] && x.UserSurname == parts[1]).Educates.Add(groupToUpdate);
+                userRepo.Update();
+                groupRepo.Update();
+            }
+
             RestartButton.Visible = true;
             myRepeater.DataBind();
         }
@@ -96,23 +147,41 @@ namespace EdukuJez
         {
             if (groupRepo.IsGroupInDatabase(NewGroupTextBox.Text))
             {
+                EditGroupButton.Enabled = true;
                 DeleteGroupButton.Enabled = true;
                 AddNewGroupButton.Enabled = false;
+                TeachersList.Visible = true;
+                EducatorLabel.Visible = true;
+
+                List<Group> groupList = groupRepo.Table.ToList();
+                var parentName = groupList.Where(x => x.Name == NewGroupTextBox.Text).Select(g => g.ParentGroup.Name);
+                string pn = parentName.FirstOrDefault();
+
+
+                if (pn != "Uczeń")
+                {
+                    EditGroupButton.Enabled = false;
+                    TeachersList.Visible = false;
+                    EducatorLabel.Visible = false;
+                }
+
             }
             else if (newGroup.IsNameValid(NewGroupTextBox.Text) && !groupRepo.IsGroupInDatabase(NewGroupTextBox.Text))
             {
                 AddNewGroupButton.Enabled = true;
                 DeleteGroupButton.Enabled = false;
-                MainGroupLabel.Visible = true;
-                MainGroupList.Visible = true;
-                EducatorLabel.Visible = true;
+                EditGroupButton.Enabled = false;
                 TeachersList.Visible = true;
+                EducatorLabel.Visible = true;
+                MainGroupList.Visible = true;
+                MainGroupLabel.Visible = true;
             }
             else
             {
                 DeleteGroupButton.Enabled = false;
                 AddNewGroupButton.Enabled = false;
-               // InfoLabel.Text = "Login może się składać z 3-30 liter (nie polskich) oraz cyfr. Nie zaczynaj loginu od cyfry.";
+                EditGroupButton.Enabled = false;
+                // InfoLabel.Text = "Login może się składać z 3-30 liter (nie polskich) oraz cyfr. Nie zaczynaj loginu od cyfry.";
             }
         }
         
@@ -133,6 +202,11 @@ namespace EdukuJez
                 EducatorLabel.Visible = true;
                 TeachersList.Visible = true;
             }
+        }
+
+        protected void GoBackButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AdminPanel.aspx");
         }
 
     }

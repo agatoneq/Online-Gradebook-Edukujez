@@ -270,6 +270,7 @@
     <Content Include="Imgs\Timetable_Management_Page_Title.png" />
     <Content Include="LessonPlan.aspx" />
     <Content Include="Main.aspx" />
+    <Content Include="Remarks.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -405,6 +406,7 @@
     <Compile Include="Model\ServerAccess\Repositories\GroupsRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\ARepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\GroupUsersRepository.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\RemarkRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\ScheduleRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\SubjectsRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\SubjViewRepository.cs" />
@@ -412,6 +414,13 @@
     <Compile Include="Model\ServerAccess\ServerClient.cs" />
     <Compile Include="Model\ServerAccess\UserSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Remarks.aspx.cs">
+      <DependentUpon>Remarks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Remarks.aspx.designer.cs">
+      <DependentUpon>Remarks.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

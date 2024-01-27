@@ -68,7 +68,6 @@ namespace EdukuJez
         protected void ReturnClick(object sender, EventArgs e)
         {
             Response.Redirect("Main.aspx");
-
         }
     }
 }
