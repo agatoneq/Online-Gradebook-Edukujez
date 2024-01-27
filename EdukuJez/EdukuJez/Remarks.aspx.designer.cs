@@ -11,7 +11,7 @@ namespace EdukuJez
 {
 
 
-    public partial class GroupsManagement
+    public partial class Remark
     {
 
         /// <summary>
@@ -33,13 +33,13 @@ namespace EdukuJez
         protected global::System.Web.UI.WebControls.Button x;
 
         /// <summary>
-        /// Kontrolka MainInfoLabel.
+        /// Kontrolka TeachersPanel.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label MainInfoLabel;
+        protected global::System.Web.UI.WebControls.Panel TeachersPanel;
 
         /// <summary>
         /// Kontrolka LabelsPanel.
@@ -51,112 +51,85 @@ namespace EdukuJez
         protected global::System.Web.UI.WebControls.Panel LabelsPanel;
 
         /// <summary>
-        /// Kontrolka NameLabel.
+        /// Kontrolka StudentGroupLabel.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label NameLabel;
+        protected global::System.Web.UI.WebControls.Label StudentGroupLabel;
 
         /// <summary>
-        /// Kontrolka MainGroupLabel.
+        /// Kontrolka StudentLabel.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label MainGroupLabel;
+        protected global::System.Web.UI.WebControls.Label StudentLabel;
 
         /// <summary>
-        /// Kontrolka EducatorLabel.
+        /// Kontrolka ListsPanel.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label EducatorLabel;
+        protected global::System.Web.UI.WebControls.Panel ListsPanel;
 
         /// <summary>
-        /// Kontrolka TextBoxesPanel.
+        /// Kontrolka StudentsGroupsList.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel TextBoxesPanel;
+        protected global::System.Web.UI.WebControls.DropDownList StudentsGroupsList;
 
         /// <summary>
-        /// Kontrolka NewGroupTextBox.
+        /// Kontrolka StudentsList.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox NewGroupTextBox;
+        protected global::System.Web.UI.WebControls.DropDownList StudentsList;
 
         /// <summary>
-        /// Kontrolka MainGroupList.
+        /// Kontrolka InfoLabel.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList MainGroupList;
+        protected global::System.Web.UI.WebControls.Label InfoLabel;
 
         /// <summary>
-        /// Kontrolka TeachersList.
+        /// Kontrolka NewRemarkTextBox.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList TeachersList;
+        protected global::System.Web.UI.WebControls.TextBox NewRemarkTextBox;
 
         /// <summary>
-        /// Kontrolka AddNewGroupButton.
+        /// Kontrolka AddNewRemarkButton.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AddNewGroupButton;
+        protected global::System.Web.UI.WebControls.Button AddNewRemarkButton;
 
         /// <summary>
-        /// Kontrolka EditGroupButton.
+        /// Kontrolka StudentsPanel.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button EditGroupButton;
-
-        /// <summary>
-        /// Kontrolka DeleteGroupButton.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button DeleteGroupButton;
-
-        /// <summary>
-        /// Kontrolka RestartButton.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button RestartButton;
-
-        /// <summary>
-        /// Kontrolka ConfirmDeleteButton.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ConfirmDeleteButton;
+        protected global::System.Web.UI.WebControls.Panel StudentsPanel;
 
         /// <summary>
         /// Kontrolka myRepeater.
