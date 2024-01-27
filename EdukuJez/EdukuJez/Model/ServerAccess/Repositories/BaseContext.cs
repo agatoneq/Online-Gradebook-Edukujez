@@ -10,19 +10,22 @@ namespace EdukuJez.Repositories
     public class BaseContext : DbContext 
     {
         static BaseContext _instance;
+        public DbSet<Activity> Activities { get; set; }
+        public DbSet<Attachment> Attachments { get; set; }
+        public DbSet<Attendance> Attendances { get; set; }
+        public DbSet<Calendar> Calendar { get; set; }
         public DbSet<ClassC> Classes { get; set; }
+        public DbSet<ClassUsers> ClassUsers { get; set; }
         public DbSet<Grade> Grades { get; set; }
+        public DbSet<GradeFormula> GradeFormulas { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<GroupUser> GroupUsers { get; set; }
-        public DbSet<ClassUsers> ClassUsers { get; set; }
-        public DbSet<Subject> Subjects { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<Activity> Activities { get; set; }
-        public DbSet<Calendar> Calendar { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<MessageGroups> MessageGroups { get; set; }
         public DbSet<MessageUsers> MessageUsers { get; set; }
-        public DbSet<Remark> Remark { get; set; }
+        public DbSet<Remark> Remarks { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
+        public DbSet<User> Users { get; set; }
         public static BaseContext GetContext()
         {
             if (_instance == null)
@@ -47,10 +50,6 @@ namespace EdukuJez.Repositories
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<User>()
-                .HasOne(u => u.Post)
-                .WithOne(p => p.User)
-                .HasForeignKey<Post>(p => p.Id);
 
             modelBuilder.Entity<User>()
                 .HasIndex(u => u.UserLogin)
@@ -95,6 +94,11 @@ namespace EdukuJez.Repositories
                 .WithMany(g => g.SubmittedRemarks)
                 .HasForeignKey(s => s.SubmitterId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<GradeFormula>()
+                .HasOne(u => u.Activity)
+                .WithOne(p => p.formula)
+                .HasForeignKey<Activity>(p => p.Id);
         }
     }
 }

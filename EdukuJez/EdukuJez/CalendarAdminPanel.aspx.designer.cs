@@ -11,97 +11,70 @@ namespace EdukuJez
 {
 
 
-    public partial class SiteMaster
+    public partial class CalendarAdminPanel
     {
 
         /// <summary>
-        /// Kontrolka ImageButton1.
+        /// Kontrolka ListBoxAllDates.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton1;
+        protected global::System.Web.UI.WebControls.ListBox ListBoxAllDates;
 
         /// <summary>
-        /// Kontrolka ContentPlaceHolderNav.
+        /// Kontrolka TextBoxDate.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderNav;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxDate;
 
         /// <summary>
-        /// Kontrolka ProfilePanel.
+        /// Kontrolka TextBoxDescription.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel ProfilePanel;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxDescription;
 
         /// <summary>
-        /// Kontrolka ProfileNameLabel.
+        /// Kontrolka ButtonAdd.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ProfileNameLabel;
+        protected global::System.Web.UI.WebControls.Button ButtonAdd;
 
         /// <summary>
-        /// Kontrolka ProfileSurnameLabel.
+        /// Kontrolka ButtonEdit.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ProfileSurnameLabel;
+        protected global::System.Web.UI.WebControls.Button ButtonEdit;
 
         /// <summary>
-        /// Kontrolka LogoutButton.
+        /// Kontrolka ButtonDelete.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LogoutButton;
+        protected global::System.Web.UI.WebControls.Button ButtonDelete;
 
         /// <summary>
-        /// Kontrolka ChangePasswordButton.
+        /// Kontrolka LabelInfo.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton ChangePasswordButton;
-
-        /// <summary>
-        /// Kontrolka ChildrenDropDownList.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ChildrenDropDownList;
-
-        /// <summary>
-        /// Kontrolka ChildButton.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ChildButton;
-
-        /// <summary>
-        /// Kontrolka MainContent.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.Label LabelInfo;
     }
 }

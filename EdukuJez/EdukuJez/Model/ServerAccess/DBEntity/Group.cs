@@ -19,7 +19,7 @@ namespace EdukuJez.Repositories
         public ICollection<GroupUser> Users { get; set; } = new List<GroupUser>();
         public ICollection<ClassC> Classes { get; set; } = new List<ClassC>();
         public ICollection<MessageGroups> Messages { get; set; } = new List<MessageGroups>();
-        
+
         public bool IsNameValid(string name)
         {
             Regex reg = new Regex(@"^[a-zA-Z][\w\s]{2,29}$");

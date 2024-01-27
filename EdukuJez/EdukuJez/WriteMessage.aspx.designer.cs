@@ -11,106 +11,115 @@ namespace EdukuJez
 {
 
 
-    public partial class SubjectAddAdminPanel
+    public partial class WriteMessage
     {
 
         /// <summary>
-        /// Kontrolka LabelSubjectName.
+        /// Kontrolka UpdatePanel1.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelSubjectName;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
 
         /// <summary>
-        /// Kontrolka TextBoxSubjectName.
+        /// Kontrolka LabelsPanel.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxSubjectName;
+        protected global::System.Web.UI.WebControls.Panel LabelsPanel;
 
         /// <summary>
-        /// Kontrolka LabelDescription.
+        /// Kontrolka Label1.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelDescription;
+        protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// Kontrolka TextBoxSubjectDescription.
+        /// Kontrolka Label2.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxSubjectDescription;
+        protected global::System.Web.UI.WebControls.Label Label2;
 
         /// <summary>
-        /// Kontrolka LabelStudentsGroup.
+        /// Kontrolka Label3.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelStudentsGroup;
+        protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
-        /// Kontrolka DropDownListStudents.
+        /// Kontrolka TextBoxesPanel.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListStudents;
+        protected global::System.Web.UI.WebControls.Panel TextBoxesPanel;
 
         /// <summary>
-        /// Kontrolka LabelTeachersGroup.
+        /// Kontrolka NameBox.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelTeachersGroup;
+        protected global::System.Web.UI.WebControls.TextBox NameBox;
 
         /// <summary>
-        /// Kontrolka DropDownListTeachers.
+        /// Kontrolka DropDownList.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListTeachers;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList;
 
         /// <summary>
-        /// Kontrolka ButtonSubjectAccept.
+        /// Kontrolka TopicBox.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonSubjectAccept;
+        protected global::System.Web.UI.WebControls.TextBox TopicBox;
 
         /// <summary>
-        /// Kontrolka ButtonSubjectCancel.
+        /// Kontrolka MessageBox.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonSubjectCancel;
+        protected global::System.Web.UI.WebControls.TextBox MessageBox;
 
         /// <summary>
-        /// Kontrolka LabelInfo.
+        /// Kontrolka SubmitButton.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelInfo;
+        protected global::System.Web.UI.WebControls.Button SubmitButton;
+
+        /// <summary>
+        /// Kontrolka InfoLabel.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label InfoLabel;
     }
 }
