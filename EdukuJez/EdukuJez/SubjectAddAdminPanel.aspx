@@ -27,6 +27,7 @@
     <br />
     <p align="center">
         <asp:Button ID="ButtonSubjectAccept"  runat="server" Text="Dodaj przedmiot" OnClick="ButtonSubjectAccept_Click" Style="width: 200px; height: 40px; font-size: 20px;" />
+        <asp:Button ID="ButtonSubjectCancel"  runat="server" Text="Anuluj" OnClick="ButtonSubjectCancel_Click" Style="width: 200px; height: 40px; font-size: 20px;" />
     </p>
             <div style="margin-top: 20px; width: 2000px; text-align: center;">
             <asp:Label ID="LabelInfo" runat="server" Text="Label" Visible="False" Font-Size="24px" ForeColor="#CC0000"></asp:Label>

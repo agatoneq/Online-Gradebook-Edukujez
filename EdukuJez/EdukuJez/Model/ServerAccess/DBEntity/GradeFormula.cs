@@ -5,9 +5,9 @@ using System.Web;
 
 namespace EdukuJez.Repositories
 {
-    public class MessageGroups : EntityBase
+    public class GradeFormula : EntityBase
     {
-        public Message Message { get; set; }
-        public Group Group { get; set; }
+        public string Formula { get; set; }
+        public Activity Activity { get; set; }
     }
 }

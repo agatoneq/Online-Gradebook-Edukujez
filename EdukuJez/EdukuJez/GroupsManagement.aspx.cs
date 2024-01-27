@@ -20,6 +20,9 @@ namespace EdukuJez
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (UserSession.CheckPermission(UserSession.ADMIN_GROUP) == false)
+                UserSession.ChangeSiteNoPermission(this, "Main.aspx");
+
             if (!IsPostBack)
             {
                 //List<Group> groups = groupRepo.Table.ToList();

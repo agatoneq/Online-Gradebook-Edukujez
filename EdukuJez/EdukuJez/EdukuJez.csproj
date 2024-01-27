@@ -239,6 +239,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdminPanel.aspx" />
+    <Content Include="CalendarAdminPanel.aspx" />
     <Content Include="ChangingPassword.aspx" />
     <Content Include="Content\LessonPlan.css" />
     <Content Include="Content\Main.css" />
@@ -254,6 +255,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="AccountsManagement.aspx" />
+    <Content Include="Calendar.aspx" />
+    <Content Include="PostOffice.aspx" />
+    <Content Include="ReadMessage.aspx" />
+    <Content Include="SubjectAddAdminPanel.aspx" />
+    <Content Include="SubjectPage.aspx" />
+    <Content Include="WriteMessage.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Grades.aspx" />
     <Content Include="GroupsManagement.aspx" />
@@ -270,7 +277,6 @@
     <Content Include="Imgs\Timetable_Management_Page_Title.png" />
     <Content Include="LessonPlan.aspx" />
     <Content Include="Main.aspx" />
-    <Content Include="Remarks.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -316,6 +322,13 @@
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="CalendarAdminPanel.aspx.cs">
+      <DependentUpon>CalendarAdminPanel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CalendarAdminPanel.aspx.designer.cs">
+      <DependentUpon>CalendarAdminPanel.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ChangingPassword.aspx.cs">
       <DependentUpon>ChangingPassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -354,6 +367,13 @@
     <Compile Include="GroupsManagement.aspx.designer.cs">
       <DependentUpon>GroupsManagement.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Calendar.aspx.cs">
+      <DependentUpon>Calendar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Calendar.aspx.designer.cs">
+      <DependentUpon>Calendar.aspx</DependentUpon>
+    </Compile>
     <Compile Include="LessonPlan.aspx.cs">
       <DependentUpon>LessonPlan.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -368,17 +388,9 @@
     <Compile Include="Main.aspx.designer.cs">
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20240104205342_NewInitial.cs" />
-    <Compile Include="Migrations\20240104205342_NewInitial.designer.cs">
-      <DependentUpon>20240104205342_NewInitial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20240117171257_gradetoTeacher.cs" />
-    <Compile Include="Migrations\20240117171257_gradetoTeacher.designer.cs">
-      <DependentUpon>20240117171257_gradetoTeacher.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20240117180121_Remarks.cs" />
-    <Compile Include="Migrations\20240117180121_Remarks.designer.cs">
-      <DependentUpon>20240117180121_Remarks.cs</DependentUpon>
+    <Compile Include="Migrations\20240121191957_GradeFormula.cs" />
+    <Compile Include="Migrations\20240121191957_GradeFormula.designer.cs">
+      <DependentUpon>20240121191957_GradeFormula.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\BaseContextModelSnapshot.cs" />
     <Compile Include="Model\Main\PanelFactory.cs" />
@@ -389,6 +401,7 @@
     <Compile Include="Model\ServerAccess\DBEntity\EntityBase.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\ClassC.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\Grade.cs" />
+    <Compile Include="Model\ServerAccess\DBEntity\GradeFormula.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\Group.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\GroupUser.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\Message.cs" />
@@ -399,14 +412,18 @@
     <Compile Include="Model\ServerAccess\DBEntity\Subject.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\SubjView.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\User.cs" />
-    <Compile Include="Model\ServerAccess\IRestricted.cs" />
     <Compile Include="Model\ServerAccess\Repositories\ActivitiesRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\BaseContext.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\CalendarRepository.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\ClassUsersRepository.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\MessageGroupsRepository.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\MessageRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\GradesRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\GroupsRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\ARepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\GroupUsersRepository.cs" />
-    <Compile Include="Model\ServerAccess\Repositories\RemarkRepository.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\MessageUsersRepository.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\PostRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\ScheduleRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\SubjectsRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\SubjViewRepository.cs" />
@@ -414,13 +431,6 @@
     <Compile Include="Model\ServerAccess\ServerClient.cs" />
     <Compile Include="Model\ServerAccess\UserSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Remarks.aspx.cs">
-      <DependentUpon>Remarks.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Remarks.aspx.designer.cs">
-      <DependentUpon>Remarks.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -435,12 +445,26 @@
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
+    <Compile Include="SubjectAddAdminPanel.aspx.cs">
+      <DependentUpon>SubjectAddAdminPanel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SubjectAddAdminPanel.aspx.designer.cs">
+      <DependentUpon>SubjectAddAdminPanel.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SubjectAdminPanel.aspx.cs">
       <DependentUpon>SubjectAdminPanel.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="SubjectAdminPanel.aspx.designer.cs">
       <DependentUpon>SubjectAdminPanel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SubjectPage.aspx.cs">
+      <DependentUpon>SubjectPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SubjectPage.aspx.designer.cs">
+      <DependentUpon>SubjectPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
@@ -455,6 +479,27 @@
     </Compile>
     <Compile Include="AccountsManagement.aspx.designer.cs">
       <DependentUpon>AccountsManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PostOffice.aspx.cs">
+      <DependentUpon>PostOffice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PostOffice.aspx.designer.cs">
+      <DependentUpon>PostOffice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReadMessage.aspx.cs">
+      <DependentUpon>ReadMessage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReadMessage.aspx.designer.cs">
+      <DependentUpon>ReadMessage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WriteMessage.aspx.cs">
+      <DependentUpon>WriteMessage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WriteMessage.aspx.designer.cs">
+      <DependentUpon>WriteMessage.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

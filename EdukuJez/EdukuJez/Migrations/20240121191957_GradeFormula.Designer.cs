@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EdukuJez.Migrations
 {
     [DbContext(typeof(BaseContext))]
-    [Migration("20240117180121_Remarks")]
-    partial class Remarks
+    [Migration("20240121191957_GradeFormula")]
+    partial class GradeFormula
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,9 +24,7 @@ namespace EdukuJez.Migrations
             modelBuilder.Entity("EdukuJez.Repositories.Activity", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -150,6 +148,21 @@ namespace EdukuJez.Migrations
                     b.ToTable("Grades");
                 });
 
+            modelBuilder.Entity("EdukuJez.Repositories.GradeFormula", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Formula")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GradeFormulas");
+                });
+
             modelBuilder.Entity("EdukuJez.Repositories.Group", b =>
                 {
                     b.Property<int>("Id")
@@ -237,16 +250,11 @@ namespace EdukuJez.Migrations
                     b.Property<int?>("MessageId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("GroupId");
 
                     b.HasIndex("MessageId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("MessageGroups");
                 });
@@ -288,7 +296,7 @@ namespace EdukuJez.Migrations
 
                     b.HasIndex("MessageId");
 
-                    b.ToTable("Post");
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("EdukuJez.Repositories.Remark", b =>
@@ -313,7 +321,7 @@ namespace EdukuJez.Migrations
 
                     b.HasIndex("SubmitterId");
 
-                    b.ToTable("Remark");
+                    b.ToTable("Remarks");
                 });
 
             modelBuilder.Entity("EdukuJez.Repositories.Subject", b =>
@@ -378,6 +386,15 @@ namespace EdukuJez.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("EdukuJez.Repositories.Activity", b =>
+                {
+                    b.HasOne("EdukuJez.Repositories.GradeFormula", "formula")
+                        .WithOne("Activity")
+                        .HasForeignKey("EdukuJez.Repositories.Activity", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("EdukuJez.Repositories.ClassC", b =>
@@ -454,23 +471,19 @@ namespace EdukuJez.Migrations
             modelBuilder.Entity("EdukuJez.Repositories.Message", b =>
                 {
                     b.HasOne("EdukuJez.Repositories.User", "Sender")
-                        .WithMany()
+                        .WithMany("Sends")
                         .HasForeignKey("SenderId");
                 });
 
             modelBuilder.Entity("EdukuJez.Repositories.MessageGroups", b =>
                 {
-                    b.HasOne("EdukuJez.Repositories.Group", null)
+                    b.HasOne("EdukuJez.Repositories.Group", "Group")
                         .WithMany("Messages")
                         .HasForeignKey("GroupId");
 
                     b.HasOne("EdukuJez.Repositories.Message", "Message")
                         .WithMany("GroupRecipients")
                         .HasForeignKey("MessageId");
-
-                    b.HasOne("EdukuJez.Repositories.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("EdukuJez.Repositories.MessageUsers", b =>
@@ -480,7 +493,7 @@ namespace EdukuJez.Migrations
                         .HasForeignKey("MessageId");
 
                     b.HasOne("EdukuJez.Repositories.User", "User")
-                        .WithMany("Messages")
+                        .WithMany("MessagesUsers")
                         .HasForeignKey("UserId");
                 });
 
