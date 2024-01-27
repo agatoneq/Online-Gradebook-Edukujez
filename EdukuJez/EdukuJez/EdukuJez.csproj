@@ -258,6 +258,8 @@
     <Content Include="Calendar.aspx" />
     <Content Include="PostOffice.aspx" />
     <Content Include="ReadMessage.aspx" />
+    <Content Include="SubjectAddAdminPanel.aspx" />
+    <Content Include="SubjectPage.aspx" />
     <Content Include="WriteMessage.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Grades.aspx" />
@@ -410,10 +412,10 @@
     <Compile Include="Model\ServerAccess\DBEntity\Subject.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\SubjView.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\User.cs" />
-    <Compile Include="Model\ServerAccess\IRestricted.cs" />
     <Compile Include="Model\ServerAccess\Repositories\ActivitiesRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\BaseContext.cs" />
     <Compile Include="Model\ServerAccess\Repositories\CalendarRepository.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\ClassUsersRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\MessageGroupsRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\MessageRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\GradesRepository.cs" />
@@ -443,12 +445,26 @@
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
+    <Compile Include="SubjectAddAdminPanel.aspx.cs">
+      <DependentUpon>SubjectAddAdminPanel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SubjectAddAdminPanel.aspx.designer.cs">
+      <DependentUpon>SubjectAddAdminPanel.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SubjectAdminPanel.aspx.cs">
       <DependentUpon>SubjectAdminPanel.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="SubjectAdminPanel.aspx.designer.cs">
       <DependentUpon>SubjectAdminPanel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SubjectPage.aspx.cs">
+      <DependentUpon>SubjectPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SubjectPage.aspx.designer.cs">
+      <DependentUpon>SubjectPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

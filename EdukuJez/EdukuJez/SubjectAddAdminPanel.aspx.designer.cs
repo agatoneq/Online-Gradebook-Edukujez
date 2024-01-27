@@ -96,6 +96,15 @@ namespace EdukuJez
         protected global::System.Web.UI.WebControls.Button ButtonSubjectAccept;
 
         /// <summary>
+        /// Kontrolka ButtonSubjectCancel.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonSubjectCancel;
+
+        /// <summary>
         /// Kontrolka LabelInfo.
         /// </summary>
         /// <remarks>

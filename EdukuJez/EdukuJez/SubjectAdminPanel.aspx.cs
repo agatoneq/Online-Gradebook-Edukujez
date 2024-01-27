@@ -14,9 +14,6 @@ namespace EdukuJez
     {
         protected void Page_load(object sender, EventArgs e)
         {
-            //sprawdzanie czy uzytkownik ma uprawnienia admina - jeszcze nie działa
-            //if (UserSession.GetSession().user.Groups.Any(x => x.Group.Name == "Administratorzy"))
-            {
                 if (!IsPostBack)
                 {
                     var repoS = new SubjectsRepository();
@@ -29,12 +26,6 @@ namespace EdukuJez
                     ButtonEdit.Visible = true;
                     ButtonDelete.Visible = true;
                 }
-            }
-            //else
-           {
-                LabelInfo.Text = "Brak dostępu do zawartości strony";
-                LabelInfo.Visible = true;
-           }
         }
 
         protected void ButtonAdd_Click(object sender, EventArgs e)
