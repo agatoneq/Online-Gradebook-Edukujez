@@ -110,14 +110,13 @@ namespace EdukuJez
             ClassC query = scheduleRepo.Table.Include(x=>x.Users)
                 .FirstOrDefault(x => x.Hour == godzina && x.Day == dzien && x.Warden.UserName == parts[0] && x.Warden.UserSurname == parts[1] && x.Class == classRoom);
 
-            var CU = query.Users.ToList();
-            foreach(var users in CU)
-            {
-                CURepo.Delete(users);   
-            }
-            scheduleRepo.Update();
-
             scheduleRepo.Delete(query);
+
+            var CU = query.Users.ToList();
+            foreach (var users in CU)
+            {
+                CURepo.Delete(users);
+            }
             ReloadData();
         }
 
@@ -283,15 +282,15 @@ namespace EdukuJez
         private void ReloadData()
         {
 
-        DropDownListTeacher.Items.Clear();
-            DropDownListGroup.Items.Clear();    
-        DropDownListSubject.Items.Clear();
+        DropDownListTeacher?.Items.Clear();
+            DropDownListGroup?.Items.Clear();    
+        DropDownListSubject?.Items.Clear();
 
 
             var subList = subjRepo.Table.ToList();
             var groupList = groupRepo.Table.ToList();
             List<GroupUser> groupUserList = groupUserRepo.Table.Include(u => u.User).Include(g => g.Group).ToList();
-            var userList = groupUserList.Where(x => x.Group != null && x.Group.Id == 2 && x.User != null).Select(x => x.User).ToList(); ;
+            var userList = groupUserList.Where(x => x.Group != null && x.Group.Name == UserSession.TEACHER_GROUP && x.User != null).Select(x => x.User).ToList(); ;
             var lessonPlan = scheduleRepo.Table.Include(u => u.Group).Include(u => u.Warden).Include(u => u.Subject).ToList();
 
             LoadToChose(groupList, subList, userList, lessonPlan);
