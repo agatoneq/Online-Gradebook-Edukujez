@@ -13,6 +13,7 @@ namespace EdukuJez
     public partial class SiteMaster : MasterPage
     {
         const String LOGIN_SITE = "Default.aspx";
+        const String MAIN_SITE = "Main.aspx";
         public UsersRepository userRepo = new UsersRepository();
         public GroupUsersRepository grUsRepo = new GroupUsersRepository();
         public GroupsRepository groupRepo = new GroupsRepository();
@@ -107,6 +108,11 @@ namespace EdukuJez
                 }
             }
 
+        }
+
+        protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect(MAIN_SITE);
         }
     }
 }

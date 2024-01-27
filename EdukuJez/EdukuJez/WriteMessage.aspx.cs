@@ -14,7 +14,6 @@ namespace EdukuJez
     {
         private MessageUsersRepository MURepo = new MessageUsersRepository();
         private MessageRepository messageRepo = new MessageRepository();
-        private PostRepository postRepo = new PostRepository();
         private MessageGroupsRepository MGRepo = new MessageGroupsRepository();
         private UsersRepository userRepo = new UsersRepository();
         private GroupsRepository groupRepo = new GroupsRepository();

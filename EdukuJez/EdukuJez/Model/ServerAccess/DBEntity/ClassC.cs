@@ -9,6 +9,7 @@ namespace EdukuJez.Repositories
     {
         public Subject Subject { get; set; }
         public ICollection<ClassUsers> Users { get; set; } = new List<ClassUsers>();
+        public ICollection<Attendance> Attendances { get; set; } = new List<Attendance>();
         public Group Group { get; set; }
         public User Warden { get; set; }
         public int Class { get; set; }

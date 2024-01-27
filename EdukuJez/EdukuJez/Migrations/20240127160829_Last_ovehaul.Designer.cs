@@ -4,14 +4,16 @@ using EdukuJez.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EdukuJez.Migrations
 {
     [DbContext(typeof(BaseContext))]
-    partial class BaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240127160829_Last_ovehaul")]
+    partial class Last_ovehaul
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,35 +68,7 @@ namespace EdukuJez.Migrations
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("Attachments");
-                });
-
-            modelBuilder.Entity("EdukuJez.Repositories.Attendance", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("ClassId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Presence")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("StudentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClassId");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("Attendances");
+                    b.ToTable("Attachment");
                 });
 
             modelBuilder.Entity("EdukuJez.Repositories.Calendar", b =>
@@ -457,17 +431,6 @@ namespace EdukuJez.Migrations
                     b.HasOne("EdukuJez.Repositories.Subject", "Subject")
                         .WithMany("Attachments")
                         .HasForeignKey("SubjectId");
-                });
-
-            modelBuilder.Entity("EdukuJez.Repositories.Attendance", b =>
-                {
-                    b.HasOne("EdukuJez.Repositories.ClassC", "Class")
-                        .WithMany("Attendances")
-                        .HasForeignKey("ClassId");
-
-                    b.HasOne("EdukuJez.Repositories.User", "Student")
-                        .WithMany("Attendance")
-                        .HasForeignKey("StudentId");
                 });
 
             modelBuilder.Entity("EdukuJez.Repositories.ClassC", b =>

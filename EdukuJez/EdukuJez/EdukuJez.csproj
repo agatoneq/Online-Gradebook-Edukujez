@@ -392,10 +392,20 @@
     <Compile Include="Migrations\20240121191957_GradeFormula.designer.cs">
       <DependentUpon>20240121191957_GradeFormula.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20240127160829_Last_ovehaul.cs" />
+    <Compile Include="Migrations\20240127160829_Last_ovehaul.designer.cs">
+      <DependentUpon>20240127160829_Last_ovehaul.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20240127161406_Last_overhaul2.cs" />
+    <Compile Include="Migrations\20240127161406_Last_overhaul2.designer.cs">
+      <DependentUpon>20240127161406_Last_overhaul2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\BaseContextModelSnapshot.cs" />
     <Compile Include="Model\Main\PanelFactory.cs" />
     <Compile Include="Model\Main\TablePanel.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\Activity.cs" />
+    <Compile Include="Model\ServerAccess\DBEntity\Attachment.cs" />
+    <Compile Include="Model\ServerAccess\DBEntity\Attendance.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\Calendar.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\ClassUsers.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\EntityBase.cs" />
@@ -407,7 +417,6 @@
     <Compile Include="Model\ServerAccess\DBEntity\Message.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\MessageGroups.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\MessageUsers.cs" />
-    <Compile Include="Model\ServerAccess\DBEntity\Post.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\Remark.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\Subject.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\SubjView.cs" />
@@ -423,7 +432,6 @@
     <Compile Include="Model\ServerAccess\Repositories\ARepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\GroupUsersRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\MessageUsersRepository.cs" />
-    <Compile Include="Model\ServerAccess\Repositories\PostRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\ScheduleRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\SubjectsRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\SubjViewRepository.cs" />
