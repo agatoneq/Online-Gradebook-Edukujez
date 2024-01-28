@@ -240,7 +240,9 @@
   <ItemGroup>
     <Content Include="AdminPanel.aspx" />
     <Content Include="CalendarAdminPanel.aspx" />
+    <Content Include="Calendars.aspx" />
     <Content Include="ChangingPassword.aspx" />
+    <Content Include="ChildForParent.aspx" />
     <Content Include="Content\LessonPlan.css" />
     <Content Include="Content\Main.css" />
     <Content Include="Content\Site.css" />
@@ -256,7 +258,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="AccountsManagement.aspx" />
-    <Content Include="Calendar.aspx" />
     <Content Include="PostOffice.aspx" />
     <Content Include="ReadMessage.aspx" />
     <Content Include="Remarks.aspx" />
@@ -331,6 +332,13 @@
     <Compile Include="CalendarAdminPanel.aspx.designer.cs">
       <DependentUpon>CalendarAdminPanel.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Calendars.aspx.cs">
+      <DependentUpon>Calendars.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Calendars.aspx.designer.cs">
+      <DependentUpon>Calendars.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ChangingPassword.aspx.cs">
       <DependentUpon>ChangingPassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -338,6 +346,14 @@
     <Compile Include="ChangingPassword.aspx.designer.cs">
       <DependentUpon>ChangingPassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ChildForParent.aspx.cs">
+      <DependentUpon>ChildForParent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ChildForParent.aspx.designer.cs">
+      <DependentUpon>ChildForParent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ServerAccess\Repositories\AttendancesRepository.cs" />
     <Compile Include="SubjectContentPage.aspx.cs">
       <DependentUpon>SubjectContentPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -375,13 +391,6 @@
     </Compile>
     <Compile Include="GroupsManagement.aspx.designer.cs">
       <DependentUpon>GroupsManagement.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Calendar.aspx.cs">
-      <DependentUpon>Calendar.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Calendar.aspx.designer.cs">
-      <DependentUpon>Calendar.aspx</DependentUpon>
     </Compile>
     <Compile Include="LessonPlan.aspx.cs">
       <DependentUpon>LessonPlan.aspx</DependentUpon>
