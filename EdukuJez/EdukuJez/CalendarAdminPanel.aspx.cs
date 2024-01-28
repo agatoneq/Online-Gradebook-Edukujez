@@ -116,8 +116,11 @@ namespace EdukuJez
         {
             // Pobierz dane z kalendarza i przypisz do ListBox
             var calendarE = Calend.Table.OrderBy(a => a.Date).ToList();
-            ListBoxAllDates.DataSource = calendarE;
-            ListBoxAllDates.DataTextField = "Date"; // Dostosuj do rzeczywistej właściwości daty
+
+            // Przygotuj listę niestandardowych ciągów do wyświetlenia w ListBoxie
+            var listBoxItems = calendarE.Select(a => $"{a.Date.ToString("dd-MM-yyyy")} : {a.Desc}").ToList();
+
+            ListBoxAllDates.DataSource = listBoxItems;
             ListBoxAllDates.DataBind();
         }
     }

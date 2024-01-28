@@ -10,6 +10,10 @@
     </div>
     
         <div style="margin-top: 20px; width: 2000px;">
+
+
+
+
              <asp:Panel ID="TeachersPanel" runat="server">
             <asp:Panel ID="LabelsPanel" runat="server" Style="display: inline-block;">
                 <asp:Label ID="StudentGroupLabel" runat="server" Text="Wybierz klasę:" Font-Size="24px" Style="display: block; margin-bottom: 10px;"></asp:Label>
@@ -23,11 +27,14 @@
             <br/>
             <asp:Label ID="InfoLabel" runat="server" Text="Wpisz uwagę:" Font-Size="24px" Style="display: block; margin-bottom: 10px;"></asp:Label>
               <br/>
-             <asp:TextBox ID="NewRemarkTextBox" runat="server" Style="display: block; margin-bottom: 10px; width: 250px; height: 25px; font-size: 16px;" AutoPostBack="true"></asp:TextBox>
+             <asp:TextBox ID="NewRemarkTextBox" runat="server" Style="margin-bottom: 10px; width: 500px; height: 150px; font-size: 16px;" AutoPostBack="true" OnTextChanged="NewRemarkBoxChanged" TextMode="MultiLine"></asp:TextBox>
             <br/>
             <asp:Button  ID="AddNewRemarkButton" runat="server" Text="Wstaw uwagę" Style="width: 150px; height: 40px; font-size: 20px;" Enabled="False" OnClick="AddNewRemarkButton_Click"/>
           
     </asp:Panel>
+
+
+
 
                          <asp:Panel ID="StudentsPanel" runat="server">
 <asp:Repeater ID="myRepeater" runat="server">
