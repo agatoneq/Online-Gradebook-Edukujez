@@ -25,6 +25,13 @@ namespace EdukuJez
                 
             }
             SubjectNameLabel.Text = presentedSubject.SubjectName;
+            var a = new Attachment() {Name="Łubudubu" };
+            var p = PanelFactory.MakeAttachmentListPanel(this.ShowAttachment, a);
+            AttachmentTable.Rows.Add(p.ConvertToRow());
+        }
+        protected void ShowAttachment(object sender, EventArgs e)
+        {
+            var a = sender;
         }
     }
 }

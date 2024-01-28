@@ -32,12 +32,12 @@
     height: 100px;
 }
 .profile-label {
-    width:100px;
-    font:18pt;
-    text-align:center;
-    color:black;
-    padding:15px;
-    margin-top:20px;
+    width: 100px;
+    font: 18pt;
+    text-align: center;
+    color: black;
+    padding: 2px 15px;
+    margin-top: 20px;
 }
 .logo {
     height: 100px;

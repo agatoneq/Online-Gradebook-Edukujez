@@ -26,6 +26,7 @@ namespace EdukuJez.Repositories
         public DbSet<Remark> Remark { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<UserParent> UserParents { get; set; }
         public static BaseContext GetContext()
         {
             if (_instance == null)
@@ -99,6 +100,18 @@ namespace EdukuJez.Repositories
                 .HasOne(u => u.Activity)
                 .WithOne(p => p.formula)
                 .HasForeignKey<Activity>(p => p.Id);
+
+            modelBuilder.Entity<UserParent>()
+                .HasOne(s => s.Student)
+                .WithMany(g => g.Students)
+                .HasForeignKey(s => s.StudentId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<UserParent>()
+                .HasOne(s => s.Parent)
+                .WithMany(g => g.Parents)
+                .HasForeignKey(s => s.ParentId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

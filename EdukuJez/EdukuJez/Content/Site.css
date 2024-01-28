@@ -16,6 +16,7 @@ input,
 select,
 textarea {
     max-width: 280px;
+    margin-left: 0px;
 }
 div {
     padding-right: 15px;

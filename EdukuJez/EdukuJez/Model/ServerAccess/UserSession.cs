@@ -14,7 +14,7 @@ namespace EdukuJez
     public class UserSession
     {
         const String LOGIN_SITE = "Default.aspx";
-        const bool ALLOW_ALL_PER = true;        //zmienić na false żeby zabraniać uprawnienienia
+        const bool ALLOW_ALL_PER = false;        //zmienić na false żeby zabraniać uprawnienienia
         public const string PARENT_GROUP = "Rodzic";
         public const string ADMIN_GROUP = "Administrator";
         public const string TEACHER_GROUP = "Nauczyciel";

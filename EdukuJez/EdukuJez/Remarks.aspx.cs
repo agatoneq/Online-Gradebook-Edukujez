@@ -13,28 +13,48 @@ namespace EdukuJez
 {
     public partial class Remarks : System.Web.UI.Page
     {
-        private Remark newRemark = new Remark();
         readonly RemarkRepository remarkRepo = new RemarkRepository();
-        //public SubjectsRepository repoSubj = new SubjectsRepository();
-        //public SubjViewRepository View = new SubjViewRepository();
 
         readonly GroupsRepository groupsRepo = new GroupsRepository();
         readonly UsersRepository userRepo = new UsersRepository();
         readonly GroupUsersRepository groupUserRepo = new GroupUsersRepository();
+        User currentuser;
         String permission;
-        //User currentuser = UserSession.GetSession().user;
         List<Group> groups = new List<Group>();
         
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            currentuser = UserSession.GetSession().user;
+            if (UserSession.CheckPermission(UserSession.ADMIN_GROUP) == true || UserSession.CheckPermission(UserSession.TEACHER_GROUP) == true)
+                permission = "nauczyciel";
+            else
+                permission = "uczen";
+
+            switch (permission)
+            {
+                case "uczen":
+                    StudentsPanel.Visible = true;
+                    break;
+                case "nauczyciel":
+                    TeachersPanel.Visible = true;
+                    break;
+            }
+
             if (!IsPostBack)
             {
+                //nauczyciel
                 groups = groupsRepo.Table.ToList();
                 StudentsGroupsList.DataSource = groups.Where(x => x.ParentGroup != null).Select(x => x.Name);
                 StudentsGroupsList.DataBind();
 
                 UploadStudentsList(groups);
+
+                //uczeń
+                List<Remark> remarks = remarkRepo.Table.Include(s => s.Student).Include(su => su.Submitter).ToList();
+                var remarksList = remarks.Where(x => x.Student.Id == currentuser.Id);
+                myRepeater.DataSource = remarksList;
+                myRepeater.DataBind();
 
             }
         }
@@ -58,17 +78,14 @@ namespace EdukuJez
         protected void AddNewRemarkButton_Click(object sender, EventArgs e)
         {
             var Session = UserSession.GetSession();
-
+            Remark newRemark = new Remark();
             if (NewRemarkTextBox.Text != null)
             {
                 newRemark.Contents = NewRemarkTextBox.Text;
-                remarkRepo.Insert(newRemark);
 
-                //var teachersId = Session.UserId;
-                //var studentsFullName = StudentsList.SelectedValue;
-                //newRemark.Submitter = userRepo.Table.First(x => x.Id == teachersId);
-                //newRemark.Student = userRepo.Table.First(x => (x.UserName + " " + x.UserSurname) == studentsFullName);
-
+                userRepo.Table.FirstOrDefault(x => x.Id == currentuser.Id).SubmittedRemarks.Add(newRemark);
+                userRepo.Table.FirstOrDefault(x => (x.UserName + " " + x.UserSurname) == StudentsList.SelectedValue).Remarks.Add(newRemark);
+                userRepo.Update();
             }
         }
 

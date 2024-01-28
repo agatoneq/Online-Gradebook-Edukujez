@@ -242,6 +242,7 @@
     <Content Include="CalendarAdminPanel.aspx" />
     <Content Include="Calendars.aspx" />
     <Content Include="ChangingPassword.aspx" />
+    <Content Include="ChildForParent.aspx" />
     <Content Include="Content\LessonPlan.css" />
     <Content Include="Content\Main.css" />
     <Content Include="Content\Site.css" />
@@ -270,7 +271,6 @@
     <Content Include="Imgs\Admin_Page_Title.png" />
     <Content Include="Imgs\Arrow_left.png" />
     <Content Include="Imgs\Calendar_Management_Page_Title.png" />
-    <Content Include="Imgs\Groups_Management_Page_Title.png" />
     <Content Include="Imgs\Groups_Page_Title.png" />
     <Content Include="Imgs\Logo_PH.png" />
     <Content Include="Imgs\Main_Page_Title.png" />
@@ -345,7 +345,20 @@
     <Compile Include="ChangingPassword.aspx.designer.cs">
       <DependentUpon>ChangingPassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ChildForParent.aspx.cs">
+      <DependentUpon>ChildForParent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ChildForParent.aspx.designer.cs">
+      <DependentUpon>ChildForParent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20240128170711_parents.cs" />
+    <Compile Include="Migrations\20240128170711_parents.Designer.cs">
+      <DependentUpon>20240128170711_parents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ServerAccess\DBEntity\UserParent.cs" />
     <Compile Include="Model\ServerAccess\Repositories\AttendancesRepository.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\UserParentsRepository.cs" />
     <Compile Include="SubjectContentPage.aspx.cs">
       <DependentUpon>SubjectContentPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

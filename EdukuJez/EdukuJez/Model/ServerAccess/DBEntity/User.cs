@@ -33,6 +33,8 @@ namespace EdukuJez.Repositories
         public ICollection<Group> Educates { get; set; } = new List<Group>();
         public ICollection<Message> Sends { get; set; } = new List<Message>();
         public ICollection<Attendance> Attendance { get; set; } = new List<Attendance>();
+        public ICollection<UserParent> Students { get; set; } = new List<UserParent>();
+        public ICollection<UserParent> Parents { get; set; } = new List<UserParent>();
 
 
         public bool IsNameValid(string name)
