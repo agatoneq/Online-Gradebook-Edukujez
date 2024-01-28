@@ -51,22 +51,13 @@ namespace EdukuJez
         protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// Kontrolka LabelParent.
+        /// Kontrolka ButtonMarge.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelParent;
-
-        /// <summary>
-        /// Kontrolka LabelChild.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelChild;
+        protected global::System.Web.UI.WebControls.Button ButtonMarge;
 
         /// <summary>
         /// Kontrolka ButtonDestroy.

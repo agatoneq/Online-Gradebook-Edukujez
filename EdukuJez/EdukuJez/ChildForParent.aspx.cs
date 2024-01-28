@@ -1,4 +1,5 @@
-﻿using EdukuJez.Repositories;
+﻿using EdukuJez.Model.ServerAccess.Repositories;
+using EdukuJez.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,48 +14,43 @@ namespace EdukuJez
     {
         private UsersRepository userRepo = new UsersRepository();
         private GroupUsersRepository GURepo = new GroupUsersRepository();
-        private GroupsRepository groupRepo = new GroupsRepository();
+        private UserParentsRepository UPRepo = new UserParentsRepository();
 
         private int ParentId, ChildId; 
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            LoadData();
-        }
-
-
-        protected void SelectedName(object sender, EventArgs e)
-        {
-            string controlName="";
-            DropDownList dropdownList = sender as DropDownList;
-            if (dropdownList != null)
+            if (UserSession.CheckPermission(UserSession.ADMIN_GROUP) == false)
+                UserSession.ChangeSiteNoPermission(this, "Main.aspx");
+            if (!IsPostBack)
             {
-                controlName = dropdownList.ID; 
-            }
-
-            var CurrentId = int.Parse(dropdownList.SelectedValue);
-            User user = userRepo.Table.FirstOrDefault(x => x.Id == CurrentId);
-
-            if (controlName== "DropDownListParent")
-            {
-                LabelParent.Text = user.UserName +" "+user.UserSurname;
-                ParentId = user.Id; 
-            }
-            else
-            {
-                LabelChild.Text = user.UserName + " " + user.UserSurname;
-                ChildId = user.Id;
+                LoadData();
             }
         }
+
+
 
         protected void MargeChildToParent(object sender, EventArgs e)
         {
-           // var query = new 
+            var ParentId = int.Parse(DropDownListParent.SelectedValue);
+            var ChildId = int.Parse(DropDownListChild.SelectedValue);
+            var query = new UserParent();
+            userRepo.Table.FirstOrDefault(x => x.Id == ParentId).Parents.Add(query);
+            userRepo.Table.FirstOrDefault(x => x.Id == ChildId).Students.Add(query);
+
+            userRepo.Update();
         }
 
 
         protected void DestroyChildToParent(object sender, EventArgs e)
         {
+            var ParentId = int.Parse(DropDownListParent.SelectedValue);
+            var ChildId = int.Parse(DropDownListChild.SelectedValue);
+       
+           var del = UPRepo.Table.FirstOrDefault(x => x.ParentId == ParentId && x.StudentId==ChildId);
+
+
+            UPRepo.Delete(del);
 
         }
 
