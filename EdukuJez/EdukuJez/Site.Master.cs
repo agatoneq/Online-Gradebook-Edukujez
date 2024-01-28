@@ -37,93 +37,47 @@ namespace EdukuJez
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (UserSession.IsInSession())
             {
                 var session = UserSession.GetSession();
-                ShowUserProfile(session);
+                ProfilePanel.Visible = true;
+                ProfileNameLabel.Text = session.UserName;
+                ProfileSurnameLabel.Text = session.UserSurname;
 
-                if (IsParent(session))
+                // if (session.UserGroups.Any(x => x.Name == "Rodzice")) //jesli zalogowany jest rodzicem
                 {
-                    SetupChildrenDropdownList(session);
+                    if (Session["childrenList"] == null)
+                    {
+                        var group = session.user.Educates.FirstOrDefault(); //grupa ktora uczy zalogowany - na razie zwraca nulla
+                        group = new Group(); //tymczasowo - zmazac
+                        group.Id = 4; //tymczasowo - zmazac
+                        List<int> usersId = grUsRepo.Table.Where(g => g.Group.Id == group.Id).Select(g => g.User.Id).ToList(); //id uczniow z grupy
+                        children = userRepo.Table.Where(x => usersId.Contains(x.Id)).ToList();
+                        Session["childrenList"] = children;
+                        ChildrenDropDownList.Items.Add("Wybierz dziecko");
+                    }
+                    else
+                        children = (List<User>)Session["childrenList"];
+                    if (Session["checked_child"] == null)
+                        ChildrenDropDownList.Items.Add("Wybierz dziecko");
+                    foreach (var child in children) //dodanie dzieci do ChildrenDropDownList
+                    {
+                        ChildrenDropDownList.Items.Add(child.UserName);
+                    }
+                    if (!IsPostBack && Session["checked_child"] != null)
+                    {
+                        ChildrenDropDownList.SelectedValue = (String)Session["checked_child"];
+                    }
+                    ChildrenDropDownList.Visible = true; //pokaz liste dzieci
+                    ChildButton.Visible = true;
                 }
             }
             else
             {
-                HideUserProfile();
+                ProfilePanel.Visible = false;
+
             }
-        }
-
-        private void ShowUserProfile(UserSession session)
-        {
-            ProfilePanel.Visible = true;
-            ProfileNameLabel.Text = session.UserName;
-            ProfileSurnameLabel.Text = session.UserSurname;
-        }
-
-        private bool IsParent(UserSession session)
-        {
-            // Check if the user is a parent (modify this condition based on your actual logic)
-            return session.UserGroups.Any(x => x.Name == "Rodzice");
-        }
-
-        private void SetupChildrenDropdownList(UserSession session)
-        {
-            if (Session["childrenList"] == null)
-            {
-                InitializeChildrenList(session);
-            }
-            else
-            {
-                children = (List<User>)Session["childrenList"];
-            }
-
-            PopulateChildrenDropdownList();
-            SetSelectedChildDropdownValue();
-            ShowChildrenControls();
-        }
-
-        private void InitializeChildrenList(UserSession session)
-        {
-            var group = session.user.Educates.FirstOrDefault();
-            group = new Group(); // Temporary - remove this line
-            group.Id = 4; // Temporary - remove this line
-
-            List<int> usersId = grUsRepo.Table.Where(g => g.Group.Id == group.Id).Select(g => g.User.Id).ToList();
-            children = userRepo.Table.Where(x => usersId.Contains(x.Id)).ToList();
-            Session["childrenList"] = children;
-            ChildrenDropDownList.Items.Add("Wybierz dziecko");
-        }
-
-        private void PopulateChildrenDropdownList()
-        {
-            if (Session["checked_child"] == null)
-            {
-                ChildrenDropDownList.Items.Add("Wybierz dziecko");
-            }
-
-            foreach (var child in children)
-            {
-                ChildrenDropDownList.Items.Add(child.UserName);
-            }
-        }
-
-        private void SetSelectedChildDropdownValue()
-        {
-            if (!IsPostBack && Session["checked_child"] != null)
-            {
-                ChildrenDropDownList.SelectedValue = (string)Session["checked_child"];
-            }
-        }
-
-        private void ShowChildrenControls()
-        {
-            ChildrenDropDownList.Visible = true;
-            ChildButton.Visible = true;
-        }
-
-        private void HideUserProfile()
-        {
-            ProfilePanel.Visible = false;
         }
 
         protected void LogoutButton_Click(object sender, EventArgs e)
@@ -140,25 +94,20 @@ namespace EdukuJez
         protected void ChildButton_Click(object sender, EventArgs e)
         {
             if (ChildrenDropDownList.SelectedValue == "Wybierz dziecko")
-            {
                 return;
-            }
-
             if (ChildrenDropDownList.Items.FindByText("Wybierz dziecko") != null)
-            {
                 ChildrenDropDownList.Items.FindByText("Wybierz dziecko").Enabled = false;
-            }
-
             foreach (var i in children)
             {
                 if (i.UserName == ChildrenDropDownList.SelectedValue)
                 {
                     UserSession.GetSession().checkedChild = userRepo.Table.FirstOrDefault(x => x.Id == i.Id);
                     Session["checked_child"] = UserSession.GetSession().checkedChild.UserName;
-                    Page.Response.Redirect(Page.Request.Url.ToString()); // Refresh the page because of child change
+                    Page.Response.Redirect(Page.Request.Url.ToString());//odswierzenie strony, bo zmiana dziecka
                     return;
                 }
             }
+
         }
 
         protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
@@ -166,4 +115,4 @@ namespace EdukuJez
             Response.Redirect(MAIN_SITE);
         }
     }
-    }
+}
