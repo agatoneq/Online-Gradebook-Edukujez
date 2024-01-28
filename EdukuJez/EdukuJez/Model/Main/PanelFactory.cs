@@ -32,6 +32,27 @@ namespace EdukuJez.Model.Main
 
             return new TablePanel(p, permission);
         }
+        public static TablePanel MakeSimplePanel(String Title, String color, String href, Action<object, EventArgs> onClickMethod)
+        {
+            Panel p = new Panel();
+            p.CssClass = "Main-Panel";
+            p.BackColor = System.Drawing.ColorTranslator.FromHtml(color);
+            p.BorderColor = Color.Black;
+            p.BorderStyle = BorderStyle.Double;
+            Panel inner = new Panel() { CssClass = "Main-Label-Panel" };
+            Literal title = new Literal();
+            title.Text = Title;
+            inner.Controls.Add(title);
+            p.Controls.Add(inner);
+            ImageButton img = new ImageButton();
+            img.CssClass = "Main-Panel-Image";
+            img.ImageUrl = "~/Imgs/Arrow_left.png";
+            img.Click += (sender, e) => onClickMethod(sender, e);
+            // Dodajemy kontrolkę Image do kontrolki Panel
+            p.Controls.Add(img);
+
+            return new TablePanel(p);
+        }
 
     }
 }

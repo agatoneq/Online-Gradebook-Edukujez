@@ -16,6 +16,10 @@ namespace EdukuJez.Model.Main
             this.REQPermission= REQPermission;
             main = p;
         }
+        public TablePanel(Panel p)
+        {
+            main = p;
+        }
 
         public TableCell ConvertToCell()
         {
