@@ -15,6 +15,24 @@ namespace EdukuJez
     {
 
         /// <summary>
+        /// Kontrolka GoBackButton.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button GoBackButton;
+
+        /// <summary>
+        /// Kontrolka x.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button x;
+
+        /// <summary>
         /// Kontrolka MainInfoLabel.
         /// </summary>
         /// <remarks>
@@ -159,6 +177,15 @@ namespace EdukuJez
         protected global::System.Web.UI.WebControls.Button AddUserButton;
 
         /// <summary>
+        /// Kontrolka EditUserButton.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button EditUserButton;
+
+        /// <summary>
         /// Kontrolka DeleteUserButton.
         /// </summary>
         /// <remarks>
@@ -177,6 +204,15 @@ namespace EdukuJez
         protected global::System.Web.UI.WebControls.Button ConfirmAddButton;
 
         /// <summary>
+        /// Kontrolka ConfirmEditButton.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ConfirmEditButton;
+
+        /// <summary>
         /// Kontrolka InfoLabel.
         /// </summary>
         /// <remarks>
@@ -184,5 +220,14 @@ namespace EdukuJez
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label InfoLabel;
+
+        /// <summary>
+        /// Kontrolka myRepeater.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater myRepeater;
     }
 }

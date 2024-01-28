@@ -245,7 +245,7 @@
     <Content Include="Content\Main.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\Master.site.css" />
-    <Content Include="Attendances.aspx" />
+    <Content Include="SubjectContentPage.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="EditClasses.aspx" />
     <Content Include="favicon.ico" />
@@ -256,9 +256,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="AccountsManagement.aspx" />
-    <Content Include="Calendars.aspx" />
+    <Content Include="Calendar.aspx" />
     <Content Include="PostOffice.aspx" />
     <Content Include="ReadMessage.aspx" />
+    <Content Include="Remarks.aspx" />
     <Content Include="SubjectAddAdminPanel.aspx" />
     <Content Include="SubjectPage.aspx" />
     <Content Include="WriteMessage.aspx" />
@@ -337,12 +338,12 @@
     <Compile Include="ChangingPassword.aspx.designer.cs">
       <DependentUpon>ChangingPassword.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Attendances.aspx.cs">
-      <DependentUpon>Attendances.aspx</DependentUpon>
+    <Compile Include="SubjectContentPage.aspx.cs">
+      <DependentUpon>SubjectContentPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Attendances.aspx.designer.cs">
-      <DependentUpon>Attendances.aspx</DependentUpon>
+    <Compile Include="SubjectContentPage.aspx.designer.cs">
+      <DependentUpon>SubjectContentPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -375,12 +376,12 @@
     <Compile Include="GroupsManagement.aspx.designer.cs">
       <DependentUpon>GroupsManagement.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Calendars.aspx.cs">
-      <DependentUpon>Calendars.aspx</DependentUpon>
+    <Compile Include="Calendar.aspx.cs">
+      <DependentUpon>Calendar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Calendars.aspx.designer.cs">
-      <DependentUpon>Calendars.aspx</DependentUpon>
+    <Compile Include="Calendar.aspx.designer.cs">
+      <DependentUpon>Calendar.aspx</DependentUpon>
     </Compile>
     <Compile Include="LessonPlan.aspx.cs">
       <DependentUpon>LessonPlan.aspx</DependentUpon>
@@ -409,7 +410,11 @@
       <DependentUpon>20240127161406_Last_overhaul2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\BaseContextModelSnapshot.cs" />
+    <Compile Include="Model\Main\CustomList.cs" />
+    <Compile Include="Model\Main\ICustomPanel.cs" />
+    <Compile Include="Model\Main\ListPanel.cs" />
     <Compile Include="Model\Main\PanelFactory.cs" />
+    <Compile Include="Model\Main\SubjectManager.cs" />
     <Compile Include="Model\Main\TablePanel.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\Activity.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\Attachment.cs" />
@@ -431,7 +436,6 @@
     <Compile Include="Model\ServerAccess\DBEntity\User.cs" />
     <Compile Include="Model\ServerAccess\Repositories\ActivitiesRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\BaseContext.cs" />
-    <Compile Include="Model\ServerAccess\Repositories\AttendancesRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\CalendarRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\ClassUsersRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\MessageGroupsRepository.cs" />
@@ -448,6 +452,13 @@
     <Compile Include="Model\ServerAccess\ServerClient.cs" />
     <Compile Include="Model\ServerAccess\UserSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Remarks.aspx.cs">
+      <DependentUpon>Remarks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Remarks.aspx.designer.cs">
+      <DependentUpon>Remarks.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

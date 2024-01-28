@@ -1,10 +1,10 @@
 ﻿//------------------------------------------------------------------------------
-// <generowany automatycznie>
+// <generowane automatycznie>
 //     Ten kod został wygenerowany przez narzędzie.
 //
-//     Modyfikacje tego pliku mogą spowodować niewłaściwe zachowanie i zostaną utracone
+//     Zmiany w tym pliku mogą spowodować niewłaściwe zachowanie i zostaną utracone
 //     w przypadku ponownego wygenerowania kodu. 
-// </generowany automatycznie>
+// </generowane automatycznie>
 //------------------------------------------------------------------------------
 
 namespace EdukuJez
@@ -19,7 +19,7 @@ namespace EdukuJez
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
-        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton ImageButton1;
 
@@ -28,7 +28,7 @@ namespace EdukuJez
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
-        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderNav;
 
@@ -37,7 +37,7 @@ namespace EdukuJez
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
-        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel ProfilePanel;
 
@@ -46,7 +46,7 @@ namespace EdukuJez
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
-        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label ProfileNameLabel;
 
@@ -55,7 +55,7 @@ namespace EdukuJez
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
-        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label ProfileSurnameLabel;
 
@@ -64,7 +64,7 @@ namespace EdukuJez
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
-        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LogoutButton;
 
@@ -73,7 +73,7 @@ namespace EdukuJez
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
-        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton ChangePasswordButton;
 
@@ -82,7 +82,7 @@ namespace EdukuJez
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
-        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ChildrenDropDownList;
 
@@ -91,7 +91,7 @@ namespace EdukuJez
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
-        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ChildButton;
 
@@ -100,7 +100,7 @@ namespace EdukuJez
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
-        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
     }

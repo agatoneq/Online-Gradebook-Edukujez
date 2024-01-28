@@ -1,7 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Grades.aspx.cs" Inherits="EdukuJez.Grades" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderNav" runat="server">
+
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+        <div style="margin-bottom: 30px;" class="header Container-Title ">
+        <img src="Imgs/Grades_Title.png" class="logo1" style="height: 82px; width: 500px" />
+        <hr />
+    </div>
+    
     <asp:DropDownList ID="GroupDropDownList" runat="server" OnSelectedIndexChanged="GroupDropDownList_SelectedIndexChanged">
 
     </asp:DropDownList> 

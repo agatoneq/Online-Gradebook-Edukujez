@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Drawing;
+using EdukuJez.Repositories;
 
 namespace EdukuJez.Model.Main
 {
@@ -31,6 +32,6 @@ namespace EdukuJez.Model.Main
 
             return new TablePanel(p, permission);
         }
-        
+
     }
 }

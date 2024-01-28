@@ -5,6 +5,7 @@ using System.Threading;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using EdukuJez.Model.Main;
 using EdukuJez.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -80,6 +81,7 @@ namespace EdukuJez
         }
         public static void EndSession(Page sender)
         {
+            SubjectManager.Subject = null;
             _instance = null;
         }
         public List<Group> GetAllParentGroups(Group group)

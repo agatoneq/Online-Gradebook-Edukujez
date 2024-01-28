@@ -1,6 +1,10 @@
 ﻿<%@ Page Title="Plan Lekcji" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="LessonPlan.aspx.cs" Inherits="EdukuJez.LessonPlan" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+            <div style="margin-bottom: 30px;" class="header Container-Title ">
+        <img src="Imgs/Lesson_Plan_Title.png" class="logo1" style="height: 82px; width: 480px" />
+        <hr />
+    </div>
         <div>
             <asp:Table ID="LessonTable" runat="server" CssClass="LessonPlan"></asp:Table>
         </div>
