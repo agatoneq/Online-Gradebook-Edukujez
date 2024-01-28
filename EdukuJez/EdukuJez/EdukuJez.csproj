@@ -256,7 +256,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="AccountsManagement.aspx" />
-    <Content Include="Calendar.aspx" />
     <Content Include="PostOffice.aspx" />
     <Content Include="ReadMessage.aspx" />
     <Content Include="Remarks.aspx" />
@@ -375,13 +374,6 @@
     </Compile>
     <Compile Include="GroupsManagement.aspx.designer.cs">
       <DependentUpon>GroupsManagement.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Calendar.aspx.cs">
-      <DependentUpon>Calendar.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Calendar.aspx.designer.cs">
-      <DependentUpon>Calendar.aspx</DependentUpon>
     </Compile>
     <Compile Include="LessonPlan.aspx.cs">
       <DependentUpon>LessonPlan.aspx</DependentUpon>
