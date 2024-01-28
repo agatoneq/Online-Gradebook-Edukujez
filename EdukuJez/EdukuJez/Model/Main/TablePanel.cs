@@ -27,6 +27,5 @@ namespace EdukuJez.Model.Main
             c.Controls.Add(main);
             return c;
         }
-
     }
 }

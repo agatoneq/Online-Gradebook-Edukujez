@@ -7,19 +7,29 @@ using System.Web.UI.WebControls;
 
 namespace EdukuJez.Model.Main
 {
-    public class ListPanel : ICustomPanel
+    public class ListPanel<T>
     {
+        public T Entity { get; set; }
         Panel main;
-        public String REQPermission { get; }
-        public ListPanel(Panel p)
+        public ListPanel(Panel p, T entity)
         {
-            this.REQPermission = REQPermission;
             main = p;
+            Entity = entity;
         }
 
-        public void AttachToCell(TableCell tc)
+        public TableCell ConvertToCell()
         {
-            tc.Controls.Add(main);
+            var c = new TableCell();
+            c.Controls.Add(main);
+            return c;
+        }
+        public TableRow ConvertToRow()
+        {
+            var c = new TableCell();
+            var r = new TableRow();
+            c.Controls.Add(main);
+            r.Controls.Add(c);
+            return r;
         }
     }
 }
