@@ -240,6 +240,7 @@
   <ItemGroup>
     <Content Include="AdminPanel.aspx" />
     <Content Include="CalendarAdminPanel.aspx" />
+    <Content Include="Calendars.aspx" />
     <Content Include="ChangingPassword.aspx" />
     <Content Include="Content\LessonPlan.css" />
     <Content Include="Content\Main.css" />
@@ -330,6 +331,13 @@
     <Compile Include="CalendarAdminPanel.aspx.designer.cs">
       <DependentUpon>CalendarAdminPanel.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Calendars.aspx.cs">
+      <DependentUpon>Calendars.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Calendars.aspx.designer.cs">
+      <DependentUpon>Calendars.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ChangingPassword.aspx.cs">
       <DependentUpon>ChangingPassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -337,6 +345,7 @@
     <Compile Include="ChangingPassword.aspx.designer.cs">
       <DependentUpon>ChangingPassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Model\ServerAccess\Repositories\AttendancesRepository.cs" />
     <Compile Include="SubjectContentPage.aspx.cs">
       <DependentUpon>SubjectContentPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
