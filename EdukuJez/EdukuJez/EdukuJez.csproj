@@ -259,6 +259,7 @@
     <Content Include="Calendar.aspx" />
     <Content Include="PostOffice.aspx" />
     <Content Include="ReadMessage.aspx" />
+    <Content Include="Remarks.aspx" />
     <Content Include="SubjectAddAdminPanel.aspx" />
     <Content Include="SubjectPage.aspx" />
     <Content Include="WriteMessage.aspx" />
@@ -451,6 +452,13 @@
     <Compile Include="Model\ServerAccess\ServerClient.cs" />
     <Compile Include="Model\ServerAccess\UserSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Remarks.aspx.cs">
+      <DependentUpon>Remarks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Remarks.aspx.designer.cs">
+      <DependentUpon>Remarks.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="Kalendarz Admin Panel" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CalendarAdminPanel.aspx.cs" Inherits="EdukuJez.CalendarAdminPanel" %>
 <asp:Content ID="MainContentID" ContentPlaceHolderID="MainContent" runat="server">
-    <div style="margin-bottom: 30px;" class="header Container-Title ">
+            <div style="margin-bottom: 30px;" class="header Container-Title ">
+        <img src="Imgs/Calendar_Management_Page_Title.png" class="logo1" style="height: 82px; width: 650px" />
+        <hr />
     </div>
     <div style="text-align:center;">
         <asp:ListBox ID="ListBoxAllDates" runat="server" style="width: 350px; height: 400px; font-size: 20px;"></asp:ListBox>

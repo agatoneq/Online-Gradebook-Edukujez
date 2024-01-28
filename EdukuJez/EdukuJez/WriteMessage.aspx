@@ -3,6 +3,10 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
      <asp:UpdatePanel ID="UpdatePanel1" runat="server">
          <ContentTemplate>
+            <div style="margin-bottom: 30px;" class="header Container-Title ">
+        <img src="Imgs/Sending_Message_Title.png" class="logo1" style="height: 82px; width: 800px" />
+        <hr />
+    </div>
     <div style="margin-top: 20px; width: 2000px;">
         <asp:Panel ID="LabelsPanel" runat="server" Style="display: inline-block; vertical-align: top;">
             <asp:Label ID="Label1" runat="server" Text=" Adresat:" Font-Size="24px" Style="display: block; margin-bottom: 10px;"></asp:Label>

@@ -2,6 +2,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderNav" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+        <div style="margin-bottom: 30px;" class="header Container-Title ">
+        <img src="Imgs/Subjects_Title.png" class="logo1" style="height: 82px; width: 340px" />
+        <hr />
+    </div>
     <div style="text-align:center;">
     <asp:ListBox ID="ListBoxSubjects" runat="server" style="width: 350px; height: 400px; font-size: 20px;"></asp:ListBox>
     <br />

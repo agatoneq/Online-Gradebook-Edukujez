@@ -2,7 +2,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div style="margin-bottom: 30px;" class="header Container-Title ">
-        <img src="Imgs/Accounts_Management_Page_Title.png" class="logo1" style="height: 82px; width: 661px" />
+        <img src="Imgs/Changing_Password_Title.png" class="logo1" style="height: 82px; width: 580px" />
         <hr />
     </div>
     <asp:Label ID="MainInfoLabel" runat="server" Text="Hasło zostało zmienione pomyślnie!" Visible="False" Font-Size="32px"></asp:Label>

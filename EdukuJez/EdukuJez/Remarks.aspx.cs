@@ -16,11 +16,19 @@ namespace EdukuJez
         public SubjViewRepository View = new SubjViewRepository();
         public GroupsRepository repoGroups = new GroupsRepository();
         String permission;
-        User currentuser = UserSession.GetSession().user;
+        //User currentuser = UserSession.GetSession().user;
 
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+        
+        protected void AddNewRemarkButton_Click(object sender, EventArgs e)
+        {
+        }
+
+        protected void StudentsGroupsListSelectedIndexChanged(object sender, EventArgs e)
+        {
         }
 
         protected void GoBackButton_Click(object sender, EventArgs e)
