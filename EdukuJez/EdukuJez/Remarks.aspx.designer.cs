@@ -11,7 +11,7 @@ namespace EdukuJez
 {
 
 
-    public partial class Remark
+    public partial class Remarks
     {
 
         /// <summary>

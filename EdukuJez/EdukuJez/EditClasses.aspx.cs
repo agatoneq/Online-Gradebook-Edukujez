@@ -10,6 +10,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.EntityFrameworkCore;
 using EdukuJez.Model.ServerAccess.Repositories;
+using System.Runtime.CompilerServices;
 
 namespace EdukuJez
 {
@@ -77,15 +78,20 @@ namespace EdukuJez
             User u = userRepo.Table.First(x => x.UserName == parts[0] && x.UserSurname == parts[1]);
             var CU = new ClassUsers();
             c.Users = new List<ClassUsers>() { CU };    
-            u.Clasess = new List<ClassUsers>() { CU };  
+            u.Clasess = new List<ClassUsers>() { CU };
 
 
+            if (scheduleRepo.Table.Any(x => x.Hour == godzina && x.Day == dzien && x.Warden.UserName == parts[0] && x.Warden.UserSurname == parts[1] && x.Class == classRoom && x.Group.Name == group && x.Subject.SubjectName == subject))
+            {
 
-            userRepo.Update();
-            groupRepo.Update();
-            subjRepo.Update();
+            }
+            else
+            {
+                userRepo.Update();
+                groupRepo.Update();
+                subjRepo.Update();
 
-
+            }
 
 
 
@@ -108,16 +114,20 @@ namespace EdukuJez
           
 
             ClassC query = scheduleRepo.Table.Include(x=>x.Users)
-                .FirstOrDefault(x => x.Hour == godzina && x.Day == dzien && x.Warden.UserName == parts[0] && x.Warden.UserSurname == parts[1] && x.Class == classRoom);
+                .FirstOrDefault(x => x.Hour == godzina && x.Day == dzien && x.Warden.UserName == parts[0] && x.Warden.UserSurname == parts[1] && x.Class == classRoom && x.Group.Name == group && x.Subject.SubjectName==subject);
 
             scheduleRepo.Delete(query);
-
-            var CU = query.Users.ToList();
-            foreach (var users in CU)
+            if (query != null)
             {
-                CURepo.Delete(users);
+                var CU = query.Users.ToList();
+
+                foreach (var users in CU)
+                {
+                    CURepo.Delete(users);
+                }
+                ReloadData();
             }
-            ReloadData();
+            else { }
         }
 
 
@@ -288,7 +298,7 @@ namespace EdukuJez
 
 
             var subList = subjRepo.Table.ToList();
-            var groupList = groupRepo.Table.ToList();
+            var groupList = groupRepo.Table.Where(y=>y.Name != UserSession.TEACHER_GROUP && y.ParentGroup.Name != UserSession.TEACHER_GROUP).ToList();
             List<GroupUser> groupUserList = groupUserRepo.Table.Include(u => u.User).Include(g => g.Group).ToList();
             var userList = groupUserList.Where(x => x.Group != null && x.Group.Name == UserSession.TEACHER_GROUP && x.User != null).Select(x => x.User).ToList(); ;
             var lessonPlan = scheduleRepo.Table.Include(u => u.Group).Include(u => u.Warden).Include(u => u.Subject).ToList();
