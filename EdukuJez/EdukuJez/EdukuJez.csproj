@@ -238,10 +238,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Activities.aspx" />
     <Content Include="AdminPanel.aspx" />
     <Content Include="CalendarAdminPanel.aspx" />
     <Content Include="Calendars.aspx" />
     <Content Include="ChangingPassword.aspx" />
+    <Content Include="ChildForParent.aspx" />
     <Content Include="Content\LessonPlan.css" />
     <Content Include="Content\Main.css" />
     <Content Include="Content\Site.css" />
@@ -314,6 +316,13 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities.aspx.cs">
+      <DependentUpon>Activities.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Activities.aspx.designer.cs">
+      <DependentUpon>Activities.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminPanel.aspx.cs">
       <DependentUpon>AdminPanel.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -344,12 +353,20 @@
     <Compile Include="ChangingPassword.aspx.designer.cs">
       <DependentUpon>ChangingPassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ChildForParent.aspx.cs">
+      <DependentUpon>ChildForParent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ChildForParent.aspx.designer.cs">
+      <DependentUpon>ChildForParent.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\20240128170711_parents.cs" />
-    <Compile Include="Migrations\20240128170711_parents.designer.cs">
+    <Compile Include="Migrations\20240128170711_parents.Designer.cs">
       <DependentUpon>20240128170711_parents.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\ServerAccess\DBEntity\UserParent.cs" />
     <Compile Include="Model\ServerAccess\Repositories\AttendancesRepository.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\UserParentsRepository.cs" />
     <Compile Include="SubjectContentPage.aspx.cs">
       <DependentUpon>SubjectContentPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

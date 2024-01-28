@@ -44,27 +44,28 @@ namespace EdukuJez
                 ProfilePanel.Visible = true;
                 ProfileNameLabel.Text = session.UserName;
                 ProfileSurnameLabel.Text = session.UserSurname;
-
-                // if (session.UserGroups.Any(x => x.Name == "Rodzice")) //jesli zalogowany jest rodzicem
+                if (UserSession.CheckPermission(UserSession.PARENT_GROUP) == true) //jesli zalogowany jest rodzicem
                 {
+                    List<int> usersId = new List<int>();
                     if (Session["childrenList"] == null)
                     {
-                        var group = session.user.Educates.FirstOrDefault(); //grupa ktora uczy zalogowany - na razie zwraca nulla
-                        group = new Group(); //tymczasowo - zmazac
-                        group.Id = 4; //tymczasowo - zmazac
-                        List<int> usersId = grUsRepo.Table.Where(g => g.Group.Id == group.Id).Select(g => g.User.Id).ToList(); //id uczniow z grupy
+                        Group group = groupRepo.Table.First(x => x.Name == UserSession.GetSession().UserLogin); //grupa, ktorej nazwa jest login zalogowanego uzytkownika-grupa w ktorej sa dzieci zalogowanego
+                        usersId = grUsRepo.Table.Where(g => g.Group.Id == group.Id).Select(g => g.User.Id).ToList(); //id uczniow z grupy
                         children = userRepo.Table.Where(x => usersId.Contains(x.Id)).ToList();
                         Session["childrenList"] = children;
                         ChildrenDropDownList.Items.Add("Wybierz dziecko");
                     }
                     else
-                        children = (List<User>)Session["childrenList"];
-                    if (Session["checked_child"] == null)
-                        ChildrenDropDownList.Items.Add("Wybierz dziecko");
-                    foreach (var child in children) //dodanie dzieci do ChildrenDropDownList
                     {
-                        ChildrenDropDownList.Items.Add(child.UserName);
+                        children = (List<User>)Session["childrenList"];
+                        if (Session["checked_child"] == null && ChildrenDropDownList.SelectedValue != "Wybierz dziecko")
+                            ChildrenDropDownList.Items.Add("Wybierz dziecko");
                     }
+                    if ((ChildrenDropDownList.Items.Count == 1 && ChildrenDropDownList.Items[0].Value == "Wybierz dziecko") || (ChildrenDropDownList.Items.Count == 0))
+                        foreach (var child in children) //dodanie dzieci do ChildrenDropDownList
+                        {
+                            ChildrenDropDownList.Items.Add(child.UserName);
+                        }
                     if (!IsPostBack && Session["checked_child"] != null)
                     {
                         ChildrenDropDownList.SelectedValue = (String)Session["checked_child"];
