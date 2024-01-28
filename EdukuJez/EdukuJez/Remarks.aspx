@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Uwagi" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Remarks.aspx.cs" Inherits="EdukuJez.Remark" %>
+﻿<%@ Page Title="Uwagi" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Remarks.aspx.cs" Inherits="EdukuJez.Remarks" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
    

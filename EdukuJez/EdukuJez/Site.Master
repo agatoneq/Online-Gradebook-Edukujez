@@ -28,7 +28,7 @@
             <div class="header navbar ">
                 <div class="navbar-grid-container">
                     <div class="navbar-logo">                    
-                        <asp:ImageButton ID="ImageButton1" runat="server" CssClass="logo" ImageUrl="~/Imgs/Logo_PH.png" OnClick="ImageButton1_Click" />
+                        <asp:ImageButton ID="ImageButton1" runat="server" CssClass="logo" ImageUrl="~/Imgs/Logo_PH.png" OnClick="ImageButton1_Click"  style="height: 82px; width: 900px; text-align: left;"/>
                     </div>
                     <div class="navbar-list">
                         <asp:ContentPlaceHolder ID="ContentPlaceHolderNav" runat="server">

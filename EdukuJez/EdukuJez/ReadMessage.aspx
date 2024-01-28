@@ -2,7 +2,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderNav" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-        <div>
+    <div style="margin-bottom: 30px;" class="header Container-Title ">
+        <img src="Imgs/Messages_Title.png" class="logo1" style="height: 82px; width: 350px" />
+        <hr />
+    </div>
+    <div>
                 <asp:Panel ID="TextBoxesPanel" runat="server" Style="display: inline-block; vertical-align: top;">
 
             <asp:Button ID="ButtonReadGet" runat="server" Text="Czytaj" OnClick="btnCzytaj_Click" />
