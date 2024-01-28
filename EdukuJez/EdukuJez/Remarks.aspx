@@ -14,7 +14,7 @@
 
 
 
-             <asp:Panel ID="TeachersPanel" runat="server">
+             <asp:Panel ID="TeachersPanel" runat="server" Visible = "false">
             <asp:Panel ID="LabelsPanel" runat="server" Style="display: inline-block;">
                 <asp:Label ID="StudentGroupLabel" runat="server" Text="Wybierz klasę:" Font-Size="24px" Style="display: block; margin-bottom: 10px;"></asp:Label>
                 <asp:Label ID="StudentLabel" runat="server" Text="Wybierz ucznia:" Font-Size="24px" Style="display: block; margin-bottom: 10px;"></asp:Label>
@@ -35,8 +35,8 @@
 
 
 
-
-                         <asp:Panel ID="StudentsPanel" runat="server">
+             <div class="Center-Form" style="margin-top: 20px; width: 2000px; text-align: center;">
+                         <asp:Panel ID="StudentsPanel" runat="server" Visible = "false">
 <asp:Repeater ID="myRepeater" runat="server">
                 <HeaderTemplate>
                     <table border="1">
@@ -56,7 +56,7 @@
                 </FooterTemplate>
             </asp:Repeater>
     </asp:Panel>
-
+ </div>
             </div>
 
 
