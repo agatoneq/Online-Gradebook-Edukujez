@@ -446,6 +446,7 @@
     <Compile Include="Model\ServerAccess\Repositories\ARepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\GroupUsersRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\MessageUsersRepository.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\RemarkRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\ScheduleRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\SubjectsRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\SubjViewRepository.cs" />

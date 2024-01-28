@@ -23,7 +23,7 @@ namespace EdukuJez.Repositories
         public DbSet<Message> Messages { get; set; }
         public DbSet<MessageGroups> MessageGroups { get; set; }
         public DbSet<MessageUsers> MessageUsers { get; set; }
-        public DbSet<Remark> Remarks { get; set; }
+        public DbSet<Remark> Remark { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<User> Users { get; set; }
         public static BaseContext GetContext()
