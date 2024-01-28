@@ -245,6 +245,7 @@
     <Content Include="Content\Main.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\Master.site.css" />
+    <Content Include="Attendances.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="EditClasses.aspx" />
     <Content Include="favicon.ico" />
@@ -255,7 +256,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="AccountsManagement.aspx" />
-    <Content Include="Calendar.aspx" />
+    <Content Include="Calendars.aspx" />
     <Content Include="PostOffice.aspx" />
     <Content Include="ReadMessage.aspx" />
     <Content Include="SubjectAddAdminPanel.aspx" />
@@ -336,6 +337,13 @@
     <Compile Include="ChangingPassword.aspx.designer.cs">
       <DependentUpon>ChangingPassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Attendances.aspx.cs">
+      <DependentUpon>Attendances.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Attendances.aspx.designer.cs">
+      <DependentUpon>Attendances.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -367,12 +375,12 @@
     <Compile Include="GroupsManagement.aspx.designer.cs">
       <DependentUpon>GroupsManagement.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Calendar.aspx.cs">
-      <DependentUpon>Calendar.aspx</DependentUpon>
+    <Compile Include="Calendars.aspx.cs">
+      <DependentUpon>Calendars.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Calendar.aspx.designer.cs">
-      <DependentUpon>Calendar.aspx</DependentUpon>
+    <Compile Include="Calendars.aspx.designer.cs">
+      <DependentUpon>Calendars.aspx</DependentUpon>
     </Compile>
     <Compile Include="LessonPlan.aspx.cs">
       <DependentUpon>LessonPlan.aspx</DependentUpon>
@@ -423,6 +431,7 @@
     <Compile Include="Model\ServerAccess\DBEntity\User.cs" />
     <Compile Include="Model\ServerAccess\Repositories\ActivitiesRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\BaseContext.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\AttendancesRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\CalendarRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\ClassUsersRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\MessageGroupsRepository.cs" />

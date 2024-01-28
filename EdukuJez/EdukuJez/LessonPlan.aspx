@@ -4,6 +4,10 @@
         <div>
             <asp:Table ID="LessonTable" runat="server" CssClass="LessonPlan"></asp:Table>
         </div>
+    <asp:DropDownList ID="GroupDropDown" runat="server" AutoPostBack="true" OnSelectedIndexChanged="GroupSelectionChanged">
+    <asp:ListItem Text="-- Wybierz grupę --" Value="" />
+    </asp:DropDownList>
+
     <div class="Center-Form">
             <asp:Repeater ID="myRepeater" runat="server">
                 <HeaderTemplate>
