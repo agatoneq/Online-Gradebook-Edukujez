@@ -13,7 +13,6 @@ namespace EdukuJez
 {
     public partial class Remarks : System.Web.UI.Page
     {
-        private Remark newRemark = new Remark();
         readonly RemarkRepository remarkRepo = new RemarkRepository();
         //public SubjectsRepository repoSubj = new SubjectsRepository();
         //public SubjViewRepository View = new SubjViewRepository();
@@ -22,12 +21,13 @@ namespace EdukuJez
         readonly UsersRepository userRepo = new UsersRepository();
         readonly GroupUsersRepository groupUserRepo = new GroupUsersRepository();
         String permission;
-        //User currentuser = UserSession.GetSession().user;
+        User currentuser;
         List<Group> groups = new List<Group>();
         
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            currentuser = UserSession.GetSession().user;
             if (!IsPostBack)
             {
                 groups = groupsRepo.Table.ToList();
@@ -58,16 +58,16 @@ namespace EdukuJez
         protected void AddNewRemarkButton_Click(object sender, EventArgs e)
         {
             var Session = UserSession.GetSession();
-
+            Remark newRemark = new Remark();
             if (NewRemarkTextBox.Text != null)
             {
                 newRemark.Contents = NewRemarkTextBox.Text;
-                remarkRepo.Insert(newRemark);
 
                 //var teachersId = Session.UserId;
                 //var studentsFullName = StudentsList.SelectedValue;
-                //newRemark.Submitter = userRepo.Table.First(x => x.Id == teachersId);
-                //newRemark.Student = userRepo.Table.First(x => (x.UserName + " " + x.UserSurname) == studentsFullName);
+                userRepo.Table.FirstOrDefault(x => x.Id == currentuser.Id).SubmittedRemarks.Add(newRemark);
+                userRepo.Table.FirstOrDefault(x => (x.UserName + " " + x.UserSurname) == StudentsList.SelectedValue).Remarks.Add(newRemark);
+                userRepo.Update();
 
             }
         }
