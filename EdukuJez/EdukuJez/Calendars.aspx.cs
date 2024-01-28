@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EdukuJez
 {
-    public partial class Calendar : System.Web.UI.Page
+    public partial class Calendars : System.Web.UI.Page
     {
         CalendarRepository Calend = new CalendarRepository();
 
@@ -19,9 +19,13 @@ namespace EdukuJez
 
         private void PopulateCalendar(List<Repositories.Calendar> calendarE)
         {
-            var l = calendarE.Select(a => new
+            // Filtrowanie wydarzeń, które są równa lub późniejsze niż obecna data
+            var currentDate = DateTime.Now.Date;
+            var filteredCalendar = calendarE.Where(a => a.Date >= currentDate).ToList();
+
+            var l = filteredCalendar.Select(a => new
             {
-                Date = a.Date.ToString("yyyy-MM-dd"), // Użyj właściwości Date, aby uzyskać tylko datę
+                Date = a.Date.ToString("dd-MM-yyyy"), // Użyj właściwości Date, aby uzyskać tylko datę
                 Desc = a.Desc,
             });
 

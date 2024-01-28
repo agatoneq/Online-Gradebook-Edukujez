@@ -11,7 +11,7 @@ namespace EdukuJez
 {
 
 
-    public partial class Calendar
+    public partial class Calendars
     {
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace EdukuJez
         /// Pole generowane automatycznie.
         /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table Calendare;
+        protected global::System.Web.UI.WebControls.Table Calendar;
 
         /// <summary>
         /// Kontrolka myRepeater.
