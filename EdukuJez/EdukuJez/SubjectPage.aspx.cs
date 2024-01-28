@@ -1,4 +1,5 @@
-﻿using EdukuJez.Repositories;
+﻿using EdukuJez.Model.Main;
+using EdukuJez.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,13 @@ namespace EdukuJez
 {
     public partial class SubjectPage : System.Web.UI.Page
     {
-        private SubjectsRepository repoS;
+        const String SUBJECT_CONTENT_SITE = "SubjectContentPage.aspx";
+        private SubjectsRepository repoS = new SubjectsRepository();
         protected void Page_Load(object sender, EventArgs e)
         {
-            repoS = new SubjectsRepository();
             if (!IsPostBack)
             {
-                if (UserSession.GetSession().UserGroups.Any(x => x.Name == "Uczniowie"))
+                if (UserSession.CheckPermission(UserSession.STUDENT_GROUP) == true)
                 {
                     foreach (var s in repoS.Table)
                     {
@@ -27,11 +28,8 @@ namespace EdukuJez
                             }
                     }
                 }
-                else if(UserSession.GetSession().UserGroups.Any(x => x.Name == "Nauczyciele"))
+                else if(UserSession.CheckPermission(UserSession.TEACHER_GROUP) == true)
                 {
-                    LabelLink.Visible = true;
-                    TextBoxLink.Visible = true;
-                    ButtonAddMaterials.Visible = true;
                     foreach (var s in repoS.Table)
                     {
                         foreach (var g in UserSession.GetSession().UserGroups)
@@ -53,19 +51,8 @@ namespace EdukuJez
             }
             else
             {
-                ListBoxSubjects.Visible = false;
-                ButtonSubjectShow.Visible = false;
-                ButtonBack.Visible = true;
-                LabelSubjectName.Visible = true;
-                LabelSubjectDesc.Visible = true;
-                LabelMaterials.Visible = true;
-                LabelLink.Visible = false;
-                TextBoxLink.Visible = false;
-                ButtonAddMaterials.Visible = false;
-                //miejsce na wyświetlanie materiałów
-                LabelSubjectName.Text = ListBoxSubjects.SelectedItem.Text;
-                LabelSubjectDesc.Text = repoS.Table.FirstOrDefault(s => s.SubjectName == ListBoxSubjects.SelectedItem.Text).SubjectDesc;
-                LabelInfo.Visible = false;
+                SubjectManager.Subject = repoS.Table.FirstOrDefault(x => x.SubjectName == ListBoxSubjects.SelectedItem.Text);
+                Response.Redirect(SUBJECT_CONTENT_SITE);
             }
         }
 
@@ -74,12 +61,6 @@ namespace EdukuJez
             ListBoxSubjects.Visible = true;
             ButtonSubjectShow.Visible = true;
             ButtonBack.Visible = false;
-            LabelSubjectName.Visible = false;
-            LabelSubjectDesc.Visible = false;
-            LabelMaterials.Visible = false;
-            LabelLink.Visible = true;
-            TextBoxLink.Visible = true;
-            ButtonAddMaterials.Visible = true;
         }
 
         protected void ButtonAddMaterials_Click(object sender, EventArgs e)

@@ -24,6 +24,15 @@ namespace EdukuJez
         protected global::System.Web.UI.WebControls.Table LessonTable;
 
         /// <summary>
+        /// Kontrolka GroupDropDown.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList GroupDropDown;
+
+        /// <summary>
         /// Kontrolka myRepeater.
         /// </summary>
         /// <remarks>

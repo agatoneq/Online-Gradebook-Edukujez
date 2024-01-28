@@ -1,0 +1,8 @@
+﻿<%@ Page Title="Obecności" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Attendances.aspx.cs" Inherits="EdukuJez.Attendances" %>
+
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+
+    <asp:Login ID="Login1" runat="server" Height="346px" Width="730px" OnAuthenticate="Login1_Authenticate" CssClass="Center-Form" >
+    </asp:Login>
+
+</asp:Content>

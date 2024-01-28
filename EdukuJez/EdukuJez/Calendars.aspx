@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Kalendarz" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Calendar.aspx.cs" Inherits="EdukuJez.Calendar" %>
+﻿<%@ Page Title="Kalendarz" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Calendars.aspx.cs" Inherits="EdukuJez.Calendars" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
         <div style="margin-bottom: 30px;" class="header Container-Title ">
@@ -14,7 +14,7 @@
                 <HeaderTemplate>
                     <table border="1">
                         <tr>
-                            <th>Dzień Tygodnia</th>
+                            <th>Data</th>
                             <th>Opis</th>
 
                         </tr>
