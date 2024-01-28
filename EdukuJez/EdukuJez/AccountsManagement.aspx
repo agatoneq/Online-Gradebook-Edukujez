@@ -2,7 +2,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div style="margin-bottom: 30px;" class="header Container-Title ">
-                       <asp:Button ID="GoBackButton" runat="server" Text="Panel Administratora" Style="width: 250px; height: 40px; font-size: 20px; float: left;" OnClick="GoBackButton_Click" />
+                       <asp:Button ID="GoBackButton" runat="server" Text="Powrót do Panelu Administratora" Style="margin-left: 90px; width: 260px; height: 85px; font-size: 20px; float: left; white-space: normal;" OnClick="GoBackButton_Click" CssClass="Main-Panel-Image" ForeColor="Black" EnableTheming="True"/>
         <img src="Imgs/Accounts_Management_Page_Title.png" class="logo1" style="height: 82px; width: 661px" />
              <asp:Button ID="x" runat="server" Text=" " Style="width: 250px; height: 40px; font-size: 20px; float: right;" BackColor="#FEFAE0" BorderColor="#FEFAE0" BorderStyle="None" />
         <hr />
