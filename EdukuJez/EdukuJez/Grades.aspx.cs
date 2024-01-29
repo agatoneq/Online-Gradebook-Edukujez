@@ -18,34 +18,48 @@ namespace EdukuJez
         public SubjViewRepository View = new SubjViewRepository();
         public GroupsRepository repoGroups = new GroupsRepository();
         String permission;
-        User currentuser= UserSession.GetSession()?.user;
+        User currentuser = UserSession.GetSession()?.user;
         protected void Page_Load(object sender, EventArgs e)
         {
-            //permission = UserSession.GetSession().UserGroup; //na razie zwraca nulla
             if (UserSession.CheckPermission(UserSession.ADMIN_GROUP) == true || UserSession.CheckPermission(UserSession.TEACHER_GROUP) == true)
-             permission = "nauczyciel";
+            {
+                permission = "nauczyciel";
+                ActivityButton.Visible = true;
+            }
+            else if (UserSession.CheckPermission(UserSession.PARENT_GROUP) == true)
+            {
+                permission = "uczen";
+                currentuser = UserSession.GetSession().checkedChild;
+            }
             else
                 permission = "uczen";
+
             GroupDropDownList.Items.Clear();
             switch (permission)
             {
                 case "uczen":
-                    GroupDropDownList.Visible = false;
-                    EditButton.Visible = false;
-                    if (!IsPostBack)
+                    if (currentuser == null)
                     {
-
-                        var c = View.GetSubjects(currentuser.Id);
-                        if (c.Count() != 0)
+                        SubjectsDropDownList.Items.Add("Wybierz dziecko");
+                    }
+                    else
+                    {
+                        GroupDropDownList.Visible = false;
+                        EditButton.Visible = false;
+                        if (!IsPostBack)
                         {
-                            foreach (var i in c)
+                            var c = View.GetSubjects(currentuser.Id);
+                            if (c.Count() != 0)
                             {
-                                SubjectsDropDownList.Items.Add(i.SubjectName);
+                                foreach (var i in c)
+                                {
+                                    SubjectsDropDownList.Items.Add(i.SubjectName);
+                                }
                             }
-                        }
-                        else
-                        {
-                            SubjectsDropDownList.Items.Add("Brak przedmiotów do wyświetlenia");
+                            else
+                            {
+                                SubjectsDropDownList.Items.Add("Brak przedmiotów do wyświetlenia");
+                            }
                         }
                     }
                     break;
@@ -91,17 +105,34 @@ namespace EdukuJez
                     var subject_repo = new SubjectsRepository("Subjects.Subject = '" + SubjectsDropDownList.SelectedValue + "'");
                     if (UserSession.GetSession() != null)
                     {
+                        if (SubjectsDropDownList.SelectedValue == "Wybierz dziecko")
+                        {
+                            return;
+                        }
                         var list = repoGrades.Table.Include(x => x.Users).Include(x => x.Activity)
                             .Where(x => x.Users.Id == currentuser.Id);
                         //wiersze tabeli:
                         if (list.Count() != 0)
                         {
+                            Grade finalGrade = null;
                             foreach (var i in list)
                             {
+                                if (i.Activity.IsFinalGrade == false) //jesli ta aktywnosc nie jest ocena koncowa
+                                {
+                                    DataRow newRow = dataTable.NewRow();
+                                    newRow["Ocena"] = i.GradeValue;
+                                    newRow["Waga"] = i.GradeWeight;
+                                    newRow["Aktywność"] = i.Activity?.Name;
+                                    dataTable.Rows.Add(newRow);
+                                }
+                                else
+                                    finalGrade = i;
+                            }
+                            if (finalGrade != null) //ocena koncowa na koncu tabeli
+                            {
                                 DataRow newRow = dataTable.NewRow();
-                                newRow["Ocena"] = i.GradeValue;
-                                newRow["Waga"] = i.GradeWeight;
-                                newRow["Aktywność"] = i.Activity?.Name; //jeszcze nie ma w bazie aktywnosci
+                                newRow["Ocena"] = finalGrade.GradeValue;
+                                newRow["Aktywność"] = finalGrade.Activity?.Name;
                                 dataTable.Rows.Add(newRow);
                             }
                         }
@@ -123,6 +154,7 @@ namespace EdukuJez
                 case "nauczyciel":
                     BindGridView();
                     GradesGridView.Visible = true;
+                    ActivityButton.Visible = true;
                     break;
                 default:
                     //to do
@@ -147,7 +179,7 @@ namespace EdukuJez
         protected void GroupDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
             SubjectsDropDownList.Items.Clear();
-            var lista = repoSubj.Table.Include(x => x.Classes)                       
+            var lista = repoSubj.Table.Include(x => x.Classes)
                         .ThenInclude(x => x.Group)
                         .Where(x => x.Classes.Any(c => c.Group.Name == GroupDropDownList.SelectedValue))
                         .ToList();
@@ -185,8 +217,8 @@ namespace EdukuJez
             BindGridView();
             for (int i = 0; i < row.Cells.Count; i++)
             {
-                if(i == 1) // Zmień 1 na odpowiednią pozycję kolumny (numeracja od zera)       
-                {   
+                if (i == 1) // Zmień 1 na odpowiednią pozycję kolumny (numeracja od zera)       
+                {
                     var textBox = row.Cells[i].Controls;
                     var c = 1 + 1;
                 }
@@ -227,6 +259,7 @@ namespace EdukuJez
                     dataTable.Columns[i.Name].ReadOnly = false;
                 }
             }
+
             int j = 0;
             foreach (var a in activities)
             {
@@ -253,14 +286,16 @@ namespace EdukuJez
                 .Where(x => x.Subject.SubjectName == SubjectsDropDownList.SelectedValue).ToList();
             var activities = grades.Select(x => x.Activity).Distinct();
             //kolumny tabeli:
-            if (activities.Count() != 0)
+            if (activities.Count() > 0)
             {
                 foreach (var i in activities)
                 {
                     dataTable.Columns.Add(i.Name, typeof(int));
                     dataTable.Columns[i.Name].ReadOnly = false;
+                    dataTable.Columns.Add("Waga " + i.Name, typeof(int)).ReadOnly = false;
                 }
             }
+            dataTable.Columns.Add("Ocena końcowa", typeof(int)).ReadOnly = true; //kolumna oceny koncowej
 
             grades = grades.OrderBy(x => x.Users.UserSurname).OrderBy(x => x.Users.UserName).ToList();
             //wiersze:
@@ -270,13 +305,22 @@ namespace EdukuJez
                 DataRow newRow = dataTable.NewRow();
                 newRow["Imię"] = grade.UserName;
                 newRow["Nazwisko"] = grade.UserSurname;
+                int suma = 0;
+                int liczba = 0;
                 foreach (var act in activities)
                 {
-                    newRow[act.Name] = userGrades.FirstOrDefault(x => x.Activity == act).GradeValue;
-                }
+                    var ocena = userGrades.FirstOrDefault(x => x.Activity == act).GradeValue;
+                    var waga = userGrades.FirstOrDefault(x => x.Activity == act).GradeWeight;
 
+                    newRow[act.Name] = ocena;
+                    newRow["Waga " + act.Name] = waga;
+                    suma += ocena * waga; //do sredniej wazonej
+                    liczba += waga; //do sredniej wazonej
+                }
+                newRow["Ocena końcowa"] = suma / liczba; //do sredniej wazonej
                 dataTable.Rows.Add(newRow);
             }
+
             GradesGridView.DataSource = dataTable;
             GradesGridView.DataBind();
         }
@@ -285,6 +329,16 @@ namespace EdukuJez
         {
             GradesGridView.EditIndex = -1; // Anuluj tryb edycji
             BindGridView();
+        }
+
+        protected void PowrotButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Main.aspx");
+        }
+
+        protected void AktywnoscButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Activities.aspx");
         }
     }
 }

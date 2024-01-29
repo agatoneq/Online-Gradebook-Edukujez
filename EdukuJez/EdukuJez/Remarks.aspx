@@ -3,16 +3,12 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
    
     <div style="margin-bottom: 30px;" class="header Container-Title ">
-               <asp:Button ID="GoBackButton" runat="server" Text="Strona Główna" Style="width: 250px; height: 40px; font-size: 20px; float: left;" OnClick="GoBackButton_Click" />
         <img src="Imgs/Remarks_Title.png" class="logo1" style="height: 82px; width: 350px; float: none;" />
-             <asp:Button ID="x" runat="server" Text=" " Style="width: 250px; height: 40px; font-size: 20px; float: right;" BackColor="#FEFAE0" BorderColor="#FEFAE0" BorderStyle="None" />
-        <hr />
+             <hr />
     </div>
     
         <div style="margin-top: 20px; width: 2000px;">
-
-
-
+            <asp:Label ID="MainInfoLabel" runat="server" Text=" " Font-Size="28px"></asp:Label>
 
              <asp:Panel ID="TeachersPanel" runat="server" Visible = "false">
             <asp:Panel ID="LabelsPanel" runat="server" Style="display: inline-block;">
@@ -30,10 +26,11 @@
              <asp:TextBox ID="NewRemarkTextBox" runat="server" Style="margin-bottom: 10px; width: 500px; height: 150px; font-size: 16px;" AutoPostBack="true" OnTextChanged="NewRemarkBoxChanged" TextMode="MultiLine"></asp:TextBox>
             <br/>
             <asp:Button  ID="AddNewRemarkButton" runat="server" Text="Wstaw uwagę" Style="width: 150px; height: 40px; font-size: 20px;" Enabled="False" OnClick="AddNewRemarkButton_Click"/>
-          
+            
     </asp:Panel>
 
-
+            <asp:Button ID="RestartButton" runat="server" Text="Zatwierdź" Style="width: 150px; height: 40px; font-size: 20px;" OnClick="ConfirmRestartClick" Visible="false" />
+          
 
              <div class="Center-Form" style="margin-top: 20px; width: 2000px; text-align: center;">
                          <asp:Panel ID="StudentsPanel" runat="server" Visible = "false">

@@ -79,8 +79,10 @@ namespace EdukuJez
             }
         }
 
-
-
+        protected void GoBackButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AdminPanel.aspx");
+        }
 
     }
 

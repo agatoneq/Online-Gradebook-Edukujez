@@ -123,5 +123,10 @@ namespace EdukuJez
             ListBoxAllDates.DataSource = listBoxItems;
             ListBoxAllDates.DataBind();
         }
+
+        protected void GoBackButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AdminPanel.aspx");
+        }
     }
 }
