@@ -239,6 +239,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Activities.aspx" />
+    <Content Include="AddAttachment.aspx" />
     <Content Include="AddUsersToGroups.aspx" />
     <Content Include="AdminPanel.aspx" />
     <Content Include="CalendarAdminPanel.aspx" />
@@ -336,6 +337,13 @@
     <Compile Include="Activities.aspx.designer.cs">
       <DependentUpon>Activities.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AddAttachment.aspx.cs">
+      <DependentUpon>AddAttachment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddAttachment.aspx.designer.cs">
+      <DependentUpon>AddAttachment.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AddUsersToGroups.aspx.cs">
       <DependentUpon>AddUsersToGroups.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -385,6 +393,7 @@
       <DependentUpon>20240128170711_parents.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\ServerAccess\DBEntity\UserParent.cs" />
+    <Compile Include="Model\ServerAccess\Repositories\AttachmentsRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\AttendancesRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\UserParentsRepository.cs" />
     <Compile Include="SubjectContentPage.aspx.cs">
