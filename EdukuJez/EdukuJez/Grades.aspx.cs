@@ -268,6 +268,9 @@ namespace EdukuJez
                 grade.GradeValue = changeList[j];
                 j++;
 
+                grade.GradeWeight = changeList[j];
+                j++;
+
             }
             repoGrades.Update();
         }
@@ -295,7 +298,7 @@ namespace EdukuJez
                     dataTable.Columns.Add("Waga " + i.Name, typeof(int)).ReadOnly = false;
                 }
             }
-            dataTable.Columns.Add("Ocena końcowa", typeof(int)).ReadOnly = true; //kolumna oceny koncowej
+            dataTable.Columns.Add("Ocena automatyczna", typeof(int)).ReadOnly = true; //kolumna oceny koncowej
 
             grades = grades.OrderBy(x => x.Users.UserSurname).OrderBy(x => x.Users.UserName).ToList();
             //wiersze:
@@ -317,7 +320,7 @@ namespace EdukuJez
                     suma += ocena * waga; //do sredniej wazonej
                     liczba += waga; //do sredniej wazonej
                 }
-                newRow["Ocena końcowa"] = suma / liczba; //do sredniej wazonej
+                newRow["Ocena automatyczna"] = suma / liczba; //do sredniej wazonej
                 dataTable.Rows.Add(newRow);
             }
 
