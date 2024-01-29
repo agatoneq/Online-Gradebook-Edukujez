@@ -18,6 +18,7 @@ namespace EdukuJez
         public GroupUsersRepository grUsRepo = new GroupUsersRepository();
         public GroupsRepository groupRepo = new GroupsRepository();
         private List<User> children = new List<User>();
+        public UserParentsRepository parentsRepository = new UserParentsRepository();
         protected override void OnInit(EventArgs e)
         {
             // Wywołaj oryginalną implementację OnInit z klasy bazowej
@@ -49,14 +50,17 @@ namespace EdukuJez
                     List<int> usersId = new List<int>();
                     if (Session["childrenList"] == null)
                     {
-                        Group group = groupRepo.Table.FirstOrDefault(x => x.Name == UserSession.GetSession().UserLogin); //grupa, ktorej nazwa jest login zalogowanego uzytkownika-grupa w ktorej sa dzieci zalogowanego
-                        if (group != null)
-                        { 
-                        usersId = grUsRepo.Table.Where(g => g.Group.Id == group.Id).Select(g => g.User.Id).ToList(); //id uczniow z grupy
-                        children = userRepo.Table.Where(x => usersId.Contains(x.Id)).ToList();
-                        Session["childrenList"] = children;
-                        ChildrenDropDownList.Items.Add("Wybierz dziecko");
+                        //List<UserParent> groups = parentsRepository.Table.Where(x => x.ParentId == session.UserId).Select(x => x).ToList();//groupRepo.Table.FirstOrDefault(x => x.Name == UserSession.GetSession().UserLogin); //grupa, ktorej nazwa jest login zalogowanego uzytkownika-grupa w ktorej sa dzieci zalogowanego
+                       // if (group != null)
+                       // {
+                        usersId = parentsRepository.Table.Where(x => x.ParentId == session.UserId).Select(x => x.StudentId).ToList();//grUsRepo.Table.Where(g => g.Group.Id == group.Id).Select(g => g.User.Id).ToList(); //id uczniow z grupy
+                        if (usersId.Count > 0)
+                        {
+                            children = userRepo.Table.Where(x => usersId.Contains(x.Id)).ToList();
+                            Session["childrenList"] = children;
+                            ChildrenDropDownList.Items.Add("Wybierz dziecko");
                         }
+                      //  }
                     }
                     else
                     {
