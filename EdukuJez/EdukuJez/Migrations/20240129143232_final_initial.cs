@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EdukuJez.Migrations
 {
-    public partial class GradeFormula : Migration
+    public partial class final_initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,7 +27,8 @@ namespace EdukuJez.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Formula = table.Column<string>(nullable: true)
+                    Formula = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -48,24 +49,6 @@ namespace EdukuJez.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Activities",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Activities", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Activities_GradeFormulas_Id",
-                        column: x => x.Id,
-                        principalTable: "GradeFormulas",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -118,7 +101,7 @@ namespace EdukuJez.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Remarks",
+                name: "Remark",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -129,16 +112,42 @@ namespace EdukuJez.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Remarks", x => x.Id);
+                    table.PrimaryKey("PK_Remark", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Remarks_Users_StudentId",
+                        name: "FK_Remark_Users_StudentId",
                         column: x => x.StudentId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Remarks_Users_SubmitterId",
+                        name: "FK_Remark_Users_SubmitterId",
                         column: x => x.SubmitterId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserParents",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StudentId = table.Column<int>(nullable: false),
+                    ParentId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserParents", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserParents_Users_ParentId",
+                        column: x => x.ParentId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UserParents_Users_StudentId",
+                        column: x => x.StudentId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -251,26 +260,52 @@ namespace EdukuJez.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Posts",
+                name: "Activities",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
-                    MessageId = table.Column<int>(nullable: true),
-                    IsUserSender = table.Column<bool>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    IsFinalGrade = table.Column<bool>(nullable: false),
+                    FormulaId = table.Column<int>(nullable: false),
+                    SubjectId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Posts", x => x.Id);
+                    table.PrimaryKey("PK_Activities", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Posts_Users_Id",
-                        column: x => x.Id,
-                        principalTable: "Users",
+                        name: "FK_Activities_GradeFormulas_FormulaId",
+                        column: x => x.FormulaId,
+                        principalTable: "GradeFormulas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Posts_Messages_MessageId",
-                        column: x => x.MessageId,
-                        principalTable: "Messages",
+                        name: "FK_Activities_Subjects_SubjectId",
+                        column: x => x.SubjectId,
+                        principalTable: "Subjects",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Attachments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SubjectId = table.Column<int>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    ContentType = table.Column<string>(nullable: true),
+                    Text = table.Column<string>(nullable: true),
+                    Content = table.Column<byte[]>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Attachments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Attachments_Subjects_SubjectId",
+                        column: x => x.SubjectId,
+                        principalTable: "Subjects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -318,6 +353,7 @@ namespace EdukuJez.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     GradeValue = table.Column<int>(nullable: false),
+                    GradeType = table.Column<string>(nullable: true),
                     GradeWeight = table.Column<int>(nullable: false),
                     TeacherId = table.Column<int>(nullable: false),
                     StudentId = table.Column<int>(nullable: false),
@@ -354,6 +390,34 @@ namespace EdukuJez.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Attendances",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StudentId = table.Column<int>(nullable: true),
+                    Date = table.Column<DateTime>(nullable: false),
+                    ClassId = table.Column<int>(nullable: true),
+                    Presence = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Attendances", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Attendances_Classes_ClassId",
+                        column: x => x.ClassId,
+                        principalTable: "Classes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Attendances_Users_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ClassUsers",
                 columns: table => new
                 {
@@ -378,6 +442,32 @@ namespace EdukuJez.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Activities_FormulaId",
+                table: "Activities",
+                column: "FormulaId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Activities_SubjectId",
+                table: "Activities",
+                column: "SubjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Attachments_SubjectId",
+                table: "Attachments",
+                column: "SubjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Attendances_ClassId",
+                table: "Attendances",
+                column: "ClassId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Attendances_StudentId",
+                table: "Attendances",
+                column: "StudentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Classes_GroupId",
@@ -470,18 +560,13 @@ namespace EdukuJez.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Posts_MessageId",
-                table: "Posts",
-                column: "MessageId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Remarks_StudentId",
-                table: "Remarks",
+                name: "IX_Remark_StudentId",
+                table: "Remark",
                 column: "StudentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Remarks_SubmitterId",
-                table: "Remarks",
+                name: "IX_Remark_SubmitterId",
+                table: "Remark",
                 column: "SubmitterId");
 
             migrationBuilder.CreateIndex(
@@ -501,6 +586,16 @@ namespace EdukuJez.Migrations
                 column: "TeacherGroupId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_UserParents_ParentId",
+                table: "UserParents",
+                column: "ParentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserParents_StudentId",
+                table: "UserParents",
+                column: "StudentId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Users_UserLogin",
                 table: "Users",
                 column: "UserLogin",
@@ -509,6 +604,12 @@ namespace EdukuJez.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Attachments");
+
+            migrationBuilder.DropTable(
+                name: "Attendances");
+
             migrationBuilder.DropTable(
                 name: "Calendar");
 
@@ -528,10 +629,10 @@ namespace EdukuJez.Migrations
                 name: "MessageUsers");
 
             migrationBuilder.DropTable(
-                name: "Posts");
+                name: "Remark");
 
             migrationBuilder.DropTable(
-                name: "Remarks");
+                name: "UserParents");
 
             migrationBuilder.DropTable(
                 name: "Classes");
@@ -543,10 +644,10 @@ namespace EdukuJez.Migrations
                 name: "Messages");
 
             migrationBuilder.DropTable(
-                name: "Subjects");
+                name: "GradeFormulas");
 
             migrationBuilder.DropTable(
-                name: "GradeFormulas");
+                name: "Subjects");
 
             migrationBuilder.DropTable(
                 name: "Groups");

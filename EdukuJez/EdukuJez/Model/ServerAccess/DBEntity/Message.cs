@@ -11,6 +11,7 @@ namespace EdukuJez.Repositories
         public string Content { get; set; }
         public User Sender { get; set; }
         public bool IsGroupMsg { get; set; }
+        public DateTime DateTime { get; set; }
         public ICollection<MessageUsers> Recipients { get; set; } = new List<MessageUsers>();
         public ICollection<MessageGroups> GroupRecipients { get; set; } = new List<MessageGroups>();
 

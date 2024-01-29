@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EdukuJez.Migrations
 {
     [DbContext(typeof(BaseContext))]
-    [Migration("20240127161406_Last_overhaul2")]
-    partial class Last_overhaul2
+    [Migration("20240129143722_Date_time_Messages")]
+    partial class Date_time_Messages
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,6 +24,11 @@ namespace EdukuJez.Migrations
             modelBuilder.Entity("EdukuJez.Repositories.Activity", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("FormulaId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsFinalGrade")
@@ -36,6 +41,10 @@ namespace EdukuJez.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FormulaId")
+                        .IsUnique()
+                        .HasFilter("[FormulaId] IS NOT NULL");
 
                     b.HasIndex("SubjectId");
 
@@ -292,6 +301,9 @@ namespace EdukuJez.Migrations
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("IsGroupMsg")
                         .HasColumnType("bit");
 
@@ -374,7 +386,7 @@ namespace EdukuJez.Migrations
 
                     b.HasIndex("SubmitterId");
 
-                    b.ToTable("Remarks");
+                    b.ToTable("Remark");
                 });
 
             modelBuilder.Entity("EdukuJez.Repositories.Subject", b =>
@@ -441,13 +453,33 @@ namespace EdukuJez.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("EdukuJez.Repositories.UserParent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ParentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("UserParents");
+                });
+
             modelBuilder.Entity("EdukuJez.Repositories.Activity", b =>
                 {
                     b.HasOne("EdukuJez.Repositories.GradeFormula", "formula")
                         .WithOne("Activity")
-                        .HasForeignKey("EdukuJez.Repositories.Activity", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EdukuJez.Repositories.Activity", "FormulaId");
 
                     b.HasOne("EdukuJez.Repositories.Subject", "Subject")
                         .WithMany("Activites")
@@ -598,6 +630,21 @@ namespace EdukuJez.Migrations
                     b.HasOne("EdukuJez.Repositories.Group", "TeacherGroup")
                         .WithMany("SubjectsTeachers")
                         .HasForeignKey("TeacherGroupId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("EdukuJez.Repositories.UserParent", b =>
+                {
+                    b.HasOne("EdukuJez.Repositories.User", "Parent")
+                        .WithMany("Parents")
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("EdukuJez.Repositories.User", "Student")
+                        .WithMany("Students")
+                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
