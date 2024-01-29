@@ -332,6 +332,10 @@ namespace EdukuJez
                 Class.Add(lesson.Class.ToString());
             }
         }
+
+        protected void GoBackButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AdminPanel.aspx");
+        }
     }
 }
-

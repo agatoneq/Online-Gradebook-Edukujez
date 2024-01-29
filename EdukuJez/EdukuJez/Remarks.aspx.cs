@@ -125,6 +125,7 @@ namespace EdukuJez
         protected void ConfirmRestartClick(object sender, EventArgs e)
         {
             Response.Redirect("Remarks.aspx");
+            
         }
 
         protected void GoBackButton_Click(object sender, EventArgs e)

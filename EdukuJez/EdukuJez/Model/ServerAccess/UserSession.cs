@@ -61,7 +61,10 @@ namespace EdukuJez
         public static bool CheckPermission(Group requiredGroup)
         {
             bool isInGroup = UserSession.GetSession().UserGroups.Any(x => x.Id == requiredGroup.Id);
-            return isInGroup;
+            if (ALLOW_ALL_PER)
+                return true;
+            else
+                return isInGroup;
         }
         public static void ChangeSiteNoPermission(Page sender, string callbackPage= LOGIN_SITE)
         {
