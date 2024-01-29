@@ -65,3 +65,26 @@
     height: 60px;
     float: right;
 }
+.Message-Label-Panel {
+    display: inline-block;
+    text-align: center;
+    margin-top: auto;
+    float: left;
+    font-size: 15pt;
+    width: 150px;
+    color:floralwhite;
+}
+
+.Message-Panel {
+    float: left;
+    display: inline-block;
+    width: 200px;
+    height: 60px;
+}
+
+.Message-Panel-Image {
+    display: inline-block;
+    width: 400px;
+    height: 30px;
+    float: right;
+}

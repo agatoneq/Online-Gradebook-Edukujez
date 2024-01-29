@@ -7,7 +7,10 @@ namespace EdukuJez.Repositories
 {
     public class Attachment : EntityBase
     {
-        public List<string> AttachmentContentType = new List<string> { "Obraz", "Strona", "Dokument" };//kategorie materiałów
+        public const string IMAGE = "Obraz";
+        public const string PAGE = "Strona";
+        public const string DOCUMENT = "Dokument";
+        public static List<string> AttachmentContentType = new List<string> { IMAGE, PAGE, DOCUMENT };//kategorie materiałów
         public Subject Subject { get; set; }
         public string Name { get; set; }
         public string ContentType { get; set; }
