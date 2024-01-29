@@ -49,6 +49,8 @@ namespace EdukuJez
             String Topic = TopicBox.Text;
             String Message = MessageBox.Text;
             String User_name = UserSession.GetSession().UserName;
+            DateTime Time = DateTime.Now;
+           
 
             String[] parts = Name.Split(' ');
 
@@ -58,7 +60,7 @@ namespace EdukuJez
                 {
                     try
                     {
-                        var query = new Message() { Topic = Topic, Content = Message };
+                        var query = new Message() { Topic = Topic, Content = Message, DateTime = Time };
 
                         userRepo.Table.First(x => x.UserName == User_name).Sends.Add(query);
 
@@ -90,7 +92,7 @@ namespace EdukuJez
                     {
 
 
-                        var query = new Message() { Topic = Topic, Content = Message };
+                        var query = new Message() { Topic = Topic, Content = Message, DateTime = Time };
                         userRepo.Table.First(x => x.UserName == User_name).Sends.Add(query);
                         query.IsGroupMsg = true;
 

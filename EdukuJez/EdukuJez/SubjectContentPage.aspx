@@ -10,13 +10,13 @@
         <asp:Panel ID="AttachmentPanel" runat="server" CssClass="Subject-Panel">
             <asp:Label ID="AttachmentLabel" runat="server" Text="Materiały" CssClass="Subject-Label"></asp:Label>
             <asp:Table ID="AttachmentTable" runat="server"></asp:Table>
-            <asp:Button ID="NewAttachmentButton" runat="server" Text="Dodaj Materiały" OnClick="NewAttachmentButton_Click" Width="118px" />
+            <asp:Button ID="NewAttachmentButton" runat="server" Text="Dodaj Materiały" OnClick="NewAttachmentButton_Click" Width="118px" Visible="False" />
         </asp:Panel>
         <hr/>
         <asp:Panel ID="ActivitesPanel" runat="server" CssClass="Subject-Panel">
             <asp:Label ID="ActivitesLabel" runat="server" Text="Aktywności" CssClass="Subject-Label"></asp:Label>
             <asp:Table ID="ActivitesTable" runat="server"></asp:Table>
-            <asp:Button ID="NewActivityButton" runat="server" Text="Dodaj aktywność" OnClick="NewActivityButton_Click" Width="115px" />
+            <asp:Button ID="NewActivityButton" runat="server" Text="Dodaj aktywność" OnClick="NewActivityButton_Click" Width="115px" Visible="False" />
         </asp:Panel>
         <hr/>
         <asp:Button ID="GoBackButton" runat="server" Text="Powrót"  Width="115px" />

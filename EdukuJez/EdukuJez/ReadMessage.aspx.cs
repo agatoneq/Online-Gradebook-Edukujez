@@ -110,7 +110,7 @@ namespace EdukuJez
 
 
             Message CurrentContent = messRepo.Table.FirstOrDefault(x => x.Id == CurrentTopic);
-            TextBox.Text = CurrentContent.Content;
+            TextBox.Text = CurrentContent.Content + " \n \n Data wysłania wiadomości: " + CurrentContent.DateTime;
         }
             else TextBox.Text = " Brak Wiadomości"; 
         }
