@@ -11,25 +11,25 @@ namespace EdukuJez
 {
 
 
-    public partial class Attendance
+    public partial class Attendances
     {
 
         /// <summary>
-        /// Kontrolka GridView1.
+        /// Kontrolka SubjectsDropDown.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.DropDownList SubjectsDropDown;
 
         /// <summary>
-        /// Kontrolka myRepeater.
+        /// Kontrolka attendanceRepeater.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater myRepeater;
+        protected global::System.Web.UI.WebControls.Repeater attendanceRepeater;
     }
 }
