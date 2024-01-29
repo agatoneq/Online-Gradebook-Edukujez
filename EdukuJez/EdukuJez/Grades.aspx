@@ -8,7 +8,7 @@
         <img src="Imgs/Grades_Title.png" class="logo1" style="height: 82px; width: 500px" />
         <hr />
     </div>
-    
+    <asp:Button ID="PowrotButton" runat="server" Text="Powrót" OnClick="PowrotButton_Click" />
     <asp:DropDownList ID="GroupDropDownList" runat="server" OnSelectedIndexChanged="GroupDropDownList_SelectedIndexChanged">
 
     </asp:DropDownList> 
@@ -18,7 +18,8 @@
 
     <asp:Button ID="ShowButton" runat="server" Text="Pokaż" OnClick="ShowButton_Click" /> 
     <asp:Button ID="EditButton" runat="server" Text="Edytuj oceny" OnClick="EditButton_Click" Visible ="false"/>
-   
+    <asp:Button ID="ActivityButton" runat="server" Text="Dodaj aktywność" OnClick="AktywnoscButton_Click" Visible="false"/>
+
     <asp:GridView ID="GradesGridView"  CssClass="Center-Form" runat="server"  Visible ="false" OnRowCancelingEdit="GradesGridView_RowCancelingEdit" OnRowEditing="GradesGridView_RowEditing" OnRowUpdating="GradesGridView_RowUpdating"></asp:GridView>
     <asp:Button ID="AddButton" runat="server" Text="Anuluj zmiany"  Visible="false" /> 
     <asp:Button ID="SaveButton" runat="server" Text="Zapisz zmiany"  Visible="false" />
