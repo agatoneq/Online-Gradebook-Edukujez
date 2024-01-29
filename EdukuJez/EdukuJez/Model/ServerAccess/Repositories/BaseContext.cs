@@ -99,7 +99,7 @@ namespace EdukuJez.Repositories
             modelBuilder.Entity<GradeFormula>()
                 .HasOne(u => u.Activity)
                 .WithOne(p => p.formula)
-                .HasForeignKey<Activity>(p => p.Id);
+                .HasForeignKey<Activity>(p => p.FormulaId);
 
             modelBuilder.Entity<UserParent>()
                 .HasOne(s => s.Student)

@@ -47,9 +47,21 @@ namespace EdukuJez.Model.Main
             ImageButton img = new ImageButton();
             img.CssClass = "Subject-Panel-Image";
             img.ImageUrl = "~/Imgs/Arrow_left.png";
-            img.Click += (sender, e) => onClickMethod(att, e);
+            if (att.ContentType == Attachment.PAGE)
+            {
+                HyperLink myLink = new HyperLink();
+                myLink.NavigateUrl = att.Text;
+                myLink.Target = "_blank";
+                myLink.Controls.Add(img);
+                myLink.CssClass = "Subject-Panel-Image";
+                p.Controls.Add(myLink);
+            }
+            else
+            {
+                img.Click += (sender, e) => onClickMethod(att, e);
+                p.Controls.Add(img);
+            }
             // Dodajemy kontrolkę Image do kontrolki Panel
-            p.Controls.Add(img);
 
             return new ListPanel<Attachment>(p, att);
         }
@@ -74,6 +86,14 @@ namespace EdukuJez.Model.Main
 
             return new ListPanel<Activity>(p, act);
         }
+        private static void OpenNewTab(string url)
+        {
+            string script = $@"
+        <script type='text/javascript'>
+            window.open('{url}', '_blank');
+        </script>";
 
+            new Page().Response.Write(script);
+        }
     }
 }

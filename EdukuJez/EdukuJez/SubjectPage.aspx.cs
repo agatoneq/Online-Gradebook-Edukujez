@@ -42,6 +42,15 @@ namespace EdukuJez
                             }
                     }
                 }
+                else if (UserSession.CheckPermission(UserSession.ADMIN_GROUP) == true)
+                {
+                    foreach (var s in repoS.Table)
+                    {
+
+                        ListBoxSubjects.Items.Add(s.SubjectName);
+
+                    }
+                }
             }
         }
 
@@ -59,18 +68,6 @@ namespace EdukuJez
                     .FirstOrDefault(x => x.SubjectName == ListBoxSubjects.SelectedItem.Text);
                 Response.Redirect(SUBJECT_CONTENT_SITE);
             }
-        }
-
-        protected void ButtonBack_Click(object sender, EventArgs e)
-        {
-            ListBoxSubjects.Visible = true;
-            ButtonSubjectShow.Visible = true;
-            ButtonBack.Visible = false;
-        }
-
-        protected void ButtonAddMaterials_Click(object sender, EventArgs e)
-        {
-            //miejsce na dodanie materiałów do bazy
         }
     }
 }

@@ -14,7 +14,6 @@
         &nbsp;</p>
     <br />
     <asp:Button ID="ButtonSubjectShow"  runat="server" Text="Wyświetl" Style="width: 200px; height: 40px; font-size: 20px;" OnClick="ButtonSubjectShow_Click" />
-        <asp:Button ID="ButtonBack" runat="server" Text="Wróć" Style="width: 200px; height: 40px; font-size: 20px;" Visible="False" OnClick="ButtonBack_Click"/>
     </div>
     <div style="margin-top: 20px; width: 2000px; text-align: center;">
         <asp:Label ID="LabelInfo" runat="server" Text="Label" Visible="False" Font-Size="24px" ForeColor="#CC0000"></asp:Label>

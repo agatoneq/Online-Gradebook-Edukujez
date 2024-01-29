@@ -129,6 +129,30 @@ namespace EdukuJez
             else { }
         }
 
+        protected void DeleteButtonDynamic_Click(object sender, EventArgs e)
+        {
+            Button clickedButton = (Button)sender;
+            string buttonId = clickedButton.ID;
+            string[] buttonParts = buttonId.Split('_');
+            int lessonId = int.Parse(buttonParts[1]);
+
+            ClassC query = scheduleRepo.Table.Include(x => x.Users)
+                .FirstOrDefault(x => x.Id == lessonId);
+
+            scheduleRepo.Delete(query);
+            if (query != null)
+            {
+                var CU = query.Users.ToList();
+
+                foreach (var users in CU)
+                {
+                    CURepo.Delete(users);
+                }
+                ReloadData();
+            }
+            else { }
+        }
+
 
         private void CreateDynamicControls(ICollection<ClassC> lessonPlan)
         {
@@ -199,13 +223,13 @@ namespace EdukuJez
 
             Button AddButton = new Button();
             AddButton.ID = "AddButton";
-            AddButton.Text = "Add";
+            AddButton.Text = "Dodaj";
             AddButton.Click += new EventHandler(AddButton_Click);
 
 
             Button DeleteButton = new Button();
             DeleteButton.ID = "DeleteButton";
-            DeleteButton.Text = "Delete";
+            DeleteButton.Text = "Usuń";
             DeleteButton.Click += new EventHandler(DeleteButton_Click);
 
             TableCell submitCell = new TableCell();
@@ -229,8 +253,10 @@ namespace EdukuJez
             TableCell StartcellTeacherSurname = new TableCell { Text = "Nazwisko" };
             TableCell StartcellGroup = new TableCell { Text = "Grupa"};
             TableCell StartcellSubject = new TableCell { Text = "Przedmiot"};
+            TableCell StartcellId = new TableCell { Text = "Id" };
 
             // Dodawanie komórek do wiersza
+            rowStart.Cells.Add(StartcellId);
             rowStart.Cells.Add(StartcellDay);
             rowStart.Cells.Add(StartcellHour);
             rowStart.Cells.Add(StartcellClass);
@@ -247,6 +273,7 @@ namespace EdukuJez
                 TableRow row = new TableRow();
 
                 // Tworzenie nowych komórek TableCell
+                TableCell cellId = new TableCell { Text = lesson.Id.ToString() };
                 TableCell cellClass = new TableCell { Text = lesson.Class.ToString() };
                 TableCell cellHour = new TableCell { Text = lesson.Hour.ToString() };
                 TableCell cellDay = new TableCell { Text = lesson.Day.ToString() };
@@ -256,6 +283,7 @@ namespace EdukuJez
                 TableCell cellSubject = new TableCell { Text = lesson.Subject.SubjectName.ToString() };
 
                 // Dodawanie komórek do wiersza
+                row.Cells.Add(cellId);
                 row.Cells.Add(cellDay);
                 row.Cells.Add(cellHour);
                 row.Cells.Add(cellClass);
@@ -263,6 +291,15 @@ namespace EdukuJez
                 row.Cells.Add(cellSubject);
                 row.Cells.Add(cellTeacherName);
                 row.Cells.Add(cellTeacherSurname);
+
+                // Dodanie komórki z przyciskiem usuwania
+                TableCell deleteButtonCell = new TableCell();
+                Button deleteButton = new Button();
+                deleteButton.ID = "DeleteButton_" + lesson.Id.ToString();  // Ustawienie unikalnego identyfikatora dla przycisku
+                deleteButton.Text = "Usuń";
+                deleteButton.Click += new EventHandler(DeleteButtonDynamic_Click);  // Podłączenie metody obsługującej zdarzenie kliknięcia
+                deleteButtonCell.Controls.Add(deleteButton);
+                row.Cells.Add(deleteButtonCell);
 
                 // Dodawanie wiersza do tabeli MainTable
                 MainTable.Rows.Add(row);
@@ -339,4 +376,3 @@ namespace EdukuJez
         }
     }
 }
-
