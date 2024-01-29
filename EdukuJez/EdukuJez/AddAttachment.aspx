@@ -9,11 +9,12 @@
     <br />
     <p align="center">
         <asp:Label ID="LabelAttachmentContentType" runat="server" Text="Kategoria:" Font-Size="24px" Style="display: block; margin-bottom: 10px;"></asp:Label>
-        <asp:DropDownList ID="DropDownListAttachmentContentType" runat="server" MaxLength="100" style="width: 255px; height: 30px; font-size: 16px;"></asp:DropDownList>
+        <asp:DropDownList ID="DropDownListAttachmentContentType" runat="server" MaxLength="100" style="width: 255px; height: 30px; font-size: 16px;" AutoPostBack="True" OnSelectedIndexChanged="DropDownListAttachmentContentType_SelectedIndexChanged"></asp:DropDownList>
     </p>
     <p align="center">
         <asp:Label ID="LabelAttachmentLink" runat="server" Text="Link:"  Font-Size="24px" Style="display: block; margin-bottom: 10px;"></asp:Label>
         <asp:TextBox ID="TextBoxAttachmentLink" runat="server" MaxLength="100" Style="display: block; margin-bottom: 10px; width: 250px; height: 25px; font-size: 16px;"></asp:TextBox>
+        <asp:FileUpload ID="FileUpload1" runat="server" />
         <br />
     </p>
     <br />
