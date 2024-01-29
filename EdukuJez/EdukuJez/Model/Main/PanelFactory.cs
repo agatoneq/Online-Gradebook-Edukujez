@@ -7,8 +7,6 @@ using System.Web.UI.WebControls;
 using System.Drawing;
 using EdukuJez.Repositories;
 
-using Image = System.Web.UI.WebControls.Image;
-
 namespace EdukuJez.Model.Main
 {
     public class PanelFactory
@@ -38,10 +36,7 @@ namespace EdukuJez.Model.Main
         {
             Panel p = new Panel();
             p.CssClass = "Subject-Main-Panel";
-            if (att.ContentType==Attachment.IMAGE)
-                p.BackColor = System.Drawing.Color.Olive;
-            else
-                p.BackColor = System.Drawing.Color.OrangeRed;
+            p.BackColor = System.Drawing.Color.OrangeRed;
             p.BorderColor = Color.Black;
             p.BorderStyle = BorderStyle.Double;
             Panel inner = new Panel() { CssClass = "Subject-Label-Panel" };
@@ -52,27 +47,9 @@ namespace EdukuJez.Model.Main
             ImageButton img = new ImageButton();
             img.CssClass = "Subject-Panel-Image";
             img.ImageUrl = "~/Imgs/Arrow_left.png";
-            if (att.ContentType == Attachment.PAGE)
-            {
-                p.BackColor = System.Drawing.Color.LightGreen;
-                Image myImage = new Image();
-                myImage.ImageUrl = "~/Imgs/Arrow_left.png";
-                myImage.AlternateText = "Sample Image";
-                myImage.CssClass = "Subject-Panel-Image";
-
-                HyperLink myLink = new HyperLink();
-                myLink.NavigateUrl = att.Text;
-                myLink.Target = "_blank";
-                myLink.Controls.Add(myImage);
-                myLink.CssClass = "Subject-Panel-Image";
-                p.Controls.Add(myLink);
-            }
-            else
-            {
-                img.Click += (sender, e) => onClickMethod(att, e);
-                p.Controls.Add(img);
-            }
+            img.Click += (sender, e) => onClickMethod(att, e);
             // Dodajemy kontrolkę Image do kontrolki Panel
+            p.Controls.Add(img);
 
             return new ListPanel<Attachment>(p, att);
         }
@@ -97,14 +74,27 @@ namespace EdukuJez.Model.Main
 
             return new ListPanel<Activity>(p, act);
         }
-        private static void OpenNewTab(string url)
-        {
-            string script = $@"
-        <script type='text/javascript'>
-            window.open('{url}', '_blank');
-        </script>";
 
-            new Page().Response.Write(script);
+        public static ListPanel<Message> MakePanelMessage(String Title, Page MainPage,Action<object, EventArgs> onClickMethod, Message Mess)
+        {
+            Panel p = new Panel();
+            p.CssClass = "Message-Panel";
+            p.BackColor = System.Drawing.ColorTranslator.FromHtml("#707070");
+            p.BorderColor = Color.Black;
+            p.BorderStyle = BorderStyle.Double;
+            Panel inner = new Panel() { CssClass = "Message-Label-Panel" };
+            Literal title = new Literal();
+            title.Text = Title;
+            inner.Controls.Add(title);
+            p.Controls.Add(inner);
+            ImageButton img = new ImageButton();
+            img.CssClass = "Message-Panel-Image";
+            img.ImageUrl = "~/Imgs/blank.png";
+            img.Click += (s, args) => onClickMethod(Mess, args) ;
+            // Dodajemy kontrolkę Image do kontrolki Panel
+            p.Controls.Add(img);
+
+            return new ListPanel<Message>(p, Mess);
         }
     }
 }
