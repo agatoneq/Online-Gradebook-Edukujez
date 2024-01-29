@@ -275,10 +275,10 @@ namespace EdukuJez
                 // Tworzenie nowych komórek TableCell
                 TableCell cellId = new TableCell { Text = lesson.Id.ToString() };
                 TableCell cellClass = new TableCell { Text = lesson.Class.ToString() };
-                TableCell cellHour = new TableCell { Text = lesson.Hour.ToString() };
-                TableCell cellDay = new TableCell { Text = lesson.Day.ToString() };
-                TableCell cellTeacherName = new TableCell { Text = lesson.Warden.UserName.ToString() };
-                TableCell cellTeacherSurname = new TableCell { Text = lesson.Warden.UserSurname.ToString() };
+                TableCell cellHour = new TableCell { Text = lesson.Hour?.ToString() };
+                TableCell cellDay = new TableCell { Text = lesson.Day?.ToString() };
+                TableCell cellTeacherName = new TableCell { Text = lesson.Warden?.UserName.ToString() };
+                TableCell cellTeacherSurname = new TableCell { Text = lesson.Warden?.UserSurname.ToString() };
                 TableCell cellGroup = new TableCell { Text = lesson.Group.Name.ToString() };
                 TableCell cellSubject = new TableCell { Text = lesson.Subject.SubjectName.ToString() };
 

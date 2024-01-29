@@ -19,6 +19,6 @@
             <asp:Button ID="NewActivityButton" runat="server" Text="Dodaj aktywność" OnClick="NewActivityButton_Click" Width="115px" Visible="False" />
         </asp:Panel>
         <hr/>
-        <asp:Button ID="GoBackButton" runat="server" Text="Powrót"  Width="115px" />
+        <asp:Button ID="GoBackButton" runat="server" Text="Powrót"  Width="115px" OnClick="GoBackButton_Click" />
     </div>
 </asp:Content>

@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using System.Drawing;
 using EdukuJez.Repositories;
 
+using Image = System.Web.UI.WebControls.Image;
+
 namespace EdukuJez.Model.Main
 {
     public class PanelFactory
@@ -36,7 +38,10 @@ namespace EdukuJez.Model.Main
         {
             Panel p = new Panel();
             p.CssClass = "Subject-Main-Panel";
-            p.BackColor = System.Drawing.Color.OrangeRed;
+            if (att.ContentType==Attachment.IMAGE)
+                p.BackColor = System.Drawing.Color.Olive;
+            else
+                p.BackColor = System.Drawing.Color.OrangeRed;
             p.BorderColor = Color.Black;
             p.BorderStyle = BorderStyle.Double;
             Panel inner = new Panel() { CssClass = "Subject-Label-Panel" };
@@ -49,10 +54,16 @@ namespace EdukuJez.Model.Main
             img.ImageUrl = "~/Imgs/Arrow_left.png";
             if (att.ContentType == Attachment.PAGE)
             {
+                p.BackColor = System.Drawing.Color.LightGreen;
+                Image myImage = new Image();
+                myImage.ImageUrl = "~/Imgs/Arrow_left.png";
+                myImage.AlternateText = "Sample Image";
+                myImage.CssClass = "Subject-Panel-Image";
+
                 HyperLink myLink = new HyperLink();
                 myLink.NavigateUrl = att.Text;
                 myLink.Target = "_blank";
-                myLink.Controls.Add(img);
+                myLink.Controls.Add(myImage);
                 myLink.CssClass = "Subject-Panel-Image";
                 p.Controls.Add(myLink);
             }
