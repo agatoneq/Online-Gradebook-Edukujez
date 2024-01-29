@@ -126,8 +126,10 @@ namespace EdukuJez
             if (TypeDropDownList.SelectedValue == "Skala nominalna")
                 grade.GradeType = "nominalna"; //grade type
             else
+            {
                 grade.GradeType = "procentowa"; //grade type
-
+                activity.Name += " [%]";
+            }
             int idGroup = repoGroups.Table.First(x => x.Name == GroupDropDownList.SelectedValue).Id;
            // var users = repoGroups.Table.Where(x => x.Name == GroupDropDownList.SelectedValue).Select(x => x.Users);// repoUsers.Table.Select(x => x).Where(x => x.Groups.Any(y => y.Id == idGroup)).ToList();// repoGroupUser.Table.Select(x => x).Where(x => x.User.Groups.Any(y => y.Id == idGroup)).ToList();
             var users = repoUsers.Table.Where(x => x.Groups.Any(y => y.Id == idGroup)).Select(x => x).ToList();
@@ -137,7 +139,6 @@ namespace EdukuJez
                 grade.StudentId = u.Id; //student
                 repoGrades.Insert(grade);
             }
-            
         }
 
         protected void ISFinalCheckBox1_CheckedChanged(object sender, EventArgs e)
