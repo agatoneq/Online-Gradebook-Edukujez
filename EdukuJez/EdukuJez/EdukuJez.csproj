@@ -388,10 +388,19 @@
     <Compile Include="ChildForParent.aspx.designer.cs">
       <DependentUpon>ChildForParent.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20240128170711_parents.cs" />
-    <Compile Include="Migrations\20240128170711_parents.Designer.cs">
-      <DependentUpon>20240128170711_parents.cs</DependentUpon>
+    <Compile Include="Migrations\20240129143232_final_initial.cs" />
+    <Compile Include="Migrations\20240129143232_final_initial.designer.cs">
+      <DependentUpon>20240129143232_final_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20240129143538_final_initial2.cs" />
+    <Compile Include="Migrations\20240129143538_final_initial2.designer.cs">
+      <DependentUpon>20240129143538_final_initial2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20240129143722_Date_time_Messages.cs" />
+    <Compile Include="Migrations\20240129143722_Date_time_Messages.designer.cs">
+      <DependentUpon>20240129143722_Date_time_Messages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\BaseContextModelSnapshot.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\UserParent.cs" />
     <Compile Include="Model\ServerAccess\Repositories\AttendancesRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\UserParentsRepository.cs" />
@@ -447,19 +456,6 @@
     <Compile Include="Main.aspx.designer.cs">
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20240121191957_GradeFormula.cs" />
-    <Compile Include="Migrations\20240121191957_GradeFormula.designer.cs">
-      <DependentUpon>20240121191957_GradeFormula.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20240127160829_Last_ovehaul.cs" />
-    <Compile Include="Migrations\20240127160829_Last_ovehaul.designer.cs">
-      <DependentUpon>20240127160829_Last_ovehaul.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20240127161406_Last_overhaul2.cs" />
-    <Compile Include="Migrations\20240127161406_Last_overhaul2.designer.cs">
-      <DependentUpon>20240127161406_Last_overhaul2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\BaseContextModelSnapshot.cs" />
     <Compile Include="Model\Main\CustomList.cs" />
     <Compile Include="Model\Main\ICustomPanel.cs" />
     <Compile Include="Model\Main\ListPanel.cs" />
