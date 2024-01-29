@@ -130,7 +130,8 @@ namespace EdukuJez
         }
 
         protected void NewActivityButton_Click(object sender, EventArgs e)
-        {            
+        {
+            SubjectManager.ActivtyTransferFlag = true;
             Response.Redirect(ADD_ACTIVITY_SITE);
         }
 

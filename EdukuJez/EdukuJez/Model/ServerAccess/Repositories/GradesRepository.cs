@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace EdukuJez.Repositories { 
     public class GradesRepository : ARepository<Grade>
@@ -25,7 +25,6 @@ namespace EdukuJez.Repositories {
             //użycie wyłącznie jednego z tych konstruktorów byłoby dużo lepsze
 
         }
-
 
         //Wyszukiwanie
         public List<int> getGrades(int id)
