@@ -8,42 +8,37 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using Microsoft.EntityFrameworkCore;
 
 namespace EdukuJez
 {
     public partial class SubjectAddAdminPanel : Page
     {
         private Subject subject;
-        private GroupsRepository repoG = new GroupsRepository();
-        private SubjectsRepository repoS = new SubjectsRepository();
+        readonly GroupsRepository repoG = new GroupsRepository();
+        readonly GroupUsersRepository repoGU= new GroupUsersRepository();
+        readonly UsersRepository repoU = new UsersRepository();
+        readonly SubjectsRepository repoS = new SubjectsRepository();
         protected void Page_Load(object sender, EventArgs e)
         {
-                if(Session["Subject"] != null) subject = (Subject)Session["Subject"];
-                if (!IsPostBack)
-                    {
-                        foreach (var s in repoG.Table)
-                        {
-                            //znalezienie tylko grup uczniów na razie nie działa
-                            //if(s.ParentGroup.Id == repoG.Table.FirstOrDefault(x => x.Name == "Uczniowie").Id)
-                            DropDownListStudents.Items.Add(s.Name);
+            if(Session["Subject"] != null) subject = (Subject)Session["Subject"];
+            if (!IsPostBack)
+            {
+                List<Group> groups = repoG.Table.ToList();
+                DropDownListStudents.DataSource = groups.Where(x => x.ParentGroup != null).Where(x => x.ParentGroup.Name == UserSession.STUDENT_GROUP).Select(x => x.Name);
+                DropDownListStudents.DataBind();
+                DropDownListTeachers.DataSource = groups.Where(x => x.ParentGroup != null).Where(x => x.ParentGroup.Name == UserSession.TEACHER_GROUP).Select(x => x.Name);
+                DropDownListTeachers.DataBind();
 
-                        }
-                        
-                        foreach (var t in repoG.Table)
-                        {
-                            //znalezienie tylko grup nauczycieli na razie nie działa 
-                            //if (t.ParentGroup.Id == repoG.Table.FirstOrDefault(x => x.Name == "Nauczyciele").Id)
-                            DropDownListTeachers.Items.Add(t.Name);
-                        }
-                    if (Session["Subject"] != null)
-                    {
-                        TextBoxSubjectName.Text = subject.SubjectName;
-                        TextBoxSubjectDescription.Text = subject.SubjectDesc;
-                        DropDownListStudents.Items.FindByText(repoG.Table.FirstOrDefault(x => x.Id == subject.StudentGroupId).Name).Selected = true;
-                        DropDownListTeachers.Items.FindByText(repoG.Table.FirstOrDefault(x => x.Id == subject.TeacherGroupId).Name).Selected = true;
-                        ButtonSubjectAccept.Text = "Edytuj przedmiot";
-                    }
+                if (Session["Subject"] != null)
+                {
+                    TextBoxSubjectName.Text = subject.SubjectName;
+                    TextBoxSubjectDescription.Text = subject.SubjectDesc;
+                    DropDownListStudents.Items.FindByText(repoG.Table.FirstOrDefault(x => x.Id == subject.StudentGroupId).Name).Selected = true;
+                    DropDownListTeachers.Items.FindByText(repoG.Table.FirstOrDefault(x => x.Id == subject.TeacherGroupId).Name).Selected = true;
+                    ButtonSubjectAccept.Text = "Edytuj przedmiot";
                 }
+            }
         }
         protected void ButtonSubjectAccept_Click(object sender, EventArgs e)
         {
@@ -113,6 +108,11 @@ namespace EdukuJez
                 Session.Abandon();
             }
             Response.Redirect("SubjectAdminPanel.aspx");
+        }
+
+        protected void GoBackButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AdminPanel.aspx");
         }
     }
 }
