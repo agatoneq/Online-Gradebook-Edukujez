@@ -42,6 +42,15 @@ namespace EdukuJez
                             }
                     }
                 }
+                else if (UserSession.CheckPermission(UserSession.ADMIN_GROUP) == true)
+                {
+                    foreach (var s in repoS.Table)
+                    {
+
+                        ListBoxSubjects.Items.Add(s.SubjectName);
+
+                    }
+                }
             }
         }
 
