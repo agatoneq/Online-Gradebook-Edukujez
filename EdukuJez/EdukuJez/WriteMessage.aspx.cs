@@ -52,77 +52,88 @@ namespace EdukuJez
 
             String[] parts = Name.Split(' ');
 
-            if (userRepo.Table.Any(x => x.UserName == parts[0])&& userRepo.Table.Any(x => x.UserSurname == parts[1]))
+            if (CheckSendText(Topic) && CheckSendText(Message))
             {
-                try
+                if (userRepo.Table.Any(x => x.UserName == parts[0]) && userRepo.Table.Any(x => x.UserSurname == parts[1]))
                 {
-                    var query = new Message() { Topic = Topic, Content = Message };
+                    try
+                    {
+                        var query = new Message() { Topic = Topic, Content = Message };
 
-                    userRepo.Table.First(x => x.UserName == User_name).Sends.Add(query);
-
-
-                    User u = userRepo.Table.First(x => x.UserName == parts[0] && x.UserSurname == parts[1]);
-                    var MU = new MessageUsers();
-                    query.Recipients = new List<MessageUsers>() { MU };
-                    u.MessagesUsers = new List<MessageUsers>() { MU };
+                        userRepo.Table.First(x => x.UserName == User_name).Sends.Add(query);
 
 
-                    userRepo.Update();
+                        User u = userRepo.Table.First(x => x.UserName == parts[0] && x.UserSurname == parts[1]);
+                        var MU = new MessageUsers();
+                        query.Recipients = new List<MessageUsers>() { MU };
+                        u.MessagesUsers = new List<MessageUsers>() { MU };
 
 
-                    InfoLabel.Text = "Wiadomość wysłana";
+                        userRepo.Update();
+
+
+                        InfoLabel.Text = "Wiadomość wysłana";
+                    }
+                    catch
+                    {
+                        InfoLabel.Text = "Wiadomość nie wysłana";
+                    }
+
+
+
+
                 }
-                catch
+                else if (groupRepo.Table.Any(x => x.Name == Name))
                 {
-                    InfoLabel.Text = "Wiadomość nie wysłana";
+
+                    try
+                    {
+
+
+                        var query = new Message() { Topic = Topic, Content = Message };
+                        userRepo.Table.First(x => x.UserName == User_name).Sends.Add(query);
+                        query.IsGroupMsg = true;
+
+
+                        Group g = groupRepo.Table.First(x => x.Name == Name);
+                        var MG = new MessageGroups();
+                        query.GroupRecipients = new List<MessageGroups>() { MG };
+                        g.Messages = new List<MessageGroups>() { MG };
+
+
+                        messageRepo.Insert(query);
+                        groupRepo.Update();
+                        userRepo.Update();
+
+                        InfoLabel.Text = "Wiadomość wysłana";
+                    }
+                    catch
+                    {
+                        InfoLabel.Text = "Wiadomość nie wysłana błąd wysyłania";
+                    }
+
+
+
+                    //   }
+
                 }
-
-
-
-
+                else
+                {
+                    InfoLabel.Text = "Wiadomość nie wysłana, nie istnieje taka grupa lub użytkownik";
+                }
             }
-            else if(groupRepo.Table.Any(x => x.Name == Name))
-            {
-                // znajdowanie użytkowników po grupie 
-                // var userList = groupUsersRepo.Table.Include(x => x.User).Include(g => g.Group).Where(g => g.Group.Name == Name).Select(x =>x.User).ToList();
-
-                try
-                {
-                    //  foreach (User users in userList)
-                    //  {
-
-                var query = new Message() { Topic = Topic, Content = Message };
-                userRepo.Table.First(x => x.UserName == User_name).Sends.Add(query);
-                query.IsGroupMsg = true;   
-
-
-                Group g = groupRepo.Table.First(x => x.Name == Name);
-                var MG = new MessageGroups();
-                query.GroupRecipients = new List<MessageGroups>() { MG };
-                g.Messages = new List<MessageGroups>() { MG };
-
-
-                messageRepo.Insert(query);
-                groupRepo.Update();
-                userRepo.Update();
-
-                    InfoLabel.Text = "Wiadomość wysłana";
-              }
-                catch
-                {
-                InfoLabel.Text = "Wiadomość nie wysłana";
-              }
-
-
-            //   }
+            else InfoLabel.Text = "Wiadomość jest pusta";
 
         }
-    }
-
         protected void SelectedIndexChanged(object sender, EventArgs e)
         {
 
             NameBox.Text = DropDownList.SelectedValue;
+        }
+
+        private bool CheckSendText(string input)
+        {
+            return !string.IsNullOrEmpty(input) && !string.IsNullOrWhiteSpace(input);
         }
 
     }

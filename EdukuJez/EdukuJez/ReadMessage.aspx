@@ -9,8 +9,8 @@
     <div>
                 <asp:Panel ID="TextBoxesPanel" runat="server" Style="display: inline-block; vertical-align: top;">
 
-            <asp:Button ID="ButtonReadGet" runat="server" Text="Czytaj" OnClick="btnCzytaj_Click" />
-              <asp:Button ID="ButtonReadSend" runat="server" Text="CzytajWys" OnClick="btnCzytajWys_Click" />
+            <asp:Button ID="ButtonReadGet" runat="server" Text="Odebrane" OnClick="btnCzytaj_Click" />
+              <asp:Button ID="ButtonReadSend" runat="server" Text="Wysłane" OnClick="btnCzytajWys_Click" />
             </br>
              <asp:Label ID="TopicLabelGet" runat="server" Text="Wybierz Wiadomosc" Visible="false"></asp:Label>
               <asp:Label ID="TopicLabelSend" runat="server" Text="Wybierz Wiadomosc" Visible="false"></asp:Label>

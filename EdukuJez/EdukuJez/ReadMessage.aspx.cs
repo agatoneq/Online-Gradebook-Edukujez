@@ -37,6 +37,7 @@ namespace EdukuJez
             TopicLabelGet.Visible = true;
             TopicLabelSend.Visible = false;
 
+            LoadTextToRead();
         }
 
         protected void btnCzytajWys_Click(object sender, EventArgs e)
@@ -47,6 +48,7 @@ namespace EdukuJez
             TopicLabelSend.Visible = true;
             TopicLabelGet.Visible = false;
 
+            LoadTextToRead();
         }
 
 
@@ -97,11 +99,20 @@ namespace EdukuJez
 
         protected void SelectedIndexChanged(object sender, EventArgs e)
         {
-            var CurrentTopic = int.Parse(DropDownList.SelectedValue);
+            LoadTextToRead();
+        }
+
+        void LoadTextToRead()
+        {
+            if(DropDownList.SelectedValue != "")
+            { 
+                var CurrentTopic = int.Parse(DropDownList.SelectedValue);
 
 
-            Message CurrentContent = messRepo.Table.FirstOrDefault(x => x.Id==CurrentTopic);
+            Message CurrentContent = messRepo.Table.FirstOrDefault(x => x.Id == CurrentTopic);
             TextBox.Text = CurrentContent.Content;
+        }
+            else TextBox.Text = " Brak Wiadomości"; 
         }
     }
 }
