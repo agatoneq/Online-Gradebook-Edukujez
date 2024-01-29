@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using EdukuJez.Model.Main;
 using EdukuJez.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -63,6 +64,17 @@ namespace EdukuJez
                     }
                 }
             }
+
+            if (SubjectManager.ActivtyTransferFlag)
+            {
+
+                var s = repoSubj.Table.Include(x => x.StudentGroup).First(x => x.SubjectName == SubjectManager.Subject.SubjectName);
+                GroupDropDownList.Items.Clear();
+                GroupDropDownList.Items.Add(s.StudentGroup.Name);
+                SubjectDropDownList.Items.Clear();
+                SubjectDropDownList.Items.Add(s.SubjectName);
+
+            }
         }
 
         protected void FormulaButton_Click(object sender, EventArgs e)
@@ -72,11 +84,13 @@ namespace EdukuJez
 
         protected void AnulujButton_Click(object sender, EventArgs e)
         {
+            SubjectManager.ActivtyTransferFlag = false;
             Response.Redirect("Grades.aspx");
         }
 
         protected void DodajButton_Click(object sender, EventArgs e)
         {
+            SubjectManager.ActivtyTransferFlag = false;
             Activity activity = new Activity();
             if (repoActivities.IsNameInDatabase(NameTextBox.Text))
             {
