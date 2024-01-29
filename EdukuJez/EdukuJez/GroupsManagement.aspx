@@ -3,12 +3,13 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
    
     <div style="margin-bottom: 30px;" class="header Container-Title ">
-               <asp:Button ID="GoBackButton" runat="server" Text="Panel Administratora" Style="width: 250px; height: 40px; font-size: 20px; float: left;" OnClick="GoBackButton_Click" />
+               <asp:Button ID="GoBackButton" runat="server" Text="Panel Administratora" Style="margin-top: 12px; width: 170px; height: 60px; font-size: 20px; float: left; white-space: normal;" OnClick="GoBackButton_Click" CssClass="Main-Panel-Image" ForeColor="Black" EnableTheming="True"/>
         <img src="Imgs/Groups_Management_Page_Title2.png" class="logo1" style="height: 82px; width: 550px; float: none;" />
              <asp:Button ID="x" runat="server" Text=" " Style="width: 250px; height: 40px; font-size: 20px; float: right;" BackColor="#FEFAE0" BorderColor="#FEFAE0" BorderStyle="None" />
         <hr />
-
     </div>
+
+
         <asp:Label ID="MainInfoLabel" runat="server" Text="Dodaj, edytuj lub usuń grupę podrzędną:" Font-Size="28px"></asp:Label>
 
         <div style="margin-top: 20px; width: 2000px;">

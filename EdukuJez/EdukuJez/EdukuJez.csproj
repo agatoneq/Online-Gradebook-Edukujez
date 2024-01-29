@@ -239,6 +239,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Activities.aspx" />
+    <Content Include="AddUsersToGroups.aspx" />
     <Content Include="AdminPanel.aspx" />
     <Content Include="CalendarAdminPanel.aspx" />
     <Content Include="Calendars.aspx" />
@@ -248,6 +249,18 @@
     <Content Include="Content\Main.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\Master.site.css" />
+    <Content Include="Imgs\Calendar_Title.png" />
+    <Content Include="Imgs\Changing_Password_Title.png" />
+    <Content Include="Imgs\Child_To_Parent_Management_Title.png" />
+    <Content Include="Imgs\Grades_Title.png" />
+    <Content Include="Imgs\Groups_Management_Page_Title2.png" />
+    <Content Include="Imgs\Lesson_Plan_Title.png" />
+    <Content Include="Imgs\Messages_Title.png" />
+    <Content Include="Imgs\Post_Office_Title.png" />
+    <Content Include="Imgs\Remarks_Title.png" />
+    <Content Include="Imgs\Sending_Message_Title.png" />
+    <Content Include="Imgs\Subjects_Title.png" />
+    <Content Include="Imgs\Users_In_Groups_Management_Title.png" />
     <Content Include="SubjectContentPage.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="EditClasses.aspx" />
@@ -322,6 +335,13 @@
     </Compile>
     <Compile Include="Activities.aspx.designer.cs">
       <DependentUpon>Activities.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddUsersToGroups.aspx.cs">
+      <DependentUpon>AddUsersToGroups.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddUsersToGroups.aspx.designer.cs">
+      <DependentUpon>AddUsersToGroups.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminPanel.aspx.cs">
       <DependentUpon>AdminPanel.aspx</DependentUpon>

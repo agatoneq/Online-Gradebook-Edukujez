@@ -16,9 +16,9 @@ namespace EdukuJez
                 UserSession.ChangeSiteNoPermission(this, "Main.aspx");
 
             AddTableRow(PanelFactory.MakePanel("Kontami", "#808000", "AccountsManagement.aspx", this),
-                PanelFactory.MakePanel("Kontami dla Rodziców", "#D2691E", "ChildForParent.aspx", this)); //dodać strone
+                PanelFactory.MakePanel("Kontami dla Rodziców", "#D2691E", "ChildForParent.aspx", this));
 
-            AddTableRow(PanelFactory.MakePanel("Członkami Grup", "#811B1B", "AdminPanel.aspx", this), //dodać strone                      
+            AddTableRow(PanelFactory.MakePanel("Członkami Grup", "#811B1B", "AddUsersToGroups.aspx", this),                   
                 PanelFactory.MakePanel("Grupami Użytkowników", "#9E9A74", "GroupsManagement.aspx", this));
 
                 AddTableRow(PanelFactory.MakePanel("Kalendarzem", "#996515", "CalendarAdminPanel.aspx", this),

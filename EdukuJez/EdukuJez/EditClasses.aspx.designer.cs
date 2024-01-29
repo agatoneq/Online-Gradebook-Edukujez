@@ -24,6 +24,24 @@ namespace EdukuJez
         protected global::System.Web.UI.WebControls.Table LessonTable;
 
         /// <summary>
+        /// Kontrolka GoBackButton.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button GoBackButton;
+
+        /// <summary>
+        /// Kontrolka Button1.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// Aby wprowadzić zmiany, przenieś deklarację pola z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1;
+
+        /// <summary>
         /// Kontrolka MainTable.
         /// </summary>
         /// <remarks>
