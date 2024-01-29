@@ -51,6 +51,15 @@ namespace EdukuJez
         protected global::System.Web.UI.WebControls.Table AttachmentTable;
 
         /// <summary>
+        /// Kontrolka NewAttachmentButton.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button NewAttachmentButton;
+
+        /// <summary>
         /// Kontrolka ActivitesPanel.
         /// </summary>
         /// <remarks>
@@ -76,5 +85,14 @@ namespace EdukuJez
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Table ActivitesTable;
+
+        /// <summary>
+        /// Kontrolka NewActivityButton.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button NewActivityButton;
     }
 }
