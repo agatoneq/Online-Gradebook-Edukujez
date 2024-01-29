@@ -28,5 +28,7 @@
     <asp:Button ID="DodajButton" runat="server" Text="Dodaj aktywność" OnClick="DodajButton_Click" />
     <asp:Button ID="AnulujButton" runat="server" Text="Anuluj" OnClick="AnulujButton_Click" />
     <br><br>
+    <br />
+    <asp:Label ID="InfoLabel" runat="server" Text=""></asp:Label><br>
     
 </asp:Content>
