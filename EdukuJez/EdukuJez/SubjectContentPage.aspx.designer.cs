@@ -60,6 +60,24 @@ namespace EdukuJez
         protected global::System.Web.UI.WebControls.Button NewAttachmentButton;
 
         /// <summary>
+        /// Kontrolka DelAttachmentButton.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button DelAttachmentButton;
+
+        /// <summary>
+        /// Kontrolka AttachmentDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList AttachmentDropDownList;
+
+        /// <summary>
         /// Kontrolka ActivitesPanel.
         /// </summary>
         /// <remarks>
@@ -94,6 +112,24 @@ namespace EdukuJez
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button NewActivityButton;
+
+        /// <summary>
+        /// Kontrolka DelActivityButton.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button DelActivityButton;
+
+        /// <summary>
+        /// Kontrolka ActivityDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Pole generowane automatycznie.
+        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ActivityDropDownList;
 
         /// <summary>
         /// Kontrolka GoBackButton.

@@ -14,12 +14,15 @@ namespace EdukuJez
     public partial class SubjectContentPage : Page
     {
         const String SUBJECT_SITE = "SubjectPage.aspx";
+        const String SUBJECT_SELF = "SubjectContentPage.aspx";
         const String ADD_ATTACHMENT_SITE = "AddAttachment.aspx";
         const String ADD_ACTIVITY_SITE = "Activities.aspx";
         Subject presentedSubject;
         protected void Page_load(object sender, EventArgs e)
         {
+            SubjectManager.ReloadSubject();
             presentedSubject = SubjectManager.Subject;
+
             if (presentedSubject is null)
                 Response.Redirect(SUBJECT_SITE);
 
@@ -44,6 +47,8 @@ namespace EdukuJez
         }
         protected void ShowFile(object sender, EventArgs e)
         {
+            SubjectManager.ReloadSubject();
+            presentedSubject = SubjectManager.Subject;
             Attachment attachment = (Attachment)sender;
             if (attachment.Content == null)
                 return;
@@ -72,6 +77,8 @@ namespace EdukuJez
         {
             AttachmentTable.Rows.Clear();
             ActivitesTable.Rows.Clear();
+            AttachmentDropDownList.Items.Clear();
+            ActivityDropDownList.Items.Clear();
             if (presentedSubject.Attachments.Count == 0)
             {
                 var r = new TableRow();
@@ -85,6 +92,7 @@ namespace EdukuJez
                 var row = new TableRow();
                 foreach (var a in presentedSubject.Attachments)
                 {
+                    AttachmentDropDownList.Items.Add(new ListItem() { Value = a.Id.ToString(), Text = a.Name });
                     ListPanel<Attachment> p;
                     if (Attachment.AttachmentContentType.Contains(a.ContentType))
                         p = PanelFactory.MakeAttachmentListPanel(this.ShowAttachment, a);
@@ -112,6 +120,7 @@ namespace EdukuJez
                 var row = new TableRow();
                 foreach (var a in presentedSubject.Activites)
                 {
+                    ActivityDropDownList.Items.Add(new ListItem() { Value = a.Id.ToString(), Text = a.Name });
                     var p = PanelFactory.MakeActivityListPanel(this.ShowActivity, a);
                     row.Cells.Add(p.ConvertToCell());
                     if (row.Cells.Count > 5)
@@ -138,6 +147,24 @@ namespace EdukuJez
         protected void GoBackButton_Click(object sender, EventArgs e)
         {
             Response.Redirect(SUBJECT_SITE);
+        }
+
+        protected void DelAttachmentButton_Click(object sender, EventArgs e)
+        {
+            var id = int.Parse(AttachmentDropDownList.SelectedItem.Value);
+            var actRep = new AttachmentsRepository();
+            var a =actRep.Table.FirstOrDefault(x => x.Id == id);
+            actRep.Delete(a);
+            Response.Redirect(SUBJECT_SELF);
+        }
+
+        protected void DelActivityButton_Click(object sender, EventArgs e)
+        {
+            var id = int.Parse(ActivityDropDownList.SelectedItem.Value);
+            var actRep = new ActivitiesRepository();
+            var a = actRep.Table.FirstOrDefault(x => x.Id == id);
+            actRep.Delete(a);
+            Response.Redirect(SUBJECT_SELF);
         }
     }
 }
