@@ -1,4 +1,5 @@
 ﻿using EdukuJez.Repositories;
+using Microsoft.Ajax.Utilities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -77,6 +78,7 @@ namespace EdukuJez
 
         protected void ConfirmAddClick(object sender, EventArgs e)
         {
+            users = userRepo.Table.ToList();
             string userBoxFullName = UsersBox.Text;
             string[] parts = userBoxFullName.Split(' ');
             firstName = parts[0];
@@ -93,44 +95,41 @@ namespace EdukuJez
             userRepo.Update();
             groupRepo.Update();
 
-            ConfirmInfoLabel.Text = "Dodałeś " + UsersBox.Text + " do grupy o nazwie " + PossibleGroupsBox.Text + " Możesz kontynuować.";
+            ConfirmInfoLabel.Text = "Dodałeś " + UsersBox.Text + " do grupy o nazwie " + PossibleGroupsBox.Text + ". Możesz kontynuować.";
             CancelButton.Visible = false;
             ConfirmAddButton.Visible = false;
-            CurrentGroupsBox.DataBind();
-            PossibleGroupsBox.DataBind();
+
+            UploadGroupsLists(users);
         }
 
         protected void ConfirmDeleteClick(object sender, EventArgs e)
         {
+            users = userRepo.Table.ToList();
             string userBoxFullName = UsersBox.Text;
             string[] parts = userBoxFullName.Split(' ');
             firstName = parts[0];
             lastName = parts[1];
             login = parts[2].Trim('(', ')');
 
-            /*            User userToDelete = userRepo.Table.FirstOrDefault(x => x.UserLogin == login);
-
-                        Group groupToDeleteFrom = groupRepo.Table.FirstOrDefault(x => x.Name == CurrentGroupsBox.Text);
-                        var groupUserToDelete = groupToDeleteFrom.Users.FirstOrDefault(gu => gu.UserId == userToDelete.Id);
-                        groupToDeleteFrom.Users.Remove(groupUserToDelete);*/
-
 
             User userToEdit = new User();
             Group g = groupRepo.Table.FirstOrDefault(x => x.Name == CurrentGroupsBox.Text);
-            var gu = new GroupUser();
+            //var gu = new GroupUser();
             userToEdit = userRepo.Table.FirstOrDefault(x => x.UserLogin == login);
-            gu = groupUserRepo.Table.FirstOrDefault(x => x.Group == g && x.User == userToEdit);
+            List<GroupUser> groupUserList = groupUserRepo.Table.Include(u => u.User).Include(gr => gr.Group).ToList();
+            var gu = groupUserList.FirstOrDefault(x => x.Group.Id == g.Id && x.User.Id == userToEdit.Id);
             g.Users.Remove(gu);
             userToEdit.Groups.Remove(gu);
 
+            groupUserRepo.Delete(gu);
             userRepo.Update();
             groupRepo.Update();
 
-            ConfirmInfoLabel.Text = "Usunąłeś " + UsersBox.Text + " z grupy o nazwie " + CurrentGroupsBox.Text + " Możesz kontynuować.";
+            ConfirmInfoLabel.Text = "Usunąłeś " + UsersBox.Text + " z grupy o nazwie " + CurrentGroupsBox.Text + ". Możesz kontynuować.";
             CancelButton.Visible = false;
             ConfirmDeleteButton.Visible = false;
-            CurrentGroupsBox.DataBind();
-            PossibleGroupsBox.DataBind();
+
+            UploadGroupsLists(users);
         }
 
         protected void CancelClick(object sender, EventArgs e)
