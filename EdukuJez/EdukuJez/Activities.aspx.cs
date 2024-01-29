@@ -83,15 +83,6 @@ namespace EdukuJez
             }
             else
                 activity.Name = NameTextBox.Text;
-            if (SubjectDropDownList.SelectedValue != "Najpierw wybierz grupę")
-            {
-                activity.Subject = repoSubj.Table.First(x => x.SubjectName == SubjectDropDownList.SelectedValue);
-            }
-            else
-            {
-                SubjectLabel.ForeColor = System.Drawing.Color.Red;
-                return;
-            }
             if (ISFinalCheckBox1.Checked)
             {
                 activity.IsFinalGrade = true;
@@ -122,6 +113,15 @@ namespace EdukuJez
                 SubjectLabel.ForeColor = System.Drawing.Color.Red;
                 return;
             }
+            if (SubjectDropDownList.SelectedValue != "Najpierw wybierz grupę")
+            {
+                repoSubj.Table.First(x => x.SubjectName == SubjectDropDownList.SelectedValue).Activites.Add(activity);
+            }
+            else
+            {
+                SubjectLabel.ForeColor = System.Drawing.Color.Red;
+                return;
+            }
             grade.Activity = activity; //activity
             if (TypeDropDownList.SelectedValue == "Skala nominalna")
                 grade.GradeType = "nominalna"; //grade type
@@ -131,7 +131,7 @@ namespace EdukuJez
             int idGroup = repoGroups.Table.First(x => x.Name == GroupDropDownList.SelectedValue).Id;
            // var users = repoGroups.Table.Where(x => x.Name == GroupDropDownList.SelectedValue).Select(x => x.Users);// repoUsers.Table.Select(x => x).Where(x => x.Groups.Any(y => y.Id == idGroup)).ToList();// repoGroupUser.Table.Select(x => x).Where(x => x.User.Groups.Any(y => y.Id == idGroup)).ToList();
             var users = repoUsers.Table.Where(x => x.Groups.Any(y => y.Id == idGroup)).Select(x => x).ToList();
-            repoActivities.Insert(activity);
+            repoSubj.Update();
             foreach (var u in users)
             {
                 grade.StudentId = u.Id; //student
