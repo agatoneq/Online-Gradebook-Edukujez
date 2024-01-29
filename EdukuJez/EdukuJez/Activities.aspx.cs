@@ -22,13 +22,10 @@ namespace EdukuJez
         {
             if (!IsPostBack)
             {
-<<<<<<< HEAD
                 if(SubjectDropDownList.Items.Count==0)
                     SubjectDropDownList.Items.Add("Najpierw wybierz grupę");
-=======
 
                 SubjectDropDownList.Items.Add("Najpierw wybierz grupę");
->>>>>>> 891bf7b254ce81df1dddb91a1662e9bf4a3275da
                 List<String> grupy = repoGroups.Table.Include(x => x.Classes)
                             .Where(x => x.Classes.Any(c => c.Warden.Id == UserSession.GetSession().UserId))
                             .Select(x => x.Name)
@@ -40,7 +37,6 @@ namespace EdukuJez
                     {
                         GroupDropDownList.Items.Add(g);
                     }
-<<<<<<< HEAD
                 }
                 if (GroupDropDownList.Items.Count != 0)
                 {
@@ -63,8 +59,6 @@ namespace EdukuJez
                         SubjectDropDownList.Items.Clear();
                         SubjectDropDownList.Items.Add("Brak przedmiotów");
                     }
-=======
->>>>>>> 891bf7b254ce81df1dddb91a1662e9bf4a3275da
                 }
             }
         }
