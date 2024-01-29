@@ -239,6 +239,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdminPanel.aspx" />
+    <Content Include="Attendances.aspx" />
     <Content Include="CalendarAdminPanel.aspx" />
     <Content Include="Calendars.aspx" />
     <Content Include="ChangingPassword.aspx" />
@@ -324,6 +325,13 @@
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Attendances.aspx.cs">
+      <DependentUpon>Attendances.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Attendances.aspx.designer.cs">
+      <DependentUpon>Attendances.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CalendarAdminPanel.aspx.cs">
       <DependentUpon>CalendarAdminPanel.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
