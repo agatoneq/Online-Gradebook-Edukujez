@@ -11,5 +11,11 @@ namespace EdukuJez.Repositories
         {
             Table = Context.Activities;
         }
+
+        public bool IsNameInDatabase(string name)
+        {
+            return Table.Any(x => x.Name == name);
+
+        }
     }
 }

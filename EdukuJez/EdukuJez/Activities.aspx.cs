@@ -17,9 +17,11 @@ namespace EdukuJez
         GradesRepository repoGrades = new GradesRepository();
         GroupUsersRepository repoGroupUser = new GroupUsersRepository();
         UsersRepository repoUsers = new UsersRepository();
+        User currentuser;
         //  FormulasRepository formulasRepo = new FormulasRepository(); //odkomentowac 1/3
         protected void Page_Load(object sender, EventArgs e)
         {
+            currentuser = UserSession.GetSession().user;
             if (!IsPostBack)
             {
                 if(SubjectDropDownList.Items.Count==0)
@@ -76,8 +78,15 @@ namespace EdukuJez
         protected void DodajButton_Click(object sender, EventArgs e)
         {
             Activity activity = new Activity();
-            if (NameTextBox.Text.Length == 0) //jesli nie podano nazwy
+            if (repoActivities.IsNameInDatabase(NameTextBox.Text))
             {
+                InfoLabel.Text = "Aktywność o tej nazwie już istnieje!";
+                NameLabel.ForeColor = System.Drawing.Color.Red;
+                return;
+            }
+            else if (NameTextBox.Text.Length == 0) //jesli nie podano nazwy
+            {
+                InfoLabel.Text = "Nazwa nie może być pusta!";
                 NameLabel.ForeColor = System.Drawing.Color.Red;
                 return;
             }
@@ -132,13 +141,20 @@ namespace EdukuJez
             }
             int idGroup = repoGroups.Table.First(x => x.Name == GroupDropDownList.SelectedValue).Id;
            // var users = repoGroups.Table.Where(x => x.Name == GroupDropDownList.SelectedValue).Select(x => x.Users);// repoUsers.Table.Select(x => x).Where(x => x.Groups.Any(y => y.Id == idGroup)).ToList();// repoGroupUser.Table.Select(x => x).Where(x => x.User.Groups.Any(y => y.Id == idGroup)).ToList();
-            var users = repoUsers.Table.Where(x => x.Groups.Any(y => y.Id == idGroup)).Select(x => x).ToList();
+            var usersId = repoUsers.Table.Where(x => x.Groups.Any(y => y.Id == idGroup)).Select(x => x.Id).ToList();
+
             repoSubj.Update();
-            foreach (var u in users)
+
+            foreach (var u in usersId)
             {
-                grade.StudentId = u.Id; //student
-                repoGrades.Insert(grade);
+                repoUsers.Table.FirstOrDefault(x => x.Id == currentuser.Id).SubmittedGrades.Add(grade);
+                repoUsers.Table.FirstOrDefault(x => x.Id == u).Grades.Add(grade);
+                repoUsers.Update();
+                repoGrades.Update();
             }
+
+
+            InfoLabel.Text = "Dodałeś aktywność o nazwie " + NameTextBox.Text + ". Możesz kontynuować.";
         }
 
         protected void ISFinalCheckBox1_CheckedChanged(object sender, EventArgs e)
