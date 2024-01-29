@@ -7,20 +7,24 @@
         <hr />
     </div>
     <div>
+                <asp:Table ID="MainTable" runat="server" CellSpacing="20" CssClass="Center-Form  Main-Table" HorizontalAlign="Left">
+
+
+    </asp:Table>
                 <asp:Panel ID="TextBoxesPanel" runat="server" Style="display: inline-block; vertical-align: top;">
 
-            <asp:Button ID="ButtonReadGet" runat="server" Text="Czytaj" OnClick="btnCzytaj_Click" />
-              <asp:Button ID="ButtonReadSend" runat="server" Text="CzytajWys" OnClick="btnCzytajWys_Click" />
+            <asp:Button ID="ButtonReadGet" runat="server" Text="Odebrane" OnClick="btnCzytaj_Click" />
+              <asp:Button ID="ButtonReadSend" runat="server" Text="Wysłane" OnClick="btnCzytajWys_Click" />
+                    <br>
+                    <br></br>
+                    <br></br>
+                    <asp:TextBox ID="TextBox" runat="server" AutoPostBack="false" ReadOnly="true" Style="display: block; margin-top: 10px; width: 2000px; height:500px; font-size: 16px; overflow: auto;" Text="Tutaj jest wiadomosc" TextMode="MultiLine" Visible="true"></asp:TextBox>
             </br>
-             <asp:Label ID="TopicLabelGet" runat="server" Text="Wybierz Wiadomosc" Visible="false"></asp:Label>
-              <asp:Label ID="TopicLabelSend" runat="server" Text="Wybierz Wiadomosc" Visible="false"></asp:Label>
-<asp:DropDownList ID="DropDownList" runat="server" OnSelectedIndexChanged="SelectedIndexChanged" AutoPostBack="true" Visible="false"></asp:DropDownList>
-              </br>
-            <asp:TextBox ID="TextBox" runat="server" Text="Tutaj jest wiadomosc" ReadOnly="true" TextMode="MultiLine" Style="display: block; margin-top: 10px; width: 1000px; height:500px; font-size: 16px; overflow: auto;" AutoPostBack="false" Visible="false"></asp:TextBox>
     </asp:Panel>
 
 
             </asp:Panel>
         </div>
             </asp:Panel>
+    <asp:HiddenField ID="Hidden" runat="server" />
 </asp:Content>

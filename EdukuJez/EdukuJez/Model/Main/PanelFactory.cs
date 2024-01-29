@@ -75,5 +75,26 @@ namespace EdukuJez.Model.Main
             return new ListPanel<Activity>(p, act);
         }
 
+        public static ListPanel<Message> MakePanelMessage(String Title, Page MainPage,Action<object, EventArgs> onClickMethod, Message Mess)
+        {
+            Panel p = new Panel();
+            p.CssClass = "Message-Panel";
+            p.BackColor = System.Drawing.ColorTranslator.FromHtml("#707070");
+            p.BorderColor = Color.Black;
+            p.BorderStyle = BorderStyle.Double;
+            Panel inner = new Panel() { CssClass = "Message-Label-Panel" };
+            Literal title = new Literal();
+            title.Text = Title;
+            inner.Controls.Add(title);
+            p.Controls.Add(inner);
+            ImageButton img = new ImageButton();
+            img.CssClass = "Message-Panel-Image";
+            img.ImageUrl = "~/Imgs/blank.png";
+            img.Click += (s, args) => onClickMethod(Mess, args) ;
+            // Dodajemy kontrolkę Image do kontrolki Panel
+            p.Controls.Add(img);
+
+            return new ListPanel<Message>(p, Mess);
+        }
     }
 }

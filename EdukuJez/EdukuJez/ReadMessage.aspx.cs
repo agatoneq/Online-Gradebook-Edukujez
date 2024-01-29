@@ -1,4 +1,5 @@
-﻿using EdukuJez.Model.ServerAccess.Repositories;
+﻿using EdukuJez.Model.Main;
+using EdukuJez.Model.ServerAccess.Repositories;
 using EdukuJez.Repositories;
 using Microsoft.Ajax.Utilities;
 using Microsoft.EntityFrameworkCore;
@@ -27,51 +28,54 @@ namespace EdukuJez
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(Hidden.Value == "1")
+            {
+                LoadGetData();
+            }
+            else if (Hidden.Value == "2")
+            {
+               LoadSendData();
+            }
         }
         protected void btnCzytaj_Click(object sender, EventArgs e)
         {
             LoadGetData();
-            DropDownList.Visible = true;
-            TextBox.Visible = true;
-            TopicLabelGet.Visible = true;
-            TopicLabelSend.Visible = false;
 
+            Hidden.Value = "1";
         }
 
         protected void btnCzytajWys_Click(object sender, EventArgs e)
         {
             LoadSendData();
-            DropDownList.Visible = true;   
-            TextBox.Visible = true;
-            TopicLabelSend.Visible = true;
-            TopicLabelGet.Visible = false;
+
+
+            Hidden.Value = "2";
 
         }
 
 
         private void LoadGetData()
         {
-            DropDownList.Items.Clear();
+            MainTable.Rows.Clear();
 
-            var messListGetUser = MU.Table.Include(x => x.User).Include(m => m.Message).Where(x => x.User.Id == CurrentUser.UserId).Select(m =>m.Message);
+            var messListGetUser = MU.Table.Include(x => x.User).Include(m => m.Message).ThenInclude(x => x.Sender).Where(x => x.User.Id == CurrentUser.UserId).Select(m =>m.Message);
             foreach (Message message in messListGetUser)
             {
-                ListItem item = new ListItem(message.Topic, message.Id.ToString());
+                AddTableRow(PanelFactory.MakePanelMessage(message.Topic, this, LoadTextToRead, message));
 
-                DropDownList.Items.Add(item);
 
             }
+
+
             var userGroupList = GURepo.Table.Include(x => x.User).Include(g => g.Group).Where(g => g.User.Id == CurrentUser.UserId).Select(x => x.Group).ToList();
 
             foreach (Group group in userGroupList)
             {
-             var messListGetGroup = MGRepo.Table.Include(x => x.Group).Include(m => m.Message).Where(x => x.Group.Id == group.Id).Select(m => m.Message);
+             var messListGetGroup = MGRepo.Table.Include(x => x.Group).Include(m => m.Message).ThenInclude(x => x.Sender).Where(x => x.Group.Id == group.Id).Select(m => m.Message);
                 foreach(Message message in messListGetGroup)
                 {
-                    ListItem item = new ListItem(message.Topic, message.Id.ToString());
+                    AddTableRow(PanelFactory.MakePanelMessage(message.Topic, this, LoadTextToRead, message));
 
-                    DropDownList.Items.Add(item);
                 }
             }
 
@@ -81,27 +85,40 @@ namespace EdukuJez
 
         private void LoadSendData()
         {
-
-            DropDownList.Items.Clear();
-            var messListSend = messRepo.Table.Where(x => x.Sender.Id == CurrentUser.UserId);
+            MainTable.Rows.Clear(); 
+            
+            var messListSend = messRepo.Table.Include(x => x.Sender).Where(x => x.Sender.Id == CurrentUser.UserId);
 
             foreach (Message message in messListSend)
             {
-                ListItem item = new ListItem(message.Topic, message.Id.ToString());
 
-                DropDownList.Items.Add(item);
+                AddTableRow(PanelFactory.MakePanelMessage(message.Topic, this, LoadTextToRead, message));
+
 
             }
         }
 
 
-        protected void SelectedIndexChanged(object sender, EventArgs e)
+        void LoadTextToRead(object sender, EventArgs e)
         {
-            var CurrentTopic = int.Parse(DropDownList.SelectedValue);
+
+            Message mess = (Message)sender;
+            TextBox.Text = " Nadawca:" +mess.Sender.UserName + mess.Sender.UserSurname+ "\n \n"+mess.Content + " \n \n Data wysłania wiadomości: " + mess.DateTime;
+        
+
+        }
 
 
-            Message CurrentContent = messRepo.Table.FirstOrDefault(x => x.Id==CurrentTopic);
-            TextBox.Text = CurrentContent.Content;
+
+
+        private void AddTableRow(params ListPanel<Message>[] cells)
+        {
+            TableRow row = new TableRow();
+            foreach (var t in cells)
+            {
+                row.Controls.Add(t.ConvertToCell());
+            }
+            MainTable.Rows.Add(row);
         }
     }
 }

@@ -10,7 +10,8 @@ namespace EdukuJez.Model.Main
 {
     public static class SubjectManager
     {
-        public static Subject Subject{get; set;}
+        public static Subject Subject{get; set; }
+        public static bool ActivtyTransferFlag { get; set; } = false;
 
         public static void ReloadSubject()
         {

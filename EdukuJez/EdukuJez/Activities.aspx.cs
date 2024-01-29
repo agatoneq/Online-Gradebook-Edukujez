@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using EdukuJez.Model.Main;
 using EdukuJez.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,9 +18,11 @@ namespace EdukuJez
         GradesRepository repoGrades = new GradesRepository();
         GroupUsersRepository repoGroupUser = new GroupUsersRepository();
         UsersRepository repoUsers = new UsersRepository();
+        User currentuser;
         //  FormulasRepository formulasRepo = new FormulasRepository(); //odkomentowac 1/3
         protected void Page_Load(object sender, EventArgs e)
         {
+            currentuser = UserSession.GetSession().user;
             if (!IsPostBack)
             {
                 if(SubjectDropDownList.Items.Count==0)
@@ -61,6 +64,17 @@ namespace EdukuJez
                     }
                 }
             }
+
+            if (SubjectManager.ActivtyTransferFlag)
+            {
+
+                var s = repoSubj.Table.Include(x => x.StudentGroup).First(x => x.SubjectName == SubjectManager.Subject.SubjectName);
+                GroupDropDownList.Items.Clear();
+                GroupDropDownList.Items.Add(s.StudentGroup.Name);
+                SubjectDropDownList.Items.Clear();
+                SubjectDropDownList.Items.Add(s.SubjectName);
+
+            }
         }
 
         protected void FormulaButton_Click(object sender, EventArgs e)
@@ -70,28 +84,28 @@ namespace EdukuJez
 
         protected void AnulujButton_Click(object sender, EventArgs e)
         {
+            SubjectManager.ActivtyTransferFlag = false;
             Response.Redirect("Grades.aspx");
         }
 
         protected void DodajButton_Click(object sender, EventArgs e)
         {
+            SubjectManager.ActivtyTransferFlag = false;
             Activity activity = new Activity();
-            if (NameTextBox.Text.Length == 0) //jesli nie podano nazwy
+            if (repoActivities.IsNameInDatabase(NameTextBox.Text))
             {
+                InfoLabel.Text = "Aktywność o tej nazwie już istnieje!";
+                NameLabel.ForeColor = System.Drawing.Color.Red;
+                return;
+            }
+            else if (NameTextBox.Text.Length == 0) //jesli nie podano nazwy
+            {
+                InfoLabel.Text = "Nazwa nie może być pusta!";
                 NameLabel.ForeColor = System.Drawing.Color.Red;
                 return;
             }
             else
                 activity.Name = NameTextBox.Text;
-            if (SubjectDropDownList.SelectedValue != "Najpierw wybierz grupę")
-            {
-                activity.Subject = repoSubj.Table.First(x => x.SubjectName == SubjectDropDownList.SelectedValue);
-            }
-            else
-            {
-                SubjectLabel.ForeColor = System.Drawing.Color.Red;
-                return;
-            }
             if (ISFinalCheckBox1.Checked)
             {
                 activity.IsFinalGrade = true;
@@ -122,22 +136,39 @@ namespace EdukuJez
                 SubjectLabel.ForeColor = System.Drawing.Color.Red;
                 return;
             }
+            if (SubjectDropDownList.SelectedValue != "Najpierw wybierz grupę")
+            {
+                repoSubj.Table.First(x => x.SubjectName == SubjectDropDownList.SelectedValue).Activites.Add(activity);
+            }
+            else
+            {
+                SubjectLabel.ForeColor = System.Drawing.Color.Red;
+                return;
+            }
             grade.Activity = activity; //activity
             if (TypeDropDownList.SelectedValue == "Skala nominalna")
                 grade.GradeType = "nominalna"; //grade type
             else
+            {
                 grade.GradeType = "procentowa"; //grade type
-
+                activity.Name += " [%]";
+            }
             int idGroup = repoGroups.Table.First(x => x.Name == GroupDropDownList.SelectedValue).Id;
            // var users = repoGroups.Table.Where(x => x.Name == GroupDropDownList.SelectedValue).Select(x => x.Users);// repoUsers.Table.Select(x => x).Where(x => x.Groups.Any(y => y.Id == idGroup)).ToList();// repoGroupUser.Table.Select(x => x).Where(x => x.User.Groups.Any(y => y.Id == idGroup)).ToList();
-            var users = repoUsers.Table.Where(x => x.Groups.Any(y => y.Id == idGroup)).Select(x => x).ToList();
-            repoActivities.Insert(activity);
-            foreach (var u in users)
+            var usersId = repoUsers.Table.Where(x => x.Groups.Any(y => y.Id == idGroup)).Select(x => x.Id).ToList();
+
+            repoSubj.Update();
+
+            foreach (var u in usersId)
             {
-                grade.StudentId = u.Id; //student
-                repoGrades.Insert(grade);
+                repoUsers.Table.FirstOrDefault(x => x.Id == currentuser.Id).SubmittedGrades.Add(grade);
+                repoUsers.Table.FirstOrDefault(x => x.Id == u).Grades.Add(grade);
+                repoUsers.Update();
+                repoGrades.Update();
             }
-            
+
+
+            InfoLabel.Text = "Dodałeś aktywność o nazwie " + NameTextBox.Text + ". Możesz kontynuować.";
         }
 
         protected void ISFinalCheckBox1_CheckedChanged(object sender, EventArgs e)

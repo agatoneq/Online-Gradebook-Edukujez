@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using EdukuJez.Repositories;
 using System.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.X509Certificates;
 
 namespace EdukuJez
 {
@@ -48,13 +49,12 @@ namespace EdukuJez
                         EditButton.Visible = false;
                         if (!IsPostBack)
                         {
-                            var c = View.GetSubjects(currentuser.Id);
-                            if (c.Count() != 0)
+                            var subjects = repoSubj.Table.Where(x => x.StudentGroup.Users.Any(y => y.User.Id == currentuser.Id)).Select(x => x.SubjectName).ToList();
+
+                            if (subjects.Any())
                             {
-                                foreach (var i in c)
-                                {
-                                    SubjectsDropDownList.Items.Add(i.SubjectName);
-                                }
+                                SubjectsDropDownList.DataSource = subjects;
+                                SubjectsDropDownList.DataBind();
                             }
                             else
                             {
@@ -110,7 +110,7 @@ namespace EdukuJez
                             return;
                         }
                         var list = repoGrades.Table.Include(x => x.Users).Include(x => x.Activity)
-                            .Where(x => x.Users.Id == currentuser.Id);
+                            .Where(x => x.Users.Id == currentuser.Id && x.Subject.SubjectName == SubjectsDropDownList.Text);
                         //wiersze tabeli:
                         if (list.Count() != 0)
                         {
@@ -268,6 +268,9 @@ namespace EdukuJez
                 grade.GradeValue = changeList[j];
                 j++;
 
+                grade.GradeWeight = changeList[j];
+                j++;
+
             }
             repoGrades.Update();
         }
@@ -295,7 +298,7 @@ namespace EdukuJez
                     dataTable.Columns.Add("Waga " + i.Name, typeof(int)).ReadOnly = false;
                 }
             }
-            dataTable.Columns.Add("Ocena końcowa", typeof(int)).ReadOnly = true; //kolumna oceny koncowej
+            dataTable.Columns.Add("Ocena automatyczna", typeof(int)).ReadOnly = true; //kolumna oceny koncowej
 
             grades = grades.OrderBy(x => x.Users.UserSurname).OrderBy(x => x.Users.UserName).ToList();
             //wiersze:
@@ -317,7 +320,7 @@ namespace EdukuJez
                     suma += ocena * waga; //do sredniej wazonej
                     liczba += waga; //do sredniej wazonej
                 }
-                newRow["Ocena końcowa"] = suma / liczba; //do sredniej wazonej
+                newRow["Ocena automatyczna"] = suma / liczba; //do sredniej wazonej
                 dataTable.Rows.Add(newRow);
             }
 
