@@ -37,13 +37,10 @@ namespace EdukuJez
 
                 List<User> users = userRepo.Table.ToList();
                 List<GroupUser> groupUserList = groupUserRepo.Table.Include(u => u.User).Include(g => g.Group).ToList();
-                List<int> teachersId = groupUserList.Where(x => x.Group != null && x.Group.Id == 2 && x.User != null).Select(x => x.User.Id).ToList();
+                List<int> teachersId = groupUserList.Where(x => x.Group != null && x.Group.Name == UserSession.TEACHER_GROUP && x.User != null).Select(x => x.User.Id).ToList();
                 
 
                 TeachersList.DataSource = users.Where(x => teachersId.Contains(x.Id)).Select(user => $"{user.UserName} {user.UserSurname}");
-
-                List <string> TeachersControlList = (users.Where(x => teachersId.Contains(x.Id)).Select(user => $"{user.UserName} {user.UserSurname}")).ToList();
-
                 TeachersList.DataBind();
             }
         }

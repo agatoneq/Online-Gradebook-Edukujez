@@ -16,13 +16,19 @@ namespace EdukuJez
         ActivitiesRepository repoActivities = new ActivitiesRepository();
         GradesRepository repoGrades = new GradesRepository();
         GroupUsersRepository repoGroupUser = new GroupUsersRepository();
+        UsersRepository repoUsers = new UsersRepository();
         //  FormulasRepository formulasRepo = new FormulasRepository(); //odkomentowac 1/3
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+<<<<<<< HEAD
+                if(SubjectDropDownList.Items.Count==0)
+                    SubjectDropDownList.Items.Add("Najpierw wybierz grupę");
+=======
 
                 SubjectDropDownList.Items.Add("Najpierw wybierz grupę");
+>>>>>>> 891bf7b254ce81df1dddb91a1662e9bf4a3275da
                 List<String> grupy = repoGroups.Table.Include(x => x.Classes)
                             .Where(x => x.Classes.Any(c => c.Warden.Id == UserSession.GetSession().UserId))
                             .Select(x => x.Name)
@@ -34,6 +40,31 @@ namespace EdukuJez
                     {
                         GroupDropDownList.Items.Add(g);
                     }
+<<<<<<< HEAD
+                }
+                if (GroupDropDownList.Items.Count != 0)
+                {
+                    GroupDropDownList.SelectedValue = GroupDropDownList.Items[0].Value;
+                    var przedmioty = repoSubj.Table.Include(x => x.Classes)
+                     .ThenInclude(x => x.Group)
+                     .Where(x => x.Classes.Any(c => c.Group.Name == GroupDropDownList.SelectedValue))
+                     .ToList();
+
+                    if (przedmioty.Count() != 0)
+                    {
+                        SubjectDropDownList.Items.Clear();
+                        foreach (var p in przedmioty)
+                        {
+                            SubjectDropDownList.Items.Add(p.SubjectName);
+                        }
+                    }
+                    else
+                    {
+                        SubjectDropDownList.Items.Clear();
+                        SubjectDropDownList.Items.Add("Brak przedmiotów");
+                    }
+=======
+>>>>>>> 891bf7b254ce81df1dddb91a1662e9bf4a3275da
                 }
             }
         }
@@ -77,7 +108,7 @@ namespace EdukuJez
 
             //dodanie ocen:
             Grade grade = new Grade();
-            grade.GradeValue = -1; //value
+            grade.GradeValue = 0; //value
             int waga;
             if (int.TryParse(WeightTextBox.Text, out waga) == true)
             {
@@ -85,7 +116,7 @@ namespace EdukuJez
             }
             else
             {
-                WeightTextBox.ForeColor = System.Drawing.Color.Red;
+                WeightLabel.ForeColor = System.Drawing.Color.Red;
                 return;
             }
             grade.TeacherId = UserSession.GetSession().UserId; //teacher
@@ -104,13 +135,15 @@ namespace EdukuJez
                 grade.GradeType = "procentowa"; //grade type
 
             int idGroup = repoGroups.Table.First(x => x.Name == GroupDropDownList.SelectedValue).Id;
-            var users = repoGroupUser.Table.Select(x => x).Where(x => x.User.Groups.Any(y => y.Id == idGroup));
+           // var users = repoGroups.Table.Where(x => x.Name == GroupDropDownList.SelectedValue).Select(x => x.Users);// repoUsers.Table.Select(x => x).Where(x => x.Groups.Any(y => y.Id == idGroup)).ToList();// repoGroupUser.Table.Select(x => x).Where(x => x.User.Groups.Any(y => y.Id == idGroup)).ToList();
+            var users = repoUsers.Table.Where(x => x.Groups.Any(y => y.Id == idGroup)).Select(x => x).ToList();
+            repoActivities.Insert(activity);
             foreach (var u in users)
             {
                 grade.StudentId = u.Id; //student
                 repoGrades.Insert(grade);
             }
-            repoActivities.Insert(activity);
+            
         }
 
         protected void ISFinalCheckBox1_CheckedChanged(object sender, EventArgs e)
@@ -143,26 +176,28 @@ namespace EdukuJez
         //wybrano grupe:
         protected void GroupDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (SubjectDropDownList.Items.Count == 0)
+            if(GroupDropDownList.SelectedValue == "" && GroupDropDownList.Items.Count != 0)
             {
-                var przedmioty = repoSubj.Table.Include(x => x.Classes)
-                            .ThenInclude(x => x.Group)
-                            .Where(x => x.Classes.Any(c => c.Group.Name == GroupDropDownList.SelectedValue))
-                            .Select(z => z.SubjectName)
-                            .ToList();
+                GroupDropDownList.SelectedValue = GroupDropDownList.Items[0].Value;
+            }
+            var przedmioty = repoSubj.Table.Include(x => x.Classes)
+                    .ThenInclude(x => x.Group)
+                    .Where(x => x.Classes.Any(c => c.Group.Name == GroupDropDownList.SelectedValue))
+                    .ToList();
 
-                if (przedmioty.Count() != 0)
+            if (przedmioty.Count() != 0)
+            {
+                foreach (var p in przedmioty)
                 {
-                    foreach (var p in przedmioty)
-                    {
-                        SubjectDropDownList.Items.Add(p);
-                    }
-                }
-                else
-                {
-                    SubjectDropDownList.Items.Add("Brak przedmiotów");
+                    SubjectDropDownList.Items.Add(p.SubjectName);
                 }
             }
+            else
+            {
+                SubjectDropDownList.Items.Clear();
+                SubjectDropDownList.Items.Add("Brak przedmiotów");
+            }
+
         }
     }
 }
