@@ -7,12 +7,12 @@
     <asp:TextBox ID="NameTextBox" runat="server"></asp:TextBox>
     <br><br>
     <asp:Label ID="GroupLabel" runat="server" Text="Grupa: *"></asp:Label><br>
-    <asp:DropDownList ID="GroupDropDownList" runat="server"></asp:DropDownList>
+    <asp:DropDownList ID="GroupDropDownList" runat="server" AutoPostBack="True" OnInit="GroupDropDownList_SelectedIndexChanged" OnSelectedIndexChanged="GroupDropDownList_SelectedIndexChanged"></asp:DropDownList>
     <br><br>
     <asp:Label ID="SubjectLabel" runat="server" Text="Przedmiot: *"></asp:Label><br>
-    <asp:DropDownList ID="SubjectDropDownList" runat="server" ></asp:DropDownList>
+    <asp:DropDownList ID="SubjectDropDownList" runat="server" AutoPostBack="True" ></asp:DropDownList>
     <br><br>
-    <asp:Label ID="WitghtLabel" runat="server" Text="Waga oceny: *"></asp:Label><br>
+    <asp:Label ID="WeightLabel" runat="server" Text="Waga oceny: *"></asp:Label><br>
     <asp:TextBox ID="WeightTextBox" runat="server"></asp:TextBox>
     <br><br>
     <asp:Label ID="TypeLabel" runat="server" Text="Typ oceny: *"></asp:Label><br>
