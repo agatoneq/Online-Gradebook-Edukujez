@@ -25,7 +25,7 @@ namespace EdukuJez
                     PanelFactory.MakePanel("Planem Zajęć", "#DAA520", "EditClasses.aspx", this));
 
                 AddTableRow(PanelFactory.MakePanel("Przedmiotami", "#F88158", "SubjectAdminPanel.aspx", this),
-                    PanelFactory.MakePanel("PlaceHolder", "#DAF380", "AdminPanel.aspx", this)); //dodać strone
+                    PanelFactory.MakePanel("Obecności", "#DAF380", "AdminPanel.aspx", this)); //dodać strone
         }
         private void AddTableRow(params TablePanel[] cells)
         {
