@@ -44,17 +44,33 @@ namespace EdukuJez
             if (!IsPostBack)
             {
                 //nauczyciel
+                MainInfoLabel.Text = "Wybierz grupę i ucznia, któremu chcesz wstawić uwagę:";
                 groups = groupsRepo.Table.ToList();
                 StudentsGroupsList.DataSource = groups.Where(x => x.ParentGroup != null).Select(x => x.Name);
                 StudentsGroupsList.DataBind();
 
                 UploadStudentsList(groups);
 
-                //uczeń
-                List<Remark> remarks = remarkRepo.Table.Include(s => s.Student).Include(su => su.Submitter).ToList();
-                var remarksList = remarks.Where(x => x.Student.Id == currentuser.Id);
-                myRepeater.DataSource = remarksList;
-                myRepeater.DataBind();
+                if (permission == "uczen")
+                {
+                    //uczeń
+                    List<Remark> remarks = remarkRepo.Table.Include(s => s.Student).Include(su => su.Submitter).ToList();
+                    var remarksList = remarks.Where(x => x.Student.Id == currentuser.Id);
+                    myRepeater.DataSource = remarksList;
+                    myRepeater.DataBind();
+
+
+                    if (remarksList.Any())
+                    {
+                        MainInfoLabel.Text = "Lista Twoich uwag:";
+                        myRepeater.DataSource = remarksList;
+                        myRepeater.DataBind();
+                    }
+                    else
+                    {
+                        MainInfoLabel.Text = "Nie masz żadnych uwag.";
+                    }
+                }
 
             }
         }
@@ -86,6 +102,10 @@ namespace EdukuJez
                 userRepo.Table.FirstOrDefault(x => x.Id == currentuser.Id).SubmittedRemarks.Add(newRemark);
                 userRepo.Table.FirstOrDefault(x => (x.UserName + " " + x.UserSurname) == StudentsList.SelectedValue).Remarks.Add(newRemark);
                 userRepo.Update();
+
+                MainInfoLabel.Text = "Dodałeś uwagę uczniowi " + StudentsList.SelectedValue + ". <br> Kliknij poniższy przycisk, aby kontynuować.";
+                TeachersPanel.Visible = false;
+                RestartButton.Visible = true;
             }
         }
 
@@ -100,6 +120,11 @@ namespace EdukuJez
             {
                 AddNewRemarkButton.Enabled = true;
             }
+        }
+
+        protected void ConfirmRestartClick(object sender, EventArgs e)
+        {
+            Response.Redirect("Remarks.aspx");
         }
 
         protected void GoBackButton_Click(object sender, EventArgs e)

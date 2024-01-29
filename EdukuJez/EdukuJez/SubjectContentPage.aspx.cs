@@ -25,9 +25,65 @@ namespace EdukuJez
                 
             }
             SubjectNameLabel.Text = presentedSubject.SubjectName;
-            var a = new Attachment() {Name="Łubudubu" };
-            var p = PanelFactory.MakeAttachmentListPanel((s, b) => { return; }, a);
-            AttachmentTable.Rows.Add(p.ConvertToRow());
+            //var a = new Attachment() {Name="Łubudubu" };
+            //var p = PanelFactory.MakeAttachmentListPanel(this.ShowAttachment, a);
+            //AttachmentTable.Rows.Add(p.ConvertToRow());   //odkomentować do testu
+            FillTables();
+        }
+        protected void ShowAttachment(object sender, EventArgs e)
+        {
+            Attachment attachment = (Attachment)sender;
+        }
+        protected void ShowActivity(object sender, EventArgs e)
+        {
+            Activity attachment = (Activity)sender;
+        }
+        private void FillTables()
+        {
+            AttachmentTable.Rows.Clear();
+            ActivitesTable.Rows.Clear();
+            if (presentedSubject.Attachments.Count == 0)
+            {
+                var r = new TableRow();
+                var c = new TableCell();
+                c.Controls.Add(new Literal() { Text = "Brak materiałów" });
+                r.Cells.Add(c);
+                AttachmentTable.Rows.Add(r);
+            }
+            else
+            {
+                foreach (var a in presentedSubject.Attachments)
+                {
+                    var p = PanelFactory.MakeAttachmentListPanel(this.ShowAttachment, a);
+                    AttachmentTable.Rows.Add(p.ConvertToRow());
+                }
+            }
+            if (presentedSubject.Activites.Count == 0)
+            {
+                var r = new TableRow();
+                var c = new TableCell();
+                c.Controls.Add(new Literal() { Text = "Brak aktywności" });
+                r.Cells.Add(c);
+                ActivitesTable.Rows.Add(r);
+            }
+            else
+            {
+                foreach (var a in presentedSubject.Activites)
+                {
+                    var p = PanelFactory.MakeActivityListPanel(this.ShowActivity, a);
+                    AttachmentTable.Rows.Add(p.ConvertToRow());
+                }
+            }
+        }
+
+        protected void NewAttachmentButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void NewActivityButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
