@@ -75,5 +75,15 @@ namespace EdukuJez
                 }
             }
         }
+
+        protected void NewAttachmentButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void NewActivityButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

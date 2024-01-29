@@ -26,6 +26,7 @@ namespace EdukuJez
                             if (g.Id == s.StudentGroupId)
                             {
                                 ListBoxSubjects.Items.Add(s.SubjectName);
+                                break;
                             }
                     }
                 }
@@ -37,6 +38,7 @@ namespace EdukuJez
                             if (g.Id == s.TeacherGroupId)
                             {
                                 ListBoxSubjects.Items.Add(s.SubjectName);
+                                break;
                             }
                     }
                 }
