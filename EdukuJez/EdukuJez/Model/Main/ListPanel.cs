@@ -28,7 +28,7 @@ namespace EdukuJez.Model.Main
             var c = new TableCell();
             var r = new TableRow();
             c.Controls.Add(main);
-            r.Controls.Add(c);
+            r.Cells.Add(c);
             return r;
         }
     }

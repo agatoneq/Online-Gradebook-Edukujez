@@ -8,12 +8,12 @@
     <div class="Center-Form" style="flex-direction: column;">
         <asp:Label ID="SubjectNameLabel" runat="server" Text="SubjectName" CssClass="Subject-Label"></asp:Label>
         <asp:Panel ID="AttachmentPanel" runat="server" CssClass="Subject-Panel">
-            <asp:Label ID="AttachmentLabel" runat="server" Text="SubjectAttachments" CssClass="Subject-Label"></asp:Label>
+            <asp:Label ID="AttachmentLabel" runat="server" Text="Materiały" CssClass="Subject-Label"></asp:Label>
             <asp:Table ID="AttachmentTable" runat="server"></asp:Table>
         </asp:Panel>
         <hr/>
         <asp:Panel ID="ActivitesPanel" runat="server" CssClass="Subject-Panel">
-            <asp:Label ID="ActivitesLabel" runat="server" Text="SubjectActivities" CssClass="Subject-Label"></asp:Label>
+            <asp:Label ID="ActivitesLabel" runat="server" Text="Aktywności" CssClass="Subject-Label"></asp:Label>
             <asp:Table ID="ActivitesTable" runat="server"></asp:Table>
         </asp:Panel>
         <hr/>

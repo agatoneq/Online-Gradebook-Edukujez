@@ -35,23 +35,44 @@ namespace EdukuJez.Model.Main
         public static ListPanel<Attachment> MakeAttachmentListPanel(Action<object, EventArgs> onClickMethod, Attachment att)
         {
             Panel p = new Panel();
-            p.CssClass = "Main-Panel";
-            p.BackColor = System.Drawing.Color.Red;
+            p.CssClass = "Subject-Main-Panel";
+            p.BackColor = System.Drawing.Color.OrangeRed;
             p.BorderColor = Color.Black;
             p.BorderStyle = BorderStyle.Double;
-            Panel inner = new Panel() { CssClass = "Main-Label-Panel" };
+            Panel inner = new Panel() { CssClass = "Subject-Label-Panel" };
             Literal title = new Literal();
             title.Text = att.Name;
             inner.Controls.Add(title);
             p.Controls.Add(inner);
             ImageButton img = new ImageButton();
-            img.CssClass = "Main-Panel-Image";
+            img.CssClass = "Subject-Panel-Image";
             img.ImageUrl = "~/Imgs/Arrow_left.png";
             img.Click += (sender, e) => onClickMethod(att, e);
             // Dodajemy kontrolkę Image do kontrolki Panel
             p.Controls.Add(img);
 
             return new ListPanel<Attachment>(p, att);
+        }
+        public static ListPanel<Activity> MakeActivityListPanel(Action<object, EventArgs> onClickMethod, Activity act)
+        {
+            Panel p = new Panel();
+            p.CssClass = "Subject-Main-Panel";
+            p.BackColor = System.Drawing.Color.LightBlue;
+            p.BorderColor = Color.Black;
+            p.BorderStyle = BorderStyle.Double;
+            Panel inner = new Panel() { CssClass = "Subject-Label-Panel" };
+            Literal title = new Literal();
+            title.Text = act.Name;
+            inner.Controls.Add(title);
+            p.Controls.Add(inner);
+            ImageButton img = new ImageButton();
+            img.CssClass = "Subject-Panel-Image";
+            img.ImageUrl = "~/Imgs/Arrow_left.png";
+            img.Click += (sender, e) => onClickMethod(act, e);
+            // Dodajemy kontrolkę Image do kontrolki Panel
+            p.Controls.Add(img);
+
+            return new ListPanel<Activity>(p, act);
         }
 
     }

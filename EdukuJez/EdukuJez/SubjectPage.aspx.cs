@@ -1,5 +1,6 @@
 ﻿using EdukuJez.Model.Main;
 using EdukuJez.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,7 +52,9 @@ namespace EdukuJez
             }
             else
             {
-                SubjectManager.Subject = repoS.Table.FirstOrDefault(x => x.SubjectName == ListBoxSubjects.SelectedItem.Text);
+                SubjectManager.Subject = repoS.Table.Include(x => x.Activites)
+                    .Include(x => x.Attachments).Include(x => x.Classes).Include(x => x.StudentGroup).Include(x => x.TeacherGroup)
+                    .FirstOrDefault(x => x.SubjectName == ListBoxSubjects.SelectedItem.Text);
                 Response.Redirect(SUBJECT_CONTENT_SITE);
             }
         }
