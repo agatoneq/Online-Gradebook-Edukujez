@@ -60,17 +60,5 @@ namespace EdukuJez
                 Response.Redirect(SUBJECT_CONTENT_SITE);
             }
         }
-
-        protected void ButtonBack_Click(object sender, EventArgs e)
-        {
-            ListBoxSubjects.Visible = true;
-            ButtonSubjectShow.Visible = true;
-            ButtonBack.Visible = false;
-        }
-
-        protected void ButtonAddMaterials_Click(object sender, EventArgs e)
-        {
-            //miejsce na dodanie materiałów do bazy
-        }
     }
 }

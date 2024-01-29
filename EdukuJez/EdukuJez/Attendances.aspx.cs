@@ -9,7 +9,7 @@ using EdukuJez.Repositories;
 
 namespace EdukuJez
 {
-    public partial class Attendances : System.Web.UI.Page
+    public partial class Attendance : System.Web.UI.Page
     {
 
         protected void Page_Load(object sender, EventArgs e)

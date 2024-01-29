@@ -49,11 +49,14 @@ namespace EdukuJez
                     List<int> usersId = new List<int>();
                     if (Session["childrenList"] == null)
                     {
-                        Group group = groupRepo.Table.First(x => x.Name == UserSession.GetSession().UserLogin); //grupa, ktorej nazwa jest login zalogowanego uzytkownika-grupa w ktorej sa dzieci zalogowanego
+                        Group group = groupRepo.Table.FirstOrDefault(x => x.Name == UserSession.GetSession().UserLogin); //grupa, ktorej nazwa jest login zalogowanego uzytkownika-grupa w ktorej sa dzieci zalogowanego
+                        if (group != null)
+                        { 
                         usersId = grUsRepo.Table.Where(g => g.Group.Id == group.Id).Select(g => g.User.Id).ToList(); //id uczniow z grupy
                         children = userRepo.Table.Where(x => usersId.Contains(x.Id)).ToList();
                         Session["childrenList"] = children;
                         ChildrenDropDownList.Items.Add("Wybierz dziecko");
+                        }
                     }
                     else
                     {
@@ -61,11 +64,14 @@ namespace EdukuJez
                         if (Session["checked_child"] == null && ChildrenDropDownList.SelectedValue != "Wybierz dziecko")
                             ChildrenDropDownList.Items.Add("Wybierz dziecko");
                     }
+
                     if ((ChildrenDropDownList.Items.Count == 1 && ChildrenDropDownList.Items[0].Value == "Wybierz dziecko") || (ChildrenDropDownList.Items.Count == 0))
+                    {
                         foreach (var child in children) //dodanie dzieci do ChildrenDropDownList
                         {
                             ChildrenDropDownList.Items.Add(child.UserName);
                         }
+                    } 
                     if (!IsPostBack && Session["checked_child"] != null)
                     {
                         ChildrenDropDownList.SelectedValue = (String)Session["checked_child"];

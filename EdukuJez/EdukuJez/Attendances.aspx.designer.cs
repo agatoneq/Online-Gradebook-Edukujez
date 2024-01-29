@@ -11,7 +11,7 @@ namespace EdukuJez
 {
 
 
-    public partial class Attendances
+    public partial class Attendance
     {
 
         /// <summary>
@@ -21,6 +21,6 @@ namespace EdukuJez
         /// Pole generowane automatycznie.
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table Attendancess;
+        protected global::System.Web.UI.WebControls.Table Attendances;
     }
 }

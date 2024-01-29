@@ -13,6 +13,7 @@ namespace EdukuJez
     public partial class SubjectContentPage : Page
     {
         const String SUBJECT_SITE = "SubjectPage.aspx";
+        const String ADD_ATTACHMENT_SITE = "AddAttachment.aspx";
         Subject presentedSubject;
         protected void Page_load(object sender, EventArgs e)
         {
@@ -22,7 +23,11 @@ namespace EdukuJez
 
             if (!IsPostBack)
             {
-                
+                if(UserSession.CheckPermission(UserSession.TEACHER_GROUP) == true)
+                {
+                    NewAttachmentButton.Visible = true;
+                    NewActivityButton.Visible = true;
+                }
             }
             SubjectNameLabel.Text = presentedSubject.SubjectName;
             //var a = new Attachment() {Name="Łubudubu" };
@@ -33,6 +38,7 @@ namespace EdukuJez
         protected void ShowAttachment(object sender, EventArgs e)
         {
             Attachment attachment = (Attachment)sender;
+            Response.Redirect(attachment.Text);
         }
         protected void ShowActivity(object sender, EventArgs e)
         {
@@ -78,7 +84,7 @@ namespace EdukuJez
 
         protected void NewAttachmentButton_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect(ADD_ATTACHMENT_SITE);
         }
 
         protected void NewActivityButton_Click(object sender, EventArgs e)

@@ -42,70 +42,99 @@ namespace EdukuJez
         {
             if (ListBoxAllDates.SelectedIndex >= 0)
             {
-                DateTime selectedDate;
-                if (DateTime.TryParse(ListBoxAllDates.SelectedItem.Text, out selectedDate))
+                // Split the selected item to separate date and description
+                string[] selectedItemParts = ListBoxAllDates.SelectedItem.Text.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
+
+                if (selectedItemParts.Length == 2)
                 {
-                    // Pobierz zaznaczony wpis do edycji na podstawie daty
-                    var selectedEntry = Calend.Table.FirstOrDefault(entry => entry.Date == selectedDate);
+                    // Trim to remove any leading or trailing whitespaces
+                    string selectedDateText = selectedItemParts[0].Trim();
 
-                    if (selectedEntry != null)
+                    if (DateTime.TryParse(selectedDateText, out DateTime selectedDate))
                     {
-                        // Zaktualizuj dane z formularza
-                        DateTime date;
-                        if (DateTime.TryParse(TextBoxDate.Text, out date))
+                        // Pobierz zaznaczony wpis do edycji na podstawie daty
+                        var selectedEntry = Calend.Table.FirstOrDefault(entry => entry.Date == selectedDate);
+
+                        if (selectedEntry != null)
                         {
-                            string desc = TextBoxDescription.Text;
+                            // Zaktualizuj dane z formularza
+                            DateTime date;
+                            if (DateTime.TryParse(TextBoxDate.Text, out date))
+                            {
+                                string desc = TextBoxDescription.Text;
 
-                            // Ustaw nowe wartości
-                            selectedEntry.Date = date;
-                            selectedEntry.Desc = desc;
+                                // Ustaw nowe wartości
+                                selectedEntry.Date = date;
+                                selectedEntry.Desc = desc;
 
-                            // Zapisz zmiany
-                            Calend.EditEntry(selectedEntry);                   
+                                // Zapisz zmiany
+                                Calend.EditEntry(selectedEntry);
 
-                            // Odśwież dane i przekształć kalendarz
-                            RefreshListBox();
+                                // Odśwież dane i przekształć kalendarz
+                                RefreshListBox();
+                            }
+                            else
+                            {
+                                // Informacja o błędnej dacie
+                                LabelInfo.Text = "Wprowadź poprawną datę.";
+                                LabelInfo.Visible = true;
+                            }
                         }
-                        else
-                        {
-                            // Informacja o błędnej dacie
-                            LabelInfo.Text = "Wprowadź poprawną datę.";
-                            LabelInfo.Visible = true;
-                        }
+                    }
+                    else
+                    {
+                        // Obsługa błędu parsowania daty
+                        LabelInfo.Text = "Nieprawidłowy format daty w ListBoxie.";
+                        LabelInfo.Visible = true;
                     }
                 }
                 else
                 {
-                    // Obsługa błędu parsowania daty
-                    LabelInfo.Text = "Nieprawidłowy format daty.";
+                    // Handle invalid format
+                    LabelInfo.Text = "Nieprawidłowy format daty w ListBoxie.";
                     LabelInfo.Visible = true;
                 }
             }
         }
 
 
+
         protected void ButtonDelete_Click(object sender, EventArgs e)
         {
             if (ListBoxAllDates.SelectedIndex >= 0)
             {
-                DateTime selectedDate;
-                if (DateTime.TryParse(ListBoxAllDates.SelectedItem.Text, out selectedDate))
-                {
-                    // Pobierz zaznaczony wpis do usunięcia na podstawie daty
-                    var selectedEntry = Calend.Table.FirstOrDefault(entry => entry.Date == selectedDate);
+                // Split the selected item to separate date and description
+                string[] selectedItemParts = ListBoxAllDates.SelectedItem.Text.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
 
-                    if (selectedEntry != null)
+                if (selectedItemParts.Length == 2)
+                {
+                    // Trim to remove any leading or trailing whitespaces
+                    string selectedDateText = selectedItemParts[0].Trim();
+
+                    if (DateTime.TryParse(selectedDateText, out DateTime selectedDate))
                     {
-                        // Usuń zaznaczony wpis
-                        Calend.RemoveEntry(selectedEntry);
-                        // Odśwież dane i przekształć kalendarz
-                        RefreshListBox();
+                        // Pobierz zaznaczony wpis do usunięcia na podstawie daty
+                        var selectedEntry = Calend.Table.FirstOrDefault(entry => entry.Date == selectedDate);
+
+                        if (selectedEntry != null)
+                        {
+                            // Usuń zaznaczony wpis
+                            Calend.RemoveEntry(selectedEntry);
+                            // Odśwież dane i przekształć kalendarz
+                            RefreshListBox();
+                        }
+                    }
+                    else
+                    {
+                        // Obsługa błędu parsowania daty
+                        LabelInfo.Text = "Nieprawidłowy format daty.";
+                        LabelInfo.Visible = true;
                     }
                 }
                 else
                 {
-                    // Obsługa błędu parsowania daty
-                    LabelInfo.Text = "Nieprawidłowy format daty.";
+                    // Handle invalid format
+                    LabelInfo.Text = "Nieprawidłowy format daty w ListBoxie.";
                     LabelInfo.Visible = true;
                 }
             }

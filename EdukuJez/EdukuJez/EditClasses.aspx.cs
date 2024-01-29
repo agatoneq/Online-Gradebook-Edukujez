@@ -41,8 +41,8 @@ namespace EdukuJez
         private ClassUsersRepository CURepo = new ClassUsersRepository();
         protected void Page_Load(object sender, EventArgs e)
         {
-/*            if (UserSession.CheckPermission(UserSession.ADMIN_GROUP) == false || UserSession.CheckPermission(UserSession.TEACHER_GROUP) == false)
-                UserSession.ChangeSiteNoPermission(this, "Main.aspx");*/
+            if (UserSession.CheckPermission(UserSession.ADMIN_GROUP) == false)
+                UserSession.ChangeSiteNoPermission(this, "Main.aspx");
             ReloadData();
         }
 
@@ -339,4 +339,3 @@ namespace EdukuJez
         }
     }
 }
-

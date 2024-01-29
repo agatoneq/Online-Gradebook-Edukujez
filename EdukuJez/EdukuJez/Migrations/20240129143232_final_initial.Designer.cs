@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EdukuJez.Migrations
 {
     [DbContext(typeof(BaseContext))]
-    [Migration("20240121191957_GradeFormula")]
-    partial class GradeFormula
+    [Migration("20240129143232_final_initial")]
+    partial class final_initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,14 +24,87 @@ namespace EdukuJez.Migrations
             modelBuilder.Entity("EdukuJez.Repositories.Activity", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("FormulaId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsFinalGrade")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("SubjectId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("FormulaId")
+                        .IsUnique();
+
+                    b.HasIndex("SubjectId");
+
                     b.ToTable("Activities");
+                });
+
+            modelBuilder.Entity("EdukuJez.Repositories.Attachment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<byte[]>("Content")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ContentType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SubjectId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("Attachments");
+                });
+
+            modelBuilder.Entity("EdukuJez.Repositories.Attendance", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ClassId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Presence")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("Attendances");
                 });
 
             modelBuilder.Entity("EdukuJez.Repositories.Calendar", b =>
@@ -120,6 +193,9 @@ namespace EdukuJez.Migrations
                     b.Property<int?>("ActivityId")
                         .HasColumnType("int");
 
+                    b.Property<string>("GradeType")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("GradeValue")
                         .HasColumnType("int");
 
@@ -156,6 +232,9 @@ namespace EdukuJez.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Formula")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -281,24 +360,6 @@ namespace EdukuJez.Migrations
                     b.ToTable("MessageUsers");
                 });
 
-            modelBuilder.Entity("EdukuJez.Repositories.Post", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsUserSender")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("MessageId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MessageId");
-
-                    b.ToTable("Posts");
-                });
-
             modelBuilder.Entity("EdukuJez.Repositories.Remark", b =>
                 {
                     b.Property<int>("Id")
@@ -321,7 +382,7 @@ namespace EdukuJez.Migrations
 
                     b.HasIndex("SubmitterId");
 
-                    b.ToTable("Remarks");
+                    b.ToTable("Remark");
                 });
 
             modelBuilder.Entity("EdukuJez.Repositories.Subject", b =>
@@ -388,13 +449,57 @@ namespace EdukuJez.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("EdukuJez.Repositories.UserParent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ParentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("UserParents");
+                });
+
             modelBuilder.Entity("EdukuJez.Repositories.Activity", b =>
                 {
                     b.HasOne("EdukuJez.Repositories.GradeFormula", "formula")
                         .WithOne("Activity")
-                        .HasForeignKey("EdukuJez.Repositories.Activity", "Id")
+                        .HasForeignKey("EdukuJez.Repositories.Activity", "FormulaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("EdukuJez.Repositories.Subject", "Subject")
+                        .WithMany("Activites")
+                        .HasForeignKey("SubjectId");
+                });
+
+            modelBuilder.Entity("EdukuJez.Repositories.Attachment", b =>
+                {
+                    b.HasOne("EdukuJez.Repositories.Subject", "Subject")
+                        .WithMany("Attachments")
+                        .HasForeignKey("SubjectId");
+                });
+
+            modelBuilder.Entity("EdukuJez.Repositories.Attendance", b =>
+                {
+                    b.HasOne("EdukuJez.Repositories.ClassC", "Class")
+                        .WithMany("Attendances")
+                        .HasForeignKey("ClassId");
+
+                    b.HasOne("EdukuJez.Repositories.User", "Student")
+                        .WithMany("Attendance")
+                        .HasForeignKey("StudentId");
                 });
 
             modelBuilder.Entity("EdukuJez.Repositories.ClassC", b =>
@@ -436,7 +541,7 @@ namespace EdukuJez.Migrations
                         .IsRequired();
 
                     b.HasOne("EdukuJez.Repositories.Subject", "Subject")
-                        .WithMany("Grades")
+                        .WithMany()
                         .HasForeignKey("SubjectId");
 
                     b.HasOne("EdukuJez.Repositories.User", "Teacher")
@@ -497,19 +602,6 @@ namespace EdukuJez.Migrations
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("EdukuJez.Repositories.Post", b =>
-                {
-                    b.HasOne("EdukuJez.Repositories.User", "User")
-                        .WithOne("Post")
-                        .HasForeignKey("EdukuJez.Repositories.Post", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EdukuJez.Repositories.Message", "Message")
-                        .WithMany()
-                        .HasForeignKey("MessageId");
-                });
-
             modelBuilder.Entity("EdukuJez.Repositories.Remark", b =>
                 {
                     b.HasOne("EdukuJez.Repositories.User", "Student")
@@ -536,6 +628,21 @@ namespace EdukuJez.Migrations
                     b.HasOne("EdukuJez.Repositories.Group", "TeacherGroup")
                         .WithMany("SubjectsTeachers")
                         .HasForeignKey("TeacherGroupId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("EdukuJez.Repositories.UserParent", b =>
+                {
+                    b.HasOne("EdukuJez.Repositories.User", "Parent")
+                        .WithMany("Parents")
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("EdukuJez.Repositories.User", "Student")
+                        .WithMany("Students")
+                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
