@@ -22,6 +22,11 @@ namespace EdukuJez.Migrations
             modelBuilder.Entity("EdukuJez.Repositories.Activity", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("FormulaId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsFinalGrade")
@@ -34,6 +39,10 @@ namespace EdukuJez.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FormulaId")
+                        .IsUnique()
+                        .HasFilter("[FormulaId] IS NOT NULL");
 
                     b.HasIndex("SubjectId");
 
@@ -290,6 +299,9 @@ namespace EdukuJez.Migrations
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("IsGroupMsg")
                         .HasColumnType("bit");
 
@@ -465,9 +477,7 @@ namespace EdukuJez.Migrations
                 {
                     b.HasOne("EdukuJez.Repositories.GradeFormula", "formula")
                         .WithOne("Activity")
-                        .HasForeignKey("EdukuJez.Repositories.Activity", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EdukuJez.Repositories.Activity", "FormulaId");
 
                     b.HasOne("EdukuJez.Repositories.Subject", "Subject")
                         .WithMany("Activites")

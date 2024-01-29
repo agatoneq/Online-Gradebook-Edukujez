@@ -19,17 +19,21 @@ namespace EdukuJez
         //  FormulasRepository formulasRepo = new FormulasRepository(); //odkomentowac 1/3
         protected void Page_Load(object sender, EventArgs e)
         {
-            SubjectDropDownList.Items.Add("Najpierw wybierz grupę");
-            List<String> grupy = repoGroups.Table.Include(x => x.Classes)
-                        .Where(x => x.Classes.Any(c => c.Warden.Id == UserSession.GetSession().UserId))
-                        .Select(x => x.Name)
-                        .ToList();
-
-            if (grupy.Count() != 0)
+            if (!IsPostBack)
             {
-                foreach (var g in grupy)
+
+                SubjectDropDownList.Items.Add("Najpierw wybierz grupę");
+                List<String> grupy = repoGroups.Table.Include(x => x.Classes)
+                            .Where(x => x.Classes.Any(c => c.Warden.Id == UserSession.GetSession().UserId))
+                            .Select(x => x.Name)
+                            .ToList();
+
+                if (grupy.Count() != 0)
                 {
-                    GroupDropDownList.Items.Add(g);
+                    foreach (var g in grupy)
+                    {
+                        GroupDropDownList.Items.Add(g);
+                    }
                 }
             }
         }

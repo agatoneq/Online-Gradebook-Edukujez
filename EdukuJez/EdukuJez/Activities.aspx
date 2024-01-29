@@ -21,7 +21,7 @@
         <asp:ListItem Value="Skala procentowa"></asp:ListItem>
     </asp:DropDownList>
     <br><br>
-    <asp:CheckBox ID="ISFinalCheckBox1" runat="server" Text="Aktywność jest oceną końcową" OnCheckedChanged="ISFinalCheckBox1_CheckedChanged" /><br>
+    <asp:CheckBox ID="ISFinalCheckBox1" runat="server" Text="Aktywność jest oceną końcową" OnCheckedChanged="ISFinalCheckBox1_CheckedChanged" AutoPostBack="True" /><br>
     <asp:DropDownList ID="FormulaDropDownList" runat="server" Visible="false"></asp:DropDownList>
     <asp:Button ID="FormulaButton" runat="server" Text="Nowa formuła" Visible="false" OnClick="FormulaButton_Click"/>
     <br><br>
