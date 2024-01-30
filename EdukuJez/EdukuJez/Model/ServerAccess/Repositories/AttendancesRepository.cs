@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
 using System.Xml;
+using Microsoft.EntityFrameworkCore;
 
 namespace EdukuJez.Repositories
 {
