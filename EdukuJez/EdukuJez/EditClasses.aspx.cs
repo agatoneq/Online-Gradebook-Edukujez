@@ -334,7 +334,7 @@ namespace EdukuJez
 
 
             var subList = subjRepo.Table.ToList();
-            var groupList = groupRepo.Table.Where(y=>y.Name != UserSession.TEACHER_GROUP && y.ParentGroup.Name != UserSession.TEACHER_GROUP).ToList();
+            var groupList = groupRepo.Table.Where(y => y.ParentGroup.Name == UserSession.STUDENT_GROUP).ToList();
             List<GroupUser> groupUserList = groupUserRepo.Table.Include(u => u.User).Include(g => g.Group).ToList();
             var userList = groupUserList.Where(x => x.Group != null && x.Group.Name == UserSession.TEACHER_GROUP && x.User != null).Select(x => x.User).ToList(); ;
             var lessonPlan = scheduleRepo.Table.Include(u => u.Group).Include(u => u.Warden).Include(u => u.Subject).ToList();
