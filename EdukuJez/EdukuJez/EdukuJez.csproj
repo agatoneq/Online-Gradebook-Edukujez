@@ -251,6 +251,7 @@
     <Content Include="Content\Main.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\Master.site.css" />
+    <Content Include="AttendancesAdminPanel.aspx" />
     <Content Include="Imgs\Calendar_Title.png" />
     <Content Include="Imgs\Changing_Password_Title.png" />
     <Content Include="Imgs\Child_To_Parent_Management_Title.png" />
@@ -395,6 +396,13 @@
     </Compile>
     <Compile Include="ChildForParent.aspx.designer.cs">
       <DependentUpon>ChildForParent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AttendancesAdminPanel.aspx.cs">
+      <DependentUpon>AttendancesAdminPanel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AttendancesAdminPanel.aspx.designer.cs">
+      <DependentUpon>AttendancesAdminPanel.aspx</DependentUpon>
     </Compile>
     <Compile Include="Migrations\20240129143232_final_initial.cs" />
     <Compile Include="Migrations\20240129143232_final_initial.designer.cs">

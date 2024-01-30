@@ -11,61 +11,52 @@ namespace EdukuJez
 {
 
 
-    public partial class Attendances
+    public partial class AttendanceAdminPanel
     {
 
         /// <summary>
-        /// Kontrolka SubjectsDropDown.
+        /// Kontrolka GroupsDropDown.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList SubjectsDropDown;
+        protected global::System.Web.UI.WebControls.DropDownList GroupsDropDown;
 
         /// <summary>
-        /// Kontrolka attendanceRepeater.
+        /// Kontrolka StudentsDropDown.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater attendanceRepeater;
+        protected global::System.Web.UI.WebControls.DropDownList StudentsDropDown;
 
         /// <summary>
-        /// Kontrolka newDate.
+        /// Kontrolka PresenceDropDown.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl newDate;
+        protected global::System.Web.UI.WebControls.DropDownList PresenceDropDown;
 
         /// <summary>
-        /// Kontrolka newRoomNumber.
+        /// Kontrolka AddAttendanceButton.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText newRoomNumber;
+        protected global::System.Web.UI.WebControls.Button AddAttendanceButton;
 
         /// <summary>
-        /// Kontrolka newPresence.
+        /// Kontrolka ListBoxAllAttendances.
         /// </summary>
         /// <remarks>
         /// Pole generowane automatycznie.
         /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect newPresence;
-
-        /// <summary>
-        /// Kontrolka addAttendanceButton.
-        /// </summary>
-        /// <remarks>
-        /// Pole generowane automatycznie.
-        /// By zmodyfikować deklaracje pola przenieś ją z pliku projektanta do pliku codebehind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button addAttendanceButton;
+        protected global::System.Web.UI.WebControls.ListBox ListBoxAllAttendances;
     }
 }

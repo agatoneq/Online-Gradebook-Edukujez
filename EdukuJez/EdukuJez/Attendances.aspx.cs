@@ -12,6 +12,7 @@ namespace EdukuJez
         AttendancesRepository attendanceRepo = new AttendancesRepository();
         UsersRepository usersRepo = new UsersRepository(); // Załóż, że masz repozytorium użytkowników, możesz dostosować nazwę
         User currentuser = UserSession.GetSession()?.user;
+        public SubjectsRepository repoSubj = new SubjectsRepository();
         public SubjViewRepository View = new SubjViewRepository();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -38,20 +39,19 @@ namespace EdukuJez
             PopulateAttendanceTable(userAttendance);
 
             // Dodaj przedmioty użytkownika do listy rozwijanej
-            var c = View.GetSubjects(currentuser.Id);
-            if (c.Count() != 0)
+            var subjects = repoSubj.Table.Where(x => x.StudentGroup.Users.Any(y => y.User.Id == currentuser.Id)).Select(x => x.SubjectName).ToList();
+
+            if (subjects.Any())
             {
-                foreach (var i in c)
-                {
-                    SubjectsDropDown.Items.Add(i.SubjectName);
-                }
+                SubjectsDropDown.DataSource = subjects;
+                SubjectsDropDown.DataBind();
             }
             else
             {
                 SubjectsDropDown.Items.Add("Brak przedmiotów do wyświetlenia");
             }
 
-            
+
         }
 
         protected void SubjectsDropDown_SelectedIndexChanged(object sender, EventArgs e)
