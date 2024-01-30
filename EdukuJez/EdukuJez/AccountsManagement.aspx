@@ -39,7 +39,7 @@
         </div>
         <div style="margin-top: 20px; width: 2020px">
             <asp:Button ID="ConfirmAddButton" runat="server" Text="Zatwierdź" Style="width: 150px; height: 40px; font-size: 20px;" OnClick="ConfirmAddClick" Visible="false" />
-         <asp:Button ID="ConfirmEditButton" runat="server" Text="ZatwierdźEdit" Style="width: 150px; height: 40px; font-size: 20px;" OnClick="ConfirmEditClick" Visible="false" />
+         <asp:Button ID="ConfirmEditButton" runat="server" Text="Zatwierdź Edycję" Style="width: 170px; height: 40px; font-size: 20px;" OnClick="ConfirmEditClick" Visible="false" />
         
         </div>
         <div style="margin-top: 20px; width: 2020px">

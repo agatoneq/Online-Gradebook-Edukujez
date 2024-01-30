@@ -31,7 +31,7 @@ namespace EdukuJez
                     UserLogin = user.UserLogin,
                     UserName = user.UserName,
                     UserSurname = user.UserSurname,
-                    ParentGroup = returnGroup(user)
+                    ParentGroup = returnGroup(user.Id)
                 }) ;
 
                 myRepeater.DataSource = mergedData;
@@ -43,29 +43,15 @@ namespace EdukuJez
             }
         }
         
-        protected string returnGroup(User user)
+        protected string returnGroup(int UserId)
         {
             string groupName = null;
-            
-            User userWithGroups = usersRepository.Table
-                .Include(u => u.Groups)
-                .ThenInclude(gu => gu.Group)
-                .FirstOrDefault(x => x.Id == user.Id);
-            
-            if (userWithGroups != null)
-            {
-                List<GroupUser> userGroups = userWithGroups.Groups.ToList();
-                
-                foreach (var groupUser in userGroups)
-                {
-                    Group group = groupUser.Group;
-                    groupName = group.Name;
-                }
-            }
+            List<GroupUser> groupUserList = groupsUsersRepository.Table.Include(u => u.User).Include(g => g.Group).ToList();
+            List<Group> allGroups = groupUserList.Where(x => x.User.Id == UserId).Select(x => x.Group).ToList();
+            List<string> parentGroups = allGroups.Where(x => x.ParentGroup == null).Select(x => x.Name).ToList();
+            groupName = parentGroups.FirstOrDefault();
             return groupName;
         }
-
-
 
         protected void AddClick(object sender, EventArgs e)
         {
@@ -184,11 +170,11 @@ namespace EdukuJez
             userToEdit = usersRepository.Table.FirstOrDefault(x => x.UserLogin == LoginBox.Text);
             if (!userToEdit.IsNameValid(NameBox.Text))
             {
-                InfoLabel.Text = "Niepoprawne imię.";
+                    InfoLabel.Text = "Niepoprawne imię.";
             }
             else if (!userToEdit.IsSurnameValid(SurnameBox.Text))
             {
-                InfoLabel.Text = "Niepoprawne nazwisko.";
+                    InfoLabel.Text = "Niepoprawne nazwisko.";
             }
             else if (!string.IsNullOrEmpty(PasswordBox.Text))
             {
@@ -207,9 +193,11 @@ namespace EdukuJez
                 {
                     userToEdit.UserPassword = PasswordBox.Text;
                 }
+                else
+                {
+                    userToEdit.UserPassword = usersRepository.Table.Where(x => x.UserLogin == LoginBox.Text).Select(x => x.UserPassword).FirstOrDefault();
+                }
                 usersRepository.UpdateRow(userToEdit);
-
-
 
                 MainInfoLabel.Text = "Edytowałeś dane użytkownika o loginie " + userToEdit.UserLogin +
                                      ". <br> Kliknij poniższy przycisk, aby dodać, edytować lub usunąć kolejnego użytkownika.";
