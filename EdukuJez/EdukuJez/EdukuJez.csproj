@@ -240,6 +240,7 @@
   <ItemGroup>
     <Content Include="Activities.aspx" />
     <Content Include="AddAttachment.aspx" />
+    <Content Include="AddGradeFormula.aspx" />
     <Content Include="AddUsersToGroups.aspx" />
     <Content Include="AdminPanel.aspx" />
     <Content Include="Attendances.aspx" />
@@ -345,6 +346,13 @@
     </Compile>
     <Compile Include="AddAttachment.aspx.designer.cs">
       <DependentUpon>AddAttachment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddGradeFormula.aspx.cs">
+      <DependentUpon>AddGradeFormula.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddGradeFormula.aspx.designer.cs">
+      <DependentUpon>AddGradeFormula.aspx</DependentUpon>
     </Compile>
     <Compile Include="AddUsersToGroups.aspx.cs">
       <DependentUpon>AddUsersToGroups.aspx</DependentUpon>
