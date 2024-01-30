@@ -2,9 +2,11 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="Center-Form">
-        <asp:Label ID="Label1" runat="server" Text="Nowa Formuła" Font-Size="Larger"></asp:Label>
-        <br><br>
-        <asp:Label ID="Label3" runat="server" Text="Przedmiot"></asp:Label>
+        <asp:Panel ID="Panel1" runat="server" Style="display: inline-block;">
+            <asp:Label ID="Label1" runat="server" Text="Nowa Formuła" Font-Size="Larger" Style="display: block; margin-bottom: 10px;"></asp:Label>
+            <br><br>
+
+        <asp:Label ID="Label3" runat="server" Text="Przedmiot" Style="display: block; margin-bottom: 10px;"></asp:Label>
         <br><br>
         <asp:DropDownList ID="SubjectDropDownList" runat="server" Width="150px" AutoPostBack="True" OnSelectedIndexChanged="SubjectDropDownList_SelectedIndexChanged">
         </asp:DropDownList>
@@ -23,6 +25,7 @@
         <br><br>
         <asp:Button ID="ButtonAdd" runat="server" Text="Zatwierdź" OnClick="ButtonAdd_Click" />
         <asp:Button ID="ButtonCancel" runat="server" Text="Anuluj" Width="75px" OnClick="ButtonCancel_Click" />
+        </asp:Panel>
     </div>
 
 
