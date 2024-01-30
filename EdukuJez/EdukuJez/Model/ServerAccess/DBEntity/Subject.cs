@@ -23,5 +23,6 @@ namespace EdukuJez.Repositories
         public ICollection<ClassC> Classes { get; set; } = new List<ClassC>();
         public ICollection<Activity> Activites { get; set; } = new List<Activity>();
         public ICollection<Attachment> Attachments { get; set; } = new List<Attachment>();
+        public ICollection<GradeFormula> Formulas { get; set; } = new List<GradeFormula>();
     }
 }

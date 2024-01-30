@@ -10,5 +10,6 @@ namespace EdukuJez.Repositories
         public string Formula { get; set; }
         public string Name { get; set; }
         public Activity Activity { get; set; }
+        public Subject Subject { get; set; }
     }
 }

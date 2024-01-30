@@ -251,6 +251,7 @@
     <Content Include="Content\Main.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\Master.site.css" />
+    <Content Include="AddGradeFormula.aspx" />
     <Content Include="Imgs\Calendar_Title.png" />
     <Content Include="Imgs\Changing_Password_Title.png" />
     <Content Include="Imgs\Child_To_Parent_Management_Title.png" />
@@ -396,6 +397,13 @@
     <Compile Include="ChildForParent.aspx.designer.cs">
       <DependentUpon>ChildForParent.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AddGradeFormula.aspx.cs">
+      <DependentUpon>AddGradeFormula.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddGradeFormula.aspx.designer.cs">
+      <DependentUpon>AddGradeFormula.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\20240129143232_final_initial.cs" />
     <Compile Include="Migrations\20240129143232_final_initial.designer.cs">
       <DependentUpon>20240129143232_final_initial.cs</DependentUpon>
@@ -408,7 +416,12 @@
     <Compile Include="Migrations\20240129143722_Date_time_Messages.designer.cs">
       <DependentUpon>20240129143722_Date_time_Messages.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20240130002508_last.cs" />
+    <Compile Include="Migrations\20240130002508_last.designer.cs">
+      <DependentUpon>20240130002508_last.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\BaseContextModelSnapshot.cs" />
+    <Compile Include="Model\Main\FormulaDecoder.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\UserParent.cs" />
     <Compile Include="Model\ServerAccess\Repositories\AttachmentsRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\AttendancesRepository.cs" />

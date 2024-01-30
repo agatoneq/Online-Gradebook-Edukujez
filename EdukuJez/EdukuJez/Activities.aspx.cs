@@ -12,6 +12,7 @@ namespace EdukuJez
 {
     public partial class Activities : System.Web.UI.Page
     {
+        const String ADD_FORM_SITE = "AddGradeFormula.aspx";
         SubjectsRepository repoSubj = new SubjectsRepository();
         GroupsRepository repoGroups = new GroupsRepository();
         ActivitiesRepository repoActivities = new ActivitiesRepository();
@@ -68,18 +69,23 @@ namespace EdukuJez
             if (SubjectManager.ActivtyTransferFlag)
             {
 
-                var s = repoSubj.Table.Include(x => x.StudentGroup).First(x => x.SubjectName == SubjectManager.Subject.SubjectName);
+                var s = repoSubj.Table.Include(x => x.StudentGroup).Include(x => x.Formulas).First(x => x.SubjectName == SubjectManager.Subject.SubjectName);
                 GroupDropDownList.Items.Clear();
                 GroupDropDownList.Items.Add(s.StudentGroup.Name);
                 SubjectDropDownList.Items.Clear();
                 SubjectDropDownList.Items.Add(s.SubjectName);
+                FormulaDropDownList.Items.Clear();
+                foreach (var f in s.Formulas)
+                {
+                    FormulaDropDownList.Items.Add(new ListItem() {Value=f.Id.ToString(), Text = f.Name});
+                }
 
             }
         }
 
         protected void FormulaButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Main.aspx"); //przekierowanie na strone tworzenia formul - tymczasowo main
+            Response.Redirect(ADD_FORM_SITE); //przekierowanie na strone tworzenia formul - tymczasowo main
         }
 
         protected void AnulujButton_Click(object sender, EventArgs e)
@@ -109,7 +115,8 @@ namespace EdukuJez
             if (ISFinalCheckBox1.Checked)
             {
                 activity.IsFinalGrade = true;
-                // activity.formula = formulasRepo.Table.First(x => x.Name == FormulaDropDownList.SelectedValue); //odkomentowac 2/3
+                activity.formula = repoSubj.Table.Include(x=>x.Formulas)
+                    .First(x => x.SubjectName == SubjectDropDownList.SelectedValue).Formulas.First(x=>x.Id==int.Parse(FormulaDropDownList.SelectedItem.Value)); 
             }
             else
                 activity.IsFinalGrade = false;
@@ -156,11 +163,16 @@ namespace EdukuJez
             int idGroup = repoGroups.Table.First(x => x.Name == GroupDropDownList.SelectedValue).Id;
            // var users = repoGroups.Table.Where(x => x.Name == GroupDropDownList.SelectedValue).Select(x => x.Users);// repoUsers.Table.Select(x => x).Where(x => x.Groups.Any(y => y.Id == idGroup)).ToList();// repoGroupUser.Table.Select(x => x).Where(x => x.User.Groups.Any(y => y.Id == idGroup)).ToList();
             var usersId = repoUsers.Table.Where(x => x.Groups.Any(y => y.Id == idGroup)).Select(x => x.Id).ToList();
-
-            repoSubj.Update();
+                repoSubj.Update();
 
             foreach (var u in usersId)
             {
+                if (ISFinalCheckBox1.Checked)
+                {
+                    var gr = repoUsers.Table.Include(x => x.Grades).ThenInclude(x => x.Activity).First(x => x.Id == u);
+                    var i = (int)FormulaDecoder.ParseForUser(activity.formula.Formula, gr);
+                    grade.GradeValue = i;
+                }
                 repoUsers.Table.FirstOrDefault(x => x.Id == currentuser.Id).SubmittedGrades.Add(grade);
                 repoUsers.Table.FirstOrDefault(x => x.Id == u).Grades.Add(grade);
                 repoUsers.Update();
