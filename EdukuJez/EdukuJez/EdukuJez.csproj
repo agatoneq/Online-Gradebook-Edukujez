@@ -417,6 +417,7 @@
       <DependentUpon>20240129143722_Date_time_Messages.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\BaseContextModelSnapshot.cs" />
+    <Compile Include="Model\Main\FormulaDecoder.cs" />
     <Compile Include="Model\ServerAccess\DBEntity\UserParent.cs" />
     <Compile Include="Model\ServerAccess\Repositories\AttachmentsRepository.cs" />
     <Compile Include="Model\ServerAccess\Repositories\AttendancesRepository.cs" />
