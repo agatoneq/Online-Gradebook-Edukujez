@@ -32,6 +32,10 @@ namespace EdukuJez
                 {
                     NewAttachmentButton.Visible = true;
                     NewActivityButton.Visible = true;
+                    DelActivityButton.Visible = true;
+                    DelAttachmentButton.Visible = true;
+                    ActivityDropDownList.Visible = true;
+                    AttachmentDropDownList.Visible = true;
                 }
             }
             SubjectNameLabel.Text = presentedSubject.SubjectName;

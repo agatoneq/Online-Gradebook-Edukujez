@@ -68,8 +68,7 @@ namespace EdukuJez
 
             if (SubjectManager.ActivtyTransferFlag)
             {
-
-                var s = repoSubj.Table.Include(x => x.StudentGroup).Include(x => x.Formulas).First(x => x.SubjectName == SubjectManager.Subject.SubjectName);
+                var s = SubjectManager.Subject;
                 GroupDropDownList.Items.Clear();
                 GroupDropDownList.Items.Add(s.StudentGroup.Name);
                 SubjectDropDownList.Items.Clear();
@@ -162,7 +161,7 @@ namespace EdukuJez
             }
             int idGroup = repoGroups.Table.First(x => x.Name == GroupDropDownList.SelectedValue).Id;
            // var users = repoGroups.Table.Where(x => x.Name == GroupDropDownList.SelectedValue).Select(x => x.Users);// repoUsers.Table.Select(x => x).Where(x => x.Groups.Any(y => y.Id == idGroup)).ToList();// repoGroupUser.Table.Select(x => x).Where(x => x.User.Groups.Any(y => y.Id == idGroup)).ToList();
-            var usersId = repoUsers.Table.Where(x => x.Groups.Any(y => y.Id == idGroup)).Select(x => x.Id).ToList();
+            var usersId = repoUsers.Table.Include(x => x.Groups).ThenInclude(x =>x.Group).Where(x => x.Groups.Any(y => y.Group.Id == idGroup)).Select(x => x.Id).ToList();
                 repoSubj.Update();
 
             foreach (var u in usersId)

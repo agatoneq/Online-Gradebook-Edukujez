@@ -11,8 +11,8 @@
             <asp:Label ID="AttachmentLabel" runat="server" Text="Materiały" CssClass="Subject-Label"></asp:Label>
             <asp:Table ID="AttachmentTable" runat="server"></asp:Table>
             <asp:Button ID="NewAttachmentButton" runat="server" Text="Dodaj Materiały" OnClick="NewAttachmentButton_Click" Width="118px" Visible="False" />
-            <asp:Button ID="DelAttachmentButton" runat="server" Text="Usuń materiał" Width="98px" OnClick="DelAttachmentButton_Click" />
-            <asp:DropDownList ID="AttachmentDropDownList" runat="server" Width="121px">
+            <asp:Button ID="DelAttachmentButton" runat="server" Text="Usuń materiał" Width="98px" OnClick="DelAttachmentButton_Click" Visible="False" />
+            <asp:DropDownList ID="AttachmentDropDownList" runat="server" Width="121px" Visible="False">
             </asp:DropDownList>
         </asp:Panel>
         <hr/>
@@ -20,8 +20,8 @@
             <asp:Label ID="ActivitesLabel" runat="server" Text="Aktywności" CssClass="Subject-Label"></asp:Label>
             <asp:Table ID="ActivitesTable" runat="server"></asp:Table>
             <asp:Button ID="NewActivityButton" runat="server" Text="Dodaj aktywność" OnClick="NewActivityButton_Click" Width="115px" Visible="False" />
-            <asp:Button ID="DelActivityButton" runat="server" Text="Usuń aktywność" Width="98px" OnClick="DelActivityButton_Click" />
-            <asp:DropDownList ID="ActivityDropDownList" runat="server" Width="121px">
+            <asp:Button ID="DelActivityButton" runat="server" Text="Usuń aktywność" Width="98px" OnClick="DelActivityButton_Click" Visible="False" />
+            <asp:DropDownList ID="ActivityDropDownList" runat="server" Width="121px" Visible="False">
             </asp:DropDownList>
         </asp:Panel>
         <hr/>
