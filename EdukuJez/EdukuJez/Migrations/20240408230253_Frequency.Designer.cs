@@ -4,14 +4,16 @@ using EdukuJez.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EdukuJez.Migrations
 {
     [DbContext(typeof(BaseContext))]
-    partial class BaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240408230253_Frequency")]
+    partial class Frequency
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,9 +30,6 @@ namespace EdukuJez.Migrations
 
                     b.Property<int?>("FormulaId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("HasSubmissions")
-                        .HasColumnType("bit");
 
                     b.Property<bool>("IsFinalGrade")
                         .HasColumnType("bit");
@@ -137,9 +136,6 @@ namespace EdukuJez.Migrations
                     b.Property<int>("Class")
                         .HasColumnType("int");
 
-                    b.Property<string>("Cyclicality")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Day")
                         .HasColumnType("nvarchar(max)");
 
@@ -152,9 +148,6 @@ namespace EdukuJez.Migrations
                     b.Property<int?>("SubjectId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SubstitutionId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("WardenId")
                         .HasColumnType("int");
 
@@ -163,10 +156,6 @@ namespace EdukuJez.Migrations
                     b.HasIndex("GroupId");
 
                     b.HasIndex("SubjectId");
-
-                    b.HasIndex("SubstitutionId")
-                        .IsUnique()
-                        .HasFilter("[SubstitutionId] IS NOT NULL");
 
                     b.HasIndex("WardenId");
 
@@ -460,60 +449,6 @@ namespace EdukuJez.Migrations
                     b.ToTable("Subjects");
                 });
 
-            modelBuilder.Entity("EdukuJez.Repositories.Submission", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("ActivityId")
-                        .HasColumnType("int");
-
-                    b.Property<byte[]>("Content")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("ContentType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Text")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ActivityId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Submission");
-                });
-
-            modelBuilder.Entity("EdukuJez.Repositories.Substitution", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Desc")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("SubTeacherId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SubTeacherId");
-
-                    b.ToTable("Substitution");
-                });
-
             modelBuilder.Entity("EdukuJez.Repositories.User", b =>
                 {
                     b.Property<int>("Id")
@@ -605,10 +540,6 @@ namespace EdukuJez.Migrations
                     b.HasOne("EdukuJez.Repositories.Subject", "Subject")
                         .WithMany("Classes")
                         .HasForeignKey("SubjectId");
-
-                    b.HasOne("EdukuJez.Repositories.Substitution", "Substitution")
-                        .WithOne("Class")
-                        .HasForeignKey("EdukuJez.Repositories.ClassC", "SubstitutionId");
 
                     b.HasOne("EdukuJez.Repositories.User", "Warden")
                         .WithMany("Teaches")
@@ -746,24 +677,6 @@ namespace EdukuJez.Migrations
                         .HasForeignKey("TeacherGroupId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("EdukuJez.Repositories.Submission", b =>
-                {
-                    b.HasOne("EdukuJez.Repositories.Activity", "Activity")
-                        .WithMany("Submissions")
-                        .HasForeignKey("ActivityId");
-
-                    b.HasOne("EdukuJez.Repositories.User", "User")
-                        .WithMany("Submissions")
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("EdukuJez.Repositories.Substitution", b =>
-                {
-                    b.HasOne("EdukuJez.Repositories.User", "SubTeacher")
-                        .WithMany("Substitutions")
-                        .HasForeignKey("SubTeacherId");
                 });
 
             modelBuilder.Entity("EdukuJez.Repositories.UserParent", b =>

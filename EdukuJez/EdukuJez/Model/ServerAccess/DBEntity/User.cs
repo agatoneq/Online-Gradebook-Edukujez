@@ -35,6 +35,9 @@ namespace EdukuJez.Repositories
         public ICollection<Attendance> Attendance { get; set; } = new List<Attendance>();
         public ICollection<UserParent> Students { get; set; } = new List<UserParent>();
         public ICollection<UserParent> Parents { get; set; } = new List<UserParent>();
+        public ICollection<Frequency> Frequency { get; set; } = new List<Frequency>();
+        public ICollection<Substitution> Substitutions { get; set; } = new List<Substitution>();
+        public ICollection<Submission> Submissions { get; set; } = new List<Submission>();
 
 
         public bool IsNameValid(string name)

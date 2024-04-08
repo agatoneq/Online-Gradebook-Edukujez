@@ -112,6 +112,12 @@ namespace EdukuJez.Repositories
                 .WithMany(g => g.Parents)
                 .HasForeignKey(s => s.ParentId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+
+            modelBuilder.Entity<Substitution>()
+                .HasOne(u => u.Class)
+                .WithOne(p => p.Substitution)
+                .HasForeignKey<ClassC>(p => p.SubstitutionId);
         }
     }
 }

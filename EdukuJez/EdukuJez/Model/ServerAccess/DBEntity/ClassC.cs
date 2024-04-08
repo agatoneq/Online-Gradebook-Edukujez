@@ -15,6 +15,10 @@ namespace EdukuJez.Repositories
         public int Class { get; set; }
         public string Hour { get; set; }
         public string Day { get; set; }
-        public string Test { get; }
+        public string Cyclicality { get; set; }
+        public ICollection<Frequency> Frequency { get; set; } = new List<Frequency>();
+
+        public int? SubstitutionId { get; set; }
+        public Substitution Substitution { get; set; } 
     }
 }
