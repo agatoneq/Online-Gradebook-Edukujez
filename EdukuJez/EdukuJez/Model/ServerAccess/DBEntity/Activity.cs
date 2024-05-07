@@ -8,6 +8,8 @@ namespace EdukuJez.Repositories
     public class Activity : EntityBase
     {
         public string Name { get; set; }
+
+        public bool Deactivated { get; set; } = false;
         public bool IsFinalGrade { get; set; }
         public int? FormulaId { get; set; }
         public ICollection<Grade> Grades { get; set; } = new List<Grade>();

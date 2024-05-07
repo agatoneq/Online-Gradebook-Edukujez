@@ -13,6 +13,7 @@ namespace EdukuJez
     public partial class Activities : System.Web.UI.Page
     {
         const String ADD_FORM_SITE = "AddGradeFormula.aspx";
+        const String SUBJECT_PAGE = "SubjectContentPage.aspx";
         SubjectsRepository repoSubj = new SubjectsRepository();
         GroupsRepository repoGroups = new GroupsRepository();
         ActivitiesRepository repoActivities = new ActivitiesRepository();
@@ -89,13 +90,16 @@ namespace EdukuJez
 
         protected void AnulujButton_Click(object sender, EventArgs e)
         {
-            SubjectManager.ActivtyTransferFlag = false;
-            Response.Redirect("Grades.aspx");
+            if (SubjectManager.ActivtyTransferFlag)
+            {
+                SubjectManager.ActivtyTransferFlag = false;
+                Response.Redirect(SUBJECT_PAGE);
+            }else
+                Response.Redirect("Grades.aspx");
         }
 
         protected void DodajButton_Click(object sender, EventArgs e)
         {
-            SubjectManager.ActivtyTransferFlag = false;
             Activity activity = new Activity();
             if (repoActivities.IsNameInDatabase(NameTextBox.Text))
             {
@@ -180,6 +184,11 @@ namespace EdukuJez
 
 
             InfoLabel.Text = "Dodałeś aktywność o nazwie " + NameTextBox.Text + ". Możesz kontynuować.";
+            if (SubjectManager.ActivtyTransferFlag)
+            {
+                SubjectManager.ActivtyTransferFlag = false;
+                Response.Redirect(SUBJECT_PAGE);
+            }
         }
 
         protected void ISFinalCheckBox1_CheckedChanged(object sender, EventArgs e)

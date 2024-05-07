@@ -89,7 +89,6 @@ F:\GitHub\ProjektIO\EdukuJez\EdukuJez\bin\pl\System.Web.Helpers.resources.dll
 F:\GitHub\ProjektIO\EdukuJez\EdukuJez\bin\pl\System.Web.Mvc.resources.dll
 F:\GitHub\ProjektIO\EdukuJez\EdukuJez\obj\Debug\EdukuJez.csproj.AssemblyReference.cache
 F:\GitHub\ProjektIO\EdukuJez\EdukuJez\obj\Debug\EdukuJez.csproj.CoreCompileInputs.cache
-F:\GitHub\ProjektIO\EdukuJez\EdukuJez\obj\Debug\EdukuJez.csproj.CopyComplete
 F:\GitHub\ProjektIO\EdukuJez\EdukuJez\obj\Debug\EdukuJez.dll
 F:\GitHub\ProjektIO\EdukuJez\EdukuJez\obj\Debug\EdukuJez.pdb
 C:\Users\agata\source\repos\ProjektIO\EdukuJez\EdukuJez\bin\EdukuJez.dll.config
@@ -2080,3 +2079,4 @@ C:\Users\eusta\source\repos\ProjektIOFFFFFFF\EdukuJez\EdukuJez\obj\Debug\EdukuJe
 C:\Users\eusta\source\repos\ProjektIOFFFFFFF\EdukuJez\EdukuJez\obj\Debug\EdukuJez.csproj.CopyComplete
 C:\Users\eusta\source\repos\ProjektIOFFFFFFF\EdukuJez\EdukuJez\obj\Debug\EdukuJez.dll
 C:\Users\eusta\source\repos\ProjektIOFFFFFFF\EdukuJez\EdukuJez\obj\Debug\EdukuJez.pdb
+F:\GitHub\ProjektIO\EdukuJez\EdukuJez\obj\Debug\EdukuJez.csproj.Up2Date

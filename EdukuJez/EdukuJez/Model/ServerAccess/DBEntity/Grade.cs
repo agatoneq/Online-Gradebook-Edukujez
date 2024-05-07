@@ -7,6 +7,8 @@ namespace EdukuJez.Repositories
 {
     public class Grade : EntityBase
     {
+
+        public bool Deactivated { get; set; } = false;
         public int GradeValue { get; set; }
         public string GradeType { get; set; } //czy ocena punktowa czy nominalna
         public int GradeWeight { get; set; }

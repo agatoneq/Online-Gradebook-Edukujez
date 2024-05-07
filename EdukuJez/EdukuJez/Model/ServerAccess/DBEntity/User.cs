@@ -20,6 +20,7 @@ namespace EdukuJez.Repositories
         public string UserLogin { get; set; }
         [Required]
         public string UserPassword { get; set; }
+        public bool Deactivated { get; set; } = false;
 
 
         public ICollection<GroupUser> Groups { get; set; } = new List<GroupUser>();

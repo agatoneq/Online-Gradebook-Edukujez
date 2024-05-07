@@ -74,9 +74,8 @@
         <hr />
         <footer>
             <p>
-                &copy; <%--Framework Scripts--%>- Aplikacja autorstwa: Karolina Barszcz, Eustachy Lisiński, Kamila Młynarczyk, Agata Sobczyk, Artur Ulman, Miłosz Wojtanek
+                &copy; <%--Framework Scripts--%>- Aplikacja autorstwa: Karolina Barszcz, Eustachy Lisiński, Kamila Młynarczyk, Agata Sobczyk, Miłosz Wojtanek
                 <br />
-                W ramach projektu akademickiego z inżynierii oprogramowania
 
             </p>
         </footer>

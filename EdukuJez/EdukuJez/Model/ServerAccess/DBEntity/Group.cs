@@ -13,6 +13,8 @@ namespace EdukuJez.Repositories
         [Required]
         public string Name { get; set; }
         public Group ParentGroup { get; set; }
+
+        public bool Deactivated { get; set; } = false;
         public User Educator { get; set; }
         public ICollection<Subject> SubjectsStudents { get; set; } = new List<Subject>();
         public ICollection<Subject> SubjectsTeachers { get; set; } = new List<Subject>();

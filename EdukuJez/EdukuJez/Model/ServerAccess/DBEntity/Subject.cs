@@ -14,6 +14,7 @@ namespace EdukuJez.Repositories
         public string SubjectName { get; set; }
         [Required]
         public string SubjectDesc { get; set; }
+        public bool Deactivated { get; set; } = false;
         public int TeacherGroupId { get; set; }
         public int StudentGroupId { get; set; }
         [Required]
