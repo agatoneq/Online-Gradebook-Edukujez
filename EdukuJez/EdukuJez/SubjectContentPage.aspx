@@ -7,6 +7,7 @@
     </div>
     <div class="Center-Form" style="flex-direction: column;">
         <asp:Label ID="SubjectNameLabel" runat="server" Text="SubjectName" CssClass="Subject-Label"></asp:Label>
+        <asp:Button ID="StudentsListButton" runat="server" Text="Lista uczniów" Width="98px" OnClick="StudentsListButton_Click" Visible="False" />
         <asp:Panel ID="AttachmentPanel" runat="server" CssClass="Subject-Panel">
             <asp:Label ID="AttachmentLabel" runat="server" Text="Materiały" CssClass="Subject-Label"></asp:Label>
             <asp:Table ID="AttachmentTable" runat="server"></asp:Table>
@@ -25,6 +26,6 @@
             </asp:DropDownList>
         </asp:Panel>
         <hr/>
-        <asp:Button ID="GoBackButton" runat="server" Text="Powrót"  Width="115px" OnClick="GoBackButton_Click" />
+        <asp:Button ID="GoBackButton" runat="server" Text="Powrót"  Style="width: 200px; height: 40px; font-size: 20px;" OnClick="GoBackButton_Click" />
     </div>
 </asp:Content>

@@ -63,6 +63,7 @@ namespace EdukuJez
                         sub.TeacherGroupId = repoG.Table.FirstOrDefault(x => x.Name == DropDownListTeachers.Text).Id;
                         repoS.UpdateRow(sub);
                         LabelInfo.Text = "Edytowano przedmiot";
+                        LabelInfo.Visible = true;
                         Session.Contents.Remove("Subject");
                         Session.Abandon();
                     }
@@ -90,6 +91,7 @@ namespace EdukuJez
                         sub.StudentGroupId = repoG.Table.FirstOrDefault(x => x.Name == DropDownListStudents.Text).Id;
                         repoS.Insert(sub);
                         LabelInfo.Text = "Dodano przedmiot";
+                        LabelInfo.Visible = true;
                     }
                 }
                 else

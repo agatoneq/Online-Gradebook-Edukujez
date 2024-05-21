@@ -13,6 +13,7 @@ namespace EdukuJez
     public partial class SubjectPage : System.Web.UI.Page
     {
         const String SUBJECT_CONTENT_SITE = "SubjectContentPage.aspx";
+        const String MAIN_SITE = "Main.aspx";
         private SubjectsRepository repoS = new SubjectsRepository();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -68,6 +69,11 @@ namespace EdukuJez
                     .FirstOrDefault(x => x.SubjectName == ListBoxSubjects.SelectedItem.Text);
                 Response.Redirect(SUBJECT_CONTENT_SITE);
             }
+        }
+
+        protected void GoBackButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(MAIN_SITE);
         }
     }
 }

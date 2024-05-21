@@ -17,6 +17,7 @@ namespace EdukuJez
         const String SUBJECT_SELF = "SubjectContentPage.aspx";
         const String ADD_ATTACHMENT_SITE = "AddAttachment.aspx";
         const String ADD_ACTIVITY_SITE = "Activities.aspx";
+        const String STUDENTS_LIST_SITE = "StudentsListSubject.aspx";
         Subject presentedSubject;
         protected void Page_load(object sender, EventArgs e)
         {
@@ -36,6 +37,7 @@ namespace EdukuJez
                     DelAttachmentButton.Visible = true;
                     ActivityDropDownList.Visible = true;
                     AttachmentDropDownList.Visible = true;
+                    StudentsListButton.Visible = true;
                 }
             }
             SubjectNameLabel.Text = presentedSubject.SubjectName;
@@ -169,6 +171,11 @@ namespace EdukuJez
             var a = actRep.Table.FirstOrDefault(x => x.Id == id);
             actRep.Delete(a);
             Response.Redirect(SUBJECT_SELF);
+        }
+
+        protected void StudentsListButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(STUDENTS_LIST_SITE);
         }
     }
 }
