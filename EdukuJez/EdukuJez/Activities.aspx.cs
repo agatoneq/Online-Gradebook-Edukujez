@@ -195,15 +195,16 @@ namespace EdukuJez
         {
             if (ISFinalCheckBox1.Checked)
             {
-                if (FormulaDropDownList.Items.Count == 0)
+                var s = SubjectManager.Subject;
+                if (FormulaDropDownList.Items.Count != 0)
                 {
-                    /*                                                              //odkomentowac 3/3
-                    var list= formulasRepo.Table.Select(x => x.Name);
+                                                                                  //odkomentowac 3/3
+                    var list= repoSubj.Table.Include(x => x.Formulas).FirstOrDefault(x =>x == s).Formulas.Select(x =>x.Name);
                     foreach (var f in list)
                     {
                         FormulaDropDownList.Items.Add(f);
                     }
-                    */
+                    
                 }
                 else
                 {
@@ -216,6 +217,27 @@ namespace EdukuJez
             {
                 FormulaButton.Visible = false;
                 FormulaDropDownList.Visible = false;
+            }
+        }
+        protected void ISSubmisionAllowedCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CheckBoxSubmisions.Checked)
+            {
+                if (FormulaDropDownList.Items.Count == 0)
+                {
+                   
+                }
+                else
+                {
+                    FormulaDropDownList.Items.Add("Brak formuł");
+                }
+                txtDateSub.Visible = true;
+                LabelSub.Visible = true;
+            }
+            else
+            {
+                txtDateSub.Visible = false;
+                LabelSub.Visible = false;
             }
         }
         //wybrano grupe:

@@ -25,6 +25,9 @@
     <asp:DropDownList ID="FormulaDropDownList" runat="server" Visible="false"></asp:DropDownList>
     <asp:Button ID="FormulaButton" runat="server" Text="Nowa formuła" Visible="false" OnClick="FormulaButton_Click"/>
     <br><br>
+    <asp:CheckBox ID="CheckBoxSubmisions" runat="server" Text="Przekazywanie prac" OnCheckedChanged="ISSubmisionAllowedCheckBox_CheckedChanged" AutoPostBack="True" /><br>
+     <asp:Label ID="LabelSub" runat="server" Text="Data Wymagania: " Visible="False"></asp:Label><br><asp:TextBox ID="txtDateSub" runat="server" type="date" TextMode="Date" Height="20px" Visible="False"></asp:TextBox>
+    <br><br>
     <asp:Button ID="DodajButton" runat="server" Text="Dodaj aktywność" OnClick="DodajButton_Click" />
     <asp:Button ID="AnulujButton" runat="server" Text="Anuluj" OnClick="AnulujButton_Click" />
     <br><br>

@@ -2079,4 +2079,4 @@ C:\Users\eusta\source\repos\ProjektIOFFFFFFF\EdukuJez\EdukuJez\obj\Debug\EdukuJe
 C:\Users\eusta\source\repos\ProjektIOFFFFFFF\EdukuJez\EdukuJez\obj\Debug\EdukuJez.csproj.CopyComplete
 C:\Users\eusta\source\repos\ProjektIOFFFFFFF\EdukuJez\EdukuJez\obj\Debug\EdukuJez.dll
 C:\Users\eusta\source\repos\ProjektIOFFFFFFF\EdukuJez\EdukuJez\obj\Debug\EdukuJez.pdb
-F:\GitHub\ProjektIO\EdukuJez\EdukuJez\obj\Debug\EdukuJez.csproj.Up2Date
+F:\GitHub\ProjektIO\EdukuJez\EdukuJez\obj\Debug\EdukuJez.csproj.CopyComplete
