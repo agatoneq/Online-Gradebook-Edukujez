@@ -6,33 +6,9 @@
         <hr />
     </div>
 
-    <div>
-        <asp:DropDownList ID="SubjectsDropDown" runat="server" AutoPostBack="true" OnSelectedIndexChanged="SubjectsDropDown_SelectedIndexChanged">
-        </asp:DropDownList>
-
-        <asp:Repeater ID="attendanceRepeater" runat="server">
-            <HeaderTemplate>
-                <table border="1">
-                    <tr>
-                        <th>Nazwa Przedmiotu</th>
-                        <th>Data</th>
-                        <th>Imię</th>
-                        <th>Nazwisko</th>
-                        <th>Obecność</th>
-                    </tr>
-            </HeaderTemplate>
-            <ItemTemplate>
-                <tr>
-                    <td><%# Eval("SubjectName") %></td>
-                    <td><%# Eval("Date", "{0:dd/MM/yyyy}") %></td>
-                    <td><%# Eval("TeacherName") %></td>
-                    <td><%# Eval("TeacherSurname") %></td>
-                    <td><%# Eval("Presence") %></td>
-                </tr>
-            </ItemTemplate>
-            <FooterTemplate>
-                </table>
-            </FooterTemplate>
-        </asp:Repeater>
+    <div style="overflow: auto;">
+        <div style="float: left;"><asp:Calendar ID="Calendar1" runat="server" Height="226px" OnSelectionChanged="Calendar1_SelectionChanged" Width="565px"></asp:Calendar></div>
+        <div style="float: right;"><asp:GridView ID="AttendanceGridView" runat="server" Visible = "false"></asp:GridView></div>
     </div>
+    <asp:GridView ID="TeacherGridView" runat="server" Visible ="false"></asp:GridView>
 </asp:Content>
